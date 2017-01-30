@@ -8,15 +8,17 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { OverviewComponent } from './overview/overview.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { AuthService } from './auth/auth.service';
+import { AuthGuardService } from './auth/auth-guard.service';
 
 const appRoutes: Routes = [
     {
-        path: 'login', 
-        component: LoginComponent 
+        path: 'login',
+        component: LoginComponent
     },
     {
-        path: 'overview', 
-        component: OverviewComponent 
+        path: 'overview',
+        component: OverviewComponent
     },
     {
         path: '',
@@ -24,8 +26,8 @@ const appRoutes: Routes = [
         pathMatch: 'full'
     },
     {
-        path: '**', 
-        component: PageNotFoundComponent 
+        path: '**',
+        component: PageNotFoundComponent
     }
 ];
 
@@ -45,7 +47,10 @@ const appRoutes: Routes = [
   exports: [
       RouterModule
   ],
-  providers: [],
+  providers: [
+      AuthService,
+      AuthGuardService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

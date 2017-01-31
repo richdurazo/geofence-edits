@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
-import { tokenNotExpired } from 'angular2-jwt';
-import 'rxjs/add/operator/map';
 import { Http, Headers, RequestOptions, URLSearchParams } from '@angular/http';
+import { RouterModule, Router } from '@angular/router';
+import { AuthHttp, tokenNotExpired } from 'angular2-jwt';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class AuthService {
 
-    constructor(private http: Http) {}
+    constructor(private http: Http, private authHttp: AuthHttp, private router: Router) {}
 
     login (credentials) {
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
@@ -21,9 +22,23 @@ export class AuthService {
         .subscribe(
             // We're assuming the response will be an object
             // with the JWT on an id_token key
-            data => localStorage.setItem('id_token', data.token),
-            error => console.log('error', error)
+            data => this.processSuccess(data),
+            error => this.processError(error)
         );
+    }
+
+    processSuccess (data) {
+        console.log('data', data);
+        localStorage.setItem('id_token', data.token);
+        this.router.navigate(['/overview']);
+    }
+
+    processError (error) {
+        console.log('error', error);
+        let new_error = JSON.parse(error._body);
+        console.log('new_error', new_error);
+        console.log('typeof new_error', typeof new_error);
+        // console.log('body', body);
     }
 
     loggedIn() {
@@ -32,5 +47,17 @@ export class AuthService {
 
     logout() {
         localStorage.removeItem('id_token');
+    }
+
+    logUser (data) {
+        console.log('data', data);
+    }
+
+    getUser () {
+        this.authHttp.get('http://api.app/index')
+        .map(res => res.json())
+        .subscribe(
+            data => this.logUser(data)
+        )
     }
 }

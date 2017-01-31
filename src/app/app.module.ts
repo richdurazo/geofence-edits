@@ -11,6 +11,8 @@ import { OverviewComponent } from './overview/overview.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AuthService } from './auth/auth.service';
 import { AuthGuardService } from './auth/auth-guard.service';
+import { AuthApiService } from './auth/auth-api.service';
+import { UserApiService } from './shared/user-api.service';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     return new AuthHttp(new AuthConfig({
@@ -60,6 +62,8 @@ const appRoutes: Routes = [
     providers: [
         AuthService,
         AuthGuardService,
+        AuthApiService,
+        UserApiService,
         {
             provide: AuthHttp,
             useFactory: authHttpServiceFactory,

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth/auth.service';
+import { UserApiService } from '../shared/user-api.service';
 
 @Component({
     selector: 'app-overview',
@@ -9,14 +9,17 @@ import { AuthService } from '../auth/auth.service';
 
 export class OverviewComponent implements OnInit {
 
-    constructor(private auth: AuthService) { }
+    constructor(private userApiService: UserApiService) { }
 
     ngOnInit() {
         console.log('OverviewComponent fired');
     }
 
     fetchUser () {
-        this.auth.getUser();
+        this.userApiService.getUser()
+        .subscribe(
+            data => this.processSuccess(data)
+        )
     }
 
     processSuccess (data) {

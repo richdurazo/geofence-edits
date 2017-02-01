@@ -18,10 +18,10 @@ import { UserApiService } from './shared/user-api.service';
         PageNotFoundComponent
     ],
     imports: [
-        AppRoutingModule,
         BrowserModule,
         FormsModule,
-        HttpModule
+        HttpModule,
+        AppRoutingModule
     ],
     providers: [
         UserApiService

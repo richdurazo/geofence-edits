@@ -1,16 +1,22 @@
-<form #f="ngForm" (ngSubmit)="onLogin(f)" *ngIf="!authService.loggedIn()" novalidate>
+<form #form="ngForm" (ngSubmit)="onLogin(form)" *ngIf="!authService.loggedIn()" novalidate>
     <span [hidden]="!invalid_credentials">The username or password you have entered is invalid.</span>
+
+    <span [hidden]="email.valid || email.pristine">Add an email dude</span>
     <input
         type="text"
         placeholder="Email"
         name="email"
         required
-        [(ngModel)]="credentials.email">
+        [(ngModel)]="credentials.email"
+        #email="ngModel">
+
+    <span [hidden]="password.valid || password.pristine">Add a password dude</span>
     <input
         type="password"
         placeholder="Password"
         name="password"
         required
-        [(ngModel)]="credentials.password">
+        [(ngModel)]="credentials.password"
+        #password="ngModel">
     <button type="submit">Submit</button>
 </form>

@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { HttpModule, Http, Headers, RequestOptions } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
@@ -42,23 +41,21 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule.forRoot(appRoutes)
-  ],
-  exports: [
-      RouterModule
-  ],
-  declarations: [],
-  providers: [
-      AuthService,
-      AuthGuardService,
-      AuthApiService,
-      {
-          provide: AuthHttp,
-          useFactory: authHttpServiceFactory,
-          deps: [Http, RequestOptions]
-      }
-  ]
+    imports: [
+        RouterModule.forRoot(appRoutes)
+    ],
+    exports: [
+        RouterModule
+    ],
+    providers: [
+        AuthService,
+        AuthGuardService,
+        AuthApiService,
+        {
+            provide: AuthHttp,
+            useFactory: authHttpServiceFactory,
+            deps: [Http, RequestOptions]
+        }
+    ]
 })
 export class AppRoutingModule { }

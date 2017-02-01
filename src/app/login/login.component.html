@@ -1,22 +1,49 @@
-<form #form="ngForm" (ngSubmit)="onLogin(form)" *ngIf="!authService.loggedIn()" novalidate>
-    <span [hidden]="!invalid_credentials">The username or password you have entered is invalid.</span>
+<form #form="ngForm" (ngSubmit)="onLogin(form)" novalidate>
 
-    <span [hidden]="email.valid || email.pristine">Add an email dude</span>
-    <input
-        type="text"
-        placeholder="Email"
-        name="email"
-        required
-        [(ngModel)]="credentials.email"
-        #email="ngModel">
+    <div class="row">
 
-    <span [hidden]="password.valid || password.pristine">Add a password dude</span>
-    <input
-        type="password"
-        placeholder="Password"
-        name="password"
-        required
-        [(ngModel)]="credentials.password"
-        #password="ngModel">
-    <button type="submit">Submit</button>
+        <span [hidden]="!invalid_credentials">The username or password you have entered is invalid.</span>
+        <div class="form-group col-6">
+
+            <label for="email">Email</label>
+
+            <span [hidden]="!form.submitted && (email.valid || email.pristine)">Add an email dude</span>
+
+            <input
+                type="text"
+                class="form-control"
+                placeholder="Email"
+                name="email"
+                required
+                [(ngModel)]="credentials.email"
+                #email="ngModel">
+        </div>
+
+    </div>
+    <div class="row">
+
+        <div class="form-group col-6">
+
+            <label for="password">Password</label>
+
+            <span [hidden]="!form.submitted && (password.valid || password.pristine)">Add a password dude</span>
+
+            <input
+                type="password"
+                class="form-control"
+                placeholder="Password"
+                name="password"
+                required
+                [(ngModel)]="credentials.password"
+                #password="ngModel">
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
+
 </form>

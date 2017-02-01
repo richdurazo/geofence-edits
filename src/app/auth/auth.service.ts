@@ -7,6 +7,8 @@ import { AuthApiService } from './auth-api.service';
 @Injectable()
 export class AuthService {
 
+    private redirectUrl: string = '';
+
     constructor(private authApiService: AuthApiService) {}
 
     // public methods
@@ -30,6 +32,15 @@ export class AuthService {
 
     logout () {
         localStorage.removeItem('id_token');
+    }
+
+    public setUrl (url) {
+        console.log('url', url);
+        this.redirectUrl = url;
+    }
+
+    public getRedirectUrl () {
+        return this.redirectUrl;
     }
 
     // private methods

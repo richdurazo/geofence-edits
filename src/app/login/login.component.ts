@@ -38,7 +38,12 @@ export class LoginComponent implements OnInit {
     }
 
     processSuccess (data) {
-        this.router.navigate(['/overview']);
+        let url = this.authService.getRedirectUrl();
+        if (url !== '') {
+            this.router.navigate([url]);
+        } else {
+            this.router.navigate(['/overview']);
+        }
     }
 
     processError (error) {

@@ -5,5 +5,7 @@
 <nav>
     <a routerLink="/login" routerLinkActive="active">Login</a>
     <a routerLink="/overview" routerLinkActive="active">Overview</a>
+    <a routerLink="/something-else" routerLinkActive="active">Something Else</a>
+    <a routerLink="/login" routerLinkActive="active" (click)="logout()">Log Out</a>
 </nav>
 <router-outlet></router-outlet>

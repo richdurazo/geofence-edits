@@ -1,36 +1,31 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
-import { RouterModule, Routes } from '@angular/router';
+import { HttpModule, Http, Headers, RequestOptions } from '@angular/http';
 
 import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing/app-routing.module';
 import { LoginComponent } from './login/login.component';
 import { OverviewComponent } from './overview/overview.component';
-
-const appRoutes: Routes = [
-    { path: 'login', component: LoginComponent },
-    { path: 'overview', component: OverviewComponent },
-    { path: '',
-        redirectTo: '/login',
-        pathMatch: 'full'
-    },
-  // { path: '**', component: PageNotFoundComponent }
-];
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { UserApiService } from './shared/user-api.service';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    OverviewComponent
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpModule,
-    RouterModule.forRoot(appRoutes)
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        LoginComponent,
+        OverviewComponent,
+        PageNotFoundComponent
+    ],
+    imports: [
+        AppRoutingModule,
+        BrowserModule,
+        FormsModule,
+        HttpModule
+    ],
+    providers: [
+        UserApiService
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

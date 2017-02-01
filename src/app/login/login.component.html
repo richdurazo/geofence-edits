@@ -1,3 +1,16 @@
-<p>
-  login works!
-</p>
+<form #f="ngForm" (ngSubmit)="onLogin(f)" *ngIf="!authService.loggedIn()" novalidate>
+    <span [hidden]="!invalid_credentials">The username or password you have entered is invalid.</span>
+    <input
+        type="text"
+        placeholder="Email"
+        name="email"
+        required
+        [(ngModel)]="credentials.email">
+    <input
+        type="password"
+        placeholder="Password"
+        name="password"
+        required
+        [(ngModel)]="credentials.password">
+    <button type="submit">Submit</button>
+</form>

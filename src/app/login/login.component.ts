@@ -32,13 +32,16 @@ export class LoginComponent implements OnInit {
     onLogin (form) {
         console.log('form', form);
         if (!form.valid) {return;}
-        console.log('credentials', this.credentials);
-        console.log('typeof credentials', typeof this.credentials);
         this.authService.login(this.credentials, this.processSuccess.bind(this), this.processError.bind(this));
     }
 
     processSuccess (data) {
-        this.router.navigate(['/overview']);
+        let url = this.authService.getRedirectUrl();
+        if (url !== '') {
+            this.router.navigate([url]);
+        } else {
+            this.router.navigate(['/overview']);
+        }
     }
 
     processError (error) {

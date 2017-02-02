@@ -26,16 +26,15 @@ export class AuthService {
         );
     }
 
-    loggedIn () {
+    public loggedIn () {
         return tokenNotExpired();
     }
 
-    logout () {
+    public logout () {
         localStorage.removeItem('id_token');
     }
 
     public setUrl (url) {
-        console.log('url', url);
         this.redirectUrl = url;
     }
 

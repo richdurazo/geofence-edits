@@ -32,8 +32,6 @@ export class LoginComponent implements OnInit {
     onLogin (form) {
         console.log('form', form);
         if (!form.valid) {return;}
-        console.log('credentials', this.credentials);
-        console.log('typeof credentials', typeof this.credentials);
         this.authService.login(this.credentials, this.processSuccess.bind(this), this.processError.bind(this));
     }
 

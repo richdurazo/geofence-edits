@@ -15,7 +15,6 @@ export class AuthApiService {
       params.set("email", credentials.email);
       params.set("password", credentials.password);
 
-      console.log('auth service params', params);
       return this.http.post('http://api.app/authenticate', params, options).map(res => res.json())
   }
 

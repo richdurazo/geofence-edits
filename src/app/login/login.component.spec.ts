@@ -124,4 +124,35 @@ describe('LoginComponent', () => {
             expect(router.navigate).toHaveBeenCalledWith(['/overview']);
         });
     });
+
+    describe('processError', () => {
+        it('should have a processError function', () => {
+            expect(comp.processError).toBeTruthy();
+            expect(typeof comp.processError).toEqual('function');
+        });
+
+        it('should parse the error message and leave the default value of this.invalid_credentials as false if the error  message is not "invalid_credentials"', () => {
+            comp.invalid_credentials = false;
+            let error = {
+              _body: {
+                error: 'Not invalid_credentials'
+              }
+            };
+            error._body = JSON.stringify(error._body);
+            comp.processError(error);
+            expect(comp.invalid_credentials).toEqual(false);
+        });
+
+        it('should parse the error message and change the value of this.invalid_credentials to true if the error message is "invalid_credentials"', () => {
+            comp.invalid_credentials = false;
+            let error = {
+              _body: {
+                error: 'invalid_credentials'
+              }
+            };
+            error._body = JSON.stringify(error._body);
+            comp.processError(error);
+            expect(comp.invalid_credentials).toEqual(true);
+        });
+    });
 });

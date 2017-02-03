@@ -1,4 +1,4 @@
-<form #form="ngForm" (ngSubmit)="onLogin(form)" novalidate>
+<form #form="ngForm" (ngSubmit)="login(form)" novalidate>
 
     <div class="form-group row col-6" [ngClass]="{ 'has-danger': form.submitted && !email.valid }">
 

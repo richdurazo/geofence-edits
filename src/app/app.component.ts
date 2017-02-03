@@ -8,11 +8,9 @@ import { AuthService } from './auth/auth.service';
 })
 export class AppComponent {
 
-    constructor (private auth: AuthService) {}
-
-    title = 'Actv8 Client Dashboard';
+    constructor (private authService: AuthService) {}
 
     logout () {
-        this.auth.logout();
+        this.authService.logout();
     }
 }

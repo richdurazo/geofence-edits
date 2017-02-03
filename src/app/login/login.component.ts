@@ -29,9 +29,8 @@ export class LoginComponent implements OnInit {
         };
     }
 
-    onLogin (form) {
-        console.log('form', form);
-        if (!form.valid) {return;}
+    login (form) {
+        if (!form.valid) { return false; }
         this.authService.login(this.credentials, this.processSuccess.bind(this), this.processError.bind(this));
     }
 

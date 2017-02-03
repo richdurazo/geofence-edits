@@ -9,6 +9,8 @@ export class AuthMockService {
 
     // public methods
     public login (credentials, successCallback, errorCallback) {
+        successCallback();
+        errorCallback();
         return true;
     }
     //
@@ -23,11 +25,11 @@ export class AuthMockService {
     // public setUrl (url) {
     //     this.redirectUrl = url;
     // }
-    //
-    // public getRedirectUrl () {
-    //     return this.redirectUrl;
-    // }
-    //
+
+    public getRedirectUrl () {
+        return true;
+    }
+
     // // private methods
     // private processSuccess (data) {
     //     localStorage.setItem('id_token', data.token);

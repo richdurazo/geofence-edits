@@ -34,9 +34,9 @@ export class LoginComponent implements OnInit {
         this.authService.login(this.credentials, this.processSuccess.bind(this), this.processError.bind(this));
     }
 
-    processSuccess (data) {
+    processSuccess () {
         let url = this.authService.getRedirectUrl();
-        if (url !== '') {
+        if (!!url && url !== '') {
             this.router.navigate([url]);
         } else {
             this.router.navigate(['/overview']);

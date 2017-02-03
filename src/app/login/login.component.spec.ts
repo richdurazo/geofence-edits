@@ -81,8 +81,47 @@ describe('LoginComponent', () => {
             let form = {
                 valid: true
             };
-            comp.login(form)
+            comp.login(form);
             expect(authService.login).toHaveBeenCalled();
+        });
+    });
+
+    describe('processSuccess', () => {
+        it('should have a processSuccess function', () => {
+            expect(comp.processSuccess).toBeTruthy();
+            expect(typeof comp.processSuccess).toEqual('function');
+        });
+
+        it('should get the redirect url from the AuthService and call the router to the url redirect if the url is defined and not an empty string', () => {
+            spyOn(authService, 'getRedirectUrl').and.returnValue('foo');
+            spyOn(router, 'navigate');
+            comp.processSuccess();
+            expect(authService.getRedirectUrl).toHaveBeenCalled();
+            expect(router.navigate).toHaveBeenCalledWith(['foo']);
+        });
+
+        it('should get the redirect url from the AuthService and call the router to redirect to /overview if passed an undefined value', () => {
+            spyOn(authService, 'getRedirectUrl').and.returnValue(undefined);
+            spyOn(router, 'navigate');
+            comp.processSuccess();
+            expect(authService.getRedirectUrl).toHaveBeenCalled();
+            expect(router.navigate).toHaveBeenCalledWith(['/overview']);
+        });
+
+        it('should get the redirect url from the AuthService and call the router to redirect to /overview if passed an undefined value', () => {
+            spyOn(authService, 'getRedirectUrl').and.returnValue(null);
+            spyOn(router, 'navigate');
+            comp.processSuccess();
+            expect(authService.getRedirectUrl).toHaveBeenCalled();
+            expect(router.navigate).toHaveBeenCalledWith(['/overview']);
+        });
+
+        it('should get the redirect url from the AuthService and call the router to redirect to /overview if passed and empty string', () => {
+            spyOn(authService, 'getRedirectUrl').and.returnValue('');
+            spyOn(router, 'navigate');
+            comp.processSuccess();
+            expect(authService.getRedirectUrl).toHaveBeenCalled();
+            expect(router.navigate).toHaveBeenCalledWith(['/overview']);
         });
     });
 });

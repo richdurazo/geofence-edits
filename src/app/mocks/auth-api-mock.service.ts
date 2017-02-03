@@ -5,12 +5,8 @@ export class AuthApiMockService {
 
     constructor() {}
 
-    public navigate () {
-        return true;
-    }
-
-    public navigateByUrl (url) {
-      return url;
+    public login (input) {
+      return false;
     }
 
 

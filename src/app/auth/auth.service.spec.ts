@@ -2,6 +2,7 @@
 
 import { TestBed, async, inject } from '@angular/core/testing';
 import { AuthService } from './auth.service';
+import {Observable} from "rxjs/Rx";
 
 import { AuthApiService } from '../auth/auth-api.service';
 import { AuthApiMockService } from '../mocks/auth-api-mock.service';
@@ -9,6 +10,7 @@ import { tokenNotExpired } from 'angular2-jwt';
 import { tokenNotExpiredMock } from '../mocks/token-not-expired-mock';
 
 let authService;
+let authApiService;
 
 describe('AuthService', () => {
   beforeEach(() => {
@@ -16,16 +18,61 @@ describe('AuthService', () => {
       providers: [
         AuthService,
         {provide: AuthApiService, useClass: AuthApiMockService },
-        // not functioning properly yet
+        // tokenNotExpiredMock not functioning properly yet
         {provide: tokenNotExpired, useClass: tokenNotExpiredMock }
       ]
     });
 
     authService = TestBed.get(AuthService);
+    authApiService = TestBed.get(AuthApiService);
   });
 
   it('should exist', () => {
     expect(authService).toBeTruthy();
+  });
+
+  describe('login', () => {
+    it('should be a function', () => {
+      expect(typeof authService.login).toEqual('function');
+    });
+
+    it('should call the AuthApiService and call the success callbacks upon success', () => {
+      spyOn(authApiService, 'login').and.returnValue(Observable.of({foo:'bar'}));
+      let callbacks = {
+        successCallback : (response) => {
+          return response;
+        },
+        errorCallback : (error) => {
+          return response;
+        }
+      }
+      spyOn(callbacks, 'successCallback');
+      spyOn(callbacks, 'errorCallback');
+      spyOn(authService, 'processSuccess');
+      authService.login({foo:'bar'}, callbacks.successCallback, callbacks.errorCallback);
+      expect(callbacks.successCallback).toHaveBeenCalledWith({foo:'bar'});
+      expect(authService.processSuccess).toHaveBeenCalledWith({foo:'bar'});
+      expect(callbacks.errorCallback).not.toHaveBeenCalled();
+    });
+
+    it('should call the AuthApiService and call the error callbacks upon error', () => {
+      spyOn(authApiService, 'login').and.returnValue(Observable.throw({error: 'oops'}));
+      let callbacks = {
+        successCallback : (response) => {
+          return response;
+        },
+        errorCallback : (error) => {
+          return response;
+        }
+      }
+      spyOn(callbacks, 'successCallback');
+      spyOn(callbacks, 'errorCallback');
+      spyOn(authService, 'processError');
+      authService.login({foo:'bar'}, callbacks.successCallback, callbacks.errorCallback);
+      expect(callbacks.errorCallback).toHaveBeenCalled();
+      expect(authService.processError).toHaveBeenCalledWith({error: 'oops'});
+      expect(callbacks.successCallback).not.toHaveBeenCalled();
+    });
   });
 
   describe('loggedIn', () => {
@@ -34,6 +81,7 @@ describe('AuthService', () => {
     });
 
     it('should return the value from tokenNotExpired', () => {
+      console.log('localStorage.getItem("id_token")', localStorage.getItem("id_token"))
       // TODO: this is not currently using the mock properly, and is using the service itself
       // looking for better documentation as to how to properly mock/spy on this function
       expect(authService.loggedIn()).toEqual(false);

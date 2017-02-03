@@ -44,8 +44,7 @@ export class LoginComponent implements OnInit {
     }
 
     processError (error) {
-        let new_error = JSON.parse(error._body);
-        if (typeof new_error === 'object' && new_error.hasOwnProperty('error') && new_error.error === 'invalid_credentials') {
+        if (typeof error === 'object' && error.hasOwnProperty('error') && error.error === 'invalid_credentials') {
             this.invalid_credentials = true;
         }
     }

@@ -18,7 +18,7 @@ export class AuthMockService {
         return true;
     }
 
-    public logout () {
+    public logOut () {
         return true;
     }
 

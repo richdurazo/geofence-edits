@@ -48,16 +48,16 @@ describe('AppComponent', () => {
         expect(comp).toBeTruthy();
     }));
 
-    describe('logout function', () => {
-        it(`should have a logout function`, async(() => {
-            expect(typeof comp.logout).toEqual('function');
+    describe('logOut function', () => {
+        it(`should have a logOut function`, async(() => {
+            expect(typeof comp.logOut).toEqual('function');
         }));
 
         it(`should call the auth service`, async(() => {
-            spyOn(authService, 'logout');
-            expect(authService.logout).not.toHaveBeenCalled();
-            comp.logout();
-            expect(authService.logout).toHaveBeenCalled();
+            spyOn(authService, 'logOut');
+            expect(authService.logOut).not.toHaveBeenCalled();
+            comp.logOut();
+            expect(authService.logOut).toHaveBeenCalled();
         }));
     });
 

@@ -20,8 +20,7 @@ export class AuthService {
                 successCallback(data);
             },
             error => {
-                this.processError(error);
-                errorCallback(error);
+                errorCallback(this.processError(error));
             }
         );
     }
@@ -30,7 +29,7 @@ export class AuthService {
         return tokenNotExpired();
     }
 
-    public logout () {
+    public logOut () {
         localStorage.removeItem('id_token');
     }
 
@@ -48,7 +47,7 @@ export class AuthService {
     }
 
     private processError (error) {
-        let new_error = JSON.parse(error._body);
+        return JSON.parse(error._body);
     }
 
 }

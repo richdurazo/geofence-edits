@@ -13,18 +13,18 @@ export class AuthMockService {
         errorCallback();
         return true;
     }
-    //
-    // public loggedIn () {
-    //     return tokenNotExpired();
-    // }
+
+    public loggedIn () {
+        return true;
+    }
 
     public logout () {
         return true;
     }
 
-    // public setUrl (url) {
-    //     this.redirectUrl = url;
-    // }
+    public setUrl (url) {
+      return url;
+    }
 
     public getRedirectUrl () {
         return true;

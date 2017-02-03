@@ -9,5 +9,9 @@ export class RouterMockService {
         return true;
     }
 
+    public navigateByUrl (url) {
+      return url;
+    }
+
 
 }

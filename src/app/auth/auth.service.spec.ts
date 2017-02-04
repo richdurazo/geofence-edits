@@ -2,10 +2,10 @@
 
 import { TestBed, async, inject } from '@angular/core/testing';
 import { AuthService } from './auth.service';
-import {Observable} from "rxjs/Rx";
+import { Observable } from "rxjs/Rx";
 
 import { AuthApiService } from '../auth/auth-api.service';
-import { AuthApiMockService } from '../mocks/auth-api-mock.service';
+import { AuthApiMockService } from '../mocks/auth/auth-api-mock.service';
 import { tokenNotExpired } from 'angular2-jwt';
 import { tokenNotExpiredMock } from '../mocks/token-not-expired-mock';
 

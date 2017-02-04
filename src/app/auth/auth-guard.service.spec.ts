@@ -5,10 +5,10 @@ import { TestBed, async, inject } from '@angular/core/testing';
 import { AuthGuardService } from './auth-guard.service';
 
 import { AuthService } from '../auth/auth.service';
-import { AuthMockService } from '../mocks/auth-mock.service';
+import { AuthMockService } from '../mocks/auth/auth-mock.service';
 import { RouterModule, Router, RouterStateSnapshot } from '@angular/router';
-import { RouterMockService } from '../mocks/router-mock.service';
-import { RouterStateSnapshotMock } from '../mocks/router-state-snapshot-mock.service';
+import { RouterMockService } from '../mocks/router/router-mock.service';
+import { RouterStateSnapshotMock } from '../mocks/router/router-state-snapshot-mock.service';
 
 let authService;
 let authGuardService;
@@ -32,7 +32,7 @@ describe('AuthGuardService', () => {
     routerSnapshot = TestBed.get(RouterStateSnapshot);
   });
 
-  it('should ...', () => {
+  it('should exist', () => {
     expect(authGuardService).toBeTruthy();
   });
 

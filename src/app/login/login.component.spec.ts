@@ -7,8 +7,8 @@ import { RouterModule, Router } from '@angular/router';
 
 import { LoginComponent } from './login.component';
 import { AuthService } from '../auth/auth.service';
-import { AuthMockService } from '../mocks/auth-mock.service';
-import { RouterMockService } from '../mocks/router-mock.service';
+import { AuthMockService } from '../mocks/auth/auth-mock.service';
+import { RouterMockService } from '../mocks/router/router-mock.service';
 
 describe('LoginComponent', () => {
     let comp:    LoginComponent;

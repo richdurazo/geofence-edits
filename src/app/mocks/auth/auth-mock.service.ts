@@ -30,13 +30,4 @@ export class AuthMockService {
         return true;
     }
 
-    // // private methods
-    // private processSuccess (data) {
-    //     localStorage.setItem('id_token', data.token);
-    // }
-    //
-    // private processError (error) {
-    //     let new_error = JSON.parse(error._body);
-    // }
-
 }

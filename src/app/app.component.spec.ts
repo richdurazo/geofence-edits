@@ -5,7 +5,7 @@ import { DebugElement }    from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { AuthService } from './auth/auth.service';
-import { AuthMockService } from './mocks/auth-mock.service';
+import { AuthMockService } from './mocks/auth/auth-mock.service';
 
 describe('AppComponent', () => {
 

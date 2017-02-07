@@ -81,7 +81,6 @@ describe('AuthService', () => {
     });
 
     it('should return the value from tokenNotExpired', () => {
-      console.log('localStorage.getItem("id_token")', localStorage.getItem("id_token"))
       // TODO: this is not currently using the mock properly, and is using the service itself
       // looking for better documentation as to how to properly mock/spy on this function
       expect(authService.loggedIn()).toEqual(false);

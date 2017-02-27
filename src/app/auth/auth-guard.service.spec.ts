@@ -21,15 +21,13 @@ describe('AuthGuardService', () => {
       providers: [
         AuthGuardService,
         {provide: AuthService, useClass: AuthMockService },
-        {provide: Router, useClass: RouterMockService },
-        {provide: RouterStateSnapshot, useClass: RouterStateSnapshotMock }
+        {provide: Router, useClass: RouterMockService }
       ]
     });
 
     authGuardService = TestBed.get(AuthGuardService);
     authService = TestBed.get(AuthService);
     router = TestBed.get(Router);
-    routerSnapshot = TestBed.get(RouterStateSnapshot);
   });
 
   it('should exist', () => {
@@ -54,7 +52,7 @@ describe('AuthGuardService', () => {
     it ('should call setUrl on the AuthService with the RouterStateSnapshot url value if AuthService.loggedIn() returns false', () => {
       spyOn(authService, 'loggedIn').and.returnValue(false);
       spyOn(authService, 'setUrl');
-      routerSnapshot.url = '/url';
+      router.routerState.snapshot.url = '/url';
       authGuardService.canActivate();
       expect(authService.setUrl).toHaveBeenCalledWith('/url');
     });

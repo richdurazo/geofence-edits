@@ -13,5 +13,11 @@ export class RouterMockService {
       return url;
     }
 
+    public routerState = {
+        snapshot: {
+            url: ''
+        }
+    }
+
 
 }

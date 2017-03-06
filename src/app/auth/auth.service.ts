@@ -12,19 +12,6 @@ export class AuthService {
     constructor(private authApiService: AuthApiService) {}
 
     // public methods
-    login (credentials, successCallback, errorCallback) {
-        this.authApiService.login(credentials)
-        .subscribe(
-            data => {
-                this.processSuccess(data);
-                successCallback(data);
-            },
-            error => {
-                errorCallback(this.processError(error));
-            }
-        );
-    }
-
     public loggedIn () {
         return tokenNotExpired();
     }
@@ -39,6 +26,19 @@ export class AuthService {
 
     public getRedirectUrl () {
         return this.redirectUrl;
+    }
+
+    login (credentials, successCallback, errorCallback) {
+        this.authApiService.login(credentials)
+        .subscribe(
+            data => {
+                this.processSuccess(data);
+                successCallback(data);
+            },
+            error => {
+                errorCallback(this.processError(error));
+            }
+        );
     }
 
     // private methods

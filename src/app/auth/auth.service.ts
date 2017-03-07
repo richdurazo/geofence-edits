@@ -12,25 +12,11 @@ export class AuthService {
     constructor(private authApiService: AuthApiService) {}
 
     // public methods
-    login (credentials, successCallback, errorCallback) {
-        this.authApiService.login(credentials)
-        .subscribe(
-            data => {
-                this.processSuccess(data);
-                successCallback(data);
-            },
-            error => {
-                this.processError(error);
-                errorCallback(error);
-            }
-        );
-    }
-
     public loggedIn () {
         return tokenNotExpired();
     }
 
-    public logout () {
+    public logOut () {
         localStorage.removeItem('id_token');
     }
 
@@ -42,13 +28,26 @@ export class AuthService {
         return this.redirectUrl;
     }
 
+    login (credentials, successCallback, errorCallback) {
+        this.authApiService.login(credentials)
+        .subscribe(
+            data => {
+                this.processSuccess(data);
+                successCallback(data);
+            },
+            error => {
+                errorCallback(this.processError(error));
+            }
+        );
+    }
+
     // private methods
     private processSuccess (data) {
         localStorage.setItem('id_token', data.token);
     }
 
     private processError (error) {
-        let new_error = JSON.parse(error._body);
+        return JSON.parse(error._body);
     }
 
 }

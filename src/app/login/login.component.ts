@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterModule, Router } from '@angular/router';
+
 import { AuthService } from '../auth/auth.service';
 
 class Credentials {

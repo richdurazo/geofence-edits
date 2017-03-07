@@ -10,8 +10,9 @@ import { OverviewComponent } from './overview/overview.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { UserApiService } from './shared/user-api.service';
 import { CampaignsComponent } from './campaigns/campaigns-component/campaigns.component';
-import { CampaignCreatorComponent } from './campaigns/campaign-creator/campaign-creator.component';
 import { CampaignsOverviewComponent } from './campaigns/campaigns-overview/campaigns-overview.component';
+import { CampaignCreatorComponent } from './campaigns/campaign-creator/components/campaign-creator.component';
+import { CampaignCreatorFormComponent } from './campaigns/campaign-creator/components/campaign-creator-form.component';
 
 @NgModule({
     declarations: [
@@ -21,7 +22,8 @@ import { CampaignsOverviewComponent } from './campaigns/campaigns-overview/campa
         PageNotFoundComponent,
         CampaignsComponent,
         CampaignCreatorComponent,
-        CampaignsOverviewComponent
+        CampaignsOverviewComponent,
+        CampaignCreatorFormComponent
     ],
     imports: [
         BrowserModule,

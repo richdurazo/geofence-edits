@@ -2,9 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { RouterModule, Router } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
 
-interface Credentials {
+interface ICredentials {
     email: string,
     password: string
+}
+
+class Credentials implements ICredentials {
+    constructor (public email: string, public password: string) {
+
+    }
 }
 
 @Component({
@@ -15,18 +21,14 @@ interface Credentials {
 
 export class LoginComponent implements OnInit {
 
-    credentials: Credentials;
-
     invalid_credentials:boolean;
+    credentials: Credentials;
 
     constructor (private authService: AuthService, private router: Router) {}
 
     ngOnInit () {
         this.invalid_credentials = false;
-        this.credentials = {
-            email: '',
-            password: ''
-        };
+        this.credentials = new Credentials('', '');
     }
 
     login (form) {

@@ -8,9 +8,7 @@ interface ICredentials {
 }
 
 class Credentials implements ICredentials {
-    constructor (public email: string, public password: string) {
-
-    }
+    constructor (public email: string, public password: string) {}
 }
 
 @Component({
@@ -21,7 +19,7 @@ class Credentials implements ICredentials {
 
 export class LoginComponent implements OnInit {
 
-    invalid_credentials:boolean;
+    invalid_credentials: boolean;
     credentials: Credentials;
 
     constructor (private authService: AuthService, private router: Router) {}

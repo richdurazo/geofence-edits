@@ -2,12 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterModule, Router } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
 
-interface ICredentials {
-    email: string,
-    password: string
-}
-
-class Credentials implements ICredentials {
+class Credentials {
     constructor (public email: string, public password: string) {}
 }
 
@@ -27,6 +22,7 @@ export class LoginComponent implements OnInit {
     ngOnInit () {
         this.invalid_credentials = false;
         this.credentials = new Credentials('', '');
+        console.log('this.credentials', this.credentials);
     }
 
     login (form) {

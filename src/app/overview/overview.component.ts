@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+
 import { UserApiService } from '../users/shared/user-api.service';
+import { UserModel } from '../users/shared/user.model';
 
 @Component({
     selector: 'app-overview',
@@ -8,6 +10,8 @@ import { UserApiService } from '../users/shared/user-api.service';
 })
 
 export class OverviewComponent implements OnInit {
+
+    user: UserModel;
 
     constructor(private userApiService: UserApiService) { }
 
@@ -23,7 +27,10 @@ export class OverviewComponent implements OnInit {
     }
 
     processSuccess (data) {
-        console.log('user data', data);
+        this.user = new UserModel();
+        for (var key in data.user) {
+            this.user[key] = data.user[key];
+        }
     }
 
 }

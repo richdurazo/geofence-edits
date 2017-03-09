@@ -17,9 +17,12 @@ export class AuthCustomHttpService {
     private authIntercept(response: Observable<Response>): Observable<Response> {
         var sharableResponse = response.share()
         sharableResponse.subscribe(null, (err) => {
+            console.log('AuthCustomHttpService err.message === "No JWT present or has expired"', err.message === "No JWT present or has expired");
             if (this.isUnauthorized(err.status) || err.message === "No JWT present or has expired") {
-                this.router.navigate(['/login']);
+                console.log('navigate called');
+                this.router.navigate(['login']);
             }
+            // Other error handling may be added here, such as refresh token …
         });
         return sharableResponse;
     }

@@ -35,7 +35,7 @@ const appRoutes: Routes = [
     {
         path: 'campaigns',
         component: CampaignsComponent,
-        // canActivate: [AuthGuardService],
+        canActivate: [AuthGuardService],
         children: [
             {
                 path: '',

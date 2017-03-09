@@ -12,4 +12,9 @@ export class CampaignApiService {
         .map(res => res.json())
     }
 
+    createCampaign (data) {
+        return this.authHttp.post(AppSettings.API_ROOT + '/campaign', data)
+        .map(res => res.json())
+    }
+
 }

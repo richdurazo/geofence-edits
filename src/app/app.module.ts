@@ -8,11 +8,12 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
 import { LoginComponent } from './login/login.component';
 import { OverviewComponent } from './overview/overview.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { UserApiService } from './users/shared/user-api.service';
 import { CampaignsComponent } from './campaigns/campaigns-component/campaigns.component';
 import { CampaignsOverviewComponent } from './campaigns/campaigns-overview/campaigns-overview.component';
 import { CampaignCreatorComponent } from './campaigns/campaign-creator/components/campaign-creator.component';
 import { CampaignCreatorFormComponent } from './campaigns/campaign-creator/components/campaign-creator-form.component';
+import { CampaignApiService } from './campaigns/shared/campaign-api.service';
+import { UserApiService } from './users/shared/user-api.service';
 
 @NgModule({
     declarations: [
@@ -32,6 +33,7 @@ import { CampaignCreatorFormComponent } from './campaigns/campaign-creator/compo
         AppRoutingModule
     ],
     providers: [
+        CampaignApiService,
         UserApiService
     ],
     bootstrap: [AppComponent]

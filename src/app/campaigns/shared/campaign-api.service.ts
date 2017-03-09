@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
-import { AuthHttp } from 'angular2-jwt';
+import { AuthCustomHttpService } from '../../auth/auth-custom-http.service';
 import { AppSettings } from '../../app-settings';
 
 @Injectable()
 export class CampaignApiService {
 
-    constructor(private authHttp: AuthHttp) { }
+    constructor(private authCustomHttp: AuthCustomHttpService) { }
 
     getCampaigns () {
-        return this.authHttp.get(AppSettings.API_ROOT + '/campaign')
+        return this.authCustomHttp.get(AppSettings.API_ROOT + '/campaign')
         .map(res => res.json())
     }
 
     createCampaign (data) {
-        return this.authHttp.post(AppSettings.API_ROOT + '/campaign', data)
+        return this.authCustomHttp.post(AppSettings.API_ROOT + '/campaign', data)
         .map(res => res.json())
     }
 

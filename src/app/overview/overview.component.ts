@@ -22,11 +22,17 @@ export class OverviewComponent implements OnInit {
     fetchUser () {
         this.userApiService.getUser()
         .subscribe(
-            data => this.processSuccess(data)
+            data => this.processSuccess(data),
+            err => this.processError(err)
         )
     }
 
+    processError (err) {
+        console.log('overview component err', err);
+    }
+
     processSuccess (data) {
+        console.log('data', data);
         this.user = new UserModel();
         for (var key in data.user) {
             this.user[key] = data.user[key];

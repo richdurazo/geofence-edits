@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
-import { AuthHttp } from 'angular2-jwt';
+import { AuthCustomHttpService } from '../../auth/auth-custom-http.service';
+import 'rxjs/Rx';
+
 import { AppSettings } from '../../app-settings';
 
 @Injectable()
 export class UserApiService {
 
-  constructor(private authHttp: AuthHttp) { }
+  constructor(private authCustomHttp: AuthCustomHttpService) { }
 
   getUser () {
-      return this.authHttp.get(AppSettings.API_ROOT + 'index')
+      return this.authCustomHttp.get(AppSettings.API_ROOT + '/index')
       .map(res => res.json())
   }
 

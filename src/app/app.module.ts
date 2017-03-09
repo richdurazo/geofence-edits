@@ -12,6 +12,8 @@ import { CampaignsComponent } from './campaigns/campaigns-component/campaigns.co
 import { CampaignsOverviewComponent } from './campaigns/campaigns-overview/campaigns-overview.component';
 import { CampaignCreatorComponent } from './campaigns/campaign-creator/components/campaign-creator.component';
 import { CampaignCreatorFormComponent } from './campaigns/campaign-creator/components/campaign-creator-form.component';
+
+import { AuthCustomHttpService } from './auth/auth-custom-http.service';
 import { CampaignApiService } from './campaigns/shared/campaign-api.service';
 import { UserApiService } from './users/shared/user-api.service';
 
@@ -33,6 +35,7 @@ import { UserApiService } from './users/shared/user-api.service';
         AppRoutingModule
     ],
     providers: [
+        AuthCustomHttpService,
         CampaignApiService,
         UserApiService
     ],

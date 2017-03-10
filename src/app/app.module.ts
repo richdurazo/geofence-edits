@@ -17,6 +17,9 @@ import { CampaignCreatorFormComponent } from './campaigns/campaign-creator/compo
 import { AuthCustomHttpService } from './auth/auth-custom-http.service';
 import { CampaignApiService } from './campaigns/shared/campaign-api.service';
 import { UserApiService } from './users/shared/user-api.service';
+import { ContentComponent } from './content/content/content.component';
+import { ContentCreatorComponent } from './content/content-creator/content-creator.component';
+import { ContentOverviewComponent } from './content/content-overview/content-overview.component';
 
 @NgModule({
     declarations: [
@@ -27,7 +30,10 @@ import { UserApiService } from './users/shared/user-api.service';
         CampaignsComponent,
         CampaignCreatorComponent,
         CampaignsOverviewComponent,
-        CampaignCreatorFormComponent
+        CampaignCreatorFormComponent,
+        ContentComponent,
+        ContentCreatorComponent,
+        ContentOverviewComponent
     ],
     imports: [
         BrowserModule,

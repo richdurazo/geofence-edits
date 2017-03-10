@@ -1,4 +1,5 @@
 export class CampaignModel {
+    id: string;
     name: string;
     description: string;
     status: number;

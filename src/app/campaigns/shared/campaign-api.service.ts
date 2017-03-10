@@ -17,4 +17,9 @@ export class CampaignApiService {
         .map(res => res.json())
     }
 
+    deleteCampaign (idx) {
+        return this.authCustomHttp.delete(AppSettings.API_ROOT + '/campaign/' + idx)
+        .map(res => res.json())
+    }
+
 }

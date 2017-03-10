@@ -13,13 +13,14 @@ import { CampaignsComponent } from './campaigns/campaigns-component/campaigns.co
 import { CampaignsOverviewComponent } from './campaigns/campaigns-overview/campaigns-overview.component';
 import { CampaignCreatorComponent } from './campaigns/campaign-creator/components/campaign-creator.component';
 import { CampaignCreatorFormComponent } from './campaigns/campaign-creator/components/campaign-creator-form.component';
+import { ContentComponent } from './content/content-component/content.component';
+import { ContentCreatorComponent } from './content/content-creator/content-creator.component';
+import { ContentOverviewComponent } from './content/content-overview/content-overview.component';
 
 import { AuthCustomHttpService } from './auth/auth-custom-http.service';
 import { CampaignApiService } from './campaigns/shared/campaign-api.service';
 import { UserApiService } from './users/shared/user-api.service';
-import { ContentComponent } from './content/content/content.component';
-import { ContentCreatorComponent } from './content/content-creator/content-creator.component';
-import { ContentOverviewComponent } from './content/content-overview/content-overview.component';
+
 
 @NgModule({
     declarations: [

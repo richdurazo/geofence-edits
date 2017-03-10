@@ -3,22 +3,22 @@ import { AuthCustomHttpService } from '../../auth/auth-custom-http.service';
 import { AppSettings } from '../../app-settings';
 
 @Injectable()
-export class CampaignApiService {
+export class ContentApiService {
 
     constructor(private authCustomHttp: AuthCustomHttpService) { }
 
-    getCampaigns () {
-        return this.authCustomHttp.get(AppSettings.API_ROOT + '/campaign')
+    getContent () {
+        return this.authCustomHttp.get(AppSettings.API_ROOT + '/content')
         .map(res => res.json())
     }
 
-    createCampaign (data) {
-        return this.authCustomHttp.post(AppSettings.API_ROOT + '/campaign', data)
+    createContent (data) {
+        return this.authCustomHttp.post(AppSettings.API_ROOT + '/content', data)
         .map(res => res.json())
     }
 
-    deleteCampaign (data) {
-        return this.authCustomHttp.delete(AppSettings.API_ROOT + '/campaign/' + data.id)
+    deleteContent (data) {
+        return this.authCustomHttp.delete(AppSettings.API_ROOT + '/content/' + data.id)
         .map(res => res.json())
     }
 

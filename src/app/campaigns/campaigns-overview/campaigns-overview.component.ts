@@ -29,7 +29,7 @@ export class CampaignsOverviewComponent implements OnInit {
   deleteItem (idx) {
       console.log('idx', idx);
       console.log('this.campaigns[idx]', this.campaigns[idx]);
-      this.campaignApi.deleteCampaign(this.campaigns[idx].id)
+      this.campaignApi.deleteCampaign(this.campaigns[idx])
       .subscribe(
           data => this.processDeleteSuccess(data, idx)
       )
@@ -37,7 +37,7 @@ export class CampaignsOverviewComponent implements OnInit {
 
   processDeleteSuccess (data, idx) {
       console.log('processDeleteSuccess data', data);
-      this.campaigns.splice(1, idx);
+      this.campaigns.splice(idx, 1);
   }
 
 }

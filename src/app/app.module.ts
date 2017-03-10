@@ -19,6 +19,7 @@ import { ContentOverviewComponent } from './content/content-overview/content-ove
 
 import { AuthCustomHttpService } from './auth/auth-custom-http.service';
 import { CampaignApiService } from './campaigns/shared/campaign-api.service';
+import { ContentApiService } from './content/shared/content-api.service';
 import { UserApiService } from './users/shared/user-api.service';
 
 
@@ -44,6 +45,7 @@ import { UserApiService } from './users/shared/user-api.service';
     ],
     providers: [
         AuthCustomHttpService,
+        ContentApiService,
         CampaignApiService,
         UserApiService
     ],

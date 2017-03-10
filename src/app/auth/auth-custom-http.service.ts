@@ -29,20 +29,17 @@ export class AuthCustomHttpService {
         this.authHttp.setGlobalHeaders(headers, request);
     }
 
-    public request(url: string | Request, options?: RequestOptionsArgs): Observable<Response> {
-        return this.authIntercept(this.authHttp.request(url, options));
-    }
-
     public get(url: string, options?: RequestOptionsArgs): Observable<Response> {
         return this.authIntercept(this.authHttp.get(url, options));
     }
 
     public post(url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
-        return this.authIntercept(this.authHttp.post(url, options));
+        console.log('url, body', url, body);
+        return this.authIntercept(this.authHttp.post(url, body, options));
     }
 
     public put(url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
-        return this.authIntercept(this.authHttp.put(url, options));
+        return this.authIntercept(this.authHttp.put(url, body, options));
     }
 
     public delete(url: string, options?: RequestOptionsArgs): Observable<Response> {
@@ -51,13 +48,5 @@ export class AuthCustomHttpService {
 
     public patch(url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
         return this.authIntercept(this.authHttp.patch(url, options));
-    }
-
-    public head(url: string, options?: RequestOptionsArgs): Observable<Response> {
-        return this.authIntercept(this.authHttp.head(url, options));
-    }
-
-    public options(url: string, options?: RequestOptionsArgs): Observable<Response> {
-        return this.authIntercept(this.authHttp.options(url, options));
     }
 }

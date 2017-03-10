@@ -23,7 +23,6 @@ export class LoginComponent implements OnInit {
     ngOnInit () {
         this.invalid_credentials = false;
         this.credentials = new Credentials('', '');
-        console.log('this.credentials', this.credentials);
     }
 
     login (form) {
@@ -33,7 +32,6 @@ export class LoginComponent implements OnInit {
 
     processSuccess () {
         let url = this.authService.getRedirectUrl();
-        console.log('url', url);
         if (!!url && url !== '') {
             this.router.navigate([url]);
         } else {

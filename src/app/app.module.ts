@@ -21,6 +21,10 @@ import { ContentCreatorComponent } from './content/content-creator/content-creat
 import { ContentCreatorFormComponent } from './content/content-creator/content-creator-form.component';
 import { ContentOverviewComponent } from './content/content-overview/content-overview.component';
 
+import { TriggerComponent } from './trigger/trigger-component/trigger.component';
+import { TriggerCreatorComponent } from './trigger/trigger-creator/trigger-creator.component';
+import { TriggerOverviewComponent } from './trigger/trigger-overview/trigger-overview.component';
+
 import { AuthCustomHttpService } from './auth/auth-custom-http.service';
 import { CampaignApiService } from './campaigns/shared/campaign-api.service';
 import { ContentApiService } from './content/shared/content-api.service';
@@ -41,7 +45,10 @@ import { UserApiService } from './users/shared/user-api.service';
         ContentComponent,
         ContentCreatorComponent,
         ContentOverviewComponent,
-        ContentCreatorFormComponent
+        ContentCreatorFormComponent,
+        TriggerComponent,
+        TriggerCreatorComponent,
+        TriggerOverviewComponent
     ],
     imports: [
         BrowserModule,

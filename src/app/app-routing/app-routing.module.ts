@@ -4,12 +4,19 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
 
 import { AppComponent } from '../app.component';
+
 import { CampaignsComponent } from '../campaigns/campaigns-component/campaigns.component';
 import { CampaignCreatorComponent } from '../campaigns/campaign-creator/campaign-creator.component';
 import { CampaignsOverviewComponent } from '../campaigns/campaigns-overview/campaigns-overview.component';
+
 import { ContentComponent } from '../content/content-component/content.component';
 import { ContentCreatorComponent } from '../content/content-creator/content-creator.component';
 import { ContentOverviewComponent } from '../content/content-overview/content-overview.component';
+
+import { TriggerComponent } from '../trigger/trigger-component/trigger.component';
+import { TriggerCreatorComponent } from '../trigger/trigger-creator/trigger-creator.component';
+import { TriggerOverviewComponent } from '../trigger/trigger-overview/trigger-overview.component';
+
 import { LoginComponent } from '../login/login.component';
 import { OverviewComponent } from '../overview/overview.component';
 import { PageNotFoundComponent } from '../page-not-found/page-not-found.component';
@@ -63,6 +70,21 @@ const appRoutes: Routes = [
             {
                 path: 'create',
                 component: ContentCreatorComponent
+            }
+        ]
+    },
+    {
+        path: 'trigger',
+        component: TriggerComponent,
+        canActivate: [AuthGuardService],
+        children: [
+            {
+                path: '',
+                component: TriggerOverviewComponent
+            },
+            {
+                path: 'create',
+                component: TriggerCreatorComponent
             }
         ]
     },

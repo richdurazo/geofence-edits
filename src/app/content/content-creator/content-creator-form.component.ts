@@ -1,7 +1,6 @@
-declare var moment: any;
-///<reference path="../../../../node_modules/moment/moment.d.ts" />
 import { Component, OnInit } from '@angular/core';
 
+import { DateUtilsService } from '../../shared/date-utils.service';
 import { ContentApiService } from '../shared/content-api.service';
 import { ContentModel } from '../shared/content.model';
 
@@ -14,7 +13,7 @@ export class ContentCreatorFormComponent implements OnInit {
 
     content: ContentModel;
 
-    constructor (private contentApi: ContentApiService) {}
+    constructor (private contentApi: ContentApiService, private dateUtils: DateUtilsService) {}
 
     ngOnInit() {
         this.content = new ContentModel();
@@ -24,8 +23,8 @@ export class ContentCreatorFormComponent implements OnInit {
 
     public submitForm () {
         var obj = JSON.parse(JSON.stringify(this.content));
-        obj.start_at = moment(new Date(obj.start_at)).format("YYYY-MM-DD HH:mm:ss");
-        obj.end_at = moment(new Date(obj.end_at)).format("YYYY-MM-DD HH:mm:ss");
+        obj.start_at = this.dateUtils.formatSQLDate(obj.start_at);
+        obj.end_at = this.dateUtils.formatSQLDate(obj.end_at);
         this.contentApi.createContent(obj)
         .subscribe(
             data => this.processSuccess(data)

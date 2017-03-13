@@ -1,9 +1,8 @@
-declare var moment: any;
-///<reference path="../../../../node_modules/moment/moment.d.ts" />
 import { Component, OnInit } from '@angular/core';
 
 import { CampaignApiService } from '../shared/campaign-api.service';
 import { CampaignModel } from '../shared/campaign.model';
+import { DateUtilsService } from '../../shared/date-utils.service';
 
 @Component({
     selector: 'app-campaign-creator-form',
@@ -14,7 +13,7 @@ export class CampaignCreatorFormComponent implements OnInit {
 
     campaign: CampaignModel;
 
-    constructor (private campaignApi: CampaignApiService) {}
+    constructor (private campaignApi: CampaignApiService, private dateUtils: DateUtilsService) {}
 
     ngOnInit() {
         this.campaign = new CampaignModel();
@@ -28,8 +27,8 @@ export class CampaignCreatorFormComponent implements OnInit {
 
     public submitForm () {
         var obj = JSON.parse(JSON.stringify(this.campaign));
-        obj.start_at = moment(new Date(obj.start_at)).format("YYYY-MM-DD HH:mm:ss");
-        obj.end_at = moment(new Date(obj.end_at)).format("YYYY-MM-DD HH:mm:ss");
+        obj.start_at = this.dateUtils.formatSQLDate(obj.start_at);
+        obj.end_at = this.dateUtils.formatSQLDate(obj.end_at);
         this.campaignApi.createCampaign(obj)
         .subscribe(
             data => this.processSuccess(data)

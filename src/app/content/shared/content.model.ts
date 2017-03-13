@@ -1,8 +1,10 @@
-export class CampaignModel {
+export class ContentModel {
+    uuid: string;
     id: string;
     name: string;
+    display_name: string;
     description: string;
-    status: number;
+    quantity: number;
     start_at: Date;
     end_at: Date;
 }

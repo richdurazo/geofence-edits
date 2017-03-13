@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { CampaignModel } from '../../shared/campaign.model';
+import { CampaignApiService } from '../shared/campaign-api.service';
+import { CampaignModel } from '../shared/campaign.model';
+import { DateUtilsService } from '../../shared/date-utils.service';
 
 @Component({
     selector: 'app-campaign-creator-form',
@@ -11,7 +13,7 @@ export class CampaignCreatorFormComponent implements OnInit {
 
     campaign: CampaignModel;
 
-    constructor () {}
+    constructor (private campaignApi: CampaignApiService, private dateUtils: DateUtilsService) {}
 
     ngOnInit() {
         this.campaign = new CampaignModel();
@@ -24,8 +26,19 @@ export class CampaignCreatorFormComponent implements OnInit {
     }
 
     public submitForm () {
-        console.log('this.campaign', this.campaign);
+        var obj = JSON.parse(JSON.stringify(this.campaign));
+        obj.start_at = this.dateUtils.formatSQLDate(obj.start_at);
+        obj.end_at = this.dateUtils.formatSQLDate(obj.end_at);
+        this.campaignApi.createCampaign(obj)
+        .subscribe(
+            data => this.processSuccess(data)
+        )
     }
+
+    processSuccess (data) {
+        console.log('saved campaign data', data);
+    }
+
 
     private setModelDefaults () {
         this.campaign.name = '';

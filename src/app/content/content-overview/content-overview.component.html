@@ -1,0 +1,16 @@
+<p>
+  content-overview works!
+</p>
+<div class="content-thing row col col-xs-12 " *ngFor="let contentItem of content; let i = index;">
+    <div class="col col-xs-3">
+        {{ contentItem.name }}
+    </div>
+
+    <div class="col col-xs-3">
+        {{ contentItem.description }}
+    </div>
+
+    <div class="col col-xs-6">
+        <button type="button" class="btn btn-danger" name="delete" (click)="deleteItem(i)">Delete Campaign</button>
+    </div>
+</div>

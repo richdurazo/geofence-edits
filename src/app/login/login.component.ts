@@ -23,7 +23,6 @@ export class LoginComponent implements OnInit {
     ngOnInit () {
         this.invalid_credentials = false;
         this.credentials = new Credentials('', '');
-        console.log('this.credentials', this.credentials);
     }
 
     login (form) {

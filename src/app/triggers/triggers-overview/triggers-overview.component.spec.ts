@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TriggerOverviewComponent } from './trigger-overview.component';
+import { TriggerOverviewComponent } from './triggers-overview.component';
 
 describe('TriggerOverviewComponent', () => {
   let component: TriggerOverviewComponent;

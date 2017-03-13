@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
 
 import { ContentCreatorFormComponent } from './content-creator-form.component';
 
@@ -8,7 +9,8 @@ describe('ContentCreatorFormComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ContentCreatorFormComponent ]
+      declarations: [ ContentCreatorFormComponent ],
+      imports: [FormsModule]
     })
     .compileComponents();
   }));

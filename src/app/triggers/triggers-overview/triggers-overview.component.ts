@@ -22,13 +22,10 @@ export class TriggersOverviewComponent implements OnInit {
   }
 
   processGetSuccess (data) {
-      console.log('trigger data', data);
       this.triggers = data;
   }
 
   deleteItem (idx) {
-      console.log('idx', idx);
-      console.log('this.triggers[idx]', this.triggers[idx]);
       this.triggerApi.deleteTrigger(this.triggers[idx])
       .subscribe(
           data => this.processDeleteSuccess(data, idx)
@@ -36,7 +33,6 @@ export class TriggersOverviewComponent implements OnInit {
   }
 
   processDeleteSuccess (data, idx) {
-      console.log('processDeleteSuccess data', data);
       this.triggers.splice(idx, 1);
   }
 

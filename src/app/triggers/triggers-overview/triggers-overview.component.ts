@@ -37,7 +37,7 @@ export class TriggersOverviewComponent implements OnInit {
 
   processDeleteSuccess (data, idx) {
       console.log('processDeleteSuccess data', data);
-      this.triggers.splice(1, idx);
+      this.triggers.splice(idx, 1);
   }
 
 }

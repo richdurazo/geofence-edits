@@ -18,7 +18,6 @@ export class ContentCreatorFormComponent implements OnInit {
     ngOnInit() {
         this.content = new ContentModel();
         this.setModelDefaults();
-        console.log('this.content', this.content);
     }
 
     public submitForm () {

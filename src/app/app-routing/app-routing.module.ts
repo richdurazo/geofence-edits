@@ -13,9 +13,9 @@ import { ContentComponent } from '../content/content-component/content.component
 import { ContentCreatorComponent } from '../content/content-creator/content-creator.component';
 import { ContentOverviewComponent } from '../content/content-overview/content-overview.component';
 
-import { TriggerComponent } from '../triggers/trigger-component/trigger.component';
+import { TriggersComponent } from '../triggers/triggers-component/triggers.component';
 import { TriggerCreatorComponent } from '../triggers/trigger-creator/trigger-creator.component';
-import { TriggerOverviewComponent } from '../triggers/trigger-overview/trigger-overview.component';
+import { TriggersOverviewComponent } from '../triggers/triggers-overview/triggers-overview.component';
 
 import { LoginComponent } from '../login/login.component';
 import { OverviewComponent } from '../overview/overview.component';
@@ -75,12 +75,12 @@ const appRoutes: Routes = [
     },
     {
         path: 'triggers',
-        component: TriggerComponent,
+        component: TriggersComponent,
         canActivate: [AuthGuardService],
         children: [
             {
                 path: '',
-                component: TriggerOverviewComponent
+                component: TriggersOverviewComponent
             },
             {
                 path: 'create',

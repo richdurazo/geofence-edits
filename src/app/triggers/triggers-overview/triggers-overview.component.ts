@@ -4,11 +4,11 @@ import { TriggerApiService } from '../shared/trigger-api.service';
 import { TriggerModel } from '../shared/trigger.model';
 
 @Component({
-  selector: 'app-trigger-overview',
-  templateUrl: './trigger-overview.component.html',
-  styleUrls: ['./trigger-overview.component.scss']
+  selector: 'app-triggers-overview',
+  templateUrl: './triggers-overview.component.html',
+  styleUrls: ['./triggers-overview.component.scss']
 })
-export class TriggerOverviewComponent implements OnInit {
+export class TriggersOverviewComponent implements OnInit {
 
     triggers: TriggerModel[] = [];
 

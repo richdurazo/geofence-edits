@@ -1,5 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { ContentApiService } from '../shared/content-api.service';
+import { ContentApiMockService } from '../../mocks/content/content-api-mock.service';
+
 import { ContentOverviewComponent } from './content-overview.component';
 
 describe('ContentOverviewComponent', () => {
@@ -8,7 +11,10 @@ describe('ContentOverviewComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ContentOverviewComponent ]
+      declarations: [ ContentOverviewComponent ],
+      providers: [
+        { provide: ContentApiService, useClass: ContentApiMockService }
+      ]
     })
     .compileComponents();
   }));

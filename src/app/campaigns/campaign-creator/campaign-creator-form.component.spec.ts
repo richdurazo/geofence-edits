@@ -4,6 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { CampaignApiService } from '../shared/campaign-api.service';
 import { CampaignApiMockService } from '../../mocks/campaigns/campaign-api-mock.service';
 
+import { DateUtilsService } from '../../shared/date-utils.service';
+import { DateUtilsMockService } from '../../mocks/shared/date-utils-mock.service';
+
 import { CampaignCreatorFormComponent } from './campaign-creator-form.component';
 
 describe('CampaignCreatorFormComponent', () => {
@@ -15,7 +18,8 @@ describe('CampaignCreatorFormComponent', () => {
             imports: [ FormsModule ],
             declarations: [ CampaignCreatorFormComponent ],
             providers: [
-                { provide: CampaignApiService, useClass: CampaignApiMockService }
+                { provide: CampaignApiService, useClass: CampaignApiMockService },
+                { provide: DateUtilsService, useClass: DateUtilsMockService }
             ]
         })
         .compileComponents();

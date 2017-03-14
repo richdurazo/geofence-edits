@@ -56,7 +56,8 @@ describe('LoginComponent', () => {
             expect(comp.credentials).toBeUndefined();
             expect(comp.invalid_credentials).toBeUndefined();
             comp.ngOnInit();
-            expect(comp.credentials).toEqual({ email: '', password: '' });
+            expect(comp.credentials.email).toEqual('');
+            expect(comp.credentials.password).toEqual('');
             expect(comp.invalid_credentials).toEqual(false);
         });
     });

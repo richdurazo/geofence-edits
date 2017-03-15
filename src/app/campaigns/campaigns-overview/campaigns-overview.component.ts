@@ -22,13 +22,10 @@ export class CampaignsOverviewComponent implements OnInit {
   }
 
   processGetSuccess (data) {
-      console.log('campaigns data', data);
       this.campaigns = data;
   }
 
   deleteItem (idx) {
-      console.log('idx', idx);
-      console.log('this.campaigns[idx]', this.campaigns[idx]);
       this.campaignApi.deleteCampaign(this.campaigns[idx])
       .subscribe(
           data => this.processDeleteSuccess(data, idx)

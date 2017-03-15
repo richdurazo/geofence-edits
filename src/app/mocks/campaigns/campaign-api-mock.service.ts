@@ -5,6 +5,8 @@ export class CampaignApiMockService {
 
     constructor() {}
 
-
+    getCampaigns () {
+      return false;
+    }
 
 }

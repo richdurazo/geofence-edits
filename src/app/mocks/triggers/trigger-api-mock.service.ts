@@ -5,6 +5,8 @@ export class TriggerApiMockService {
 
     constructor() {}
 
-
+    getTriggers () {
+      return false;
+    }
 
 }

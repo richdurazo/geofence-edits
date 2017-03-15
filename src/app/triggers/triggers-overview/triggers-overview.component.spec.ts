@@ -1,20 +1,31 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { Observable } from "rxjs/Rx";
 
-import { TriggerOverviewComponent } from './triggers-overview.component';
+import { TriggerApiService } from '../shared/trigger-api.service';
+import { TriggerApiMockService } from '../../mocks/triggers/trigger-api-mock.service';
 
-describe('TriggerOverviewComponent', () => {
-  let component: TriggerOverviewComponent;
-  let fixture: ComponentFixture<TriggerOverviewComponent>;
+import { TriggersOverviewComponent } from './triggers-overview.component';
+
+describe('TriggersOverviewComponent', () => {
+  let component: TriggersOverviewComponent;
+  let fixture: ComponentFixture<TriggersOverviewComponent>;
+  let triggerApi: TriggerApiMockService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TriggerOverviewComponent ]
+      declarations: [ TriggersOverviewComponent ],
+      providers: [
+          { provide: TriggerApiService, useClass: TriggerApiMockService }
+      ]
     })
     .compileComponents();
+
+    triggerApi = TestBed.get(TriggerApiService);
+    spyOn(triggerApi, 'getTriggers').and.returnValue(Observable.of([{foo:'bar'}, {foo:'bar'}]));
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TriggerOverviewComponent);
+    fixture = TestBed.createComponent(TriggersOverviewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

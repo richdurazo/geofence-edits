@@ -9,4 +9,8 @@ export class CampaignApiMockService {
       return false;
     }
 
+    createCampaign (data) {
+      return false;
+    }
+
 }

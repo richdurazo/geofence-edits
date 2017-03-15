@@ -18,7 +18,6 @@ export class CampaignCreatorFormComponent implements OnInit {
     ngOnInit() {
         this.campaign = new CampaignModel();
         this.setModelDefaults();
-        console.log('this.campaign', this.campaign);
     }
 
     public checkStatus (event) {

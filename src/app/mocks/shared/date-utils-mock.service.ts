@@ -5,6 +5,8 @@ export class DateUtilsMockService {
 
     constructor() {}
 
-
+    public formatSQLDate () {
+      return false;
+    }
 
 }

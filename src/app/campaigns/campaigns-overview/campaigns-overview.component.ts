@@ -33,7 +33,6 @@ export class CampaignsOverviewComponent implements OnInit {
   }
 
   processDeleteSuccess (data, idx) {
-      console.log('processDeleteSuccess data', data);
       this.campaigns.splice(idx, 1);
   }
 

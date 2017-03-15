@@ -21,7 +21,7 @@ describe('TriggersOverviewComponent', () => {
     .compileComponents();
 
     triggerApi = TestBed.get(TriggerApiService);
-    spyOn(triggerApi, 'getTriggers').and.returnValue(Observable.of([{foo:'bar'}, {foo:'bar'}]));
+    spyOn(triggerApi, 'getTriggers').and.returnValue(Observable.of([]));
   }));
 
   beforeEach(() => {

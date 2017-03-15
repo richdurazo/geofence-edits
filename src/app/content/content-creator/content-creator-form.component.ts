@@ -16,7 +16,6 @@ export class ContentCreatorFormComponent implements OnInit {
     constructor (private contentApi: ContentApiService, private dateUtils: DateUtilsService) {}
 
     ngOnInit() {
-        this.content = new ContentModel();
         this.setModelDefaults();
     }
 
@@ -36,6 +35,7 @@ export class ContentCreatorFormComponent implements OnInit {
 
 
     private setModelDefaults () {
+        this.content = new ContentModel();
         this.content.name = '';
         this.content.description = '';
         this.content.start_at = new Date();

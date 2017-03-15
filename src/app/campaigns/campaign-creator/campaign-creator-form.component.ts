@@ -16,7 +16,6 @@ export class CampaignCreatorFormComponent implements OnInit {
     constructor (private campaignApi: CampaignApiService, private dateUtils: DateUtilsService) {}
 
     ngOnInit() {
-        this.campaign = new CampaignModel();
         this.setModelDefaults();
     }
 
@@ -40,6 +39,7 @@ export class CampaignCreatorFormComponent implements OnInit {
 
 
     private setModelDefaults () {
+        this.campaign = new CampaignModel();
         this.campaign.name = '';
         this.campaign.description = '';
         this.campaign.status = 0;

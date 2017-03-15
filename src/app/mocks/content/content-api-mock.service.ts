@@ -9,4 +9,7 @@ export class ContentApiMockService {
         return false;
     }
 
+    public createContent () {
+        return false;
+    }
 }

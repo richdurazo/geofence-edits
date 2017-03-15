@@ -9,4 +9,8 @@ export class TriggerApiMockService {
       return false;
     }
 
+    createTrigger () {
+      return false;
+    }
+
 }

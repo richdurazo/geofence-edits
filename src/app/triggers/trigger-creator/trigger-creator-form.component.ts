@@ -14,7 +14,6 @@ export class TriggerCreatorFormComponent implements OnInit {
   constructor(private triggerApi: TriggerApiService) { }
 
   ngOnInit() {
-      this.trigger = new TriggerModel();
       this.setModelDefaults();
   }
 
@@ -33,6 +32,7 @@ export class TriggerCreatorFormComponent implements OnInit {
 
 
   private setModelDefaults () {
+      this.trigger = new TriggerModel();
       this.trigger.name = '';
       this.trigger.value = '';
       this.trigger.campaign_id = '';

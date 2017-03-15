@@ -85,7 +85,7 @@ describe('CampaignCreatorFormComponent', () => {
 
         it('should format the request and call the CampaignApiService', () => {
           spyOn(dateUtils, 'formatSQLDate').and.returnValue('foo');
-          spyOn(campaignApi, 'createCampaign').and.returnValue(Observable.of({'foo': 'bar'}));
+          spyOn(campaignApi, 'createCampaign').and.returnValue(Observable.of({foo: 'bar'}));
           spyOn(component, 'processSuccess');
           expect(dateUtils.formatSQLDate).not.toHaveBeenCalled();
           expect(campaignApi.createCampaign).not.toHaveBeenCalled();

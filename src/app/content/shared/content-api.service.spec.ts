@@ -39,7 +39,6 @@ describe('ContentApiService', () => {
         spyOn(authHttp, 'get').and.returnValue(Observable.of(response));
         service.getContent()
         .subscribe( data => {
-            console.log('data', data);
             expect(authHttp.get).toHaveBeenCalledWith('http://api.app/content');
             expect(data).toEqual([{foo:'bar'}, {hay: 'guyz'}]);
         });

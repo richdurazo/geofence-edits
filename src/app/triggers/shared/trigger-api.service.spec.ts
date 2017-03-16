@@ -39,7 +39,6 @@ describe('TriggerApiService', () => {
         spyOn(authHttp, 'get').and.returnValue(Observable.of(response));
         service.getTriggers()
         .subscribe( data => {
-            console.log('data', data);
             expect(authHttp.get).toHaveBeenCalledWith('http://api.app/trigger');
             expect(data).toEqual([{foo:'bar'}, {hay: 'guyz'}]);
         });

@@ -15,10 +15,14 @@ export class CampaignsOverviewComponent implements OnInit {
   constructor(private campaignApi: CampaignApiService) { }
 
   ngOnInit() {
-      this.campaignApi.getCampaigns()
-      .subscribe(
-          data => this.processGetSuccess(data)
-      )
+      this.getCampaigns();
+  }
+
+  getCampaigns () {
+    this.campaignApi.getCampaigns()
+    .subscribe(
+        data => this.processGetSuccess(data)
+    )
   }
 
   processGetSuccess (data) {

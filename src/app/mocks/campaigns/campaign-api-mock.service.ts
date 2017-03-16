@@ -13,4 +13,7 @@ export class CampaignApiMockService {
       return false;
     }
 
+    deleteCampaign (data) {
+      return false;
+    }
 }

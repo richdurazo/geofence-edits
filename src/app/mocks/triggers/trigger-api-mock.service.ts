@@ -13,4 +13,8 @@ export class TriggerApiMockService {
       return false;
     }
 
+    deleteTrigger () {
+      return false;
+    }
+
 }

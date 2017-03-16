@@ -15,10 +15,14 @@ export class TriggersOverviewComponent implements OnInit {
   constructor(private triggerApi: TriggerApiService) { }
 
   ngOnInit() {
-      this.triggerApi.getTriggers()
-      .subscribe(
-          data => this.processGetSuccess(data)
-      )
+      this.getTriggers();
+  }
+
+  getTriggers () {
+    this.triggerApi.getTriggers()
+    .subscribe(
+        data => this.processGetSuccess(data)
+    )
   }
 
   processGetSuccess (data) {

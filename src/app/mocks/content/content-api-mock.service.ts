@@ -12,4 +12,8 @@ export class ContentApiMockService {
     public createContent () {
         return false;
     }
+
+    public deleteContent () {
+        return false;
+    }
 }

@@ -15,10 +15,14 @@ export class ContentOverviewComponent implements OnInit {
   constructor(private contentApi: ContentApiService) { }
 
   ngOnInit() {
-      this.contentApi.getContent()
-      .subscribe(
-          data => this.processGetSuccess(data)
-      )
+      this.getContent();
+  }
+
+  getContent () {
+    this.contentApi.getContent()
+    .subscribe(
+        data => this.processGetSuccess(data)
+    )
   }
 
   processGetSuccess (data) {

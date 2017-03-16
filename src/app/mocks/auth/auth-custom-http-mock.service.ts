@@ -5,6 +5,16 @@ export class AuthCustomHttpServiceMock {
 
     constructor() {}
 
+    get () {
+      return false;
+    }
 
+    post () {
+      return false;
+    }
+
+    delete () {
+      return false;
+    }
 
 }

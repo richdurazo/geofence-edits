@@ -29,7 +29,7 @@ describe('AuthApiMockService', () => {
           return response;
         },
         errorCallback : (error) => {
-          return response;
+          return error;
         }
       }
       spyOn(callbacks, 'successCallback');
@@ -45,6 +45,7 @@ describe('AuthApiMockService', () => {
       expect(authMockService.loggedIn()).toEqual(true);
       expect(authMockService.logOut()).toEqual(true);
       expect(authMockService.getRedirectUrl()).toEqual(true);
+      expect(authMockService.setUrl(true)).toEqual(true);
     });
 
   });

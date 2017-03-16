@@ -43,7 +43,7 @@ describe('AuthService', () => {
           return response;
         },
         errorCallback : (error) => {
-          return response;
+          return error;
         }
       }
       spyOn(callbacks, 'successCallback');
@@ -62,7 +62,7 @@ describe('AuthService', () => {
           return response;
         },
         errorCallback : (error) => {
-          return response;
+          return error;
         }
       }
       spyOn(callbacks, 'successCallback');
@@ -142,11 +142,9 @@ describe('AuthService', () => {
 
     it('should parse the JSON string in the error response and return an object with the error message', () => {
       let error = {
-        _body: {
-          error: 'foo'
-        }
+        _body: ''
       }
-      error._body = JSON.stringify(error._body);
+      error._body = JSON.stringify({error: 'foo'});
       expect(typeof authService.processError(error)).toEqual('object');
       expect(authService.processError(error).error).toEqual('foo');
     });

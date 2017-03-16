@@ -38,8 +38,8 @@ describe('LoginComponent', () => {
         fixture = TestBed.createComponent(LoginComponent);
         comp = fixture.debugElement.componentInstance;
         // AuthService from the root injector
-        authService = fixture.debugElement.injector.get(AuthService);
-        router = fixture.debugElement.injector.get(Router);
+        authService = TestBed.get(AuthService);
+        router = TestBed.get(Router);
     });
 
     it('should create', () => {
@@ -47,7 +47,7 @@ describe('LoginComponent', () => {
     });
 
     describe('ngOnInit', () => {
-        it('should have and init function', () => {
+        it('should have an init function', () => {
             expect(comp.ngOnInit).toBeTruthy();
             expect(typeof comp.ngOnInit).toEqual('function');
         });
@@ -56,7 +56,8 @@ describe('LoginComponent', () => {
             expect(comp.credentials).toBeUndefined();
             expect(comp.invalid_credentials).toBeUndefined();
             comp.ngOnInit();
-            expect(comp.credentials).toEqual({ email: '', password: '' });
+            expect(comp.credentials.email).toEqual('');
+            expect(comp.credentials.password).toEqual('');
             expect(comp.invalid_credentials).toEqual(false);
         });
     });

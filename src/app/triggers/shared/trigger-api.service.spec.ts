@@ -5,21 +5,21 @@ import { Observable } from "rxjs/Rx";
 import { AuthCustomHttpService } from '../../auth/auth-custom-http.service';
 import { AuthCustomHttpServiceMock } from '../../mocks/auth/auth-custom-http-mock.service';
 
-import { ContentApiService } from './content-api.service';
+import { TriggerApiService } from './trigger-api.service';
 
-let service: ContentApiService;
+let service: TriggerApiService;
 let authHttp: AuthCustomHttpServiceMock;
 
-describe('ContentApiService', () => {
+describe('TriggerApiService', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             providers: [
-                ContentApiService,
+                TriggerApiService,
                 { provide: AuthCustomHttpService, useClass: AuthCustomHttpServiceMock }
             ]
         });
 
-        service = TestBed.get(ContentApiService);
+        service = TestBed.get(TriggerApiService);
         authHttp = TestBed.get(AuthCustomHttpService);
     });
 
@@ -27,58 +27,57 @@ describe('ContentApiService', () => {
         expect(service).toBeTruthy();
     });
 
-    describe('getContent', () => {
-      it ('should have a getContent function', () => {
-        expect(service.getContent).toBeTruthy();
-        expect(typeof service.getContent).toEqual('function');
+    describe('getTriggers', () => {
+      it ('should have a getTriggers function', () => {
+        expect(service.getTriggers).toBeTruthy();
+        expect(typeof service.getTriggers).toEqual('function');
       })
 
       it ('should call the AuthCustomHttpService and return the response', () => {
         let responseOptions = new ResponseOptions({ body : JSON.stringify([{ foo:'bar' }, { hay: 'guyz' }]) });
         let response = new Response(responseOptions);
         spyOn(authHttp, 'get').and.returnValue(Observable.of(response));
-        service.getContent()
+        service.getTriggers()
         .subscribe( data => {
-            expect(authHttp.get).toHaveBeenCalledWith('http://api.app/content');
+            expect(authHttp.get).toHaveBeenCalledWith('http://api.app/trigger');
             expect(data).toEqual([{foo:'bar'}, {hay: 'guyz'}]);
         });
       });
     });
 
-    describe('createContent', () => {
-      it ('should have a createContent function', () => {
-        expect(service.createContent).toBeTruthy();
-        expect(typeof service.createContent).toEqual('function');
+    describe('createTrigger', () => {
+      it ('should have a createTrigger function', () => {
+        expect(service.createTrigger).toBeTruthy();
+        expect(typeof service.createTrigger).toEqual('function');
       })
 
       it ('should call the AuthCustomHttpService and return the response', () => {
         let responseOptions = new ResponseOptions({ body : JSON.stringify([{ foo:'bar' }, { hay: 'guyz' }]) });
         let response = new Response(responseOptions);
         spyOn(authHttp, 'post').and.returnValue(Observable.of(response));
-        service.createContent({id: 1})
+        service.createTrigger({id: 1})
         .subscribe( data => {
-            expect(authHttp.post).toHaveBeenCalledWith('http://api.app/content', { id: 1 });
+            expect(authHttp.post).toHaveBeenCalledWith('http://api.app/trigger', { id: 1 });
             expect(data).toEqual([{foo:'bar'}, {hay: 'guyz'}]);
         });
       });
     });
 
-    describe('deleteContent', () => {
-      it ('should have a deleteContent function', () => {
-        expect(service.deleteContent).toBeTruthy();
-        expect(typeof service.deleteContent).toEqual('function');
+    describe('deleteTrigger', () => {
+      it ('should have a deleteTrigger function', () => {
+        expect(service.deleteTrigger).toBeTruthy();
+        expect(typeof service.deleteTrigger).toEqual('function');
       })
 
       it ('should call the AuthCustomHttpService and return the response', () => {
         let responseOptions = new ResponseOptions({ body : JSON.stringify([{ foo:'bar' }, { hay: 'guyz' }]) });
         let response = new Response(responseOptions);
         spyOn(authHttp, 'delete').and.returnValue(Observable.of(response));
-        service.deleteContent({id: 1})
+        service.deleteTrigger({id: 1})
         .subscribe( data => {
-            expect(authHttp.delete).toHaveBeenCalledWith('http://api.app/content/1');
+            expect(authHttp.delete).toHaveBeenCalledWith('http://api.app/trigger/1');
             expect(data).toEqual([{foo:'bar'}, {hay: 'guyz'}]);
         });
       });
     });
-
 });

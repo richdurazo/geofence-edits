@@ -21,12 +21,18 @@ import { ContentCreatorComponent } from './content/content-creator/content-creat
 import { ContentCreatorFormComponent } from './content/content-creator/content-creator-form.component';
 import { ContentOverviewComponent } from './content/content-overview/content-overview.component';
 
+import { TriggersComponent } from './triggers/triggers-component/triggers.component';
+import { TriggerCreatorComponent } from './triggers/trigger-creator/trigger-creator.component';
+import { TriggersOverviewComponent } from './triggers/triggers-overview/triggers-overview.component';
+
 import { AuthCustomHttpService } from './auth/auth-custom-http.service';
 import { CampaignApiService } from './campaigns/shared/campaign-api.service';
 import { ContentApiService } from './content/shared/content-api.service';
-import { DateUtilsService } from './shared/date-utils.service';
+import { TriggerApiService } from './triggers/shared/trigger-api.service';
 import { UserApiService } from './users/shared/user-api.service';
 
+import { DateUtilsService } from './shared/date-utils.service';
+import { TriggerCreatorFormComponent } from './triggers/trigger-creator/trigger-creator-form.component';
 
 @NgModule({
     declarations: [
@@ -41,7 +47,11 @@ import { UserApiService } from './users/shared/user-api.service';
         ContentComponent,
         ContentCreatorComponent,
         ContentOverviewComponent,
-        ContentCreatorFormComponent
+        ContentCreatorFormComponent,
+        TriggersComponent,
+        TriggerCreatorComponent,
+        TriggersOverviewComponent,
+        TriggerCreatorFormComponent
     ],
     imports: [
         BrowserModule,
@@ -54,6 +64,7 @@ import { UserApiService } from './users/shared/user-api.service';
         ContentApiService,
         CampaignApiService,
         DateUtilsService,
+        TriggerApiService,
         UserApiService
     ],
     bootstrap: [AppComponent]

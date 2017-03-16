@@ -1,31 +1,31 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Observable } from "rxjs/Rx";
 
-import { ContentApiService } from '../shared/content-api.service';
-import { ContentApiMockService } from '../../mocks/content/content-api-mock.service';
+import { TriggerApiService } from '../shared/trigger-api.service';
+import { TriggerApiMockService } from '../../mocks/triggers/trigger-api-mock.service';
 
-import { ContentOverviewComponent } from './content-overview.component';
+import { TriggersOverviewComponent } from './triggers-overview.component';
 
-describe('ContentOverviewComponent', () => {
-  let component: ContentOverviewComponent;
-  let fixture: ComponentFixture<ContentOverviewComponent>;
-  let contentApi: ContentApiMockService;
+describe('TriggersOverviewComponent', () => {
+  let component: TriggersOverviewComponent;
+  let fixture: ComponentFixture<TriggersOverviewComponent>;
+  let triggerApi: TriggerApiMockService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ContentOverviewComponent ],
+      declarations: [ TriggersOverviewComponent ],
       providers: [
-        { provide: ContentApiService, useClass: ContentApiMockService }
+          { provide: TriggerApiService, useClass: TriggerApiMockService }
       ]
     })
     .compileComponents();
 
-    contentApi = TestBed.get(ContentApiService);
-    spyOn(contentApi, 'getContent').and.returnValue(Observable.of([{foo:'bar'}, {hay: 'guyz'}]));
+    triggerApi = TestBed.get(TriggerApiService);
+    spyOn(triggerApi, 'getTriggers').and.returnValue(Observable.of([{foo:'bar'}, {hay: 'guyz'}]));
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ContentOverviewComponent);
+    fixture = TestBed.createComponent(TriggersOverviewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -40,24 +40,24 @@ describe('ContentOverviewComponent', () => {
           expect(typeof component.ngOnInit).toEqual('function');
       });
 
-      it('should call getContent', () => {
-        spyOn(component, 'getContent');
+      it('should call getTriggers', () => {
+        spyOn(component, 'getTriggers');
         component.ngOnInit();
-        expect(component.getContent).toHaveBeenCalled();
+        expect(component.getTriggers).toHaveBeenCalled();
       });
   });
 
-  describe('getContent', () => {
-      it('should have a getContent function', () => {
-          expect(component.getContent).toBeTruthy();
-          expect(typeof component.getContent).toEqual('function');
+  describe('getTriggers', () => {
+      it('should have a getTriggers function', () => {
+          expect(component.getTriggers).toBeTruthy();
+          expect(typeof component.getTriggers).toEqual('function');
       });
 
-      it('should call the ContentApi and pass the response to processGetSuccess', () => {
+      it('should call the TriggerApi and pass the response to processGetSuccess', () => {
           spyOn(component, 'processGetSuccess');
           expect(component.processGetSuccess).not.toHaveBeenCalled();
-          component.getContent();
-          expect(contentApi.getContent).toHaveBeenCalled();
+          component.getTriggers();
+          expect(triggerApi.getTriggers).toHaveBeenCalled();
           expect(component.processGetSuccess).toHaveBeenCalledWith([{ foo: 'bar' }, { hay: 'guyz' }]);
       });
   });
@@ -70,7 +70,7 @@ describe('ContentOverviewComponent', () => {
 
       it('should handle the response from a successful create call', () => {
           component.processGetSuccess({foo: 'bar'});
-          expect(component.content).toEqual({foo: 'bar'});
+          expect(component.triggers).toEqual({foo: 'bar'});
       });
   });
 
@@ -80,13 +80,13 @@ describe('ContentOverviewComponent', () => {
           expect(typeof component.deleteItem).toEqual('function');
       });
 
-      it('should call the ContentApi and pass the response to processGetSuccess', () => {
+      it('should call the TriggerApi and pass the response to processGetSuccess', () => {
           spyOn(component, 'processDeleteSuccess');
-          spyOn(contentApi, 'deleteContent').and.returnValue(Observable.of({}));
+          spyOn(triggerApi, 'deleteTrigger').and.returnValue(Observable.of({}));
           expect(component.processDeleteSuccess).not.toHaveBeenCalled();
-          expect(contentApi.deleteContent).not.toHaveBeenCalled();
+          expect(triggerApi.deleteTrigger).not.toHaveBeenCalled();
           component.deleteItem(0);
-          expect(contentApi.deleteContent).toHaveBeenCalled();
+          expect(triggerApi.deleteTrigger).toHaveBeenCalled();
           expect(component.processDeleteSuccess).toHaveBeenCalledWith({}, 0);
       });
   });
@@ -98,9 +98,9 @@ describe('ContentOverviewComponent', () => {
       });
 
       it('should handle the response from a successful delete call and remove the item from the array', () => {
-          expect(component.content).toEqual([{foo: 'bar'}, {hay: 'guyz'}]);
+          expect(component.triggers).toEqual([{foo: 'bar'}, {hay: 'guyz'}]);
           component.processDeleteSuccess({foo: 'bar'}, 0);
-          expect(component.content).toEqual([{hay: 'guyz'}]);
+          expect(component.triggers).toEqual([{hay: 'guyz'}]);
       });
   });
 });

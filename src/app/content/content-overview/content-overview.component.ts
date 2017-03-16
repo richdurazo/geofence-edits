@@ -15,20 +15,21 @@ export class ContentOverviewComponent implements OnInit {
   constructor(private contentApi: ContentApiService) { }
 
   ngOnInit() {
-      this.contentApi.getContent()
-      .subscribe(
-          data => this.processGetSuccess(data)
-      )
+      this.getContent();
+  }
+
+  getContent () {
+    this.contentApi.getContent()
+    .subscribe(
+        data => this.processGetSuccess(data)
+    )
   }
 
   processGetSuccess (data) {
-      console.log('content data', data);
       this.content = data;
   }
 
   deleteItem (idx) {
-      console.log('idx', idx);
-      console.log('this.content[idx]', this.content[idx]);
       this.contentApi.deleteContent(this.content[idx])
       .subscribe(
           data => this.processDeleteSuccess(data, idx)
@@ -36,8 +37,7 @@ export class ContentOverviewComponent implements OnInit {
   }
 
   processDeleteSuccess (data, idx) {
-      console.log('processDeleteSuccess data', data);
-      this.content.splice(1, idx);
+      this.content.splice(idx, 1);
   }
 
 }

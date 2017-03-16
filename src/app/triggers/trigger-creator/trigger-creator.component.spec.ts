@@ -1,24 +1,24 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CampaignsComponent } from './campaigns.component';
+import { TriggerCreatorComponent } from './trigger-creator.component';
 
-describe('CampaignsComponent', () => {
-    let component: CampaignsComponent;
-    let fixture: ComponentFixture<CampaignsComponent>;
+describe('TriggerCreatorComponent', () => {
+    let component: TriggerCreatorComponent;
+    let fixture: ComponentFixture<TriggerCreatorComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             schemas: [
                 CUSTOM_ELEMENTS_SCHEMA
             ],
-            declarations: [ CampaignsComponent ]
+            declarations: [ TriggerCreatorComponent ]
         })
         .compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(CampaignsComponent);
+        fixture = TestBed.createComponent(TriggerCreatorComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

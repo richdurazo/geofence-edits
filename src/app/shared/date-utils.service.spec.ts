@@ -8,8 +8,7 @@ describe('DateUtilsService', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             providers: [
-                DateUtilsService,
-                moment
+                DateUtilsService
             ]
         });
 
@@ -25,11 +24,8 @@ describe('DateUtilsService', () => {
             expect(typeof service.formatSQLDate).toEqual('function');
         });
 
-        it('should return false', () => {
-            // spyOn(moment, 'format');
-            console.log("service.formatSQLDate(new Date('2016-11-22 12:00:00'))", service.formatSQLDate(new Date('2016-11-22 12:00:00')));
-            console.log("new Date('2016-11-22 12:00:00')", new Date('2016-11-22 12:00:00'));
-            // expect(moment.format).toHaveBeenCalled();
+        it('should format the date', () => {
+            expect(service.formatSQLDate(new Date('2016-11-22 12:00:00'))).toEqual('2016-11-22 12:00:00');
         })
     });
 });

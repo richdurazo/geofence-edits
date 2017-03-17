@@ -16,7 +16,6 @@ export class OverviewComponent implements OnInit {
     constructor(private userApiService: UserApiService) { }
 
     ngOnInit() {
-        console.log('OverviewComponent fired');
     }
 
     fetchUser () {
@@ -32,7 +31,6 @@ export class OverviewComponent implements OnInit {
     }
 
     processSuccess (data) {
-        console.log('data', data);
         this.user = new UserModel();
         for (var key in data.user) {
             this.user[key] = data.user[key];

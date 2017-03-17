@@ -13,7 +13,7 @@ module.exports = function (config) {
     ],
     files: [
       { pattern: './src/test.ts', watched: false },
-      { pattern: './node_modules/moment/moment.d.ts', included: true, watched: false }
+      { pattern: './node_modules/moment/moment.js', included: true, watched: false }
     ],
     preprocessors: {
       './src/test.ts': ['@angular/cli']

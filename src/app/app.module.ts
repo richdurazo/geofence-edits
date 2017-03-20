@@ -1,7 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { MaterialModule } from '@angular/material';
 import { HttpModule, Http, Headers, RequestOptions } from '@angular/http';
+import 'hammerjs';
 import * as moment from 'moment/moment.d';
 
 import { AppComponent } from './app.component';
@@ -23,6 +25,7 @@ import { ContentOverviewComponent } from './content/content-overview/content-ove
 
 import { TriggersComponent } from './triggers/triggers-component/triggers.component';
 import { TriggerCreatorComponent } from './triggers/trigger-creator/trigger-creator.component';
+import { TriggerCreatorFormComponent } from './triggers/trigger-creator/trigger-creator-form.component';
 import { TriggersOverviewComponent } from './triggers/triggers-overview/triggers-overview.component';
 
 import { AuthCustomHttpService } from './auth/auth-custom-http.service';
@@ -30,9 +33,7 @@ import { CampaignApiService } from './campaigns/shared/campaign-api.service';
 import { ContentApiService } from './content/shared/content-api.service';
 import { TriggerApiService } from './triggers/shared/trigger-api.service';
 import { UserApiService } from './users/shared/user-api.service';
-
 import { DateUtilsService } from './shared/date-utils.service';
-import { TriggerCreatorFormComponent } from './triggers/trigger-creator/trigger-creator-form.component';
 
 @NgModule({
     declarations: [
@@ -57,6 +58,7 @@ import { TriggerCreatorFormComponent } from './triggers/trigger-creator/trigger-
         BrowserModule,
         FormsModule,
         HttpModule,
+        MaterialModule.forRoot(),
         AppRoutingModule
     ],
     providers: [

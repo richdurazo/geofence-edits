@@ -34,6 +34,7 @@ import { ContentApiService } from './content/shared/content-api.service';
 import { TriggerApiService } from './triggers/shared/trigger-api.service';
 import { UserApiService } from './users/shared/user-api.service';
 import { DateUtilsService } from './shared/date-utils.service';
+import { AppNavigationComponent } from './app-navigation/app-navigation.component';
 
 @NgModule({
     declarations: [
@@ -52,7 +53,8 @@ import { DateUtilsService } from './shared/date-utils.service';
         TriggersComponent,
         TriggerCreatorComponent,
         TriggersOverviewComponent,
-        TriggerCreatorFormComponent
+        TriggerCreatorFormComponent,
+        AppNavigationComponent
     ],
     imports: [
         BrowserModule,

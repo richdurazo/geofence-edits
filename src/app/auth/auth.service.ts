@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { tokenNotExpired } from 'angular2-jwt';
+import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
 
 import { AuthApiService } from './auth-api.service';
@@ -9,7 +10,7 @@ export class AuthService {
 
     private redirectUrl: string = '';
 
-    constructor(private authApiService: AuthApiService) {}
+    constructor(private authApiService: AuthApiService, private router: Router) {}
 
     // public methods
     public loggedIn () {
@@ -18,6 +19,7 @@ export class AuthService {
 
     public logOut () {
         localStorage.removeItem('id_token');
+        this.router.navigate(['login']);
     }
 
     public setUrl (url) {

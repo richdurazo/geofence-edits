@@ -5,6 +5,8 @@ import { AuthHttp, AuthConfig } from 'angular2-jwt';
 
 import { AppComponent } from '../app.component';
 
+import { AppNavigationComponent } from '../app-navigation/app-navigation.component';
+
 import { CampaignsComponent } from '../campaigns/campaigns-component/campaigns.component';
 import { CampaignCreatorComponent } from '../campaigns/campaign-creator/campaign-creator.component';
 import { CampaignsOverviewComponent } from '../campaigns/campaigns-overview/campaigns-overview.component';
@@ -39,64 +41,70 @@ const appRoutes: Routes = [
         component: LoginComponent
     },
     {
-        path: 'overview',
-        component: OverviewComponent,
-        canActivate: [AuthGuardService]
-    },
-    {
-        path: 'campaigns',
-        component: CampaignsComponent,
-        canActivate: [AuthGuardService],
-        children: [
-            {
-                path: '',
-                component: CampaignsOverviewComponent
-            },
-            {
-                path: 'create',
-                component: CampaignCreatorComponent
-            }
-        ]
-    },
-    {
-        path: 'content',
-        component: ContentComponent,
-        canActivate: [AuthGuardService],
-        children: [
-            {
-                path: '',
-                component: ContentOverviewComponent
-            },
-            {
-                path: 'create',
-                component: ContentCreatorComponent
-            }
-        ]
-    },
-    {
-        path: 'triggers',
-        component: TriggersComponent,
-        canActivate: [AuthGuardService],
-        children: [
-            {
-                path: '',
-                component: TriggersOverviewComponent
-            },
-            {
-                path: 'create',
-                component: TriggerCreatorComponent
-            }
-        ]
-    },
-    {
         path: '',
-        redirectTo: '/login',
-        pathMatch: 'full'
-    },
-    {
-        path: '**',
-        component: PageNotFoundComponent,
-        canActivate: [AuthGuardService]
+        component: AppNavigationComponent,
+        children: [
+            {
+                path: 'overview',
+                component: OverviewComponent,
+                canActivate: [AuthGuardService]
+            },
+            {
+                path: 'campaigns',
+                component: CampaignsComponent,
+                canActivate: [AuthGuardService],
+                children: [
+                    {
+                        path: '',
+                        component: CampaignsOverviewComponent
+                    },
+                    {
+                        path: 'create',
+                        component: CampaignCreatorComponent
+                    }
+                ]
+            },
+            {
+                path: 'content',
+                component: ContentComponent,
+                canActivate: [AuthGuardService],
+                children: [
+                    {
+                        path: '',
+                        component: ContentOverviewComponent
+                    },
+                    {
+                        path: 'create',
+                        component: ContentCreatorComponent
+                    }
+                ]
+            },
+            {
+                path: 'triggers',
+                component: TriggersComponent,
+                canActivate: [AuthGuardService],
+                children: [
+                    {
+                        path: '',
+                        component: TriggersOverviewComponent
+                    },
+                    {
+                        path: 'create',
+                        component: TriggerCreatorComponent
+                    }
+                ]
+            },
+            {
+                path: '',
+                redirectTo: '/login',
+                pathMatch: 'full'
+            },
+            {
+                path: '**',
+                component: PageNotFoundComponent,
+                canActivate: [AuthGuardService]
+            }
+        ]
     }
 ];
 

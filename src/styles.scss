@@ -1,13 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
-// @import '~@angular/material/core/theming/all-theme';
-// @include mat-core();
-@import "~@angular/material/core/theming/prebuilt/indigo-pink";
-@import "themes/thing";
+@import '~@angular/material/core/theming/all-theme';
+
+// Include non-theme styles for core.
+@include mat-core();
+
+// Define a theme.
+$primary: mat-palette($mat-indigo);
+$accent:  mat-palette($mat-amber, A200, A100, A400);
+$warn:  mat-palette($mat-red, A200, A100, A400);
+
+$theme: mat-dark-theme($primary, $accent, $warn);
+
+// Include all theme styles for the components.
+@include angular-material-theme($theme);
+
 
 body {
 
-    nav {
-        margin-bottom: 10px;
-    }
+    margin: 0;
+
+    // .mat-input-container.ng-invalid {
+    //     color: red;
+    // }
 
 }

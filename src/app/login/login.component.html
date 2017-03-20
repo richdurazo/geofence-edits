@@ -1,31 +1,30 @@
-<form #form="ngForm" (ngSubmit)="login(form)" novalidate>
+<md-sidenav-container fullscreen>
 
-    <div class="form-group row col-6" [ngClass]="{ 'has-danger': form.submitted && !email.valid }">
+    <md-toolbar color="primary">
+      <button md-button class="navbar-brand">Actv8me</button>
+    </md-toolbar>
+    <form #form="ngForm" (ngSubmit)="login(form)" novalidate>
 
-        <label class="col-md-3 col-form-label" for="email">Email</label>
-
-        <div class="col-md-9">
+        <md-input-container>
             <input
-            type="text"
-            class="form-control"
-            placeholder="Email"
+            mdInput
             name="email"
+            type="email"
+            placeholder="Email"
             required
             [(ngModel)]="credentials.email"
             #email="ngModel">
 
-            <div class="form-control-feedback" [hidden]="!form.submitted || password.valid">Add a password dude</div>
+            <md-hint align="start">
+                <div  [hidden]="!form.submitted || email.valid">
+                    Add an email dude
+                </div>
+            </md-hint>
+        </md-input-container>
 
-        </div>
-
-    </div>
-
-    <div class="form-group row col-6" [ngClass]="{ 'has-danger': form.submitted && !password.valid }">
-
-        <label class="col-md-3 col-form-label" for="password">Password</label>
-
-        <div class="col-md-9">
+        <md-input-container>
             <input
+            mdInput
             type="password"
             class="form-control"
             placeholder="Password"
@@ -34,26 +33,24 @@
             [(ngModel)]="credentials.password"
             #password="ngModel">
 
-            <div class="form-control-feedback" [hidden]="!form.submitted || password.valid">
-                Add a password dude
-            </div>
+            <md-hint align="start">
+                <div [hidden]="!form.submitted || password.valid">
+                    Add a password dude
+                </div>
 
-            <div class="form-group has-danger" [hidden]="!invalid_credentials">
-                <div class="form-control-feedback">
+                <div [hidden]="!invalid_credentials">
                     The username or password you have entered is invalid.
                 </div>
+            </md-hint>
+        </md-input-container>
+
+        <div class="row">
+            <div class="col">
+                <button type="submit" md-raised-button color="primary">Submit</button>
             </div>
-
         </div>
 
-    </div>
-
-    <div class="row">
-        <div class="col">
-            <button type="submit" md-raised-button color="primary">Submit</button>
-        </div>
-    </div>
+    </form>
 
 
-
-</form>
+</md-sidenav-container>

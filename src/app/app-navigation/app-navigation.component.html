@@ -5,54 +5,18 @@
 
         <md-nav-list>
 
-            <md-list-item md-ripple class="relative">
-                <a routerLink="/overview" routerLinkActive="active">
-                    Overview
-                </a>
-            </md-list-item>
+            <a routerLink="{{ route.route }}" routerLinkActive="active" *ngFor="let route of routes">
+                <md-list-item md-ripple class="relative">
+                    {{ route.name }}
+                </md-list-item>
+            </a>
 
-            <md-list-item md-ripple class="relative">
-                <a routerLink="/campaigns" routerLinkActive="active">
-                    Campaigns
-                </a>
-            </md-list-item>
-
-            <md-list-item md-ripple class="relative">
-                <a routerLink="/campaigns/create" routerLinkActive="active">
-                    Campaign Creator
-                </a>
-            </md-list-item>
-
-            <md-list-item md-ripple class="relative">
-                <a routerLink="/content" routerLinkActive="active">
-                    Content
-                </a>
-            </md-list-item>
-
-            <md-list-item md-ripple class="relative">
-                <a routerLink="/content/create" routerLinkActive="active">
-                    Content Creator
-                </a>
-            </md-list-item>
-
-            <md-list-item md-ripple class="relative">
-                <a routerLink="/triggers" routerLinkActive="active">
-                    Trigger
-                </a>
-            </md-list-item>
-
-            <md-list-item md-ripple class="relative">
-                <a routerLink="/triggers/create" routerLinkActive="active">
-                    Trigger Creator
-                </a>
-            </md-list-item>
-
-            <md-list-item md-ripple class="relative">
-                <a (click)="logOut()">
+            <a (click)="logOut()">
+                <md-list-item md-ripple class="relative">
                     Log Out
-                </a>
-            </md-list-item>
-
+                </md-list-item>
+            </a>
+            
         </md-nav-list>
 
     </md-sidenav>

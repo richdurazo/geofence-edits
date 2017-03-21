@@ -18,22 +18,26 @@ $common-margin: 20px;
 
 body {
 
-    // margin: 0;
+    // COMMON UTILITIES
+    .relative {
+        position: relative;
+    }
 
+    // COMMON TOOLBAR
     md-toolbar {
         margin-bottom: $common-margin;
     }
+
+    // INPUTS
 
     .mat-input-container[fxFlex="100"] {
         width: 100%;
     }
 
+    // SIDENAV
     .mat-sidenav-focus-trap>.cdk-focus-trap-content {
         position: relative;
     }
 
-    .relative {
-        position: relative;
-    }
 
 }

@@ -1,56 +1,66 @@
 <md-sidenav-container fullscreen>
 
+
     <md-toolbar color="primary">
       <button md-button class="navbar-brand">Actv8me</button>
     </md-toolbar>
-    <form #form="ngForm" (ngSubmit)="login(form)" novalidate>
 
-        <md-input-container>
-            <input
-            mdInput
-            name="email"
-            type="email"
-            placeholder="Email"
-            required
-            [(ngModel)]="credentials.email"
-            #email="ngModel">
+    <md-card fxFlex="33" fxFlexOffset="33">
 
-            <md-hint align="start">
-                <div  [hidden]="!form.submitted || email.valid">
-                    Add an email dude
-                </div>
-            </md-hint>
-        </md-input-container>
+        <md-card-content fxFlex="100">
 
-        <md-input-container>
-            <input
-            mdInput
-            type="password"
-            class="form-control"
-            placeholder="Password"
-            name="password"
-            required
-            [(ngModel)]="credentials.password"
-            #password="ngModel">
+            <form #form="ngForm" (ngSubmit)="login(form)" novalidate fxFlex="100">
 
-            <md-hint align="start">
-                <div [hidden]="!form.submitted || password.valid">
-                    Add a password dude
-                </div>
+                <md-input-container fxFlex="100">
+                    <input
+                    mdInput
+                    name="email"
+                    type="email"
+                    placeholder="Email"
+                    pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+                    required
+                    [(ngModel)]="credentials.email"
+                    #email="ngModel">
 
-                <div [hidden]="!invalid_credentials">
-                    The username or password you have entered is invalid.
-                </div>
-            </md-hint>
-        </md-input-container>
+                    <md-hint align="start">
+                        <div  *ngIf="form.submitted && email.errors !== null && email.errors.required">
+                            Add an email dude
+                        </div>
+                        <div  *ngIf="form.submitted && email.errors !== null && email.errors.pattern">
+                            Email is invalid
+                        </div>
+                    </md-hint>
+                </md-input-container>
 
-        <div class="row">
-            <div class="col">
+                <md-input-container fxFlex="100">
+                    <input
+                    mdInput
+                    type="password"
+                    class="form-control"
+                    placeholder="Password"
+                    name="password"
+                    required
+                    [(ngModel)]="credentials.password"
+                    #password="ngModel">
+
+                    <md-hint align="start">
+                        <div [hidden]="!form.submitted || password.valid">
+                            Add a password dude
+                        </div>
+
+                        <div [hidden]="!invalid_credentials">
+                            The username or password you have entered is invalid.
+                        </div>
+                    </md-hint>
+                </md-input-container>
+
                 <button type="submit" md-raised-button color="primary">Submit</button>
-            </div>
-        </div>
 
-    </form>
+            </form>
+
+        </md-card-content>
+
+    </md-card>
 
 
 </md-sidenav-container>

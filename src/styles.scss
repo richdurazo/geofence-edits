@@ -5,8 +5,8 @@
 @include mat-core();
 
 // Define a theme.
-$primary: mat-palette($mat-indigo);
-$accent:  mat-palette($mat-amber, A200, A100, A400);
+$primary: mat-palette($mat-pink, 700, 500, 900);
+$accent:  mat-palette($mat-blue-grey, A200, A100, A400);
 $warn:  mat-palette($mat-red, A200, A100, A400);
 
 $theme: mat-dark-theme($primary, $accent, $warn);
@@ -14,13 +14,26 @@ $theme: mat-dark-theme($primary, $accent, $warn);
 // Include all theme styles for the components.
 @include angular-material-theme($theme);
 
+$common-margin: 20px;
 
 body {
 
-    margin: 0;
+    // margin: 0;
 
-    // .mat-input-container.ng-invalid {
-    //     color: red;
-    // }
+    md-toolbar {
+        margin-bottom: $common-margin;
+    }
+
+    .mat-input-container[fxFlex="100"] {
+        width: 100%;
+    }
+
+    .mat-sidenav-focus-trap>.cdk-focus-trap-content {
+        position: relative;
+    }
+
+    .relative {
+        position: relative;
+    }
 
 }

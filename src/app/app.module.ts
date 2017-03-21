@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MaterialModule } from '@angular/material';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpModule, Http, Headers, RequestOptions } from '@angular/http';
 import 'hammerjs';
 import * as moment from 'moment/moment.d';
@@ -61,6 +62,7 @@ import { AppNavigationComponent } from './app-navigation/app-navigation.componen
         FormsModule,
         HttpModule,
         MaterialModule.forRoot(),
+        FlexLayoutModule,
         AppRoutingModule
     ],
     providers: [

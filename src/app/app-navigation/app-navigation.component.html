@@ -1,36 +1,66 @@
 <md-sidenav-container fullscreen>
-  <md-sidenav #sidenav mode="side" opened="true" class="app-sidenav">
+    <md-sidenav #sidenav mode="side" opened="true" class="app-sidenav">
 
-      <button md-button routerLink="/overview" class="navbar-brand">Actv8me</button>
+        <button md-button routerLink="/overview" class="navbar-brand">Actv8me</button>
 
-      <md-nav-list>
+        <md-nav-list>
 
-          <a md-list-item routerLink="/login" routerLinkActive="active">Login</a>
+            <md-list-item md-ripple class="relative">
+                <a routerLink="/overview" routerLinkActive="active">
+                    Overview
+                </a>
+            </md-list-item>
 
-          <a md-list-item routerLink="/overview" routerLinkActive="active">Overview</a>
+            <md-list-item md-ripple class="relative">
+                <a routerLink="/campaigns" routerLinkActive="active">
+                    Campaigns
+                </a>
+            </md-list-item>
 
-          <a md-list-item routerLink="/campaigns" routerLinkActive="active">Campaigns</a>
+            <md-list-item md-ripple class="relative">
+                <a routerLink="/campaigns/create" routerLinkActive="active">
+                    Campaign Creator
+                </a>
+            </md-list-item>
 
-          <a md-list-item routerLink="/campaigns/create" routerLinkActive="active">Campaign Creator</a>
+            <md-list-item md-ripple class="relative">
+                <a routerLink="/content" routerLinkActive="active">
+                    Content
+                </a>
+            </md-list-item>
 
-          <a md-list-item routerLink="/content" routerLinkActive="active">Content</a>
+            <md-list-item md-ripple class="relative">
+                <a routerLink="/content/create" routerLinkActive="active">
+                    Content Creator
+                </a>
+            </md-list-item>
 
-          <a md-list-item routerLink="/content/create" routerLinkActive="active">Content Creator</a>
+            <md-list-item md-ripple class="relative">
+                <a routerLink="/triggers" routerLinkActive="active">
+                    Trigger
+                </a>
+            </md-list-item>
 
-          <a md-list-item routerLink="/triggers" routerLinkActive="active">Trigger</a>
+            <md-list-item md-ripple class="relative">
+                <a routerLink="/triggers/create" routerLinkActive="active">
+                    Trigger Creator
+                </a>
+            </md-list-item>
 
-          <a md-list-item routerLink="/triggers/create" routerLinkActive="active">Trigger Creator</a>
+            <md-list-item md-ripple class="relative">
+                <a (click)="logOut()">
+                    Log Out
+                </a>
+            </md-list-item>
 
-          <a md-list-item (click)="logOut()">Log Out</a>
+        </md-nav-list>
 
-      </md-nav-list>
+    </md-sidenav>
+    <md-toolbar color="primary">
+        Tool Bar
+    </md-toolbar>
 
-  </md-sidenav>
-  <md-toolbar color="primary">
-      TOOL!
-  </md-toolbar>
-
-  <!-- primary content -->
-  <router-outlet></router-outlet>
+    <!-- primary content -->
+    <router-outlet></router-outlet>
 
 </md-sidenav-container>

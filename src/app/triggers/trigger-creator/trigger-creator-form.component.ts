@@ -17,7 +17,10 @@ export class TriggerCreatorFormComponent implements OnInit {
       this.setModelDefaults();
   }
 
-  public submitForm () {
+  public submitForm (form) {
+      if (!form.valid) {
+          return;
+      }
       var obj = JSON.parse(JSON.stringify(this.trigger));
 
       this.triggerApi.createTrigger(obj)

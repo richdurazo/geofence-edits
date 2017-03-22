@@ -1,27 +1,39 @@
 <md-sidenav-container fullscreen>
     <md-sidenav #sidenav mode="side" opened="true" class="app-sidenav">
 
-        <button md-button routerLink="/overview" class="navbar-brand">Actv8me</button>
-
         <md-nav-list>
-
-            <a routerLink="{{ route.route }}" routerLinkActive="active" *ngFor="let route of routes">
+            <a routerLink="/overview">
                 <md-list-item md-ripple class="relative">
-                    {{ route.name }}
+                    Actv8me
                 </md-list-item>
             </a>
+
+            <div *ngFor="let route of routes">
+                <a class="router-link" routerLink="{{ route.route }}" routerLinkActive="active">
+                    <md-list-item md-ripple class="relative">
+                        {{ route.name }}
+                    </md-list-item>
+                </a>
+
+                <a class="router-sub-link" routerLink="{{ subroute.route }}" routerLinkActive="active" *ngFor="let subroute of route.subroutes">
+                    <md-list-item md-ripple class="relative">
+                        {{ subroute.name }}
+                    </md-list-item>
+                </a>
+
+            </div>
 
             <a (click)="logOut()">
                 <md-list-item md-ripple class="relative">
                     Log Out
                 </md-list-item>
             </a>
-            
         </md-nav-list>
 
     </md-sidenav>
+
     <md-toolbar color="primary">
-        Tool Bar
+        {{ activeRoute }}
     </md-toolbar>
 
     <!-- primary content -->

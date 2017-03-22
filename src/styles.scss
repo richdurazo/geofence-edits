@@ -6,7 +6,7 @@
 
 // Define a theme.
 $primary: mat-palette($mat-pink, 700, 500, 900);
-$accent:  mat-palette($mat-blue-grey, A200, A100, A400);
+$accent:  mat-palette($mat-amber, A200, A100, A400);
 $warn:  mat-palette($mat-red, A200, A100, A400);
 
 $theme: mat-dark-theme($primary, $accent, $warn);
@@ -16,11 +16,16 @@ $theme: mat-dark-theme($primary, $accent, $warn);
 
 $common-margin: 20px;
 
+
 body {
 
     // COMMON UTILITIES
     .relative {
         position: relative;
+    }
+
+    .color-primary {
+        color: mat-color($primary);
     }
 
     // COMMON TOOLBAR
@@ -29,6 +34,10 @@ body {
     }
 
     // INPUTS
+
+    md-sidenav {
+        width: 200px;
+    }
 
     .mat-input-container[fxFlex="100"] {
         width: 100%;
@@ -39,5 +48,22 @@ body {
         position: relative;
     }
 
+    .router-link.active {
+        .mat-list-item {
+            background-color: mat-color($primary);
+        }
+    }
+
+    .router-sub-link {
+        .mat-list-item {
+            background-color: mat-color($warn);
+        }
+
+        &.active {
+            .mat-list-item {
+                background-color: mat-color($accent);
+            }
+        }
+    }
 
 }

@@ -43,16 +43,15 @@ const appRoutes: Routes = [
     {
         path: '',
         component: AppNavigationComponent,
+        canActivate: [AuthGuardService],
         children: [
             {
                 path: 'overview',
                 component: OverviewComponent,
-                canActivate: [AuthGuardService]
             },
             {
                 path: 'campaigns',
                 component: CampaignsComponent,
-                canActivate: [AuthGuardService],
                 children: [
                     {
                         path: '',
@@ -67,7 +66,6 @@ const appRoutes: Routes = [
             {
                 path: 'content',
                 component: ContentComponent,
-                canActivate: [AuthGuardService],
                 children: [
                     {
                         path: '',
@@ -82,7 +80,6 @@ const appRoutes: Routes = [
             {
                 path: 'triggers',
                 component: TriggersComponent,
-                canActivate: [AuthGuardService],
                 children: [
                     {
                         path: '',
@@ -102,7 +99,6 @@ const appRoutes: Routes = [
             {
                 path: '**',
                 component: PageNotFoundComponent,
-                canActivate: [AuthGuardService]
             }
         ]
     }

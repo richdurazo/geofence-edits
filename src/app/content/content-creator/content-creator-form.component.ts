@@ -19,7 +19,8 @@ export class ContentCreatorFormComponent implements OnInit {
         this.setModelDefaults();
     }
 
-    public submitForm () {
+    public submitForm (form) {
+        if (!form.valid) { return; }
         var obj = JSON.parse(JSON.stringify(this.content));
         obj.start_at = this.dateUtils.formatSQLDate(obj.start_at);
         obj.end_at = this.dateUtils.formatSQLDate(obj.end_at);

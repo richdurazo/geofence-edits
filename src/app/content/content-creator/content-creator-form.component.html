@@ -1,34 +1,112 @@
-<form>
-    <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text" name="name" class="form-control" [(ngModel)]="content.name"/>
-    </div>
+<md-card fxFlex="96" fxFlexOffset="2">
 
-    <div class="form-group">
-        <label for="display_name">Display Name</label>
-        <input type="text" name="display_name" class="form-control" [(ngModel)]="content.display_name"/>
-    </div>
+    <form #form="ngForm" (ngSubmit)="submitForm(form)" novalidate fxFlex="100">
 
-    <div class="form-group">
-        <label for="description">Description</label>
-        <textarea type="text" name="description" class="form-control" [(ngModel)]="content.description">
+        <md-input-container fxFlex="50">
+            <input
+            mdInput
+            name="name"
+            type="text"
+            placeholder="Name"
+            required
+            [(ngModel)]="content.name"
+            #name="ngModel">
+
+            <md-hint align="start">
+                <div  *ngIf="form.submitted && name.errors !== null && name.errors.required">
+                    Please add a name
+                </div>
+            </md-hint>
+        </md-input-container>
+
+        <md-input-container fxFlex="50">
+            <input
+            mdInput
+            name="display_name"
+            type="text"
+            placeholder="Display Name"
+            required
+            [(ngModel)]="content.display_name"
+            #display_name="ngModel">
+
+            <md-hint align="start">
+                <div  *ngIf="form.submitted && display_name.errors !== null && display_name.errors.required">
+                    Please add a name
+                </div>
+            </md-hint>
+        </md-input-container>
+
+        <md-input-container fxFlex="100">
+            <textarea
+            mdInput
+            name="description"
+            type="text"
+            placeholder="Description"
+            required
+            [(ngModel)]="content.description"
+            #description="ngModel">
         </textarea>
-    </div>
 
-    <div class="form-group">
-        <label for="start_at">Start Date</label>
-        <input type="datetime-local" name="start_at" class="form-control" [(ngModel)]="content.start_at"/>
-    </div>
+        <md-hint align="start">
+            <div  *ngIf="form.submitted && description.errors !== null && description.errors.required">
+                Please add a description
+            </div>
+        </md-hint>
+    </md-input-container>
 
-    <div class="form-group">
-        <label for="end_at">End Date</label>
-        <input type="datetime-local" name="end_at" class="form-control" [(ngModel)]="content.end_at"/>
-    </div>
+    <md-input-container fxFlex="50">
+        <input
+        mdInput
+        name="start_at"
+        type="datetime-local"
+        placeholder="Start Date"
+        required
+        [(ngModel)]="content.start_at"
+        #start_at="ngModel">
 
-    <div class="form-group">
-        <label for="quantity">Quantity</label>
-        <input type="text" name="quantity" class="form-control" [(ngModel)]="content.quantity"/>
-    </div>
+        <md-hint align="start">
+            <div  *ngIf="form.submitted && start_at.errors !== null && start_at.errors.required">
+                Please add a start date
+            </div>
+        </md-hint>
+    </md-input-container>
 
-    <button type="submit" class="btn btn-primary" name="submit" (click)="submitForm()">Submit</button>
+    <md-input-container fxFlex="50">
+        <input
+        mdInput
+        name="end_at"
+        type="datetime-local"
+        placeholder="End Date"
+        required
+        [(ngModel)]="content.end_at"
+        #end_at="ngModel">
+
+        <md-hint align="start">
+            <div  *ngIf="form.submitted && end_at.errors !== null && end_at.errors.required">
+                Please add an end date
+            </div>
+        </md-hint>
+    </md-input-container>
+
+    <md-input-container fxFlex="50">
+        <input
+        mdInput
+        name="quantity"
+        type="text"
+        placeholder="Quantity"
+        required
+        [(ngModel)]="content.quantity"
+        #quantity="ngModel">
+
+        <md-hint align="start">
+            <div  *ngIf="form.submitted && quantity.errors !== null && quantity.errors.required">
+                Please add a quantity
+            </div>
+        </md-hint>
+    </md-input-container>
+
+    <button type="submit" md-raised-button color="primary">Submit</button>
+
 </form>
+
+</md-card>

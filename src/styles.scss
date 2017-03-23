@@ -5,7 +5,7 @@
 @include mat-core();
 
 // Define a theme.
-$primary: mat-palette($mat-pink, 700, 500, 900);
+$primary: mat-palette($mat-indigo);
 $accent:  mat-palette($mat-amber, A200, A100, A400);
 $warn:  mat-palette($mat-red, A200, A100, A400);
 
@@ -13,6 +13,9 @@ $theme: mat-dark-theme($primary, $accent, $warn);
 
 // Include all theme styles for the components.
 @include angular-material-theme($theme);
+
+$background-color: #303030;
+$foreground-color: map_get($mat-grey, 50);
 
 $common-margin: 20px;
 
@@ -43,15 +46,15 @@ body {
 
     // INPUTS
 
-    md-sidenav {
-        width: 200px;
-    }
-
     .mat-input-container[fxFlex="100"] {
         width: 100%;
     }
 
     // SIDENAV
+    md-sidenav {
+        width: 200px;
+    }
+
     .mat-sidenav-focus-trap>.cdk-focus-trap-content {
         position: relative;
     }
@@ -64,12 +67,12 @@ body {
 
     .router-sub-link {
         .mat-list-item {
-            background-color: mat-color($warn);
+            background-color: lighten($background-color, 10);
         }
 
         &.active {
             .mat-list-item {
-                background-color: mat-color($accent);
+                background-color: lighten(mat-color($primary), 10);
             }
         }
     }

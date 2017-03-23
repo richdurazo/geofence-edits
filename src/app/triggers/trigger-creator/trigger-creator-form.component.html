@@ -27,7 +27,7 @@
             placeholder="Value"
             required
             [(ngModel)]="trigger.value"
-            #name="ngModel">
+            #value="ngModel">
 
             <md-hint align="start">
                 <div  *ngIf="form.submitted && value.errors !== null && value.errors.required">

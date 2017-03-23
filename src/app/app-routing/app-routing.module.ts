@@ -43,7 +43,7 @@ const appRoutes: Routes = [
     {
         path: '',
         component: AppNavigationComponent,
-        canActivate: [AuthGuardService],
+        // canActivate: [AuthGuardService],
         children: [
             {
                 path: 'overview',

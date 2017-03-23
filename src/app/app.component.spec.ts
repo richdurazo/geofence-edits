@@ -1,4 +1,3 @@
-/* tslint:disable:no-unused-variable */
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { DebugElement }    from '@angular/core';
@@ -48,18 +47,18 @@ describe('AppComponent', () => {
         expect(comp).toBeTruthy();
     }));
 
-    describe('logOut function', () => {
-        it(`should have a logOut function`, async(() => {
-            expect(typeof comp.logOut).toEqual('function');
-        }));
-
-        it(`should call the auth service`, async(() => {
-            spyOn(authService, 'logOut');
-            expect(authService.logOut).not.toHaveBeenCalled();
-            comp.logOut();
-            expect(authService.logOut).toHaveBeenCalled();
-        }));
-    });
+    // describe('logOut function', () => {
+    //     it(`should have a logOut function`, async(() => {
+    //         expect(typeof comp.logOut).toEqual('function');
+    //     }));
+    //
+    //     it(`should call the auth service`, async(() => {
+    //         spyOn(authService, 'logOut');
+    //         expect(authService.logOut).not.toHaveBeenCalled();
+    //         comp.logOut();
+    //         expect(authService.logOut).toHaveBeenCalled();
+    //     }));
+    // });
 
     // it('should render title in a h1 tag', async(() => {
     //   const fixture = TestBed.createComponent(AppComponent);

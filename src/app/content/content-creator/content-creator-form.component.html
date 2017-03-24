@@ -2,9 +2,12 @@
 
     <form #form="ngForm" (ngSubmit)="submitForm(form)" novalidate fxFlex="100">
 
+      <div fxLayout="row">
+
         <div fxFlex="60">
 
-            <md-input-container fxFlex="100">
+          <div fxLayout="row">
+            <md-input-container fxFlex="60">
                 <input
                 mdInput
                 name="name"
@@ -20,8 +23,10 @@
                     </div>
                 </md-hint>
             </md-input-container>
+          </div>
 
-            <md-input-container fxFlex="33">
+          <div fxLayout="row">
+            <md-input-container fxFlex="20">
                 <input
                 mdInput
                 name="start_at"
@@ -38,7 +43,7 @@
                 </md-hint>
             </md-input-container>
 
-            <md-input-container fxFlex="33">
+            <md-input-container fxFlex="20" fxFlexOffset="10">
                 <input
                 mdInput
                 name="end_at"
@@ -54,7 +59,11 @@
                     </div>
                 </md-hint>
             </md-input-container>
+          </div>
 
+          <hr class="horizontal-divider" />
+
+          <div fxLayout="row">
             <md-input-container fxFlex="100">
                 <input
                 mdInput
@@ -71,7 +80,9 @@
                     </div>
                 </md-hint>
             </md-input-container>
+          </div>
 
+          <div fxLayout="row">
             <md-input-container fxFlex="100">
                 <textarea
                 mdInput
@@ -89,8 +100,10 @@
                     </div>
                 </md-hint>
             </md-input-container>
+          </div>
 
-            <md-input-container fxFlex="50">
+          <div fxLayout="row">
+            <md-input-container fxFlex="30">
                 <input
                 mdInput
                 name="quantity"
@@ -106,10 +119,13 @@
                     </div>
                 </md-hint>
             </md-input-container>
+          </div>
 
         </div>
 
-        <button type="submit" md-raised-button color="primary">Submit</button>
+      </div>
+
+      <button type="submit" md-raised-button color="primary">Submit</button>
 
     </form>
 

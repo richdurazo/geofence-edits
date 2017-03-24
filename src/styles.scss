@@ -41,6 +41,11 @@ body {
     font-weight: 400;
     color: $primary-text-color;
 
+    textarea {
+      resize: none;
+      height: 74px;
+    }
+
     .mat-sidenav-container {
       background-color: $body-background-color;
 
@@ -65,9 +70,14 @@ body {
         font-weight: 400;
     }
 
+    .horizontal-divider {
+      border: 1px solid $body-background-color;
+      margin: 20px 0;
+    }
+
     // INPUTS
     .mat-input-container[fxFlex="100"] {
-        width: 100%;
+        // width: 100%;
     }
 
     // COMMON TOOLBAR

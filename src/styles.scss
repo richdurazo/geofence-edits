@@ -1,6 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@angular/material/core/theming/all-theme';
 
+// COLOR VARIABLES
+$light-grey: #F9F9F9;
+$dark-grey: #F4F4F4;
+$light-steel: #495765;
+$dark-steel: #2B3A49;
+$light-blue: #4691DB;
+$dark-blue: #1976D2;
+
 // Include non-theme styles for core.
 @include mat-core();
 
@@ -9,21 +17,39 @@ $primary: mat-palette($mat-indigo);
 $accent:  mat-palette($mat-amber, A200, A100, A400);
 $warn:  mat-palette($mat-red, A200, A100, A400);
 
-$theme: mat-dark-theme($primary, $accent, $warn);
+$theme: mat-light-theme($primary, $accent, $warn);
 
 // Include all theme styles for the components.
 @include angular-material-theme($theme);
 
-$background-color: #303030;
-$foreground-color: map_get($mat-grey, 50);
+// COLORS
+$primary-text-color: $light-steel;
+$body-background-color: $dark-grey;
+$toolbar-background-color: $light-grey;
+$nav-background-base-color: $light-steel;
+$nav-background-dark-color: $dark-steel;
+$nav-text-color: $dark-grey;
 
+// PIXEL VALUES
 $common-margin: 20px;
+$common-font-size: 13px;
 
 body {
 
     font-family: Roboto,"Helvetica Neue",sans-serif;
-    font-size: 14px;
+    font-size: $common-font-size;
     font-weight: 400;
+    color: $primary-text-color;
+
+    .mat-sidenav-container {
+      background-color: $body-background-color;
+
+      .mat-sidenav-content > .content-container {
+        max-width: 1150px;
+      }
+    }
+
+
 
     // COMMON UTILITIES
     .relative {
@@ -39,20 +65,45 @@ body {
         font-weight: 400;
     }
 
-    // COMMON TOOLBAR
-    md-toolbar {
-        margin-bottom: $common-margin;
-    }
-
     // INPUTS
-
     .mat-input-container[fxFlex="100"] {
         width: 100%;
     }
 
+    // COMMON TOOLBAR
+    md-toolbar.mat-toolbar {
+        margin-bottom: $common-margin;
+        background-color: $toolbar-background-color;
+
+        .mat-toolbar-row {
+          color: $primary-text-color;
+        }
+    }
+
     // SIDENAV
-    md-sidenav {
-        width: 200px;
+    md-sidenav.mat-sidenav {
+        background-color: $nav-background-base-color;
+        width: 272px;
+
+        .mat-nav-list {
+          padding-top: 0;
+        }
+
+        .mat-list-item > .mat-list-item-content {
+          color: $nav-text-color;
+          font-size: $common-font-size;
+          padding-left: 50px;
+
+          .mat-icon {
+            margin-right: $common-margin;
+          }
+        }
+
+        .app-sidenav-list-header {
+          height: 64px;
+          background-color: $nav-background-dark-color;
+          margin-bottom: 40px;
+        }
     }
 
     .mat-sidenav-focus-trap>.cdk-focus-trap-content {
@@ -66,13 +117,13 @@ body {
     }
 
     .router-sub-link {
-        .mat-list-item {
-            background-color: lighten($background-color, 10);
-        }
+        // .mat-list-item {
+        //     background-color: lighten($nav-background-base-color, 5);
+        // }
 
         &.active {
             .mat-list-item {
-                background-color: lighten(mat-color($primary), 10);
+                background-color: lighten(mat-color($primary), 5);
             }
         }
     }

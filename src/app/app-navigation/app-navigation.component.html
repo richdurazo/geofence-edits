@@ -3,20 +3,22 @@
 
         <md-nav-list>
             <a routerLink="/overview">
-                <md-list-item md-ripple class="relative">
-                    Actv8me
+                <md-list-item md-ripple class="relative app-sidenav-list-header">
+                  Actv8me
                 </md-list-item>
             </a>
 
             <div *ngFor="let route of routes">
                 <a class="router-link" routerLink="{{ route.route }}" routerLinkActive="active">
                     <md-list-item md-ripple class="relative">
+                        <md-icon>{{ route.icon }}</md-icon>
                         {{ route.name }}
                     </md-list-item>
                 </a>
 
                 <a class="router-sub-link" routerLink="{{ subroute.route }}" routerLinkActive="active" *ngFor="let subroute of route.subroutes">
                     <md-list-item md-ripple class="relative">
+                        <md-icon>{{ subroute.icon }}</md-icon>
                         {{ subroute.name }}
                     </md-list-item>
                 </a>
@@ -25,18 +27,20 @@
 
             <a (click)="logOut()">
                 <md-list-item md-ripple class="relative">
-                    Log Out
+                    <md-icon>power_settings_new</md-icon>Log Out
                 </md-list-item>
             </a>
         </md-nav-list>
 
     </md-sidenav>
 
-    <md-toolbar color="primary">
+    <md-toolbar>
         {{ activeRoute }}
     </md-toolbar>
 
     <!-- primary content -->
-    <router-outlet></router-outlet>
+    <div class="content-container">
+      <router-outlet></router-outlet>
+    </div>
 
 </md-sidenav-container>

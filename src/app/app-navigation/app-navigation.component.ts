@@ -18,35 +18,42 @@ export class AppNavigationComponent implements OnInit {
         {
             route: "/overview",
             name: "Overview",
+            icon: "dashboard",
             subroutes: []
         },
         {
             route: "/campaigns",
             name: "Campaigns",
+            icon: "date_range",
             subroutes: [
                 {
                     route: "/campaigns/create",
-                    name: "Create"
+                    name: "Create",
+                    icon: "assessment"
                 }
             ]
         },
         {
             route: "/content",
             name: "Content",
+            icon: "perm_media",
             subroutes: [
                 {
                     route: "/content/create",
-                    name: "Create"
+                    name: "Create",
+                    icon: "edit"
                 }
             ]
         },
         {
             route: "/triggers",
             name: "Trigger",
+            icon: "memory",
             subroutes: [
                 {
                     route: "/triggers/create",
-                    name: "Create"
+                    name: "Create",
+                    icon: "add_location"
                 }
             ]
         }

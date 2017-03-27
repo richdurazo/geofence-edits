@@ -31,7 +31,6 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     return new AuthHttp(new AuthConfig({
         tokenName: 'Authorization',
         tokenGetter: (() => localStorage.getItem('id_token')),
-        // globalHeaders: [{'Content-Type':'application/json'}, {'Access-Control-Allow-Origin': 'GET, POST, PUT, DELETE'}, {'Access-Control-Allow-Origin': '*'}],
     }), http, options);
 }
 
@@ -43,7 +42,7 @@ const appRoutes: Routes = [
     {
         path: '',
         component: AppNavigationComponent,
-        // canActivate: [AuthGuardService],
+        canActivate: [AuthGuardService],
         children: [
             {
                 path: 'overview',

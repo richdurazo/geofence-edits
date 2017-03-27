@@ -34,8 +34,10 @@ import { CampaignApiService } from './campaigns/shared/campaign-api.service';
 import { ContentApiService } from './content/shared/content-api.service';
 import { TriggerApiService } from './triggers/shared/trigger-api.service';
 import { UserApiService } from './users/shared/user-api.service';
-import { DateUtilsService } from './shared/date-utils.service';
 import { AppNavigationComponent } from './app-navigation/app-navigation.component';
+
+import { DateUtilsService } from './shared/date-utils.service';
+import { FilestackService } from './shared/filestack.service';
 
 @NgModule({
     declarations: [
@@ -68,6 +70,7 @@ import { AppNavigationComponent } from './app-navigation/app-navigation.componen
     providers: [
         AuthCustomHttpService,
         ContentApiService,
+        FilestackService,
         CampaignApiService,
         DateUtilsService,
         TriggerApiService,

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { FilestackService } from '../shared/filestack.service';
+
 import { UserApiService } from '../users/shared/user-api.service';
 import { UserModel } from '../users/shared/user.model';
 
@@ -13,9 +15,17 @@ export class OverviewComponent implements OnInit {
 
     user: UserModel;
 
-    constructor(private userApiService: UserApiService) { }
+    constructor(private userApiService: UserApiService, private filestack: FilestackService) { }
 
     ngOnInit() {
+    }
+
+    showPicker () {
+        this.filestack.pick({
+            maxFiles: 1
+        }).then((results) => {
+            console.log('results', results);
+        })
     }
 
     fetchUser () {

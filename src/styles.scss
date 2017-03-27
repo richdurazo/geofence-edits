@@ -70,6 +70,19 @@ body {
         width: 100%;
     }
 
+    .mat-select {
+        margin-bottom: 10px;
+
+        .mat-select-trigger {
+            font-size: $common-font-size;
+            height: 25px;
+        }
+
+        .mat-select-placeholder.mat-floating-placeholder {
+            top: -16px;
+        }
+    }
+
     // COMMON TOOLBAR
     md-toolbar.mat-toolbar {
         margin-bottom: $common-margin;

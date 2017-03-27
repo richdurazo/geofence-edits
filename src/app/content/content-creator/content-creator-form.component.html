@@ -3,6 +3,18 @@
     <form #form="ngForm" (ngSubmit)="submitForm(form)" novalidate fxFlex="100">
 
         <div fxFlex="60">
+            <md-select placeholder="Type" name="type" [(ngModel)]="contentType" (change)="typeChange($event)">
+                <md-option *ngFor="let type of contentTypes" [value]="type.value">
+                    {{ type.viewValue }}
+                </md-option>
+            </md-select>
+
+            <p *ngIf="!contentType">
+                To get started, please select a type.
+            </p>
+        </div>
+
+        <div fxFlex="60" *ngIf="contentType">
 
             <md-input-container fxFlex="100">
                 <input
@@ -109,7 +121,7 @@
 
         </div>
 
-        <button type="submit" md-raised-button color="primary">Submit</button>
+        <button type="submit" *ngIf="contentType" md-raised-button color="primary">Submit</button>
 
     </form>
 

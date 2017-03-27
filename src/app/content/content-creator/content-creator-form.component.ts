@@ -13,10 +13,45 @@ export class ContentCreatorFormComponent implements OnInit {
 
     content: ContentModel;
 
+    contentType: string;
+
+    contentTypes: [
+        {
+            value: "offer",
+            viewValue: "Offer"
+        },
+        {
+            value: "prize",
+            viewValue: "Prize"
+        },
+        {
+            value: "message",
+            viewValue: "Message"
+        }
+    ];
+
     constructor (private contentApi: ContentApiService, private dateUtils: DateUtilsService) {}
 
     ngOnInit() {
         this.setModelDefaults();
+        this.contentTypes = [
+            {
+                value: "offer",
+                viewValue: "Offer"
+            },
+            {
+                value: "prize",
+                viewValue: "Prize"
+            },
+            {
+                value: "message",
+                viewValue: "Message"
+            }
+        ]
+    }
+
+    public typeChange (event) {
+        console.log('event, this.contentType', event, this.contentType);
     }
 
     public submitForm (form) {

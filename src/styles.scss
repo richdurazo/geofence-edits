@@ -44,9 +44,9 @@ body {
     .mat-sidenav-container {
       background-color: $body-background-color;
 
-    //   .mat-sidenav-content > .containerX {
-    //     max-width: 1150px;
-    //   }
+      .mat-sidenav-content > .containerX {
+        max-width: 1150px;
+      }
     }
 
     .mat-raised-button {
@@ -71,9 +71,9 @@ body {
     }
 
     // INPUTS
-    .mat-input-container[fxFlex="100"] {
-        width: 100%;
-    }
+    // .mat-input-container[fxFlex="100"] {
+    //     width: 100%;
+    // }
 
     .mat-select {
         margin-bottom: 10px;

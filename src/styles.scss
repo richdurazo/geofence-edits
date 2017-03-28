@@ -44,9 +44,14 @@ body {
     .mat-sidenav-container {
       background-color: $body-background-color;
 
-      .mat-sidenav-content > .content-container {
-        max-width: 1150px;
-      }
+    //   .mat-sidenav-content > .containerX {
+    //     max-width: 1150px;
+    //   }
+    }
+
+    .mat-raised-button {
+        line-height: 45px;
+        padding: 0 45px;
     }
 
 

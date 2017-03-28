@@ -15,16 +15,17 @@ export class OverviewComponent implements OnInit {
 
     user: UserModel;
 
+    stagedPhoto: any;
+
     constructor(private userApiService: UserApiService, private filestack: FilestackService) { }
 
     ngOnInit() {
     }
 
     showPicker () {
-        this.filestack.pick({
-            maxFiles: 1
-        }).then((results) => {
+        this.filestack.pick().then((results) => {
             console.log('results', results);
+            this.stagedPhoto = results.filesUploaded[0];
         })
     }
 

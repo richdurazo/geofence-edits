@@ -4,3 +4,5 @@
 <button type="button" md-raised-button color="primary" (click)="fetchUser()">Fetch User</button>
 
 <button type="button" md-raised-button value="Upload" (click)="showPicker()">Upload Photo</button>
+
+<img *ngIf="stagedPhoto" src="{{ 'https://s3-us-west-1.amazonaws.com/garythebucket/' + stagedPhoto.key }}" alt="">

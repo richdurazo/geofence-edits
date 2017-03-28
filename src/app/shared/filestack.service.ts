@@ -10,9 +10,7 @@ export class FilestackService {
     constructor() { }
 
     public initFilestack () {
-        console.log('initFilestack');
         this.uploader = filestack.init("AfK7thvLTRoyjflG6yqz3z");
-        console.log('this.uploader', this.uploader);
     }
 
     public pick () {
@@ -21,8 +19,7 @@ export class FilestackService {
             storeTo: {
                 location: 's3',
                 access: 'public',
-                // container: 'garythebucket',
-                path: '/GARYSUCKS.JPG'
+                path: '/thing/something.JPG'
             }
         });
     }

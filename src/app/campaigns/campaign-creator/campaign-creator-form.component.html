@@ -1,39 +1,37 @@
 <md-card fxFlex="96" fxFlexOffset="2">
 
-    <form #form="ngForm" (ngSubmit)="submitForm(form)" novalidate>
+    <form #form="ngForm" (ngSubmit)="submitForm(form)" novalidate fxLayout="column">
 
-        <div fxLayout="column">
+        <div fxLayout="row">
 
-            <div fxLayout="row">
+            <div fxLayout="column" fxFlex="60">
 
-                <div fxLayout="column" fxFlex="60">
+                <md-input-container>
+                    <input
+                    mdInput
+                    name="name"
+                    type="text"
+                    placeholder="Name"
+                    required
+                    [(ngModel)]="campaign.name"
+                    #name="ngModel">
 
-                    <md-input-container>
-                        <input
-                        mdInput
-                        name="name"
-                        type="text"
-                        placeholder="Name"
-                        required
-                        [(ngModel)]="campaign.name"
-                        #name="ngModel">
+                    <md-hint align="start">
+                        <div  *ngIf="form.submitted && name.errors !== null && name.errors.required">
+                            Please add a name
+                        </div>
+                    </md-hint>
+                </md-input-container>
 
-                        <md-hint align="start">
-                            <div  *ngIf="form.submitted && name.errors !== null && name.errors.required">
-                                Please add a name
-                            </div>
-                        </md-hint>
-                    </md-input-container>
-
-                    <md-input-container>
-                        <textarea
-                        mdInput
-                        name="description"
-                        type="text"
-                        placeholder="Description"
-                        required
-                        [(ngModel)]="campaign.description"
-                        #description="ngModel">
+                <md-input-container>
+                    <textarea
+                    mdInput
+                    name="description"
+                    type="text"
+                    placeholder="Description"
+                    required
+                    [(ngModel)]="campaign.description"
+                    #description="ngModel">
                     </textarea>
 
                     <md-hint align="start">
@@ -92,9 +90,6 @@
             <button type="submit" md-raised-button color="primary">Create</button>
         </div>
 
-    </div>
-
-
-</form>
+    </form>
 
 </md-card>

@@ -52,20 +52,23 @@ body {
     .mat-raised-button {
         line-height: 45px;
         padding: 0 45px;
-
-        &.common-form-submit {
-            margin-bottom: 10px;
-            margin-right: 60px;
-        }
     }
 
-    .card-divider {
-        border: 0;
-        height: 0;
-        border-top: 1px dotted darken($dark-grey, 5);
-        border-bottom: 1px dotted darken($dark-grey, 5);
-        width: 100%;
-        margin: 50px 0;
+    .creator-form-card {
+        padding-right: 80px;
+
+        .card-divider {
+            border: 0;
+            height: 0;
+            border-top: 1px dotted darken($dark-grey, 5);
+            border-bottom: 1px dotted darken($dark-grey, 5);
+            width: 100%;
+            margin: 50px 0;
+        }
+
+        .mat-raised-button.common-form-submit {
+            margin-bottom: 10px;
+        }
     }
 
     // COMMON UTILITIES
@@ -90,14 +93,6 @@ body {
     textarea.mat-input-element {
         min-height: 60px;
     }
-    //
-    // .mat-select-underline {
-    //     background-color: $light-grey;
-    // }
-    //
-    // .mat-input-underline {
-    //     border-color: $light-grey;
-    // }
 
     .mat-select {
         margin-bottom: 25px;
@@ -166,6 +161,40 @@ body {
         &.active {
             .mat-list-item {
                 background-color: lighten(mat-color($primary), 5);
+            }
+        }
+    }
+
+    // UPLOADER
+    .common-uploader {
+        .uploader-preview, .uploader-zone {
+            width: 100%;
+            height: 150px;
+
+            img {
+                height: 100%;
+                width: 100%;
+            }
+        }
+
+        .uploader-zone {
+            background-color: $dark-grey;
+            outline: 1px dashed darken($dark-grey, 10);
+        }
+    }
+
+    // CONTENT CREATOR
+    .scratcher-preview {
+        background-color: $light-grey;
+        width: 300px;
+        height: 450px;
+
+        .scratcher-body {
+            padding: 15px;
+
+            .scratcher-heading {
+                font-weight: 400;
+                margin: 0;
             }
         }
     }

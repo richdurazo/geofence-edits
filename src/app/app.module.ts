@@ -39,6 +39,7 @@ import { AppNavigationComponent } from './app-navigation/app-navigation.componen
 
 import { DateUtilsService } from './shared/date-utils.service';
 import { FilestackService } from './shared/filestack.service';
+import { FileUploaderComponent } from './shared/file-uploader/file-uploader.component';
 
 @NgModule({
     declarations: [
@@ -58,7 +59,8 @@ import { FilestackService } from './shared/filestack.service';
         TriggerCreatorComponent,
         TriggersOverviewComponent,
         TriggerCreatorFormComponent,
-        AppNavigationComponent
+        AppNavigationComponent,
+        FileUploaderComponent
     ],
     imports: [
         BrowserModule,

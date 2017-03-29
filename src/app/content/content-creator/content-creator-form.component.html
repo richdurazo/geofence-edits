@@ -1,4 +1,4 @@
-<md-card fxFlex="96" fxFlexOffset="2">
+<md-card class="creator-form-card" fxFlex="96" fxFlexOffset="2">
 
     <form #form="ngForm" (ngSubmit)="submitForm(form)" novalidate fxLayout="column">
 
@@ -20,7 +20,8 @@
 
         <div fxLayout="row" *ngIf="contentType">
 
-            <div fxLayout="column" fxFlex="60">
+            <!-- Left Justified Content -->
+            <div fxLayout="column" fxFlex="55">
 
                 <md-input-container fxFlex="100">
                     <input
@@ -139,8 +140,19 @@
 
             </div>
 
-            <!-- Placeholder div -->
-            <div fxFlex="40">
+            <!-- Right Justified Content -->
+            <div fxLayoutAlign="end" fxFlex="45">
+
+                <div class="scratcher-preview">
+                    <app-file-uploader></app-file-uploader>
+
+                    <div class="scratcher-body">
+                        <h3 class="scratcher-heading">{{ content.display_name }}</h3>
+                        <small>from Payless Shoes</small>
+                        <p>{{ content.description }}</p>
+                    </div>
+                </div>
+
             </div>
 
         </div>

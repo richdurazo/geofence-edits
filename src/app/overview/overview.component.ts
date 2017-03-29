@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { FilestackService } from '../shared/filestack.service';
-
 import { UserApiService } from '../users/shared/user-api.service';
 import { UserModel } from '../users/shared/user.model';
 
@@ -15,18 +13,9 @@ export class OverviewComponent implements OnInit {
 
     user: UserModel;
 
-    stagedPhoto: any;
-
-    constructor(private userApiService: UserApiService, private filestack: FilestackService) { }
+    constructor(private userApiService: UserApiService) { }
 
     ngOnInit() {
-    }
-
-    showPicker () {
-        this.filestack.pick().then((results) => {
-            console.log('results', results);
-            this.stagedPhoto = results.filesUploaded[0];
-        })
     }
 
     fetchUser () {

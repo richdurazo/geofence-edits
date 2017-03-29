@@ -56,6 +56,7 @@ body {
 
     .creator-form-card {
         padding-right: 80px;
+        padding-left: 40px;
 
         .card-divider {
             border: 0;
@@ -95,7 +96,8 @@ body {
     }
 
     .mat-select {
-        margin-bottom: 25px;
+        margin-bottom: $common-margin;
+        margin-top: 15px;
 
         .mat-select-trigger {
             font-size: $common-font-size;
@@ -105,6 +107,18 @@ body {
         .mat-select-placeholder.mat-floating-placeholder {
             top: -16px;
         }
+    }
+
+    // FORMS
+    .form-highlight-well {
+        background-color: $light-grey;
+        margin-left: -$common-margin;
+        margin-right: -$common-margin;
+        margin-bottom: $common-margin;
+        margin-top: $common-margin;
+        padding-left: $common-margin;
+        padding-right: $common-margin;
+        padding-top: $common-margin;
     }
 
     // COMMON TOOLBAR
@@ -184,17 +198,21 @@ body {
     }
 
     // CONTENT CREATOR
-    .scratcher-preview {
-        background-color: $light-grey;
+    .right-column {
         width: 300px;
-        height: 450px;
 
-        .scratcher-body {
-            padding: 15px;
+        .scratcher-preview {
+            background-color: $light-grey;
+            width: 300px;
+            height: 450px;
 
-            .scratcher-heading {
-                font-weight: 400;
-                margin: 0;
+            .scratcher-body {
+                padding: 15px;
+
+                .scratcher-heading {
+                    font-weight: 400;
+                    margin: 0;
+                }
             }
         }
     }

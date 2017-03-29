@@ -41,7 +41,7 @@
                     </md-hint>
                 </md-input-container>
 
-                <div fxLayout="row" fxLayoutGap="10px" fxFlex="66">
+                <div fxLayout="row" fxLayout.sm="column" fxLayoutGap="10px" fxFlex="66">
 
                     <md-input-container>
                         <input
@@ -81,13 +81,14 @@
 
             </div>
 
+            <!-- Placeholder div -->
             <div fxFlex="40">
             </div>
 
         </div>
 
         <div fxLayoutAlign="end" fxFlex="100">
-            <button type="submit" md-raised-button color="primary">Create</button>
+            <button type="submit" class="common-form-submit" md-raised-button color="primary">Create</button>
         </div>
 
     </form>

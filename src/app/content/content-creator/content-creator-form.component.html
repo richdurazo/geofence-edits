@@ -1,127 +1,153 @@
 <md-card fxFlex="96" fxFlexOffset="2">
 
-    <form #form="ngForm" (ngSubmit)="submitForm(form)" novalidate fxFlex="100">
+    <form #form="ngForm" (ngSubmit)="submitForm(form)" novalidate fxLayout="column">
 
-        <div fxFlex="60">
-            <md-select placeholder="Type" name="type" [(ngModel)]="contentType" (change)="typeChange($event)">
-                <md-option *ngFor="let type of contentTypes" [value]="type.value">
-                    {{ type.viewValue }}
-                </md-option>
-            </md-select>
+        <div fxLayout="row">
 
-            <p *ngIf="!contentType">
-                To get started, please select a type.
-            </p>
-        </div>
+            <div fxFlex="60">
+                <md-select placeholder="Type" name="type" [(ngModel)]="contentType" (change)="typeChange($event)">
+                    <md-option *ngFor="let type of contentTypes" [value]="type.value">
+                        {{ type.viewValue }}
+                    </md-option>
+                </md-select>
 
-        <div fxFlex="60" *ngIf="contentType">
-
-            <md-input-container fxFlex="100">
-                <input
-                mdInput
-                name="name"
-                type="text"
-                placeholder="Title"
-                required
-                [(ngModel)]="content.name"
-                #name="ngModel">
-
-                <md-hint align="start">
-                    <div  *ngIf="form.submitted && name.errors !== null && name.errors.required">
-                        Please add a name
-                    </div>
-                </md-hint>
-            </md-input-container>
-
-            <md-input-container fxFlex="33">
-                <input
-                mdInput
-                name="start_at"
-                type="date"
-                placeholder="Start Date"
-                required
-                [(ngModel)]="content.start_at"
-                #start_at="ngModel">
-
-                <md-hint align="start">
-                    <div  *ngIf="form.submitted && start_at.errors !== null && start_at.errors.required">
-                        Please add a start date
-                    </div>
-                </md-hint>
-            </md-input-container>
-
-            <md-input-container fxFlex="33">
-                <input
-                mdInput
-                name="end_at"
-                type="date"
-                placeholder="End Date"
-                required
-                [(ngModel)]="content.end_at"
-                #end_at="ngModel">
-
-                <md-hint align="start">
-                    <div  *ngIf="form.submitted && end_at.errors !== null && end_at.errors.required">
-                        Please add an end date
-                    </div>
-                </md-hint>
-            </md-input-container>
-
-            <md-input-container fxFlex="100">
-                <input
-                mdInput
-                name="display_name"
-                type="text"
-                placeholder="Display Title"
-                required
-                [(ngModel)]="content.display_name"
-                #display_name="ngModel">
-
-                <md-hint align="start">
-                    <div  *ngIf="form.submitted && display_name.errors !== null && display_name.errors.required">
-                        Please add a name
-                    </div>
-                </md-hint>
-            </md-input-container>
-
-            <md-input-container fxFlex="100">
-                <textarea
-                mdInput
-                name="description"
-                type="text"
-                placeholder="Description"
-                required
-                [(ngModel)]="content.description"
-                #description="ngModel">
-                </textarea>
-
-                <md-hint align="start">
-                    <div  *ngIf="form.submitted && description.errors !== null && description.errors.required">
-                        Please add a description
-                    </div>
-                </md-hint>
-            </md-input-container>
-
-            <md-input-container fxFlex="50">
-                <input
-                mdInput
-                name="quantity"
-                type="text"
-                placeholder="Quantity"
-                required
-                [(ngModel)]="content.quantity"
-                #quantity="ngModel">
-
-                <md-hint align="start">
-                    <div  *ngIf="form.submitted && quantity.errors !== null && quantity.errors.required">
-                        Please add a quantity
-                    </div>
-                </md-hint>
-            </md-input-container>
+                <p *ngIf="!contentType">
+                    To get started, please select a type.
+                </p>
+            </div>
 
         </div>
 
-        <button type="submit" *ngIf="contentType" md-raised-button color="primary">Submit</button>
+        <div fxLayout="row" *ngIf="contentType">
+
+            <div fxLayout="column" fxFlex="60">
+
+                <md-input-container fxFlex="100">
+                    <input
+                    mdInput
+                    name="name"
+                    type="text"
+                    placeholder="Title"
+                    required
+                    [(ngModel)]="content.name"
+                    #name="ngModel">
+
+                    <md-hint align="start">
+                        <div  *ngIf="form.submitted && name.errors !== null && name.errors.required">
+                            Please add a name
+                        </div>
+                    </md-hint>
+                </md-input-container>
+
+                <div fxLayout="row" fxLayout.sm="column" fxLayoutGap="10px" fxFlex="66">
+
+                    <md-input-container fxFlex="33">
+                        <input
+                        mdInput
+                        name="start_at"
+                        type="date"
+                        placeholder="Start Date"
+                        required
+                        [(ngModel)]="content.start_at"
+                        #start_at="ngModel">
+
+                        <md-hint align="start">
+                            <div  *ngIf="form.submitted && start_at.errors !== null && start_at.errors.required">
+                                Please add a start date
+                            </div>
+                        </md-hint>
+                    </md-input-container>
+
+                    <md-input-container fxFlex="33">
+                        <input
+                        mdInput
+                        name="end_at"
+                        type="date"
+                        placeholder="End Date"
+                        required
+                        [(ngModel)]="content.end_at"
+                        #end_at="ngModel">
+
+                        <md-hint align="start">
+                            <div  *ngIf="form.submitted && end_at.errors !== null && end_at.errors.required">
+                                Please add an end date
+                            </div>
+                        </md-hint>
+                    </md-input-container>
+
+                </div>
+
+
+                <hr class="card-divider">
+
+
+                <md-input-container fxFlex="100">
+                    <input
+                    mdInput
+                    name="display_name"
+                    type="text"
+                    placeholder="Display Title"
+                    required
+                    [(ngModel)]="content.display_name"
+                    #display_name="ngModel">
+
+                    <md-hint align="start">
+                        <div  *ngIf="form.submitted && display_name.errors !== null && display_name.errors.required">
+                            Please add a name
+                        </div>
+                    </md-hint>
+                </md-input-container>
+
+                <md-input-container fxFlex="100">
+                    <textarea
+                    mdInput
+                    name="description"
+                    type="text"
+                    placeholder="Description"
+                    required
+                    [(ngModel)]="content.description"
+                    #description="ngModel">
+                    </textarea>
+
+                    <md-hint align="start">
+                        <div  *ngIf="form.submitted && description.errors !== null && description.errors.required">
+                            Please add a description
+                        </div>
+                    </md-hint>
+                </md-input-container>
+
+
+                <hr class="card-divider">
+
+
+                <md-input-container fxFlex="50">
+                    <input
+                    mdInput
+                    name="quantity"
+                    type="text"
+                    placeholder="Quantity"
+                    required
+                    [(ngModel)]="content.quantity"
+                    #quantity="ngModel">
+
+                    <md-hint align="start">
+                        <div  *ngIf="form.submitted && quantity.errors !== null && quantity.errors.required">
+                            Please add a quantity
+                        </div>
+                    </md-hint>
+                </md-input-container>
+
+            </div>
+
+            <!-- Placeholder div -->
+            <div fxFlex="40">
+            </div>
+
+        </div>
+
+        <div fxLayoutAlign="end" fxFlex="100" *ngIf="contentType">
+            <button type="submit" class="common-form-submit" md-raised-button color="primary">Create</button>
+        </div>
 
     </form>
 

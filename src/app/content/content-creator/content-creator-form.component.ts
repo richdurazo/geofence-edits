@@ -13,10 +13,6 @@ export class ContentCreatorFormComponent implements OnInit {
 
     content: ContentModel;
 
-    contentType: string;
-
-    limitEnabled: boolean;
-
     contentTypes: [
         {
             value: "offer",
@@ -31,6 +27,44 @@ export class ContentCreatorFormComponent implements OnInit {
             viewValue: "Message"
         }
     ];
+
+    contentType: string;
+
+    limitEnabled: boolean;
+
+    redemptionFormat: string;
+
+    redemptionFormats: [
+        {
+            value: "format1",
+            viewValue: "Format 1"
+        },
+        {
+            value: "format2",
+            viewValue: "Format 2"
+        },
+        {
+            value: "format3",
+            viewValue: "Format 3"
+        }
+    ]
+
+    redemptionMethod: string;
+
+    redemptionMethods: [
+        {
+            value: "online",
+            viewValue: "Online"
+        },
+        {
+            value: "store",
+            viewValue: "In Store"
+        },
+        {
+            value: "both",
+            viewValue: "Online & In Store"
+        }
+    ]
 
     constructor (private contentApi: ContentApiService, private dateUtils: DateUtilsService) {}
 
@@ -49,12 +83,49 @@ export class ContentCreatorFormComponent implements OnInit {
                 value: "message",
                 viewValue: "Message"
             }
+        ];
+
+        this.redemptionMethods = [
+            {
+                value: "online",
+                viewValue: "Online"
+            },
+            {
+                value: "store",
+                viewValue: "In Store"
+            },
+            {
+                value: "both",
+                viewValue: "Online & In Store"
+            }
+        ];
+
+        this.redemptionFormats = [
+            {
+                value: "format1",
+                viewValue: "Format 1"
+            },
+            {
+                value: "format2",
+                viewValue: "Format 2"
+            },
+            {
+                value: "format3",
+                viewValue: "Format 3"
+            }
         ]
-        this.limitEnabled = false;
     }
 
     public typeChange (event) {
         console.log('event, this.contentType', event, this.contentType);
+    }
+
+    public methodChange (event) {
+        console.log('event, this.redemptionMethod', event, this.redemptionMethod);
+    }
+
+    public formatChange (event) {
+        console.log('event, this.redemptionFormat', event, this.redemptionFormat);
     }
 
     public submitForm (form) {

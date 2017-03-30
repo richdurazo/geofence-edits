@@ -101,7 +101,7 @@ body {
 
     .mat-select {
         margin-bottom: $common-margin;
-        margin-top: 15px;
+        margin-top: 8px;
 
         .mat-select-trigger {
             font-size: $common-font-size;
@@ -176,7 +176,7 @@ body {
             background-color: lighten(mat-color($primary), 5);
         }
     }
-    
+
 
     // UPLOADER
     .common-uploader {

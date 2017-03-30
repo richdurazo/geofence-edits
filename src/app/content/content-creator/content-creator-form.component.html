@@ -120,10 +120,65 @@
 
                 </div>
 
-                <div fxLayout="row">
+                <div fxLayout="row"  *ngIf="contentType === 'offer'">
+                    <div fxFlex="33">
+                        <md-select placeholder="Redemption Method" name="redemption_method" [(ngModel)]="redemptionMethod" (change)="methodChange($event)">
+                            <md-option *ngFor="let method of redemptionMethods" [value]="method.value">
+                                {{ method.viewValue }}
+                            </md-option>
+                        </md-select>
+                    </div>
+
+                    <div fxFlex="66" fxLayout="column" *ngIf="redemptionMethod">
+                        <div fxLayout="row" fxLayoutGap="10px" *ngIf="redemptionMethod">
+                            <md-input-container fxFlex="50">
+                                <input
+                                mdInput
+                                name="redemption_code"
+                                type="text"
+                                placeholder="Redemption Code"
+                                [(ngModel)]="content.redemptionCode"
+                                #redemption_code="ngModel"
+                                required>
+
+                                <md-hint align="start">
+                                    <div  *ngIf="form.submitted && redemption_code.errors !== null && redemption_code.errors.required">
+                                        Please add a redemption code
+                                    </div>
+                                </md-hint>
+                            </md-input-container>
+
+                            <md-select placeholder="QR Format" name="redemption_format" [(ngModel)]="redemptionFormat" (change)="formatChange($event)" *ngIf="redemptionMethod === 'store' || redemptionMethod === 'both'"  fxFlex="50">
+                                <md-option *ngFor="let format of redemptionFormats" [value]="format.value">
+                                    {{ format.viewValue }}
+                                </md-option>
+                            </md-select>
+                        </div>
+
+                        <div fxLayout="row" fxLayoutGap="10px" *ngIf="redemptionMethod === 'online' || redemptionMethod === 'both'">
+                            <md-input-container fxFlex="100">
+                                <input
+                                mdInput
+                                name="redemption_url"
+                                type="text"
+                                placeholder="Redemption URL"
+                                [(ngModel)]="content.redemptionUrl"
+                                #redemption_url="ngModel">
+
+                                <md-hint align="start">
+                                    <div  *ngIf="form.submitted && redemption_url.errors !== null && redemption_url.errors.required">
+                                        Please add a redemption code
+                                    </div>
+                                </md-hint>
+                            </md-input-container>
+                        </div>
+                    </div>
+                </div>
+
+                <div fxLayout="row" *ngIf="contentType !== 'message'">
                     <div fxFlex="50">
                         <md-slide-toggle
-                            name="limitEnabled"
+                            name="limit_enabled"
                             [color]="'primary'"
                             [labelPosition]="'before'"
                             [(ngModel)]="limitEnabled">
@@ -137,7 +192,7 @@
                         name="quantity"
                         type="text"
                         placeholder="Limit"
-                        required="{{ !limitEnabled }}"
+                        required="{{ limitEnabled }}"
                         [(ngModel)]="content.quantity"
                         #quantity="ngModel"
                         disabled="{{ !limitEnabled }}">

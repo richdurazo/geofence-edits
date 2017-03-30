@@ -1,6 +1,9 @@
 <div class="common-uploader">
-    <div class="uploader-zone" *ngIf="!stagedPhoto" (click)="showUploader()">
-        Uploader Zone
+    <div class="uploader-zone" *ngIf="!stagedPhoto" (click)="showUploader()" fxLayoutAlign="center center">
+        <div class="uploader-text">
+            <md-icon>perm_media</md-icon>
+            <div>Select Image</div>
+        </div>
     </div>
 
     <div class="uploader-preview" *ngIf="stagedPhoto" (click)="showUploader()">

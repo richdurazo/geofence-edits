@@ -192,7 +192,12 @@ body {
 
         .uploader-zone {
             background-color: $dark-grey;
-            outline: 1px dashed darken($dark-grey, 10);
+            outline: 1px dashed darken($dark-grey, 15);
+
+            .uploader-text {
+                color: darken($dark-grey, 15);
+                text-align: center;
+            }
         }
     }
 

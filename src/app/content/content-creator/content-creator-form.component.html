@@ -8,7 +8,7 @@
             <div fxLayout="column" fxFlex="55">
 
                 <div>
-                    <md-select placeholder="Type" name="type" [(ngModel)]="contentType" (change)="typeChange($event)">
+                    <md-select placeholder="Type" name="type" [(ngModel)]="contentType">
                         <md-option *ngFor="let type of contentTypes" [value]="type.value">
                             {{ type.viewValue }}
                         </md-option>
@@ -122,7 +122,7 @@
 
                 <div fxLayout="row"  *ngIf="contentType === 'offer'">
                     <div fxFlex="33">
-                        <md-select placeholder="Redemption Method" name="redemption_method" [(ngModel)]="redemptionMethod" (change)="methodChange($event)">
+                        <md-select placeholder="Redemption Method" name="redemption_method" [(ngModel)]="redemptionMethod">
                             <md-option *ngFor="let method of redemptionMethods" [value]="method.value">
                                 {{ method.viewValue }}
                             </md-option>
@@ -148,7 +148,7 @@
                                 </md-hint>
                             </md-input-container>
 
-                            <md-select placeholder="QR Format" name="redemption_format" [(ngModel)]="redemptionFormat" (change)="formatChange($event)" *ngIf="redemptionMethod === 'store' || redemptionMethod === 'both'"  fxFlex="50">
+                            <md-select placeholder="QR Format" name="redemption_format" [(ngModel)]="redemptionFormat" *ngIf="redemptionMethod === 'store' || redemptionMethod === 'both'"  fxFlex="50">
                                 <md-option *ngFor="let format of redemptionFormats" [value]="format.value">
                                     {{ format.viewValue }}
                                 </md-option>

@@ -116,18 +116,6 @@ export class ContentCreatorFormComponent implements OnInit {
         ]
     }
 
-    public typeChange (event) {
-        console.log('event, this.contentType', event, this.contentType);
-    }
-
-    public methodChange (event) {
-        console.log('event, this.redemptionMethod', event, this.redemptionMethod);
-    }
-
-    public formatChange (event) {
-        console.log('event, this.redemptionFormat', event, this.redemptionFormat);
-    }
-
     public submitForm (form) {
         if (!form.valid) { return; }
         var obj = JSON.parse(JSON.stringify(this.content));

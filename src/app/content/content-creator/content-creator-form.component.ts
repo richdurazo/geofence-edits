@@ -15,6 +15,8 @@ export class ContentCreatorFormComponent implements OnInit {
 
     contentType: string;
 
+    limitEnabled: boolean;
+
     contentTypes: [
         {
             value: "offer",
@@ -48,6 +50,7 @@ export class ContentCreatorFormComponent implements OnInit {
                 viewValue: "Message"
             }
         ]
+        this.limitEnabled = false;
     }
 
     public typeChange (event) {
@@ -68,7 +71,6 @@ export class ContentCreatorFormComponent implements OnInit {
     processSuccess (data) {
         console.log('saved content data', data);
     }
-
 
     private setModelDefaults () {
         this.content = new ContentModel();

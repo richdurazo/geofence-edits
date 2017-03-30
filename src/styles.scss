@@ -54,6 +54,10 @@ body {
         padding: 0 45px;
     }
 
+    .mat-card {
+        color: $primary-text-color;
+    }
+
     .creator-form-card {
         padding-right: 80px;
         padding-left: 40px;
@@ -167,17 +171,12 @@ body {
         }
     }
 
-    .router-sub-link {
-        // .mat-list-item {
-        //     background-color: lighten($nav-background-base-color, 5);
-        // }
-
-        &.active {
-            .mat-list-item {
-                background-color: lighten(mat-color($primary), 5);
-            }
+    .router-sub-link.active {
+        .mat-list-item {
+            background-color: lighten(mat-color($primary), 5);
         }
     }
+    
 
     // UPLOADER
     .common-uploader {

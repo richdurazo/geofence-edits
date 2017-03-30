@@ -108,16 +108,27 @@
                                 required
                                 [(ngModel)]="content.description"
                                 #description="ngModel">
-                                </textarea>
+                            </textarea>
 
-                                <md-hint align="start">
-                                    <div  *ngIf="form.submitted && description.errors !== null && description.errors.required">
-                                        Please add a description
-                                    </div>
-                                </md-hint>
-                            </md-input-container>
-                        </div>
+                            <md-hint align="start">
+                                <div  *ngIf="form.submitted && description.errors !== null && description.errors.required">
+                                    Please add a description
+                                </div>
+                            </md-hint>
+                        </md-input-container>
+                    </div>
 
+                </div>
+
+                <div fxLayout="row">
+                    <div fxFlex="50">
+                        <md-slide-toggle
+                            name="limitEnabled"
+                            [color]="'primary'"
+                            [labelPosition]="'before'"
+                            [(ngModel)]="limitEnabled">
+                            Enable Limit
+                        </md-slide-toggle>
                     </div>
 
                     <md-input-container fxFlex="50">
@@ -125,10 +136,11 @@
                         mdInput
                         name="quantity"
                         type="text"
-                        placeholder="Quantity"
-                        required
+                        placeholder="Limit"
+                        required="{{ !limitEnabled }}"
                         [(ngModel)]="content.quantity"
-                        #quantity="ngModel">
+                        #quantity="ngModel"
+                        disabled="{{ !limitEnabled }}">
 
                         <md-hint align="start">
                             <div  *ngIf="form.submitted && quantity.errors !== null && quantity.errors.required">
@@ -136,30 +148,29 @@
                             </div>
                         </md-hint>
                     </md-input-container>
-
                 </div>
 
             </div>
 
-            <!-- Right Justified Content -->
-            <div fxLayoutAlign="end" fxFlex="45"  *ngIf="contentType">
+        </div>
 
-                <div class="right-column">
-                    <span>Offer Preview</span>
+        <!-- Right Justified Content -->
+        <div fxLayoutAlign="end" fxFlex="45"  *ngIf="contentType">
 
-                    <div class="scratcher-preview">
+            <div class="right-column">
+                <span>Offer Preview</span>
 
-                        <app-file-uploader></app-file-uploader>
+                <div class="scratcher-preview">
 
-                        <div class="scratcher-body">
+                    <app-file-uploader></app-file-uploader>
 
-                            <h3 class="scratcher-heading">{{ content.display_name }}</h3>
+                    <div class="scratcher-body">
 
-                            <small>from Payless Shoes</small>
+                        <h3 class="scratcher-heading">{{ content.display_name }}</h3>
 
-                            <p>{{ content.description }}</p>
+                        <small>from Payless Shoes</small>
 
-                        </div>
+                        <p>{{ content.description }}</p>
 
                     </div>
 
@@ -169,9 +180,11 @@
 
         </div>
 
-        <div fxLayoutAlign="end" fxFlex="100" *ngIf="contentType">
-            <button type="submit" class="common-form-submit" md-raised-button color="primary">Create</button>
-        </div>
+    </div>
+
+    <div fxLayoutAlign="end" fxFlex="100" *ngIf="contentType">
+        <button type="submit" class="common-form-submit" md-raised-button color="primary">Create</button>
+    </div>
 
     </form>
 

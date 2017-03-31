@@ -120,6 +120,47 @@
 
                 </div>
 
+                <div class="form-highlight-well" fxFlex="100" *ngIf="scratcherEnabled">
+                    <div fxFlex="100" fxLayout="row">
+                        <md-input-container fxFlex="100">
+                            <input
+                            mdInput
+                            name="scratcher_name"
+                            type="text"
+                            placeholder="Scratcher Exclamation"
+                            required
+                            [(ngModel)]="content.scratcher_name"
+                            #scratcher_name="ngModel">
+
+                            <md-hint align="start">
+                                <div  *ngIf="form.submitted && scratcher_name.errors !== null && scratcher_name.errors.required">
+                                    Please add a scratcher exclamation
+                                </div>
+                            </md-hint>
+                        </md-input-container>
+                    </div>
+
+                    <div fxFlex="100" fxLayout="row">
+                        <md-input-container fxFlex="100">
+                            <input
+                            mdInput
+                            name="scratcher_description"
+                            type="text"
+                            placeholder="Scratcher Description"
+                            required
+                            [(ngModel)]="content.scratcher_description"
+                            #scratcher_description="ngModel">
+
+                        <md-hint align="start">
+                            <div  *ngIf="form.submitted && scratcher_description.errors !== null && scratcher_description.errors.required">
+                                Please add a description for the scratcher
+                            </div>
+                        </md-hint>
+                    </md-input-container>
+                </div>
+
+            </div>
+
                 <div fxLayout="row"  *ngIf="contentType === 'offer'">
                     <div fxFlex="33">
                         <md-select placeholder="Redemption Method" name="redemption_method" [(ngModel)]="redemptionMethod">
@@ -210,39 +251,69 @@
         </div>
 
         <!-- Right Justified Content -->
-        <div fxLayoutAlign="end" fxFlex="45"  *ngIf="contentType">
+        <div fxLayout="column" fxFlex="45"  *ngIf="contentType">
 
-            <div class="right-column" fxLayout="column">
-                <div class="creator-section-label">Offer Preview</div>
+            <div fxLayout="row" fxLayoutAlign="end" fxFlex="40px">
+                <div *ngIf="scratcherEnabled">
+                    enabled
+                </div>
+            </div>
 
-                <div class="scratcher-preview">
-
-                    <div class="scratcher-image-container">
-                        <app-file-uploader></app-file-uploader>
+            <div fxLayout="row" fxLayoutAlign="end">
+                <div fxFlex="50" fxLayout="column" class="scratcher-toggle-container">
+                    <div fxLayout="row" fxLayoutAlign="center">
+                        <label class="creator-section-label" for="scratcher_enabled">
+                            Enable Scratcher
+                        </label>
                     </div>
 
-                    <div class="scratcher-body">
+                    <div class="scratcher-toggle" fxLayout="row" fxLayoutAlign="center">
+                        <md-slide-toggle
+                            name="scratcher_enabled"
+                            [color]="'primary'"
+                            [labelPosition]="'before'"
+                            [(ngModel)]="scratcherEnabled">
+                        </md-slide-toggle>
+                    </div>
+                </div>
 
-                        <h3 class="scratcher-heading">{{ content.display_name }}</h3>
+                <div class="right-column" fxLayout="column">
+                    <div class="creator-section-label">Offer Preview</div>
 
-                        <small>from Payless Shoes</small>
+                    <div class="scratcher-preview">
 
-                        <p>{{ content.description }}</p>
+                        <div class="scratcher-image-container">
+                            <app-file-uploader></app-file-uploader>
+                        </div>
 
+                        <div class="scratcher-body">
+
+                            <h3 class="scratcher-heading">{{ content.display_name }}</h3>
+
+                            <small>from Payless Shoes</small>
+
+                            <p>{{ content.description }}</p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="creator-section-label" *ngIf="contentType !== 'message'">
+                        Wallet Item Preview
+                    </div>
+                    <div fxLayout="row" class="wallet-preview" *ngIf="contentType !== 'message'">
+                        <div class="wallet-image-container">
+                            <app-file-uploader></app-file-uploader>
+                        </div>
+                        <div class="wallet-body-container" fxLayout="column">
+                            <h3 class="wallet-heading" fxFlex="50">{{ content.display_name }}</h3>
+                            <div class="wallet-expiration" fxFlex="50">
+                                Use by {{ content.end_at | date }}
+                            </div>
+                        </div>
                     </div>
 
                 </div>
-
-                <div class="creator-section-label" *ngIf="contentType !== 'message'">
-                    Wallet Item Preview
-                </div>
-                <div fxLayout="row" class="wallet-preview" *ngIf="contentType !== 'message'">
-                    <div class="wallet-image-container">
-                        <app-file-uploader></app-file-uploader>
-                    </div>
-                    <h3 class="wallet-heading">{{ content.display_name }}</h3>
-                </div>
-
             </div>
 
         </div>

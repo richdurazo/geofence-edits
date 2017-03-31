@@ -30,6 +30,8 @@ export class ContentCreatorFormComponent implements OnInit {
 
     contentType: string;
 
+    scratcherEnabled: boolean;
+
     limitEnabled: boolean;
 
     redemptionFormat: string;

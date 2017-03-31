@@ -62,15 +62,6 @@ body {
         padding-right: 80px;
         padding-left: 40px;
 
-        .card-divider {
-            border: 0;
-            height: 0;
-            border-top: 1px dotted darken($dark-grey, 5);
-            border-bottom: 1px dotted darken($dark-grey, 5);
-            width: 100%;
-            margin: 50px 0;
-        }
-
         .mat-raised-button.common-form-submit {
             margin-bottom: 10px;
         }
@@ -206,6 +197,16 @@ body {
         margin-bottom: 10px;
     }
 
+    .scratcher-toggle-container {
+        margin-top: 25px;
+
+        .scratcher-toggle {
+            .mat-slide-toggle {
+                margin-top: 0;
+            }
+        }
+    }
+
     .right-column {
         width: 300px;
 
@@ -245,9 +246,21 @@ body {
                 }
             }
 
-            .wallet-heading {
-                font-weight: 400;
-                margin-left: 10px;
+            .wallet-body-container {
+                max-width: 245px;
+                height: 100%;
+
+                .wallet-heading {
+                    font-weight: 600;
+                    font-size: 11px;
+                    margin: 5px;
+                    word-wrap: break-word;
+                }
+
+                .wallet-expiration {
+                    font-size: 9px;
+                    margin-left: 5px;
+                }
             }
         }
     }

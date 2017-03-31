@@ -159,30 +159,29 @@ body {
             background-color: $nav-background-dark-color;
             margin-bottom: 40px;
         }
-    }
 
-    .mat-sidenav-focus-trap>.cdk-focus-trap-content {
-        position: relative;
-    }
-
-    .router-link.active {
-        .mat-list-item {
-            background-color: mat-color($primary);
+        .router-link.active {
+            .mat-list-item {
+                background-color: mat-color($primary);
+            }
         }
-    }
 
-    .router-sub-link.active {
-        .mat-list-item {
-            background-color: lighten(mat-color($primary), 5);
+        .router-sub-link.active {
+            .mat-list-item {
+                background-color: lighten(mat-color($primary), 5);
+            }
         }
     }
 
 
     // UPLOADER
     .common-uploader {
+        width: 100%;
+        height: 100%;
+
         .uploader-preview, .uploader-zone {
             width: 100%;
-            height: 150px;
+            height: 100%;
 
             img {
                 height: 100%;
@@ -202,6 +201,11 @@ body {
     }
 
     // CONTENT CREATOR
+    .creator-section-label {
+        font-size: 11px;
+        margin-bottom: 10px;
+    }
+
     .right-column {
         width: 300px;
 
@@ -209,6 +213,12 @@ body {
             background-color: $light-grey;
             width: 300px;
             height: 450px;
+            margin-bottom: 20px;
+
+            .scratcher-image-container {
+                height: 150px;
+                width: 100%;
+            }
 
             .scratcher-body {
                 padding: 15px;
@@ -217,6 +227,27 @@ body {
                     font-weight: 400;
                     margin: 0;
                 }
+            }
+        }
+
+        .wallet-preview {
+            background-color: $light-grey;
+            width: 300px;
+            height: 55px;
+            margin-bottom: 20px;
+
+            .wallet-image-container {
+                height: 55px;
+                width: 55px;
+
+                .uploader-text {
+                    font-size: 10px;
+                }
+            }
+
+            .wallet-heading {
+                font-weight: 400;
+                margin-left: 10px;
             }
         }
     }

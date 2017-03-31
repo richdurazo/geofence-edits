@@ -212,12 +212,14 @@
         <!-- Right Justified Content -->
         <div fxLayoutAlign="end" fxFlex="45"  *ngIf="contentType">
 
-            <div class="right-column">
-                <span>Offer Preview</span>
+            <div class="right-column" fxLayout="column">
+                <div class="creator-section-label">Offer Preview</div>
 
                 <div class="scratcher-preview">
 
-                    <app-file-uploader></app-file-uploader>
+                    <div class="scratcher-image-container">
+                        <app-file-uploader></app-file-uploader>
+                    </div>
 
                     <div class="scratcher-body">
 
@@ -229,6 +231,16 @@
 
                     </div>
 
+                </div>
+
+                <div class="creator-section-label" *ngIf="contentType !== 'message'">
+                    Wallet Item Preview
+                </div>
+                <div fxLayout="row" class="wallet-preview" *ngIf="contentType !== 'message'">
+                    <div class="wallet-image-container">
+                        <app-file-uploader></app-file-uploader>
+                    </div>
+                    <h3 class="wallet-heading">{{ content.display_name }}</h3>
                 </div>
 
             </div>

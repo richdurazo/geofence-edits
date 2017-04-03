@@ -41,20 +41,31 @@ body {
     font-weight: 400;
     color: $primary-text-color;
 
-    textarea {
-      resize: none;
-      height: 74px;
-    }
-
     .mat-sidenav-container {
-      background-color: $body-background-color;
+        background-color: $body-background-color;
 
-      .mat-sidenav-content > .content-container {
-        max-width: 1150px;
-      }
+        .mat-sidenav-content > .containerX {
+            max-width: 1150px;
+        }
     }
 
+    .mat-raised-button {
+        line-height: 45px;
+        padding: 0 45px;
+    }
 
+    .mat-card {
+        color: $primary-text-color;
+    }
+
+    .creator-form-card {
+        padding-right: 80px;
+        padding-left: 40px;
+
+        .mat-raised-button.common-form-submit {
+            margin-bottom: 10px;
+        }
+    }
 
     // COMMON UTILITIES
     .relative {
@@ -70,14 +81,39 @@ body {
         font-weight: 400;
     }
 
-    .horizontal-divider {
-      border: 1px solid $body-background-color;
-      margin: 20px 0;
+    // INPUTS
+    .mat-input-container {
+        margin-bottom: 15px;
     }
 
-    // INPUTS
-    .mat-input-container[fxFlex="100"] {
-        // width: 100%;
+    textarea.mat-input-element {
+        min-height: 60px;
+    }
+
+    .mat-select {
+        margin-bottom: $common-margin;
+        margin-top: 8px;
+
+        .mat-select-trigger {
+            font-size: $common-font-size;
+            height: 25px;
+        }
+
+        .mat-select-placeholder.mat-floating-placeholder {
+            top: -16px;
+        }
+    }
+
+    // FORMS
+    .form-highlight-well {
+        background-color: $light-grey;
+        margin-left: -$common-margin;
+        margin-right: -$common-margin;
+        margin-bottom: $common-margin;
+        margin-top: $common-margin;
+        padding-left: $common-margin;
+        padding-right: $common-margin;
+        padding-top: $common-margin;
     }
 
     // COMMON TOOLBAR
@@ -86,7 +122,7 @@ body {
         background-color: $toolbar-background-color;
 
         .mat-toolbar-row {
-          color: $primary-text-color;
+            color: $primary-text-color;
         }
     }
 
@@ -96,44 +132,135 @@ body {
         width: 272px;
 
         .mat-nav-list {
-          padding-top: 0;
+            padding-top: 0;
         }
 
         .mat-list-item > .mat-list-item-content {
-          color: $nav-text-color;
-          font-size: $common-font-size;
-          padding-left: 50px;
+            color: $nav-text-color;
+            font-size: $common-font-size;
+            padding-left: 50px;
 
-          .mat-icon {
-            margin-right: $common-margin;
-          }
+            .mat-icon {
+                margin-right: $common-margin;
+            }
         }
 
         .app-sidenav-list-header {
-          height: 64px;
-          background-color: $nav-background-dark-color;
-          margin-bottom: 40px;
+            height: 64px;
+            background-color: $nav-background-dark-color;
+            margin-bottom: 40px;
         }
-    }
 
-    .mat-sidenav-focus-trap>.cdk-focus-trap-content {
-        position: relative;
-    }
-
-    .router-link.active {
-        .mat-list-item {
-            background-color: mat-color($primary);
+        .router-link.active {
+            .mat-list-item {
+                background-color: mat-color($primary);
+            }
         }
-    }
 
-    .router-sub-link {
-        // .mat-list-item {
-        //     background-color: lighten($nav-background-base-color, 5);
-        // }
-
-        &.active {
+        .router-sub-link.active {
             .mat-list-item {
                 background-color: lighten(mat-color($primary), 5);
+            }
+        }
+    }
+
+
+    // UPLOADER
+    .common-uploader {
+        width: 100%;
+        height: 100%;
+
+        .uploader-preview, .uploader-zone {
+            width: 100%;
+            height: 100%;
+
+            img {
+                height: 100%;
+                width: 100%;
+            }
+        }
+
+        .uploader-zone {
+            background-color: $dark-grey;
+            outline: 1px dashed darken($dark-grey, 15);
+
+            .uploader-text {
+                color: darken($dark-grey, 15);
+                text-align: center;
+            }
+        }
+    }
+
+    // CONTENT CREATOR
+    .creator-section-label {
+        font-size: 11px;
+        margin-bottom: 10px;
+    }
+
+    .scratcher-toggle-container {
+        margin-top: 25px;
+
+        .scratcher-toggle {
+            .mat-slide-toggle {
+                margin-top: 0;
+            }
+        }
+    }
+
+    .right-column {
+        width: 300px;
+
+        .scratcher-preview {
+            background-color: $light-grey;
+            width: 300px;
+            height: 450px;
+            margin-bottom: 20px;
+
+            .scratcher-image-container {
+                height: 150px;
+                width: 100%;
+            }
+
+            .scratcher-body {
+                padding: 15px;
+
+                .scratcher-heading {
+                    font-weight: 400;
+                    margin: 0;
+                }
+            }
+        }
+
+        .wallet-preview {
+            background-color: $light-grey;
+            width: 300px;
+            height: 55px;
+            margin-bottom: 20px;
+
+            .wallet-image-container {
+                height: 55px;
+                width: 55px;
+
+                .uploader-text {
+                    font-size: 10px;
+                }
+            }
+
+            .wallet-body-container {
+                max-width: 245px;
+                height: 100%;
+
+                .wallet-heading {
+                    font-weight: 600;
+                    font-size: 11px;
+                    margin: 5px;
+                    word-wrap: break-word;
+                }
+
+                .wallet-expiration {
+                    font-size: 9px;
+                    margin-left: 5px;
+                }
             }
         }
     }

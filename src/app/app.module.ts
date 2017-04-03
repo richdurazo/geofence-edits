@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MaterialModule } from '@angular/material';
@@ -34,8 +35,11 @@ import { CampaignApiService } from './campaigns/shared/campaign-api.service';
 import { ContentApiService } from './content/shared/content-api.service';
 import { TriggerApiService } from './triggers/shared/trigger-api.service';
 import { UserApiService } from './users/shared/user-api.service';
-import { DateUtilsService } from './shared/date-utils.service';
 import { AppNavigationComponent } from './app-navigation/app-navigation.component';
+
+import { DateUtilsService } from './shared/date-utils.service';
+import { FilestackService } from './shared/filestack.service';
+import { FileUploaderComponent } from './shared/file-uploader/file-uploader.component';
 
 @NgModule({
     declarations: [
@@ -55,10 +59,12 @@ import { AppNavigationComponent } from './app-navigation/app-navigation.componen
         TriggerCreatorComponent,
         TriggersOverviewComponent,
         TriggerCreatorFormComponent,
-        AppNavigationComponent
+        AppNavigationComponent,
+        FileUploaderComponent
     ],
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         FormsModule,
         HttpModule,
         MaterialModule.forRoot(),
@@ -68,6 +74,7 @@ import { AppNavigationComponent } from './app-navigation/app-navigation.componen
     providers: [
         AuthCustomHttpService,
         ContentApiService,
+        FilestackService,
         CampaignApiService,
         DateUtilsService,
         TriggerApiService,

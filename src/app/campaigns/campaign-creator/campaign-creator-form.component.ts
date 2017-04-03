@@ -23,7 +23,7 @@ export class CampaignCreatorFormComponent implements OnInit {
         this.campaign.status = event ? 1 : 0;
     }
 
-    public submitForm (form, event) {
+    public submitForm (form) {
         if (!form.valid) { return; }
 
         var obj = JSON.parse(JSON.stringify(this.campaign));

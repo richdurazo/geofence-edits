@@ -1,5 +1,6 @@
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 import { FormsModule, NG_VALIDATORS, Validator, AbstractControl, NgForm } from '@angular/forms';
@@ -22,6 +23,9 @@ describe('LoginComponent', () => {
         TestBed.configureTestingModule({
             declarations: [
                 LoginComponent
+            ],
+            schemas: [
+              CUSTOM_ELEMENTS_SCHEMA
             ],
             imports: [
                 FormsModule
@@ -53,8 +57,6 @@ describe('LoginComponent', () => {
         });
 
         it('should set some defaults', () => {
-            expect(comp.credentials).toBeUndefined();
-            expect(comp.invalid_credentials).toBeUndefined();
             comp.ngOnInit();
             expect(comp.credentials.email).toEqual('');
             expect(comp.credentials.password).toEqual('');

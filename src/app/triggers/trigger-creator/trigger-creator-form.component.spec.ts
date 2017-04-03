@@ -1,4 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
 import { FormsModule } from '@angular/forms';
 import { Observable } from "rxjs/Rx";
 
@@ -16,6 +18,9 @@ describe('TriggerCreatorFormComponent', () => {
         TestBed.configureTestingModule({
             imports: [FormsModule],
             declarations: [ TriggerCreatorFormComponent ],
+            schemas: [
+                CUSTOM_ELEMENTS_SCHEMA
+            ],
             providers: [
                 { provide: TriggerApiService, useClass: TriggerApiMockService }
             ]
@@ -59,7 +64,7 @@ describe('TriggerCreatorFormComponent', () => {
           spyOn(component, 'processSuccess');
           expect(triggerApi.createTrigger).not.toHaveBeenCalled();
           expect(component.processSuccess).not.toHaveBeenCalled();
-          component.submitForm();
+          component.submitForm({valid: true});
           expect(triggerApi.createTrigger).toHaveBeenCalledWith({ name: '', value: '', campaign_id: '' });
           expect(component.processSuccess).toHaveBeenCalledWith({ foo: 'bar' });
         });

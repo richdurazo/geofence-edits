@@ -1,16 +1,19 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { TestBed, async, ComponentFixture } from '@angular/core/testing';
-import { DebugElement }    from '@angular/core';
+// import { DebugElement }    from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { AuthService } from './auth/auth.service';
 import { AuthMockService } from './mocks/auth/auth-mock.service';
+import { FilestackService } from './shared/filestack.service';
+import { FilestackMockService } from './mocks/shared/filestack-mock.service';
+
 
 describe('AppComponent', () => {
 
     let comp:    AppComponent;
     let fixture: ComponentFixture<AppComponent>;
-    let de:      DebugElement;
+    // let de:      DebugElement;
     let el:      HTMLElement;
     let authService;
 
@@ -25,7 +28,8 @@ describe('AppComponent', () => {
                 CUSTOM_ELEMENTS_SCHEMA
             ],
             providers:[
-                {provide: AuthService, useClass: AuthMockService }
+                {provide: AuthService, useClass: AuthMockService },
+                {provide: FilestackService, useClass: FilestackMockService }
             ]
         });
         TestBed.compileComponents();

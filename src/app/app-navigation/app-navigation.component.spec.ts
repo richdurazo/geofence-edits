@@ -1,6 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { RouterModule } from '@angular/router';
+
+import { RouterModule, Router } from '@angular/router';
+
+import { RouterMockService } from '../mocks/router/router-mock.service';
+
+import { AuthService } from '../auth/auth.service';
+import { AuthMockService } from '../mocks/auth/auth-mock.service';
 
 import { AppNavigationComponent } from './app-navigation.component';
 
@@ -14,6 +20,10 @@ describe('AppNavigationComponent', () => {
       imports: [RouterModule],
       schemas: [
         CUSTOM_ELEMENTS_SCHEMA
+      ],
+      providers: [
+        { provide: AuthService, useClass: AuthMockService },
+        { provide: Router, useClass: RouterMockService }
       ]
     })
     .compileComponents();
@@ -21,8 +31,8 @@ describe('AppNavigationComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AppNavigationComponent);
-    component = fixture.componentInstance;
     fixture.detectChanges();
+    component = fixture.componentInstance;
   });
 
   it('should create', () => {

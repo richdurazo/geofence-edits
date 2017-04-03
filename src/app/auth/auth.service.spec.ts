@@ -1,6 +1,8 @@
 /* tslint:disable:no-unused-variable */
+import { RouterModule, Router } from '@angular/router';
+import { RouterMockService } from '../mocks/router/router-mock.service';
 
-import { TestBed, async, inject } from '@angular/core/testing';
+import { TestBed, inject } from '@angular/core/testing';
 import { AuthService } from './auth.service';
 import { Observable } from "rxjs/Rx";
 
@@ -19,7 +21,8 @@ describe('AuthService', () => {
         AuthService,
         {provide: AuthApiService, useClass: AuthApiMockService },
         // tokenNotExpiredMock not functioning properly yet
-        {provide: tokenNotExpired, useClass: tokenNotExpiredMock }
+        {provide: tokenNotExpired, useClass: tokenNotExpiredMock },
+        {provide: Router, useClass: RouterMockService }
       ]
     });
 

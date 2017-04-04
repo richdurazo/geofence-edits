@@ -38,6 +38,7 @@ import { UserApiService } from './users/shared/user-api.service';
 import { AppNavigationComponent } from './app-navigation/app-navigation.component';
 
 import { DateUtilsService } from './shared/date-utils.service';
+import { UuidApiService } from './shared/uuid-api.service';
 import { FilestackService } from './shared/filestack.service';
 import { FileUploaderComponent } from './shared/file-uploader/file-uploader.component';
 
@@ -78,7 +79,8 @@ import { FileUploaderComponent } from './shared/file-uploader/file-uploader.comp
         CampaignApiService,
         DateUtilsService,
         TriggerApiService,
-        UserApiService
+        UserApiService,
+        UuidApiService
     ],
     bootstrap: [AppComponent]
 })

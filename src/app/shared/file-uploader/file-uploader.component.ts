@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { FilestackService } from '../filestack.service';
 
@@ -9,15 +9,18 @@ import { FilestackService } from '../filestack.service';
 })
 export class FileUploaderComponent implements OnInit {
 
+    @Input() config;
+
     stagedPhoto: any;
 
     constructor( private filestack: FilestackService ) { }
 
     ngOnInit() {
+        console.log('this.config', this.config);
     }
 
     showUploader () {
-        this.filestack.pick().then((results) => {
+        this.filestack.pick(this.config.pickerOptions).then((results) => {
             console.log('results', results);
             this.stagedPhoto = results.filesUploaded[0];
         });

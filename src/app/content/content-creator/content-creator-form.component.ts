@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { DateUtilsService } from '../../shared/date-utils.service';
+import { FilestackService } from '../../shared/filestack.service';
+import { UuidApiService } from '../../shared/uuid-api.service';
 import { ContentApiService } from '../shared/content-api.service';
 import { ContentModel } from '../shared/content.model';
 
@@ -30,6 +32,8 @@ export class ContentCreatorFormComponent implements OnInit {
 
     contentType: string;
 
+    contentUuid: string;
+
     scratcherEnabled: boolean;
 
     limitEnabled: boolean;
@@ -51,8 +55,6 @@ export class ContentCreatorFormComponent implements OnInit {
         }
     ]
 
-    redemptionMethod: string;
-
     redemptionMethods: [
         {
             value: "online",
@@ -68,10 +70,19 @@ export class ContentCreatorFormComponent implements OnInit {
         }
     ]
 
-    constructor (private contentApi: ContentApiService, private dateUtils: DateUtilsService) {}
+    heroImageConfig: any;
+
+    walletImageConfig: any;
+
+    constructor (
+        private contentApi: ContentApiService,
+        private uuidApi: UuidApiService,
+        private filestack: FilestackService,
+        private dateUtils: DateUtilsService
+    ) {}
 
     ngOnInit() {
-        this.setModelDefaults();
+        this.fetchUuid();
         this.contentTypes = [
             {
                 value: "offer",
@@ -115,10 +126,22 @@ export class ContentCreatorFormComponent implements OnInit {
                 value: "format3",
                 viewValue: "Format 3"
             }
-        ]
+        ];
+    }
+
+    public setDate (key, event) {
+        console.log('key, event', key, event);
+        this.content[key] = new Date(event);
+    }
+
+    public setType (event) {
+        console.log('setType event', event);
+        this.contentType = event;
+        this.setModelDefaults(this.contentType);
     }
 
     public submitForm (form) {
+        console.log('submitForm this.content', this.content);
         if (!form.valid) { return; }
         var obj = JSON.parse(JSON.stringify(this.content));
         obj.start_at = this.dateUtils.formatSQLDate(obj.start_at);
@@ -133,12 +156,20 @@ export class ContentCreatorFormComponent implements OnInit {
         console.log('saved content data', data);
     }
 
-    private setModelDefaults () {
-        this.content = new ContentModel();
-        this.content.name = '';
-        this.content.description = '';
-        this.content.start_at = new Date();
-        this.content.end_at = new Date();
+    private fetchUuid () {
+        this.uuidApi.fetchUuid()
+        .subscribe(
+            data => {
+                this.contentUuid = data.uuid;
+                this.heroImageConfig = this.filestack.createConfig('hero', this.contentUuid, 2/1);
+                this.walletImageConfig = this.filestack.createConfig('wallet', this.contentUuid, 1/1);
+            }
+        )
+    }
+
+    private setModelDefaults (type: string) {
+        this.content = new ContentModel(this.contentUuid, type, '', '', '', new Date(), new Date());
+        console.log('this.content', this.content);
     }
 
 }

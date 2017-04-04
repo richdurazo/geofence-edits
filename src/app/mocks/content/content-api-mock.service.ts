@@ -16,4 +16,8 @@ export class ContentApiMockService {
     public deleteContent () {
         return false;
     }
+
+    public fetchUuid () {
+        return false;
+    }
 }

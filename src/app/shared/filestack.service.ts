@@ -31,6 +31,7 @@ export class FilestackService {
                 storeTo: {
                     location: 's3',
                     container: 'garythebucket',
+                    region: 'us-west-1',
                     access: 'public',
                     path: this.generateSaveFilePath(uuid, type)
                 },

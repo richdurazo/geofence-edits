@@ -284,19 +284,25 @@
                             <!-- SCRATCHER LAYER -->
                             <md-tab label="Overlay">
 
-                                <div class="creator-section-label">Scratcher Overlay Preview</div>
+                                <div class="creator-section-label">
+                                    Scratcher Overlay Preview
+                                </div>
 
                                 <div class="scratcher-preview">
 
-                                    <div class="scratcher-hero-image-container">
+                                    <div class="scratcher-hero-image-container" fxFlex="150px;">
                                         <app-file-uploader
-                                            [config]="heroScratcherImageConfig">
+                                            [config]="heroScratcherImageConfig"
+                                            [imageExists]="heroScratcherImageExists"
+                                            (onUpload)="heroScratcherImageExists = $event">
                                         </app-file-uploader>
                                     </div>
 
-                                    <div class="scratcher-overlay-body-container">
+                                    <div class="scratcher-overlay-body-container" fxFlex="300px;">
                                         <app-file-uploader
-                                            [config]="overlayScratcherImageConfig">
+                                            [config]="overlayScratcherImageConfig"
+                                            [imageExists]="overlayScratcherImageExists"
+                                            (onUpload)="overlayScratcherImageExists = $event">
                                         </app-file-uploader>
                                     </div>
 
@@ -307,11 +313,13 @@
                             <!-- SCRATCHER INTERIOR LAYER -->
                             <md-tab label="Scratcher">
 
-                                <div class="creator-section-label">Scratcher Preview</div>
+                                <div class="creator-section-label">
+                                    Scratcher Preview
+                                </div>
 
                                 <div class="scratcher-preview">
 
-                                    <div class="scratcher-hero-image-container">
+                                    <div class="scratcher-hero-image-container" fxFlex="150px;">
                                         <app-file-uploader
                                             [config]="heroOfferImageConfig"
                                             [imageExists]="heroOfferImageExists"
@@ -321,16 +329,40 @@
                                         </app-file-uploader>
                                     </div>
 
-                                    <div class="scratcher-body">
-                                        <h3 class="scratcher-heading">{{ content.scratcher_exclamation }}</h3>
+                                    <div class="scratcher-body" fxFlex="300px;" fxLayout="column">
 
-                                        <h2 class="scratcher-heading">{{ content.scratcher_description }}</h2>
+                                        <div fxFlex></div>
 
-                                        <small>from Payless Shoes</small>
+                                        <h3 class="scratcher-heading center" fxLayout="row" fxFlex="10" fxLayoutAlign="center">
+                                            <span>
+                                                {{ content.scratcher_name }}
+                                            </span>
+                                        </h3>
 
-                                        <button type="button" name="button" md-raised-button color="primary">
-                                            Save
-                                        </button>
+                                        <h2 class="scratcher-heading center" fxLayout="row" fxFlex="20" fxLayoutAlign="center">
+                                            <span>
+                                                {{ content.scratcher_description }}
+                                            </span>
+                                        </h2>
+
+                                        <div fxLayout="row" fxFlex="10" fxLayoutAlign="center">
+                                            <small>
+                                                from Payless Shoes
+                                            </small>
+                                        </div>
+
+                                        <div fxLayout="row" fxFlex="30">
+                                            <button type="button" name="button" md-raised-button color="primary" fxFlexAlign="end" fxFlex="100">
+                                                Save to Wallet
+                                            </button>
+                                        </div>
+
+                                        <div fxFlex></div>
+
+                                        <div fxLayout="row" fxFlex="10" fxLayoutAlign="center">
+                                            No thanks
+                                        </div>
+
                                     </div>
 
                                 </div>
@@ -340,11 +372,13 @@
                             <!-- OFFER LAYER -->
                             <md-tab label="Offer">
 
-                                <div class="creator-section-label">Offer Preview</div>
+                                <div class="creator-section-label">
+                                    Offer Preview
+                                </div>
 
                                 <div class="scratcher-preview">
 
-                                    <div class="scratcher-hero-image-container">
+                                    <div class="scratcher-hero-image-container" fxFlex="150px;">
                                         <app-file-uploader
                                             [config]="heroOfferImageConfig"
                                             [imageExists]="heroOfferImageExists"
@@ -354,7 +388,7 @@
                                         </app-file-uploader>
                                     </div>
 
-                                    <div class="scratcher-body">
+                                    <div class="scratcher-body" fxFlex="300px;">
 
                                         <h3 class="scratcher-heading">{{ content.display_name }}</h3>
 
@@ -373,11 +407,13 @@
                         <div *ngIf="!scratcherEnabled">
                             <div fxFlex="49px;"></div>
 
-                            <div class="creator-section-label">Offer Preview</div>
+                            <div class="creator-section-label">
+                                Offer Preview
+                            </div>
 
                             <div class="scratcher-preview">
 
-                                <div class="scratcher-hero-image-container">
+                                <div class="scratcher-hero-image-container" fxFlex="150px;">
                                     <app-file-uploader
                                         [config]="heroOfferImageConfig"
                                         [imageExists]="heroOfferImageExists"
@@ -387,7 +423,7 @@
                                     </app-file-uploader>
                                 </div>
 
-                                <div class="scratcher-body">
+                                <div class="scratcher-body" fxFlex="300px;">
 
                                     <h3 class="scratcher-heading">{{ content.display_name }}</h3>
 

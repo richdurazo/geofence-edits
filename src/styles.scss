@@ -237,12 +237,14 @@ body {
             }
 
             .scratcher-overlay-body-container {
-                height: 320px;
+                height: 300px;
                 width: 100%;
 
                 .uploader-zone {
                     background-image: url('/assets/images/scratch_overlay.png');
-                    background-size: contain;
+                    background-position: center center;
+                    background-size: cover;
+                    border: none;
 
                     .uploader-text {
                         opacity: 0;
@@ -268,6 +270,10 @@ body {
                 .scratcher-heading {
                     font-weight: 400;
                     margin: 0;
+
+                    &.center {
+                        text-align: center;
+                    }
                 }
             }
         }

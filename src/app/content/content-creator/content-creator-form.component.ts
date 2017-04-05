@@ -76,7 +76,11 @@ export class ContentCreatorFormComponent implements OnInit {
 
     heroOfferImageModified: number;
 
+    heroScratcherImageExists: boolean = false;
+
     heroScratcherImageConfig: any;
+
+    overlayScratcherImageExists: boolean = false;
 
     overlayScratcherImageConfig: any;
 

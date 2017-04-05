@@ -70,7 +70,11 @@ export class ContentCreatorFormComponent implements OnInit {
         }
     ]
 
-    heroImageConfig: any;
+    heroOfferImageUploaded: boolean = false;
+
+    heroOfferImageConfig: any;
+
+    heroScratcherImageConfig: any;
 
     walletImageConfig: any;
 
@@ -82,6 +86,7 @@ export class ContentCreatorFormComponent implements OnInit {
     ) {}
 
     ngOnInit() {
+        console.log('heroOfferImageUploaded', this.heroOfferImageUploaded);
         this.fetchUuid();
         this.contentTypes = [
             {
@@ -161,7 +166,8 @@ export class ContentCreatorFormComponent implements OnInit {
         .subscribe(
             data => {
                 this.contentUuid = data.uuid;
-                this.heroImageConfig = this.filestack.createConfig('hero', this.contentUuid, 2/1);
+                this.heroOfferImageConfig = this.filestack.createConfig('hero-offer', this.contentUuid, 2/1);
+                this.heroScratcherImageConfig = this.filestack.createConfig('hero-scratcher', this.contentUuid, 2/1);
                 this.walletImageConfig = this.filestack.createConfig('wallet', this.contentUuid, 1/1);
             }
         )

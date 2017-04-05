@@ -33,6 +33,7 @@ $nav-text-color: $dark-grey;
 // PIXEL VALUES
 $common-margin: 20px;
 $common-font-size: 13px;
+$small-font-size: 11px;
 
 body {
 
@@ -184,7 +185,7 @@ body {
 
         .uploader-zone {
             background-color: $dark-grey;
-            outline: 1px dashed darken($dark-grey, 15);
+            border: 1px dashed darken($dark-grey, 15);
 
             .uploader-text {
                 color: darken($dark-grey, 15);
@@ -195,12 +196,14 @@ body {
 
     // CONTENT CREATOR
     .creator-section-label {
-        font-size: 11px;
+        font-size: $small-font-size;
         margin-bottom: 10px;
+        margin-top: $common-margin;
     }
 
     .scratcher-toggle-container {
-        margin-top: 25px;
+        margin-top: 48px;
+        padding-left: 15px;
 
         .scratcher-toggle {
             .mat-slide-toggle {
@@ -212,13 +215,19 @@ body {
     .right-column {
         width: 300px;
 
+        .mat-tab-label {
+            min-width: 0;
+            width: 33%;
+            font-size: $small-font-size;
+        }
+
         .scratcher-preview {
             background-color: $light-grey;
             width: 300px;
             height: 450px;
             margin-bottom: 20px;
 
-            .scratcher-image-container {
+            .scratcher-hero-image-container {
                 height: 150px;
                 width: 100%;
             }
@@ -254,7 +263,7 @@ body {
 
                 .wallet-heading {
                     font-weight: 600;
-                    font-size: 11px;
+                    font-size: $small-font-size;
                     margin: 5px;
                     word-wrap: break-word;
                 }

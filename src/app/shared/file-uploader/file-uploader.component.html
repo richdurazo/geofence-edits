@@ -1,12 +1,12 @@
 <div class="common-uploader" fxFlexFill>
-    <div class="uploader-zone" *ngIf="!stagedPhoto" (click)="showUploader()" fxLayoutAlign="center center">
+    <div class="uploader-zone" *ngIf="!imageExists" (click)="showUploader()" fxLayoutAlign="center center">
         <div class="uploader-text">
             <md-icon>perm_media</md-icon>
             <div>Select Image</div>
         </div>
     </div>
 
-    <div class="uploader-preview" *ngIf="stagedPhoto" (click)="showUploader()">
-        <img src="{{ 'https://s3-us-west-1.amazonaws.com/' + stagedPhoto.container + '/' + stagedPhoto.key }}" alt="">
+    <div class="uploader-preview" *ngIf="imageExists" (click)="showUploader()">
+        <img src="{{ 'https://s3-us-west-1.amazonaws.com/' + mediaPath }}" alt="">
     </div>
 </div>

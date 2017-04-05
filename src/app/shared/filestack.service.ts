@@ -5,10 +5,6 @@ declare var filestack : any;
 @Injectable()
 export class FilestackService {
 
-    // NOTE: Force crop isn't quite ready just yet in the v3 picker,
-    // it should be ready before this needs to be in production,
-    // if not we can roll back to v2
-
     uploader: any;
 
     constructor() { }
@@ -21,15 +17,20 @@ export class FilestackService {
         return this.uploader.pick(config);
     }
 
+    // NOTE: Force crop isn't quite ready just yet in the v3 picker,
+    // it should be ready before this needs to be in production,
+    // if not we can roll back to v2
     public createConfig (type, uuid, ratio) {
         return {
             type: type,
+            uuid: uuid,
             pickerOptions: {
                 accept: 'image/*',
                 maxFiles: 1,
                 uploadInBackground: false,
                 storeTo: {
                     location: 's3',
+                    container: 'garythebucket',
                     access: 'public',
                     path: this.generateSaveFilePath(uuid, type)
                 },
@@ -44,7 +45,7 @@ export class FilestackService {
         };
     }
 
-    private generateSaveFilePath (uuid, type) {
+    public generateSaveFilePath (uuid, type) {
         return '/' + uuid[0] + '/' + uuid[1] + '/' + uuid + '/image/' + type + '.jpg';
     }
 

@@ -290,14 +290,14 @@
 
                                     <div class="scratcher-hero-image-container">
                                         <app-file-uploader
-                                            [config]="heroScratcherImageConfig"
-                                            [imageExists]="heroScratcherImageExists"
-                                            (onUpload)="heroScratcherImageExists = $event">
+                                            [config]="heroScratcherImageConfig">
                                         </app-file-uploader>
                                     </div>
 
-                                    <div class="scratcher-body">
-                                        <h3>This will be the scratcher overlay uploader</h3>
+                                    <div class="scratcher-overlay-body-container">
+                                        <app-file-uploader
+                                            [config]="overlayScratcherImageConfig">
+                                        </app-file-uploader>
                                     </div>
 
                                 </div>

@@ -76,9 +76,9 @@ export class ContentCreatorFormComponent implements OnInit {
 
     heroOfferImageModified: number;
 
-    heroScratcherImageExists: boolean = false;
-
     heroScratcherImageConfig: any;
+
+    overlayScratcherImageConfig: any;
 
     walletImageConfig: any;
 
@@ -175,6 +175,7 @@ export class ContentCreatorFormComponent implements OnInit {
                 this.contentUuid = data.uuid;
                 this.heroOfferImageConfig = this.filestack.createConfig('hero-offer', this.contentUuid, 2/1);
                 this.heroScratcherImageConfig = this.filestack.createConfig('hero-scratcher', this.contentUuid, 2/1);
+                this.overlayScratcherImageConfig = this.filestack.createConfig('overlay-scratcher', this.contentUuid, 9/10);
                 this.walletImageConfig = this.filestack.createConfig('wallet', this.contentUuid, 1/1);
             }
         )

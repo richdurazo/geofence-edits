@@ -30,16 +30,6 @@ export class ContentCreatorFormComponent implements OnInit {
         }
     ];
 
-    contentType: string;
-
-    contentUuid: string;
-
-    scratcherEnabled: boolean;
-
-    limitEnabled: boolean;
-
-    redemptionFormat: string;
-
     redemptionFormats: [
         {
             value: "format1",
@@ -68,11 +58,25 @@ export class ContentCreatorFormComponent implements OnInit {
             value: "both",
             viewValue: "Online & In Store"
         }
-    ]
+    ];
 
-    heroOfferImageUploaded: boolean = false;
+    contentType: string;
+
+    contentUuid: string;
+
+    scratcherEnabled: boolean;
+
+    limitEnabled: boolean;
+
+    redemptionFormat: string;
 
     heroOfferImageConfig: any;
+
+    heroOfferImageExists: boolean = false;
+
+    heroOfferImageModified: number;
+
+    heroScratcherImageExists: boolean = false;
 
     heroScratcherImageConfig: any;
 
@@ -86,7 +90,6 @@ export class ContentCreatorFormComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        console.log('heroOfferImageUploaded', this.heroOfferImageUploaded);
         this.fetchUuid();
         this.contentTypes = [
             {
@@ -132,6 +135,10 @@ export class ContentCreatorFormComponent implements OnInit {
                 viewValue: "Format 3"
             }
         ];
+    }
+
+    modified (event) {
+        console.log('event', event);
     }
 
     public setDate (key, event) {

@@ -12,11 +12,15 @@ export class FileUploaderComponent implements OnInit {
 
     mediaPath: string;
 
-    @Input() config;
+    @Input() lastModified: number;
+
+    @Input() config: any;
 
     @Input()  imageExists: boolean;
 
     @Output() onUpload = new EventEmitter<boolean>();
+
+    @Output() onChange = new EventEmitter<number>();
 
     stagedPhoto: any;
 
@@ -32,12 +36,10 @@ export class FileUploaderComponent implements OnInit {
         this.filestack.pick(this.config.pickerOptions).then((results) => {
             console.log('results', results);
             this.imageExists = !!results.filesUploaded[0];
-            this.emitUploadEvent(this.imageExists);
+            this.lastModified = new Date().getTime();
+            this.onUpload.emit(this.imageExists);
+            this.onChange.emit(this.lastModified);
         });
     }
 
-    emitUploadEvent(loaded: boolean) {
-      this.onUpload.emit(loaded);
-      this.imageExists = true;
-    }
 }

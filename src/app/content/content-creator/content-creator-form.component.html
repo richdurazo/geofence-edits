@@ -290,7 +290,9 @@
 
                                     <div class="scratcher-hero-image-container">
                                         <app-file-uploader
-                                            [config]="heroScratcherImageConfig">
+                                            [config]="heroScratcherImageConfig"
+                                            [imageExists]="heroScratcherImageExists"
+                                            (onUpload)="heroScratcherImageExists = $event">
                                         </app-file-uploader>
                                     </div>
 
@@ -312,8 +314,10 @@
                                     <div class="scratcher-hero-image-container">
                                         <app-file-uploader
                                             [config]="heroOfferImageConfig"
-                                            [imageExists]="heroOfferImageUploaded"
-                                            (onUpload)="heroOfferImageUploaded = $event">
+                                            [imageExists]="heroOfferImageExists"
+                                            [lastModified]="heroOfferImageModified"
+                                            (onUpload)="heroOfferImageExists = $event"
+                                            (onChange)="heroOfferImageModified = $event">
                                         </app-file-uploader>
                                     </div>
 
@@ -343,8 +347,10 @@
                                     <div class="scratcher-hero-image-container">
                                         <app-file-uploader
                                             [config]="heroOfferImageConfig"
-                                            [imageExists]="heroOfferImageUploaded"
-                                            (onUpload)="heroOfferImageUploaded = $event">
+                                            [imageExists]="heroOfferImageExists"
+                                            [lastModified]="heroOfferImageModified"
+                                            (onUpload)="heroOfferImageExists = $event"
+                                            (onChange)="heroOfferImageModified = $event">
                                         </app-file-uploader>
                                     </div>
 
@@ -374,8 +380,10 @@
                                 <div class="scratcher-hero-image-container">
                                     <app-file-uploader
                                         [config]="heroOfferImageConfig"
-                                        [imageExists]="heroOfferImageUploaded"
-                                        (onUpload)="heroOfferImageUploaded = $event">
+                                        [imageExists]="heroOfferImageExists"
+                                        [lastModified]="heroOfferImageModified"
+                                        (onUpload)="heroOfferImageExists = $event"
+                                        (onChange)="heroOfferImageModified = $event">
                                     </app-file-uploader>
                                 </div>
 

@@ -22,4 +22,9 @@ export class TriggerApiService {
       .map(res => res.json())
   }
 
+  getTriggerValue () {
+      return this.authCustomHttp.get(AppSettings.API_ROOT + '/trigger/value')
+      .map(res => res.json())
+  }
+
 }

@@ -1,47 +1,94 @@
 <md-card fxFlex="96" fxFlexOffset="2">
 
-    <form #form="ngForm" (ngSubmit)="submitForm(form)" novalidate fxFlex="100">
+    <form #form="ngForm" (ngSubmit)="submitForm(form)" novalidate fxLayout="column">
 
-        <md-input-container fxFlex="50">
-            <input
-            mdInput
-            name="name"
-            type="text"
-            placeholder="Name"
-            required
-            [(ngModel)]="trigger.name"
-            #name="ngModel">
+        <div fxLayout="row">
 
-            <md-hint align="start">
-                <div  *ngIf="form.submitted && name.errors !== null && name.errors.required">
-                    Please add a name
+            <div fxLayout="column" fxFlex="55">
+
+                <div>
+                    <md-select
+                    placeholder="Type"
+                    name="type"
+                    [ngModel]="triggerType"
+                    (ngModelChange)="setType($event)">
+                        <md-option *ngFor="let type of triggerTypes" [value]="type.value">
+                            {{ type.viewValue }}
+                        </md-option>
+                    </md-select>
+
+                    <p *ngIf="!triggerType">
+                        To get started, please select a type.
+                    </p>
                 </div>
-            </md-hint>
-        </md-input-container>
 
-        <md-input-container fxFlex="50">
-            <input
-            mdInput
-            name="value"
-            type="text"
-            placeholder="Value"
-            required
-            [(ngModel)]="trigger.value"
-            #value="ngModel">
+                <div *ngIf="triggerType">
 
-            <md-hint align="start">
-                <div  *ngIf="form.submitted && value.errors !== null && value.errors.required">
-                    Please add a value
+                    <div fxLayout="row">
+                        <md-input-container fxFlex="50">
+                            <input
+                            mdInput
+                            name="name"
+                            type="text"
+                            placeholder="Name"
+                            required
+                            [(ngModel)]="trigger.name"
+                            #name="ngModel">
+
+                            <md-hint align="start">
+                                <div  *ngIf="form.submitted && name.errors !== null && name.errors.required">
+                                    Please add a name
+                                </div>
+                            </md-hint>
+                        </md-input-container>
+                    </div>
+
+                    <div fxLayout="row">
+                        <md-input-container fxFlex="60">
+                            <input
+                            mdInput
+                            name="notes"
+                            type="text"
+                            placeholder="Notes"
+                            [(ngModel)]="trigger.notes"
+                            #notes="ngModel">
+                        </md-input-container>
+                    </div>
+
+                    <div fxLayout="row" *ngIf="triggerType === 'watermark' || triggerType === 'touch'">
+                        <md-input-container fxFlex="60">
+                            <input
+                            mdInput
+                            name="value"
+                            type="text"
+                            placeholder="Value"
+                            required
+                            disabled
+                            [(ngModel)]="trigger.value"
+                            #value="ngModel">
+
+                            <md-hint align="start">
+                                <div  *ngIf="form.submitted && value.errors !== null && value.errors.required">
+                                    Please add a value
+                                </div>
+                            </md-hint>
+                        </md-input-container>
+                    </div>
+
                 </div>
-            </md-hint>
-        </md-input-container>
 
-        <!-- <div class="form-group">
-            <label for="campaign_id">Campaign Id</label>
-            <input type="text" name="campaign_id" class="form-control" [(ngModel)]="trigger.campaign_id">
-        </div> -->
 
-        <button type="submit" md-raised-button color="primary">Submit</button>
+            </div>
+
+            <div fxFlex="45">
+
+            </div>
+
+        </div>
+
+        <div fxLayoutAlign="end" fxFlex="100">
+            <button type="submit" class="common-form-submit" md-raised-button color="primary">Create</button>
+        </div>
 
     </form>
 

@@ -2,18 +2,18 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Observable } from "rxjs/Rx";
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
-import { CampaignsTableComponent } from './campaigns-table.component';
+import { CampaignsListComponent } from './campaigns-list.component';
 import { CampaignApiService } from '../../shared/campaign-api.service';
 import { CampaignApiMockService } from '../../../mocks/campaigns/campaign-api-mock.service';
 
-describe('CampaignsTableComponent', () => {
-  let component: CampaignsTableComponent;
-  let fixture: ComponentFixture<CampaignsTableComponent>;
+describe('CampaignsListComponent', () => {
+  let component: CampaignsListComponent;
+  let fixture: ComponentFixture<CampaignsListComponent>;
   let campaignApi: CampaignApiMockService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CampaignsTableComponent ],
+      declarations: [ CampaignsListComponent ],
       providers: [
           { provide: CampaignApiService, useClass: CampaignApiMockService }
       ],
@@ -28,7 +28,7 @@ describe('CampaignsTableComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CampaignsTableComponent);
+    fixture = TestBed.createComponent(CampaignsListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

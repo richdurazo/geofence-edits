@@ -4,11 +4,11 @@ import { CampaignApiService } from '../../shared/campaign-api.service';
 import { CampaignModel } from '../../shared/campaign.model';
 
 @Component({
-  selector: 'app-campaigns-table',
-  templateUrl: './campaigns-table.component.html',
-  styleUrls: ['./campaigns-table.component.scss']
+  selector: 'app-campaigns-list',
+  templateUrl: './campaigns-list.component.html',
+  styleUrls: ['./campaigns-list.component.scss']
 })
-export class CampaignsTableComponent implements OnInit {
+export class CampaignsListComponent implements OnInit {
 
     campaigns: CampaignModel[] = [];
 

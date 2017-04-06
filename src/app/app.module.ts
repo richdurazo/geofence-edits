@@ -41,7 +41,8 @@ import { DateUtilsService } from './shared/date-utils.service';
 import { UuidApiService } from './shared/uuid-api.service';
 import { FilestackService } from './shared/filestack.service';
 import { FileUploaderComponent } from './shared/file-uploader/file-uploader.component';
-import { CampaignsTableComponent } from './campaigns/campaigns-overview/campaigns-table/campaigns-table.component';
+import { CampaignsListComponent } from './campaigns/campaigns-overview/campaigns-list/campaigns-list.component';
+import { SortableListComponent } from './shared/sortable-list/sortable-list.component';
 
 @NgModule({
     declarations: [
@@ -63,7 +64,8 @@ import { CampaignsTableComponent } from './campaigns/campaigns-overview/campaign
         TriggerCreatorFormComponent,
         AppNavigationComponent,
         FileUploaderComponent,
-        CampaignsTableComponent
+        CampaignsListComponent,
+        SortableListComponent
     ],
     imports: [
         BrowserModule,

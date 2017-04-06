@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 
+import { AppSettings } from '../app-settings';
+
 @Injectable()
 export class AuthApiService {
 
@@ -15,7 +17,7 @@ export class AuthApiService {
       params.set("email", credentials.email);
       params.set("password", credentials.password);
 
-      return this.http.post('http://api.app/authenticate', params, options).map(res => res.json())
+      return this.http.post(AppSettings.API_ROOT + '/user/login', params, options).map(res => res.json())
   }
 
 }

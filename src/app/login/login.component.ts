@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterModule, Router } from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+
 import { AuthService } from '../auth/auth.service';
 
-interface Credentials {
-    email: string,
-    password: string
+class Credentials {
+    constructor (public email: string, public password: string) {}
 }
 
 @Component({
@@ -15,29 +16,24 @@ interface Credentials {
 
 export class LoginComponent implements OnInit {
 
-    credentials: Credentials;
-
-    invalid_credentials:boolean;
+    invalid_credentials: boolean;
+    credentials = new Credentials('', '');
 
     constructor (private authService: AuthService, private router: Router) {}
 
     ngOnInit () {
         this.invalid_credentials = false;
-        this.credentials = {
-            email: '',
-            password: ''
-        };
     }
 
-    onLogin (form) {
-        console.log('form', form);
-        if (!form.valid) {return;}
+    login (form) {
+        console.log('this.credentials', this.credentials);
+        if (!form.valid) { return false; }
         this.authService.login(this.credentials, this.processSuccess.bind(this), this.processError.bind(this));
     }
 
-    processSuccess (data) {
+    processSuccess () {
         let url = this.authService.getRedirectUrl();
-        if (url !== '') {
+        if (!!url && url !== '') {
             this.router.navigate([url]);
         } else {
             this.router.navigate(['/overview']);
@@ -45,8 +41,7 @@ export class LoginComponent implements OnInit {
     }
 
     processError (error) {
-        let new_error = JSON.parse(error._body);
-        if (typeof new_error === 'object' && new_error.hasOwnProperty('error') && new_error.error === 'invalid_credentials') {
+        if (typeof error === 'object' && error.hasOwnProperty('error') && error.error === 'invalid_credentials') {
             this.invalid_credentials = true;
         }
     }

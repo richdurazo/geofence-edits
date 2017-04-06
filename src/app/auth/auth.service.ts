@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { tokenNotExpired } from 'angular2-jwt';
+import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
 
 import { AuthApiService } from './auth-api.service';
@@ -9,29 +10,16 @@ export class AuthService {
 
     private redirectUrl: string = '';
 
-    constructor(private authApiService: AuthApiService) {}
+    constructor(private authApiService: AuthApiService, private router: Router) {}
 
     // public methods
-    login (credentials, successCallback, errorCallback) {
-        this.authApiService.login(credentials)
-        .subscribe(
-            data => {
-                this.processSuccess(data);
-                successCallback(data);
-            },
-            error => {
-                this.processError(error);
-                errorCallback(error);
-            }
-        );
-    }
-
     public loggedIn () {
         return tokenNotExpired();
     }
 
-    public logout () {
+    public logOut () {
         localStorage.removeItem('id_token');
+        this.router.navigate(['login']);
     }
 
     public setUrl (url) {
@@ -42,13 +30,26 @@ export class AuthService {
         return this.redirectUrl;
     }
 
+    login (credentials, successCallback, errorCallback) {
+        this.authApiService.login(credentials)
+        .subscribe(
+            data => {
+                this.processSuccess(data);
+                successCallback(data);
+            },
+            error => {
+                errorCallback(this.processError(error));
+            }
+        );
+    }
+
     // private methods
     private processSuccess (data) {
         localStorage.setItem('id_token', data.token);
     }
 
     private processError (error) {
-        let new_error = JSON.parse(error._body);
+        return JSON.parse(error._body);
     }
 
 }

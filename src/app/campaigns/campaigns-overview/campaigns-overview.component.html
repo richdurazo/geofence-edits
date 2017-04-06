@@ -1,0 +1,13 @@
+<h1 class="color-primary page-heading" fxFlex="96" fxFlexOffset="2">
+    Overview
+</h1>
+
+<div class="campaign-thing row col col-xs-12 " *ngFor="let campaign of campaigns; let i = index;">
+    <div class="col col-xs-3">
+        {{ campaign.name }}
+    </div>
+
+    <div class="col col-xs-6">
+        <button type="button" class="btn btn-danger" name="delete" (click)="deleteItem(i)">Delete Campaign</button>
+    </div>
+</div>

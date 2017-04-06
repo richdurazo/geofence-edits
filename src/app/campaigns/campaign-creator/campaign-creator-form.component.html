@@ -1,0 +1,109 @@
+<md-card fxFlex="96" fxFlexOffset="2">
+
+    <form #form="ngForm" (ngSubmit)="submitForm(form)" novalidate fxLayout="column">
+
+        <div fxLayout="row">
+
+            <div fxLayout="column" fxFlex="55">
+
+                <div fxLayout="row">
+                    <md-input-container fxFlex="60">
+                        <input
+                        mdInput
+                        name="name"
+                        type="text"
+                        placeholder="Title"
+                        required
+                        [(ngModel)]="campaign.name"
+                        #name="ngModel">
+
+                        <md-hint align="start">
+                            <div  *ngIf="form.submitted && name.errors !== null && name.errors.required">
+                                Please add a title
+                            </div>
+                        </md-hint>
+                    </md-input-container>
+                </div>
+
+
+                <div fxLayout="row">
+                    <md-input-container fxFlex="100">
+                        <textarea
+                        mdInput
+                        name="description"
+                        type="text"
+                        placeholder="Description"
+                        required
+                        [(ngModel)]="campaign.description"
+                        #description="ngModel">
+                        </textarea>
+
+                        <md-hint align="start">
+                            <div  *ngIf="form.submitted && description.errors !== null && description.errors.required">
+                                Please add a description
+                            </div>
+                        </md-hint>
+                    </md-input-container>
+                </div>
+
+                <div fxLayout="row" fxLayout.sm="column" fxLayoutGap="10px">
+
+                    <div fxFlex="33">
+
+                        <md-input-container>
+                            <input
+                            mdInput
+                            name="start_at"
+                            type="date"
+                            placeholder="Start Date"
+                            required
+                            [(ngModel)]="campaign.start_at"
+                            #start_at="ngModel">
+
+                            <md-hint align="start">
+                                <div  *ngIf="form.submitted && start_at.errors !== null && start_at.errors.required">
+                                    Please add a start date
+                                </div>
+                            </md-hint>
+                        </md-input-container>
+
+                    </div>
+
+                    <div fxFlex="33">
+
+                        <md-input-container>
+                            <input
+                            mdInput
+                            name="end_at"
+                            type="date"
+                            placeholder="End Date"
+                            required
+                            [(ngModel)]="campaign.end_at"
+                            #end_at="ngModel">
+
+                            <md-hint align="start">
+                                <div  *ngIf="form.submitted && end_at.errors !== null && end_at.errors.required">
+                                    Please add an end date
+                                </div>
+                            </md-hint>
+                        </md-input-container>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Placeholder div -->
+            <div fxFlex="45">
+            </div>
+
+        </div>
+
+        <div fxLayoutAlign="end" fxFlex="100">
+            <button type="submit" class="common-form-submit" md-raised-button color="primary">Create</button>
+        </div>
+
+    </form>
+
+</md-card>

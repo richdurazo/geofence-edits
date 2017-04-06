@@ -1,0 +1,17 @@
+<md-card class="" fxFlex="96" fxFlexOffset="2">
+
+    <div fxLayout="column">
+
+        <div class="campaign-item" *ngFor="let campaign of campaigns; let i = index;">
+            <div class="col col-xs-3">
+                {{ campaign.name }}
+            </div>
+
+            <div class="col col-xs-6">
+                <button type="button" class="btn btn-danger" name="delete" (click)="deleteItem(i)">Delete Campaign</button>
+            </div>
+        </div>
+
+    </div>
+
+</md-card>

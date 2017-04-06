@@ -1,0 +1,46 @@
+<md-sidenav-container fullscreen>
+    <md-sidenav #sidenav mode="side" opened="true" class="app-sidenav">
+
+        <md-nav-list>
+            <a routerLink="/overview">
+                <md-list-item md-ripple class="relative app-sidenav-list-header">
+                  Actv8me
+                </md-list-item>
+            </a>
+
+            <div *ngFor="let route of routes">
+                <a class="router-link" routerLink="{{ route.route }}" routerLinkActive="active">
+                    <md-list-item md-ripple class="relative">
+                        <md-icon>{{ route.icon }}</md-icon>
+                        {{ route.name }}
+                    </md-list-item>
+                </a>
+
+                <a class="router-sub-link" routerLink="{{ subroute.route }}" routerLinkActive="active" *ngFor="let subroute of route.subroutes">
+                    <md-list-item md-ripple class="relative">
+                        <md-icon>{{ subroute.icon }}</md-icon>
+                        {{ subroute.name }}
+                    </md-list-item>
+                </a>
+
+            </div>
+
+            <a (click)="logOut()">
+                <md-list-item md-ripple class="relative">
+                    <md-icon>power_settings_new</md-icon>Log Out
+                </md-list-item>
+            </a>
+        </md-nav-list>
+
+    </md-sidenav>
+
+    <md-toolbar>
+        {{ activeRoute }}
+    </md-toolbar>
+
+    <!-- primary content -->
+    <div class="containerX">
+      <router-outlet></router-outlet>
+    </div>
+
+</md-sidenav-container>

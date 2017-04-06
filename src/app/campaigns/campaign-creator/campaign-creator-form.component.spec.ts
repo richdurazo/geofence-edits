@@ -1,4 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
 import { Observable } from "rxjs/Rx";
 import { FormsModule } from '@angular/forms';
 
@@ -20,6 +22,9 @@ describe('CampaignCreatorFormComponent', () => {
         TestBed.configureTestingModule({
             imports: [ FormsModule ],
             declarations: [ CampaignCreatorFormComponent ],
+            schemas: [
+                CUSTOM_ELEMENTS_SCHEMA
+            ],
             providers: [
                 { provide: CampaignApiService, useClass: CampaignApiMockService },
                 { provide: DateUtilsService, useClass: DateUtilsMockService }
@@ -90,7 +95,7 @@ describe('CampaignCreatorFormComponent', () => {
           expect(dateUtils.formatSQLDate).not.toHaveBeenCalled();
           expect(campaignApi.createCampaign).not.toHaveBeenCalled();
           expect(component.processSuccess).not.toHaveBeenCalled();
-          component.submitForm();
+          component.submitForm({valid: true});
           expect(dateUtils.formatSQLDate).toHaveBeenCalled();
           expect(campaignApi.createCampaign).toHaveBeenCalledWith({ name: '', description: '', status: 0, start_at: 'foo', end_at: 'foo' });
           expect(component.processSuccess).toHaveBeenCalledWith({ foo: 'bar' });

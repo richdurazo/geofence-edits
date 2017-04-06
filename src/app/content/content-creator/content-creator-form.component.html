@@ -1,34 +1,469 @@
-<form>
-    <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text" name="name" class="form-control" [(ngModel)]="content.name"/>
-    </div>
+<md-card class="creator-form-card" fxFlex="96" fxFlexOffset="2">
 
-    <div class="form-group">
-        <label for="display_name">Display Name</label>
-        <input type="text" name="display_name" class="form-control" [(ngModel)]="content.display_name"/>
-    </div>
+    <form #form="ngForm" (ngSubmit)="submitForm(form)" novalidate fxLayout="column">
 
-    <div class="form-group">
-        <label for="description">Description</label>
-        <textarea type="text" name="description" class="form-control" [(ngModel)]="content.description">
-        </textarea>
-    </div>
+        <div fxLayout="row" fxLayout.md="column" fxLayout.sm="column">
 
-    <div class="form-group">
-        <label for="start_at">Start Date</label>
-        <input type="datetime-local" name="start_at" class="form-control" [(ngModel)]="content.start_at"/>
-    </div>
+            <!-- Left Justified Content -->
+            <div fxLayout="column" fxFlex="55">
 
-    <div class="form-group">
-        <label for="end_at">End Date</label>
-        <input type="datetime-local" name="end_at" class="form-control" [(ngModel)]="content.end_at"/>
-    </div>
+                <div>
+                    <md-select
+                    placeholder="Type"
+                    name="type"
+                    [ngModel]="contentType"
+                    (ngModelChange)="setType($event)">
+                        <md-option *ngFor="let type of contentTypes" [value]="type.value">
+                            {{ type.viewValue }}
+                        </md-option>
+                    </md-select>
 
-    <div class="form-group">
-        <label for="quantity">Quantity</label>
-        <input type="text" name="quantity" class="form-control" [(ngModel)]="content.quantity"/>
-    </div>
+                    <p *ngIf="!contentType">
+                        To get started, please select a type.
+                    </p>
+                </div>
 
-    <button type="submit" class="btn btn-primary" name="submit" (click)="submitForm()">Submit</button>
-</form>
+                <div *ngIf="contentType">
+
+                    <div fxLayout="row">
+                        <md-input-container fxFlex="50">
+                            <input
+                            mdInput
+                            name="name"
+                            type="text"
+                            placeholder="Title"
+                            required
+                            [(ngModel)]="content.name"
+                            #name="ngModel">
+
+                            <md-hint align="start">
+                                <div  *ngIf="form.submitted && name.errors !== null && name.errors.required">
+                                    Please add a name
+                                </div>
+                            </md-hint>
+                        </md-input-container>
+                    </div>
+
+                    <div fxLayout="row" fxLayout.sm="column" fxLayoutGap="10px" fxFlex="66">
+
+                        <md-input-container fxFlex="33">
+                            <input
+                            mdInput
+                            name="start_at"
+                            type="date"
+                            placeholder="Start Date"
+                            required
+                            [ngModel]="content.start_at | date:'yyyy-MM-dd'"
+                            (ngModelChange)="setDate('start_at', $event)"
+                            #start_at="ngModel">
+
+                            <md-hint align="start">
+                                <div  *ngIf="form.submitted && start_at.errors !== null && start_at.errors.required">
+                                    Please add a start date
+                                </div>
+                            </md-hint>
+                        </md-input-container>
+
+                        <md-input-container fxFlex="33">
+                            <input
+                            mdInput
+                            name="end_at"
+                            type="date"
+                            placeholder="End Date"
+                            required
+                            [ngModel]="content.end_at | date:'yyyy-MM-dd'"
+                            (ngModelChange)="setDate('end_at', $event)"
+                            #end_at="ngModel">
+
+                            <md-hint align="start">
+                                <div  *ngIf="form.submitted && end_at.errors !== null && end_at.errors.required">
+                                    Please add an end date
+                                </div>
+                            </md-hint>
+                        </md-input-container>
+
+                    </div>
+
+                    <div class="form-highlight-well" fxFlex="100">
+                        <div fxFlex="100" fxLayout="row">
+                            <md-input-container fxFlex="50">
+                                <input
+                                mdInput
+                                name="display_name"
+                                type="text"
+                                placeholder="Display Title"
+                                required
+                                [(ngModel)]="content.display_name"
+                                #display_name="ngModel">
+
+                                <md-hint align="start">
+                                    <div  *ngIf="form.submitted && display_name.errors !== null && display_name.errors.required">
+                                        Please add a name
+                                    </div>
+                                </md-hint>
+                            </md-input-container>
+                        </div>
+
+                        <div fxFlex="100" fxLayout="row">
+                            <md-input-container fxFlex="100">
+                                <textarea
+                                mdInput
+                                name="description"
+                                type="text"
+                                placeholder="Description"
+                                required
+                                [(ngModel)]="content.description"
+                                #description="ngModel">
+                                </textarea>
+
+                                <md-hint align="start">
+                                    <div  *ngIf="form.submitted && description.errors !== null && description.errors.required">
+                                        Please add a description
+                                    </div>
+                                </md-hint>
+                            </md-input-container>
+                        </div>
+
+                    </div>
+
+                    <div class="form-highlight-well" fxFlex="100" *ngIf="scratcherEnabled">
+                        <div fxFlex="100" fxLayout="row">
+                            <md-input-container fxFlex="50">
+                                <input
+                                mdInput
+                                name="scratcher_name"
+                                type="text"
+                                placeholder="Scratcher Exclamation"
+                                required
+                                [(ngModel)]="content.scratcher_name"
+                                #scratcher_name="ngModel">
+
+                                <md-hint align="start">
+                                    <div  *ngIf="form.submitted && scratcher_name.errors !== null && scratcher_name.errors.required">
+                                        Please add a scratcher exclamation
+                                    </div>
+                                </md-hint>
+                            </md-input-container>
+                        </div>
+
+                        <div fxFlex="100" fxLayout="row">
+                            <md-input-container fxFlex="100">
+                                <input
+                                mdInput
+                                name="scratcher_description"
+                                type="text"
+                                placeholder="Scratcher Description"
+                                required
+                                [(ngModel)]="content.scratcher_description"
+                                #scratcher_description="ngModel">
+
+                                <md-hint align="start">
+                                    <div  *ngIf="form.submitted && scratcher_description.errors !== null && scratcher_description.errors.required">
+                                        Please add a description for the scratcher
+                                    </div>
+                                </md-hint>
+                            </md-input-container>
+                        </div>
+
+                    </div>
+
+                    <div fxLayout="row"  *ngIf="contentType === 'offer'">
+                        <div fxFlex="33">
+                            <md-select placeholder="Redemption Method" name="redemption_method" [(ngModel)]="content.redemption_method">
+                                <md-option *ngFor="let method of redemptionMethods" [value]="method.value">
+                                    {{ method.viewValue }}
+                                </md-option>
+                            </md-select>
+                        </div>
+
+                        <div fxFlex="66" fxLayout="column" *ngIf="content.redemption_method">
+                            <div fxLayout="row" fxLayoutGap="10px">
+                                <md-input-container fxFlex="50">
+                                    <input
+                                    mdInput
+                                    name="redemption_code"
+                                    type="text"
+                                    placeholder="Redemption Code"
+                                    [(ngModel)]="content.redemptionCode"
+                                    #redemption_code="ngModel"
+                                    required>
+
+                                    <md-hint align="start">
+                                        <div  *ngIf="form.submitted && redemption_code.errors !== null && redemption_code.errors.required">
+                                            Please add a redemption code
+                                        </div>
+                                    </md-hint>
+                                </md-input-container>
+
+                                <md-select placeholder="QR Format" name="redemption_format" [(ngModel)]="redemptionFormat" *ngIf="content.redemption_method === 'store' || content.redemption_method === 'both'"  fxFlex="50">
+                                    <md-option *ngFor="let format of redemptionFormats" [value]="format.value">
+                                        {{ format.viewValue }}
+                                    </md-option>
+                                </md-select>
+                            </div>
+
+                            <div fxLayout="row" fxLayoutGap="10px" *ngIf="content.redemption_method === 'online' || content.redemption_method === 'both'">
+                                <md-input-container fxFlex="100">
+                                    <input
+                                    mdInput
+                                    name="redemption_url"
+                                    type="text"
+                                    placeholder="Redemption URL"
+                                    [(ngModel)]="content.redemptionUrl"
+                                    #redemption_url="ngModel">
+
+                                    <md-hint align="start">
+                                        <div  *ngIf="form.submitted && redemption_url.errors !== null && redemption_url.errors.required">
+                                            Please add a redemption code
+                                        </div>
+                                    </md-hint>
+                                </md-input-container>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div fxLayout="row" *ngIf="contentType !== 'message'">
+                        <div fxFlex="50">
+                            <md-slide-toggle
+                            name="limit_enabled"
+                            [color]="'primary'"
+                            [labelPosition]="'before'"
+                            [(ngModel)]="limitEnabled">
+                            Enable Limit
+                            </md-slide-toggle>
+                        </div>
+
+                        <md-input-container fxFlex="50">
+                            <input
+                            mdInput
+                            name="quantity"
+                            type="text"
+                            placeholder="Limit"
+                            required="{{ limitEnabled }}"
+                            [(ngModel)]="content.quantity"
+                            #quantity="ngModel"
+                            disabled="{{ !limitEnabled }}">
+
+                            <md-hint align="start">
+                                <div  *ngIf="form.submitted && quantity.errors !== null && quantity.errors.required">
+                                    Please add a quantity
+                                </div>
+                            </md-hint>
+                        </md-input-container>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Right Justified Content -->
+            <div fxLayout="column" fxFlex="45"  *ngIf="contentType">
+
+                <div fxLayout="row" fxLayoutAlign="end">
+                    <div fxFlex="50" fxLayout="column" class="scratcher-toggle-container">
+                        <div fxLayout="row" fxLayoutAlign="center">
+                            <label class="creator-section-label" for="scratcher_enabled">
+                                Enable Scratcher
+                            </label>
+                        </div>
+
+                        <div class="scratcher-toggle" fxLayout="row" fxLayoutAlign="center">
+                            <md-slide-toggle
+                                name="scratcher_enabled"
+                                [color]="'primary'"
+                                [labelPosition]="'before'"
+                                [(ngModel)]="scratcherEnabled">
+                            </md-slide-toggle>
+                        </div>
+                    </div>
+
+                    <div class="right-column" fxLayout="column">
+
+                        <md-tab-group *ngIf="scratcherEnabled">
+
+                            <!-- SCRATCHER LAYER -->
+                            <md-tab label="Overlay">
+
+                                <div class="creator-section-label">
+                                    Scratcher Overlay Preview
+                                </div>
+
+                                <div class="scratcher-preview">
+
+                                    <div class="scratcher-hero-image-container" fxFlex="150px;">
+                                        <app-file-uploader
+                                            [config]="heroScratcherImageConfig"
+                                            [fileExists]="heroScratcherImageExists"
+                                            (onUpload)="heroScratcherImageExists = $event">
+                                        </app-file-uploader>
+                                    </div>
+
+                                    <div class="scratcher-overlay-body-container" fxFlex="300px;">
+                                        <app-file-uploader
+                                            [config]="overlayScratcherImageConfig"
+                                            [fileExists]="overlayScratcherImageExists"
+                                            (onUpload)="overlayScratcherImageExists = $event">
+                                        </app-file-uploader>
+                                    </div>
+
+                                </div>
+
+                            </md-tab>
+
+                            <!-- SCRATCHER INTERIOR LAYER -->
+                            <md-tab label="Scratcher">
+
+                                <div class="creator-section-label">
+                                    Scratcher Preview
+                                </div>
+
+                                <div class="scratcher-preview">
+
+                                    <div class="scratcher-hero-image-container" fxFlex="150px;">
+                                        <app-file-uploader
+                                            [config]="heroOfferImageConfig"
+                                            [fileExists]="heroOfferImageExists"
+                                            [lastModified]="heroOfferImageModified"
+                                            (onUpload)="heroOfferImageExists = $event"
+                                            (onChange)="heroOfferImageModified = $event">
+                                        </app-file-uploader>
+                                    </div>
+
+                                    <div class="scratcher-body" fxFlex="300px;" fxLayout="column">
+
+                                        <div fxFlex></div>
+
+                                        <h3 class="scratcher-heading center" fxLayout="row" fxFlex="10" fxLayoutAlign="center">
+                                            <span>
+                                                {{ content.scratcher_name }}
+                                            </span>
+                                        </h3>
+
+                                        <h2 class="scratcher-heading center" fxLayout="row" fxFlex="10" fxLayoutAlign="center">
+                                            <span>
+                                                {{ content.scratcher_description }}
+                                            </span>
+                                        </h2>
+
+                                        <div fxLayout="row" fxFlex="10" fxLayoutAlign="center">
+                                            <small>
+                                                from Payless Shoes
+                                            </small>
+                                        </div>
+
+                                        <div fxLayout="row" fxFlex="40">
+                                            <button type="button" name="button" md-raised-button color="primary" fxFlexAlign="end" fxFlex="100">
+                                                Save to Wallet
+                                            </button>
+                                        </div>
+
+                                        <div fxFlex></div>
+
+                                        <div fxLayout="row" fxFlex="10" fxLayoutAlign="center">
+                                            No thanks
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </md-tab>
+
+                            <!-- OFFER LAYER -->
+                            <md-tab label="Offer">
+
+                                <div class="creator-section-label">
+                                    Offer Preview
+                                </div>
+
+                                <div class="scratcher-preview">
+
+                                    <div class="scratcher-hero-image-container" fxFlex="150px;">
+                                        <app-file-uploader
+                                            [config]="heroOfferImageConfig"
+                                            [fileExists]="heroOfferImageExists"
+                                            [lastModified]="heroOfferImageModified"
+                                            (onUpload)="heroOfferImageExists = $event"
+                                            (onChange)="heroOfferImageModified = $event">
+                                        </app-file-uploader>
+                                    </div>
+
+                                    <div class="scratcher-body" fxFlex="300px;">
+
+                                        <h3 class="scratcher-heading">{{ content.display_name }}</h3>
+
+                                        <small>from Payless Shoes</small>
+
+                                        <p>{{ content.description }}</p>
+
+                                    </div>
+
+                                </div>
+
+                            </md-tab>
+
+                        </md-tab-group>
+
+                        <div *ngIf="!scratcherEnabled">
+                            <div fxFlex="49px;"></div>
+
+                            <div class="creator-section-label">
+                                Offer Preview
+                            </div>
+
+                            <div class="scratcher-preview">
+
+                                <div class="scratcher-hero-image-container" fxFlex="150px;">
+                                    <app-file-uploader
+                                        [config]="heroOfferImageConfig"
+                                        [fileExists]="heroOfferImageExists"
+                                        [lastModified]="heroOfferImageModified"
+                                        (onUpload)="heroOfferImageExists = $event"
+                                        (onChange)="heroOfferImageModified = $event">
+                                    </app-file-uploader>
+                                </div>
+
+                                <div class="scratcher-body" fxFlex="300px;">
+
+                                    <h3 class="scratcher-heading">{{ content.display_name }}</h3>
+
+                                    <small>from Payless Shoes</small>
+
+                                    <p>{{ content.description }}</p>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="creator-section-label" *ngIf="contentType !== 'message'">
+                            Wallet Item Preview
+                        </div>
+                        <div fxLayout="row" class="wallet-preview" *ngIf="contentType !== 'message'">
+                            <div class="wallet-image-container">
+                                <app-file-uploader
+                                    [config]="walletImageConfig">
+                                </app-file-uploader>
+                            </div>
+                            <div class="wallet-body-container" fxLayout="column">
+                                <h3 class="wallet-heading" fxFlex="50">{{ content.display_name }}</h3>
+                                <div class="wallet-expiration" fxFlex="50">
+                                    Use by {{ content.end_at | date }}
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div fxLayoutAlign="end" fxFlex="100" *ngIf="contentType">
+            <button type="submit" class="common-form-submit" md-raised-button color="primary">Create</button>
+        </div>
+
+    </form>
+
+</md-card>

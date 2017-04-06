@@ -23,7 +23,9 @@ export class CampaignCreatorFormComponent implements OnInit {
         this.campaign.status = event ? 1 : 0;
     }
 
-    public submitForm () {
+    public submitForm (form) {
+        if (!form.valid) { return; }
+
         var obj = JSON.parse(JSON.stringify(this.campaign));
         obj.start_at = this.dateUtils.formatSQLDate(obj.start_at);
         obj.end_at = this.dateUtils.formatSQLDate(obj.end_at);

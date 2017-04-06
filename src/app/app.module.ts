@@ -1,7 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { MaterialModule } from '@angular/material';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpModule, Http, Headers, RequestOptions } from '@angular/http';
+import 'hammerjs';
 import * as moment from 'moment/moment.d';
 
 import { AppComponent } from './app.component';
@@ -23,6 +27,7 @@ import { ContentOverviewComponent } from './content/content-overview/content-ove
 
 import { TriggersComponent } from './triggers/triggers-component/triggers.component';
 import { TriggerCreatorComponent } from './triggers/trigger-creator/trigger-creator.component';
+import { TriggerCreatorFormComponent } from './triggers/trigger-creator/trigger-creator-form.component';
 import { TriggersOverviewComponent } from './triggers/triggers-overview/triggers-overview.component';
 
 import { AuthCustomHttpService } from './auth/auth-custom-http.service';
@@ -30,9 +35,12 @@ import { CampaignApiService } from './campaigns/shared/campaign-api.service';
 import { ContentApiService } from './content/shared/content-api.service';
 import { TriggerApiService } from './triggers/shared/trigger-api.service';
 import { UserApiService } from './users/shared/user-api.service';
+import { AppNavigationComponent } from './app-navigation/app-navigation.component';
 
 import { DateUtilsService } from './shared/date-utils.service';
-import { TriggerCreatorFormComponent } from './triggers/trigger-creator/trigger-creator-form.component';
+import { UuidApiService } from './shared/uuid-api.service';
+import { FilestackService } from './shared/filestack.service';
+import { FileUploaderComponent } from './shared/file-uploader/file-uploader.component';
 
 @NgModule({
     declarations: [
@@ -51,21 +59,28 @@ import { TriggerCreatorFormComponent } from './triggers/trigger-creator/trigger-
         TriggersComponent,
         TriggerCreatorComponent,
         TriggersOverviewComponent,
-        TriggerCreatorFormComponent
+        TriggerCreatorFormComponent,
+        AppNavigationComponent,
+        FileUploaderComponent
     ],
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         FormsModule,
         HttpModule,
+        MaterialModule.forRoot(),
+        FlexLayoutModule,
         AppRoutingModule
     ],
     providers: [
         AuthCustomHttpService,
         ContentApiService,
+        FilestackService,
         CampaignApiService,
         DateUtilsService,
         TriggerApiService,
-        UserApiService
+        UserApiService,
+        UuidApiService
     ],
     bootstrap: [AppComponent]
 })

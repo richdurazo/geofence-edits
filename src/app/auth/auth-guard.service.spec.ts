@@ -1,11 +1,13 @@
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async, inject } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { AuthGuardService } from './auth-guard.service';
 
 import { AuthService } from '../auth/auth.service';
 import { AuthMockService } from '../mocks/auth/auth-mock.service';
+
 import { RouterModule, Router, RouterStateSnapshot } from '@angular/router';
 import { RouterMockService } from '../mocks/router/router-mock.service';
 import { RouterStateSnapshotMock } from '../mocks/router/router-state-snapshot-mock.service';
@@ -18,6 +20,7 @@ let state;
 describe('AuthGuardService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [RouterTestingModule],
       providers: [
         AuthGuardService,
         {provide: AuthService, useClass: AuthMockService },
@@ -48,14 +51,14 @@ describe('AuthGuardService', () => {
 
     it ('should return false if the AuthService.loggedIn() returns false', () => {
       spyOn(authService, 'loggedIn').and.returnValue(false);
-      spyOn(authService, 'setUrl');
+      spyOn(authService, 'setUrl').and.returnValue(false);
       expect(authGuardService.canActivate()).toEqual(false);
     });
 
     it ('should call setUrl on the AuthService with the RouterStateSnapshot url value if AuthService.loggedIn() returns false', () => {
+      router.snapshot.url = '/url';
       spyOn(authService, 'loggedIn').and.returnValue(false);
-      spyOn(authService, 'setUrl');
-      state.url = '/url';
+      spyOn(authService, 'setUrl').and.returnValue(false);
       authGuardService.canActivate();
       expect(authService.setUrl).toHaveBeenCalledWith('/url');
     });

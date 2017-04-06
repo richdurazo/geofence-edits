@@ -1,18 +1,109 @@
-<form>
-    <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text" name="name" class="form-control" [(ngModel)]="trigger.name"/>
-    </div>
+<md-card fxFlex="96" fxFlexOffset="2">
 
-    <div class="form-group">
-        <label for="value">Trigger Value</label>
-        <input type="text" name="value" class="form-control" [(ngModel)]="trigger.value"/>
-    </div>
+    <form #form="ngForm" (ngSubmit)="submitForm(form)" novalidate fxLayout="column">
 
-    <div class="form-group">
-        <label for="campaign_id">Campaign Id</label>
-        <input type="text" name="campaign_id" class="form-control" [(ngModel)]="trigger.campaign_id">
-    </div>
+        <div fxLayout="row">
 
-    <button type="submit" class="btn btn-primary" name="submit" (click)="submitForm()">Submit</button>
-</form>
+            <div fxLayout="column" fxFlex="55">
+
+                <div>
+                    <md-select
+                    placeholder="Type"
+                    name="type"
+                    [ngModel]="triggerType"
+                    (ngModelChange)="setType($event)">
+                        <md-option *ngFor="let type of triggerTypes" [value]="type.value">
+                            {{ type.viewValue }}
+                        </md-option>
+                    </md-select>
+
+                    <p *ngIf="!triggerType">
+                        To get started, please select a type.
+                    </p>
+                </div>
+
+                <div *ngIf="triggerType">
+
+                    <div fxLayout="row">
+                        <md-input-container fxFlex="50">
+                            <input
+                            mdInput
+                            name="name"
+                            type="text"
+                            placeholder="Name"
+                            required
+                            [(ngModel)]="trigger.name"
+                            #name="ngModel">
+
+                            <md-hint align="start">
+                                <div  *ngIf="form.submitted && name.errors !== null && name.errors.required">
+                                    Please add a name
+                                </div>
+                            </md-hint>
+                        </md-input-container>
+                    </div>
+
+                    <div fxLayout="row">
+                        <md-input-container fxFlex="60">
+                            <input
+                            mdInput
+                            name="notes"
+                            type="text"
+                            placeholder="Notes"
+                            [(ngModel)]="trigger.notes"
+                            #notes="ngModel">
+                        </md-input-container>
+                    </div>
+
+                    <div fxLayout="row" *ngIf="triggerType === 'watermark' || triggerType === 'touch'">
+                        <md-input-container fxFlex="60">
+                            <input
+                            mdInput
+                            name="value"
+                            type="text"
+                            placeholder="Value"
+                            required
+                            disabled
+                            [(ngModel)]="trigger.value"
+                            #value="ngModel">
+
+                            <md-hint align="start">
+                                <div  *ngIf="form.submitted && value.errors !== null && value.errors.required">
+                                    Please add a value
+                                </div>
+                            </md-hint>
+                        </md-input-container>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+            <div class="right-column" fxFlex="45">
+
+                <div class="media-container" *ngIf="triggerType === 'watermark' || triggerType === 'fingerprint'">
+                    <div class="creator-section-label">
+                        Media
+                    </div>
+
+                    <div class="media-upload-container">
+                        <app-file-uploader
+                        [fileExists]="triggerMediaExists"
+                        [config]="triggerMediaConfig"
+                        (onUpload)="triggerMediaExists = $event">
+                        </app-file-uploader>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div fxLayoutAlign="end" fxFlex="100">
+            <button type="submit" class="common-form-submit" md-raised-button color="primary">Create</button>
+        </div>
+
+    </form>
+
+</md-card>

@@ -1,3 +1,4 @@
+import {} from 'jasmine';
 import { TestBed, async, inject } from '@angular/core/testing';
 import { BaseRequestOptions, Response, ResponseOptions, Http } from '@angular/http';
 import { Observable } from "rxjs/Rx";
@@ -39,7 +40,7 @@ describe('UserApiService', () => {
       spyOn(authHttp, 'get').and.returnValue(Observable.of(response));
       service.getUser()
       .subscribe( data => {
-          expect(authHttp.get).toHaveBeenCalledWith('http://api.app/index');
+          expect(authHttp.get).toHaveBeenCalledWith('http://api.app/user');
           expect(data).toEqual([{foo:'bar'}, {hay: 'guyz'}]);
       });
     });

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterModule, Router } from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 import { AuthService } from '../auth/auth.service';
 
@@ -16,16 +17,16 @@ class Credentials {
 export class LoginComponent implements OnInit {
 
     invalid_credentials: boolean;
-    credentials: Credentials;
+    credentials = new Credentials('', '');
 
     constructor (private authService: AuthService, private router: Router) {}
 
     ngOnInit () {
         this.invalid_credentials = false;
-        this.credentials = new Credentials('', '');
     }
 
     login (form) {
+        console.log('this.credentials', this.credentials);
         if (!form.valid) { return false; }
         this.authService.login(this.credentials, this.processSuccess.bind(this), this.processError.bind(this));
     }

@@ -10,7 +10,7 @@ export class UserApiService {
   constructor(private authCustomHttp: AuthCustomHttpService) { }
 
   getUser () {
-      return this.authCustomHttp.get(AppSettings.API_ROOT + '/index')
+      return this.authCustomHttp.get(AppSettings.API_ROOT + '/user')
       .map(res => res.json())
   }
 

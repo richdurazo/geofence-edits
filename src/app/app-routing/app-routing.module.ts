@@ -5,6 +5,8 @@ import { AuthHttp, AuthConfig } from 'angular2-jwt';
 
 import { AppComponent } from '../app.component';
 
+import { AppNavigationComponent } from '../app-navigation/app-navigation.component';
+
 import { CampaignsComponent } from '../campaigns/campaigns-component/campaigns.component';
 import { CampaignCreatorComponent } from '../campaigns/campaign-creator/campaign-creator.component';
 import { CampaignsOverviewComponent } from '../campaigns/campaigns-overview/campaigns-overview.component';
@@ -29,7 +31,6 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     return new AuthHttp(new AuthConfig({
         tokenName: 'Authorization',
         tokenGetter: (() => localStorage.getItem('id_token')),
-        // globalHeaders: [{'Content-Type':'application/json'}, {'Access-Control-Allow-Origin': 'GET, POST, PUT, DELETE'}, {'Access-Control-Allow-Origin': '*'}],
     }), http, options);
 }
 
@@ -39,64 +40,66 @@ const appRoutes: Routes = [
         component: LoginComponent
     },
     {
-        path: 'overview',
-        component: OverviewComponent,
-        canActivate: [AuthGuardService]
-    },
-    {
-        path: 'campaigns',
-        component: CampaignsComponent,
-        canActivate: [AuthGuardService],
-        children: [
-            {
-                path: '',
-                component: CampaignsOverviewComponent
-            },
-            {
-                path: 'create',
-                component: CampaignCreatorComponent
-            }
-        ]
-    },
-    {
-        path: 'content',
-        component: ContentComponent,
-        canActivate: [AuthGuardService],
-        children: [
-            {
-                path: '',
-                component: ContentOverviewComponent
-            },
-            {
-                path: 'create',
-                component: ContentCreatorComponent
-            }
-        ]
-    },
-    {
-        path: 'triggers',
-        component: TriggersComponent,
-        canActivate: [AuthGuardService],
-        children: [
-            {
-                path: '',
-                component: TriggersOverviewComponent
-            },
-            {
-                path: 'create',
-                component: TriggerCreatorComponent
-            }
-        ]
-    },
-    {
         path: '',
-        redirectTo: '/login',
-        pathMatch: 'full'
-    },
-    {
-        path: '**',
-        component: PageNotFoundComponent,
-        canActivate: [AuthGuardService]
+        component: AppNavigationComponent,
+        canActivate: [AuthGuardService],
+        children: [
+            {
+                path: 'overview',
+                component: OverviewComponent,
+            },
+            {
+                path: 'campaigns',
+                component: CampaignsComponent,
+                children: [
+                    {
+                        path: '',
+                        component: CampaignsOverviewComponent
+                    },
+                    {
+                        path: 'create',
+                        component: CampaignCreatorComponent
+                    }
+                ]
+            },
+            {
+                path: 'content',
+                component: ContentComponent,
+                children: [
+                    {
+                        path: '',
+                        component: ContentOverviewComponent
+                    },
+                    {
+                        path: 'create',
+                        component: ContentCreatorComponent
+                    }
+                ]
+            },
+            {
+                path: 'triggers',
+                component: TriggersComponent,
+                children: [
+                    {
+                        path: '',
+                        component: TriggersOverviewComponent
+                    },
+                    {
+                        path: 'create',
+                        component: TriggerCreatorComponent
+                    }
+                ]
+            },
+            {
+                path: '',
+                redirectTo: '/login',
+                pathMatch: 'full'
+            },
+            {
+                path: '**',
+                component: PageNotFoundComponent,
+            }
+        ]
     }
 ];
 

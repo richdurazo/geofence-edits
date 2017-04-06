@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Observable } from "rxjs/Rx";
 
@@ -19,6 +20,9 @@ describe('ContentCreatorFormComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ ContentCreatorFormComponent ],
+      schemas: [
+          CUSTOM_ELEMENTS_SCHEMA
+      ],
       providers: [
         { provide: ContentApiService, useClass: ContentApiMockService },
         { provide: DateUtilsService, useClass: DateUtilsMockService }
@@ -69,7 +73,7 @@ describe('ContentCreatorFormComponent', () => {
         expect(dateUtils.formatSQLDate).not.toHaveBeenCalled();
         expect(contentApi.createContent).not.toHaveBeenCalled();
         expect(component.processSuccess).not.toHaveBeenCalled();
-        component.submitForm();
+        component.submitForm({valid: true});
         expect(dateUtils.formatSQLDate).toHaveBeenCalled();
         expect(contentApi.createContent).toHaveBeenCalledWith({ name: '', description: '', start_at: 'foo', end_at: 'foo' });
         expect(component.processSuccess).toHaveBeenCalledWith({ foo: 'bar' });

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { DateUtilsService } from '../../shared/date-utils.service';
+import { FilestackService } from '../../shared/filestack.service';
+import { UuidApiService } from '../../shared/uuid-api.service';
 import { ContentApiService } from '../shared/content-api.service';
 import { ContentModel } from '../shared/content.model';
 
@@ -13,13 +15,150 @@ export class ContentCreatorFormComponent implements OnInit {
 
     content: ContentModel;
 
-    constructor (private contentApi: ContentApiService, private dateUtils: DateUtilsService) {}
+    contentTypes: [
+        {
+            value: "offer",
+            viewValue: "Offer"
+        },
+        {
+            value: "prize",
+            viewValue: "Prize"
+        },
+        {
+            value: "message",
+            viewValue: "Message"
+        }
+    ];
+
+    redemptionFormats: [
+        {
+            value: "format1",
+            viewValue: "Format 1"
+        },
+        {
+            value: "format2",
+            viewValue: "Format 2"
+        },
+        {
+            value: "format3",
+            viewValue: "Format 3"
+        }
+    ]
+
+    redemptionMethods: [
+        {
+            value: "online",
+            viewValue: "Online"
+        },
+        {
+            value: "store",
+            viewValue: "In Store"
+        },
+        {
+            value: "both",
+            viewValue: "Online & In Store"
+        }
+    ];
+
+    contentType: string;
+
+    contentUuid: string;
+
+    scratcherEnabled: boolean;
+
+    limitEnabled: boolean;
+
+    redemptionFormat: string;
+
+    heroOfferImageConfig: any;
+
+    heroOfferImageExists: boolean = false;
+
+    heroOfferImageModified: number;
+
+    heroScratcherImageExists: boolean = false;
+
+    heroScratcherImageConfig: any;
+
+    overlayScratcherImageExists: boolean = false;
+
+    overlayScratcherImageConfig: any;
+
+    walletImageConfig: any;
+
+    constructor (
+        private contentApi: ContentApiService,
+        private uuidApi: UuidApiService,
+        private filestack: FilestackService,
+        private dateUtils: DateUtilsService
+    ) {}
 
     ngOnInit() {
-        this.setModelDefaults();
+        this.fetchUuid();
+        this.contentTypes = [
+            {
+                value: "offer",
+                viewValue: "Offer"
+            },
+            {
+                value: "prize",
+                viewValue: "Prize"
+            },
+            {
+                value: "message",
+                viewValue: "Message"
+            }
+        ];
+
+        this.redemptionMethods = [
+            {
+                value: "online",
+                viewValue: "Online"
+            },
+            {
+                value: "store",
+                viewValue: "In Store"
+            },
+            {
+                value: "both",
+                viewValue: "Online & In Store"
+            }
+        ];
+
+        this.redemptionFormats = [
+            {
+                value: "format1",
+                viewValue: "Format 1"
+            },
+            {
+                value: "format2",
+                viewValue: "Format 2"
+            },
+            {
+                value: "format3",
+                viewValue: "Format 3"
+            }
+        ];
     }
 
-    public submitForm () {
+    modified (event) {
+        console.log('event', event);
+    }
+
+    public setDate (key, event) {
+        console.log('key, event', key, event);
+        this.content[key] = new Date(event);
+    }
+
+    public setType (event) {
+        console.log('setType event', event);
+        this.contentType = event;
+        this.setModelDefaults(this.contentType);
+    }
+
+    public submitForm (form) {
+        console.log('submitForm this.content', this.content);
+        if (!form.valid) { return; }
         var obj = JSON.parse(JSON.stringify(this.content));
         obj.start_at = this.dateUtils.formatSQLDate(obj.start_at);
         obj.end_at = this.dateUtils.formatSQLDate(obj.end_at);
@@ -33,13 +172,26 @@ export class ContentCreatorFormComponent implements OnInit {
         console.log('saved content data', data);
     }
 
+    private fetchUuid () {
+        this.uuidApi.fetchUuid()
+        .subscribe(
+            data => {
+                this.contentUuid = data.uuid;
+                this.setImageConfig();
+            }
+        )
+    }
 
-    private setModelDefaults () {
-        this.content = new ContentModel();
-        this.content.name = '';
-        this.content.description = '';
-        this.content.start_at = new Date();
-        this.content.end_at = new Date();
+    private setImageConfig () {
+        this.heroOfferImageConfig = this.filestack.createImageConfig('hero-offer', this.contentUuid, 2/1);
+        this.heroScratcherImageConfig = this.filestack.createImageConfig('hero-scratcher', this.contentUuid, 2/1);
+        this.overlayScratcherImageConfig = this.filestack.createImageConfig('overlay-scratcher', this.contentUuid, 9/10);
+        this.walletImageConfig = this.filestack.createImageConfig('wallet', this.contentUuid, 1/1);
+    }
+
+    private setModelDefaults (type: string) {
+        this.content = new ContentModel(this.contentUuid, type, '', '', '', new Date(), new Date());
+        console.log('this.content', this.content);
     }
 
 }

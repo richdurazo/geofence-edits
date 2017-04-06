@@ -1,11 +1,323 @@
 /* You can add global styles to this file, and also import other style files */
-@import "node_modules/bootstrap/scss/bootstrap";
-@import "themes/thing";
+@import '~@angular/material/core/theming/all-theme';
+
+// COLOR VARIABLES
+$light-grey: #F9F9F9;
+$dark-grey: #F4F4F4;
+$light-steel: #495765;
+$dark-steel: #2B3A49;
+$light-blue: #4691DB;
+$dark-blue: #1976D2;
+
+// Include non-theme styles for core.
+@include mat-core();
+
+// Define a theme.
+$primary: mat-palette($mat-indigo);
+$accent:  mat-palette($mat-amber, A200, A100, A400);
+$warn:  mat-palette($mat-red, A200, A100, A400);
+
+$theme: mat-light-theme($primary, $accent, $warn);
+
+// Include all theme styles for the components.
+@include angular-material-theme($theme);
+
+// COLORS
+$primary-text-color: $light-steel;
+$body-background-color: $dark-grey;
+$toolbar-background-color: $light-grey;
+$nav-background-base-color: $light-steel;
+$nav-background-dark-color: $dark-steel;
+$nav-text-color: $dark-grey;
+
+// PIXEL VALUES
+$common-margin: 20px;
+$common-font-size: 13px;
+$small-font-size: 11px;
 
 body {
 
-    nav {
-        margin-bottom: 10px;
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+    font-size: $common-font-size;
+    font-weight: 400;
+    color: $primary-text-color;
+
+    .mat-sidenav-container {
+        background-color: $body-background-color;
+
+        .mat-sidenav-content > .containerX {
+            max-width: 1150px;
+            min-width: 525px;
+            padding-bottom: 30px;
+        }
     }
+
+    .mat-raised-button {
+        line-height: 45px;
+        padding: 0 45px;
+    }
+
+    .mat-card {
+        color: $primary-text-color;
+    }
+
+    .creator-form-card {
+        padding-right: 80px;
+        padding-left: 40px;
+
+        .mat-raised-button.common-form-submit {
+            margin-bottom: 10px;
+        }
+    }
+
+    // COMMON UTILITIES
+    .relative {
+        position: relative;
+    }
+
+    .color-primary {
+        color: mat-color($primary);
+    }
+
+    .page-heading {
+        font-size: 22px;
+        font-weight: 400;
+    }
+
+    // INPUTS
+    .mat-input-container {
+        margin-bottom: 15px;
+    }
+
+    textarea.mat-input-element {
+        min-height: 47px;
+    }
+
+    .mat-select {
+        margin-bottom: $common-margin;
+        margin-top: 8px;
+
+        .mat-select-trigger {
+            font-size: $common-font-size;
+            height: 25px;
+        }
+
+        .mat-select-placeholder.mat-floating-placeholder {
+            top: -16px;
+        }
+    }
+
+    // FORMS
+    .form-highlight-well {
+        background-color: $light-grey;
+        margin-left: -$common-margin;
+        margin-right: -$common-margin;
+        margin-bottom: $common-margin;
+        margin-top: $common-margin;
+        padding-left: $common-margin;
+        padding-right: $common-margin;
+        padding-top: $common-margin;
+    }
+
+    // COMMON TOOLBAR
+    md-toolbar.mat-toolbar {
+        margin-bottom: $common-margin;
+        background-color: $toolbar-background-color;
+
+        .mat-toolbar-row {
+            color: $primary-text-color;
+        }
+    }
+
+    // SIDENAV
+    md-sidenav.mat-sidenav {
+        background-color: $nav-background-base-color;
+        width: 272px;
+
+        .mat-nav-list {
+            padding-top: 0;
+        }
+
+        .mat-list-item > .mat-list-item-content {
+            color: $nav-text-color;
+            font-size: $common-font-size;
+            padding-left: 50px;
+
+            .mat-icon {
+                margin-right: $common-margin;
+            }
+        }
+
+        .app-sidenav-list-header {
+            height: 64px;
+            background-color: $nav-background-dark-color;
+            margin-bottom: 40px;
+        }
+
+        .router-link.active {
+            .mat-list-item {
+                background-color: mat-color($primary);
+            }
+        }
+
+        .router-sub-link.active {
+            .mat-list-item {
+                background-color: lighten(mat-color($primary), 5);
+            }
+        }
+    }
+
+
+    // UPLOADER
+    .common-uploader {
+        width: 100%;
+        height: 100%;
+
+        .uploader-preview, .uploader-zone {
+            width: 100%;
+            height: 100%;
+
+            &:hover {
+                cursor: pointer;
+            }
+
+            img {
+                height: 100%;
+                width: 100%;
+            }
+        }
+
+        .uploader-zone {
+            background-color: $dark-grey;
+            border: 1px dashed darken($dark-grey, 15);
+
+            .uploader-text {
+                color: darken($dark-grey, 15);
+                text-align: center;
+            }
+        }
+    }
+
+    // CONTENT CREATOR
+    .creator-section-label {
+        font-size: $small-font-size;
+        margin-bottom: 10px;
+        margin-top: $common-margin;
+    }
+
+    .scratcher-toggle-container {
+        margin-top: 48px;
+        padding-left: 15px;
+
+        .scratcher-toggle {
+            .mat-slide-toggle {
+                margin-top: 0;
+            }
+        }
+    }
+
+    .right-column {
+        width: 300px;
+
+        .mat-tab-label {
+            min-width: 0;
+            width: 33%;
+            font-size: $small-font-size;
+        }
+
+        .media-upload-container {
+            height: 183px;
+            width: 325px;
+            margin-bottom: $common-margin;
+        }
+
+        .scratcher-preview {
+            background-color: $light-grey;
+            width: 300px;
+            height: 450px;
+            margin-bottom: 20px;
+
+            .scratcher-hero-image-container {
+                height: 150px;
+                width: 100%;
+            }
+
+            .scratcher-overlay-body-container {
+                height: 300px;
+                width: 100%;
+
+                .uploader-zone {
+                    background-image: url('/assets/images/scratch_overlay.png');
+                    background-position: center center;
+                    background-size: cover;
+                    border: none;
+
+                    .uploader-text {
+                        opacity: 0;
+                        transition: opacity .5s linear;
+                        color: $dark-steel;
+                    }
+
+                    &:hover {
+                        cursor: pointer;
+
+                        .uploader-text {
+                            opacity: 1;
+                            transition: opacity .5s linear;
+                            color: $dark-steel;
+                        }
+                    }
+                }
+            }
+
+            .scratcher-body {
+                padding: 15px;
+
+                .scratcher-heading {
+                    font-weight: 400;
+                    margin: 0;
+
+                    &.center {
+                        text-align: center;
+                    }
+                }
+            }
+        }
+
+        .wallet-preview {
+            background-color: $light-grey;
+            width: 300px;
+            height: 55px;
+            margin-bottom: 20px;
+
+            .wallet-image-container {
+                height: 55px;
+                width: 55px;
+
+                .uploader-text {
+                    font-size: 10px;
+                }
+            }
+
+            .wallet-body-container {
+                max-width: 245px;
+                height: 100%;
+
+                .wallet-heading {
+                    font-weight: 600;
+                    font-size: $small-font-size;
+                    margin: 5px;
+                    word-wrap: break-word;
+                }
+
+                .wallet-expiration {
+                    font-size: 9px;
+                    margin-left: 5px;
+                }
+            }
+        }
+    }
+
+
 
 }

@@ -80,7 +80,21 @@
 
             </div>
 
-            <div fxFlex="45">
+            <div class="right-column" fxFlex="45">
+
+                <div class="media-container" *ngIf="triggerType === 'watermark' || triggerType === 'fingerprint'">
+                    <div class="creator-section-label">
+                        Media
+                    </div>
+
+                    <div class="media-upload-container">
+                        <app-file-uploader
+                        [fileExists]="triggerMediaExists"
+                        [config]="triggerMediaConfig"
+                        (onUpload)="triggerMediaExists = $event">
+                        </app-file-uploader>
+                    </div>
+                </div>
 
             </div>
 

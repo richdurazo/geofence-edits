@@ -20,10 +20,11 @@ export class FilestackService {
     // NOTE: Force crop isn't quite ready just yet in the v3 picker,
     // it should be ready before this needs to be in production,
     // if not we can roll back to v2
-    public createConfig (type, uuid, ratio) {
+    public createImageConfig (key, uuid, ratio) {
         return {
-            type: type,
+            key: key,
             uuid: uuid,
+            type: 'image',
             pickerOptions: {
                 accept: 'image/*',
                 maxFiles: 1,
@@ -33,7 +34,7 @@ export class FilestackService {
                     container: 'garythebucket',
                     region: 'us-west-1',
                     access: 'public',
-                    path: this.generateSaveFilePath(uuid, type)
+                    path: this.generateSaveFilePath(uuid, key, 'image')
                 },
                 transformOptions: {
                     transformations: {
@@ -46,8 +47,36 @@ export class FilestackService {
         };
     }
 
-    public generateSaveFilePath (uuid, type) {
-        return '/' + uuid[0] + '/' + uuid[1] + '/' + uuid + '/image/' + type + '.jpg';
+    public createMediaConfig (key, uuid) {
+        return {
+            key: key,
+            uuid: uuid,
+            type: 'video',
+            pickerOptions: {
+                accept: 'video/mp4',
+                maxFiles: 1,
+                uploadInBackground: false,
+                storeTo: {
+                    location: 's3',
+                    container: 'garythebucket',
+                    region: 'us-west-1',
+                    access: 'public',
+                    path: this.generateSaveFilePath(uuid, key, 'video')
+                }
+            }
+        };
+    }
+
+
+    public generateSaveFilePath (uuid, key, type) {
+        let ext;
+        if (type === 'image') {
+            ext = '.jpg'
+        } else {
+            ext = '.mp4'
+        }
+
+        return '/' + uuid[0] + '/' + uuid[1] + '/' + uuid + '/' + type + '/' + key + ext;
     }
 
 }

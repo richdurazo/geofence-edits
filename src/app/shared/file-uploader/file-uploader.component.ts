@@ -16,7 +16,7 @@ export class FileUploaderComponent implements OnInit {
 
     @Input() config: any;
 
-    @Input()  imageExists: boolean;
+    @Input()  fileExists: boolean;
 
     @Output() onUpload = new EventEmitter<boolean>();
 
@@ -27,17 +27,17 @@ export class FileUploaderComponent implements OnInit {
     constructor ( private filestack: FilestackService ) {}
 
     ngOnInit () {
-        this.mediaPath = this.config.pickerOptions.storeTo.container + this.filestack.generateSaveFilePath(this.config.uuid, this.config.type);
-        console.log('imageExists', this.imageExists);
+        this.mediaPath = this.config.pickerOptions.storeTo.container + this.filestack.generateSaveFilePath(this.config.uuid, this.config.key, this.config.type);
+        console.log('fileExists', this.fileExists);
     }
 
     showUploader () {
         console.log('this.config', this.config);
         this.filestack.pick(this.config.pickerOptions).then((results) => {
             console.log('results', results);
-            this.imageExists = !!results.filesUploaded[0];
+            this.fileExists = !!results.filesUploaded[0];
             this.lastModified = new Date().getTime();
-            this.onUpload.emit(this.imageExists);
+            this.onUpload.emit(this.fileExists);
             this.onChange.emit(this.lastModified);
         });
     }

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+
+import { FilestackService } from '../../shared/filestack.service';
+import { UuidApiService } from '../../shared/uuid-api.service';
 import { TriggerApiService } from '../shared/trigger-api.service';
 import { TriggerModel } from '../shared/trigger.model';
 
@@ -10,6 +13,10 @@ import { TriggerModel } from '../shared/trigger.model';
 export class TriggerCreatorFormComponent implements OnInit {
 
     trigger: TriggerModel;
+
+    triggerMediaConfig: any;
+
+    triggerMediaExists: boolean = false;
 
     triggerType: string;
 
@@ -32,9 +39,13 @@ export class TriggerCreatorFormComponent implements OnInit {
         }
     ];
 
-    constructor(private triggerApi: TriggerApiService) { }
+    triggerUuid: string;
+
+    constructor(private uuidApi: UuidApiService, private triggerApi: TriggerApiService, private filestack: FilestackService) { }
 
     ngOnInit() {
+        this.fetchUuid();
+
         this.triggerTypes = [
             {
                 value: "touch",
@@ -53,7 +64,16 @@ export class TriggerCreatorFormComponent implements OnInit {
                 viewValue: "Beacon"
             }
         ];
+    }
 
+    private fetchUuid () {
+        this.uuidApi.fetchUuid()
+        .subscribe(
+            data => {
+                this.triggerUuid = data.uuid;
+                this.triggerMediaConfig = this.filestack.createMediaConfig('audio-trigger', this.triggerUuid);
+            }
+        )
     }
 
     public submitForm (form) {

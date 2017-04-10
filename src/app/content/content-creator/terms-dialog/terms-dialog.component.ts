@@ -22,7 +22,6 @@ export class TermsDialogComponent implements OnInit {
 
   public submitForm (form) {
       if (form.valid) {
-          console.log('this.data.terms', this.data.terms);
           this.dialogRef.close(this.data.terms);
       }
   }

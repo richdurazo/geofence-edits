@@ -453,6 +453,17 @@
                             </div>
                         </div>
 
+                        <div fxLayout="row" *ngIf="contentType !== 'message'">
+                            <button
+                                fxFlex="100"
+                                type="button"
+                                name="button"
+                                md-raised-button
+                                (click)="launchTerms()">
+                                Terms and Conditions
+                            </button>
+                        </div>
+
                     </div>
                 </div>
 
@@ -461,7 +472,13 @@
         </div>
 
         <div fxLayoutAlign="end" fxFlex="100" *ngIf="contentType">
-            <button type="submit" class="common-form-submit" md-raised-button color="primary">Create</button>
+            <button
+                type="submit"
+                class="common-form-submit"
+                md-raised-button
+                color="primary">
+                Create
+            </button>
         </div>
 
     </form>

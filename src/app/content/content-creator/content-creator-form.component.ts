@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {MdDialog} from '@angular/material';
+
+import { TermsDialogComponent } from './terms-dialog/terms-dialog.component';
 
 import { DateUtilsService } from '../../shared/date-utils.service';
 import { FilestackService } from '../../shared/filestack.service';
@@ -90,7 +93,8 @@ export class ContentCreatorFormComponent implements OnInit {
         private contentApi: ContentApiService,
         private uuidApi: UuidApiService,
         private filestack: FilestackService,
-        private dateUtils: DateUtilsService
+        private dateUtils: DateUtilsService,
+        private dialog: MdDialog
     ) {}
 
     ngOnInit() {
@@ -141,7 +145,18 @@ export class ContentCreatorFormComponent implements OnInit {
         ];
     }
 
-    modified (event) {
+    public launchTerms () {
+        let config = {
+            data: this.content.terms || ''
+        };
+        let dialogRef = this.dialog.open(TermsDialogComponent, config);
+        dialogRef.afterClosed().subscribe(result => {
+            console.log('terms result', result);
+            this.content.terms = result;
+        });
+    }
+
+    public modified (event) {
         console.log('event', event);
     }
 

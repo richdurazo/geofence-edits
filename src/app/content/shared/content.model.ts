@@ -8,6 +8,7 @@ export class ContentModel {
     quantity: number;
     start_at: Date;
     end_at: Date;
+    terms: string;
 
     constructor (
         uuid: string,

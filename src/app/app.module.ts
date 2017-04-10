@@ -41,6 +41,7 @@ import { DateUtilsService } from './shared/date-utils.service';
 import { UuidApiService } from './shared/uuid-api.service';
 import { FilestackService } from './shared/filestack.service';
 import { FileUploaderComponent } from './shared/file-uploader/file-uploader.component';
+import { TermsDialogComponent } from './content/content-creator/terms-dialog/terms-dialog.component';
 
 @NgModule({
     declarations: [
@@ -61,7 +62,8 @@ import { FileUploaderComponent } from './shared/file-uploader/file-uploader.comp
         TriggersOverviewComponent,
         TriggerCreatorFormComponent,
         AppNavigationComponent,
-        FileUploaderComponent
+        FileUploaderComponent,
+        TermsDialogComponent
     ],
     imports: [
         BrowserModule,
@@ -81,6 +83,9 @@ import { FileUploaderComponent } from './shared/file-uploader/file-uploader.comp
         TriggerApiService,
         UserApiService,
         UuidApiService
+    ],
+    entryComponents: [
+        TermsDialogComponent
     ],
     bootstrap: [AppComponent]
 })

@@ -16,6 +16,7 @@ import { OverviewComponent } from './overview/overview.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 import { CampaignsComponent } from './campaigns/campaigns-component/campaigns.component';
+import { CampaignsListComponent } from './campaigns/campaigns-overview/campaigns-list/campaigns-list.component';
 import { CampaignsOverviewComponent } from './campaigns/campaigns-overview/campaigns-overview.component';
 import { CampaignCreatorComponent } from './campaigns/campaign-creator/campaign-creator.component';
 import { CampaignCreatorFormComponent } from './campaigns/campaign-creator/campaign-creator-form.component';
@@ -24,6 +25,7 @@ import { ContentComponent } from './content/content-component/content.component'
 import { ContentCreatorComponent } from './content/content-creator/content-creator.component';
 import { ContentCreatorFormComponent } from './content/content-creator/content-creator-form.component';
 import { ContentOverviewComponent } from './content/content-overview/content-overview.component';
+import { TermsDialogComponent } from './content/content-creator/terms-dialog/terms-dialog.component';
 
 import { TriggersComponent } from './triggers/triggers-component/triggers.component';
 import { TriggerCreatorComponent } from './triggers/trigger-creator/trigger-creator.component';
@@ -41,7 +43,6 @@ import { DateUtilsService } from './shared/date-utils.service';
 import { UuidApiService } from './shared/uuid-api.service';
 import { FilestackService } from './shared/filestack.service';
 import { FileUploaderComponent } from './shared/file-uploader/file-uploader.component';
-import { CampaignsListComponent } from './campaigns/campaigns-overview/campaigns-list/campaigns-list.component';
 import { SortableListComponent } from './shared/sortable-list/sortable-list.component';
 
 @NgModule({
@@ -65,7 +66,8 @@ import { SortableListComponent } from './shared/sortable-list/sortable-list.comp
         AppNavigationComponent,
         FileUploaderComponent,
         CampaignsListComponent,
-        SortableListComponent
+        SortableListComponent,
+        TermsDialogComponent
     ],
     imports: [
         BrowserModule,
@@ -85,6 +87,9 @@ import { SortableListComponent } from './shared/sortable-list/sortable-list.comp
         TriggerApiService,
         UserApiService,
         UuidApiService
+    ],
+    entryComponents: [
+        TermsDialogComponent
     ],
     bootstrap: [AppComponent]
 })

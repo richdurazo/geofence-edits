@@ -1,0 +1,58 @@
+<md-card fxFlex="96" fxFlexOffset="2">
+
+    <div fxLayout="row" *ngIf="campaign">
+
+        <div fxLayout="column" fxFlex="55">
+
+            <div fxLayout="row">
+                <div fxFlex="60">
+                    <label>
+                        Title
+                    </label>
+                    <div>
+                        {{ campaign.name }}
+                    </div>
+                </div>
+            </div>
+
+
+            <div fxLayout="row">
+                <label>
+                    Description
+                </label>
+                <div>
+                    {{ campaign.description }}
+                </div>
+            </div>
+
+            <div fxLayout="row" fxLayout.sm="column" fxLayoutGap="10px">
+
+                <div fxFlex="33">
+                    <label>
+                        Start Date
+                    </label>
+                    <div>
+                        {{ campaign.start_at | date:'dd/MM/yyyy' }}
+                    </div>
+                </div>
+
+                <div fxFlex="33">
+                    <label>
+                        End Date
+                    </label>
+                    <div>
+                        {{ campaign.end_at | date:'dd/MM/yyyy' }}
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Placeholder div -->
+        <div fxFlex="45">
+        </div>
+
+    </div>
+
+</md-card>

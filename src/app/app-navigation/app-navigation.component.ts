@@ -64,21 +64,11 @@ export class AppNavigationComponent implements OnInit {
             let self = this;
             if(event instanceof NavigationEnd && event.urlAfterRedirects !== '/login') {
                 let routeObj = this.routes.filter(( obj ) => {
-                  return obj.route === event.urlAfterRedirects || self.checkSubroutes(obj.subroutes, event.urlAfterRedirects);
+                  return obj.route.split("/")[1] === event.urlAfterRedirects.split("/")[1];
                 });
                 this.activeRoute = routeObj[0].name;
             }
         });
-    }
-
-    checkSubroutes (subroutes, url) {
-        var bool = false;
-        subroutes.forEach((item) => {
-            if (item.route === url) {
-                bool = true;
-            }
-        });
-        return bool;
     }
 
     logOut () {

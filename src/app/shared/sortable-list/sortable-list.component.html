@@ -1,0 +1,45 @@
+<div class="sortable-list" fxLayout="column" fxFlex="100">
+    <md-card-title>
+        {{ listTitle }}
+    </md-card-title>
+
+
+    <div class="list-header-row" fxLayout="row">
+        <table fxFlex="100" fxLayout="column">
+            <tr fxLayout="row">
+                <th class="list-header" *ngFor="let header of headers; let i = index;" fxFlex="100">
+                    {{ header.viewValue }}
+                </th>
+            </tr>
+
+            <tbody fxLayout="column">
+
+                <tr class="sortable-list-item" *ngFor="let row of rows; let i = index;" fxLayout="row" fxFlex="100">
+                    <td fxLayout="row" fxFlex="100"  *ngFor="let header of headers; let i = index;">
+                        <span
+                            *ngIf="header.value !== 'action' && header.value !== 'start_at' && header.value !== 'name' && header.value !== 'end_at'">
+                            {{ row[header.value] }}
+                        </span>
+                        <span
+                            *ngIf="header.value !== 'action' && (header.value === 'start_at' && header.value !== 'name' || header.value === 'end_at')">
+                            {{ row[header.value] | date }}
+                        </span>
+                        <a *ngIf="header.value === 'name'" routerLink="{{ '/' + root + '/' + row.id }}">
+                            {{ row[header.value] }}
+                        </a>
+                        <button
+                            *ngIf="header.value === 'action'"
+                            type="button"
+                            class="btn btn-danger"
+                            name="delete"
+                            (click)="deleteItem(i)">
+                            Delete Campaign
+                        </button>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+</div>

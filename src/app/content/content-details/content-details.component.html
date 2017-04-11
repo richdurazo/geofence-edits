@@ -1,0 +1,360 @@
+<md-card class="creator-form-card" fxFlex="96" fxFlexOffset="2">
+
+        <div fxLayout="row" fxLayout.md="column" fxLayout.sm="column" *ngIf="content">
+
+            <!-- Left Justified Content -->
+            <div fxLayout="column" fxFlex="55">
+
+                    <div fxLayout="row">
+                        <div fxFlex="50">
+                            <label>Title</label>
+                            <div>
+                                {{ content.name }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div fxLayout="row" fxLayout.sm="column" fxLayoutGap="10px" fxFlex="66">
+
+                        <div fxFlex="33">
+                            <label>Start Date</label>
+                            <div>
+                                {{ content.start_at }}
+                            </div>
+                        </div>
+
+                        <div fxFlex="33">
+                            <label>End Date</label>
+                            <div>
+                                {{ content.end_at }}
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-highlight-well" fxFlex="100">
+                        <div fxFlex="100" fxLayout="row">
+                            <label>Display Title</label>
+                            <div>
+                                {{ content.display_name }}
+                            </div>
+                        </div>
+
+                        <div fxFlex="100" fxLayout="row">
+                            <label>Description</label>
+                            <div>
+                                {{ content.description }}
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-highlight-well" fxFlex="100" *ngIf="scratcherEnabled">
+                        <div fxFlex="100" fxLayout="row">
+                            <label>
+                                Scratcher Exclamation
+                            </label>
+                            <div>
+                                {{ content.scratcher_name }}
+                            </div>
+                        </div>
+
+                        <div fxFlex="100" fxLayout="row">
+                            <label>
+                                Scratcher Description
+                            </label>
+                            <div>
+                                {{ content.scratcher_description }}
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div fxLayout="row"  *ngIf="contentType === 'offer'">
+                        <div fxFlex="33">
+                            <label>
+                                Redemption Method
+                            </label>
+                            <div>
+                                {{ content.redemption_method }}
+                            </div>
+                        </div>
+
+                        <div fxFlex="66" fxLayout="column" *ngIf="content.redemption_method">
+                            <div fxLayout="row" fxLayoutGap="10px">
+                                <md-input-container fxFlex="50">
+                                    <input
+                                    mdInput
+                                    name="redemption_code"
+                                    type="text"
+                                    placeholder="Redemption Code"
+                                    [(ngModel)]="content.redemptionCode"
+                                    #redemption_code="ngModel"
+                                    required>
+
+                                </md-input-container>
+
+                                <md-select placeholder="QR Format" name="redemption_format" [(ngModel)]="redemptionFormat" *ngIf="content.redemption_method === 'store' || content.redemption_method === 'both'"  fxFlex="50">
+                                    <md-option *ngFor="let format of redemptionFormats" [value]="format.value">
+                                        {{ format.viewValue }}
+                                    </md-option>
+                                </md-select>
+                            </div>
+
+                            <div fxLayout="row" fxLayoutGap="10px" *ngIf="content.redemption_method === 'online' || content.redemption_method === 'both'">
+                                <md-input-container fxFlex="100">
+                                    <input
+                                    mdInput
+                                    name="redemption_url"
+                                    type="text"
+                                    placeholder="Redemption URL"
+                                    [(ngModel)]="content.redemptionUrl"
+                                    #redemption_url="ngModel">
+
+                                </md-input-container>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div fxLayout="row" *ngIf="contentType !== 'message'">
+                        <div fxFlex="50">
+                            <md-slide-toggle
+                            name="limit_enabled"
+                            [color]="'primary'"
+                            [labelPosition]="'before'"
+                            [(ngModel)]="limitEnabled">
+                            Enable Limit
+                            </md-slide-toggle>
+                        </div>
+
+                        <md-input-container fxFlex="50">
+                            <input
+                            mdInput
+                            name="quantity"
+                            type="text"
+                            placeholder="Limit"
+                            required="{{ limitEnabled }}"
+                            [(ngModel)]="content.quantity"
+                            #quantity="ngModel"
+                            disabled="{{ !limitEnabled }}">
+                        </md-input-container>
+                    </div>
+
+            </div>
+
+            <!-- Right Justified Content -->
+            <div fxLayout="column" fxFlex="45"  *ngIf="contentType">
+
+                <div fxLayout="row" fxLayoutAlign="end">
+                    <div fxFlex="50" fxLayout="column" class="scratcher-toggle-container">
+                        <div fxLayout="row" fxLayoutAlign="center">
+                            <label class="creator-section-label" for="scratcher_enabled">
+                                Enable Scratcher
+                            </label>
+                        </div>
+
+                        <div class="scratcher-toggle" fxLayout="row" fxLayoutAlign="center">
+                            <md-slide-toggle
+                                name="scratcher_enabled"
+                                [color]="'primary'"
+                                [labelPosition]="'before'"
+                                [(ngModel)]="scratcherEnabled">
+                            </md-slide-toggle>
+                        </div>
+                    </div>
+
+                    <div class="right-column" fxLayout="column">
+
+                        <md-tab-group *ngIf="scratcherEnabled">
+
+                            <!-- SCRATCHER LAYER -->
+                            <md-tab label="Overlay">
+
+                                <div class="creator-section-label">
+                                    Scratcher Overlay Preview
+                                </div>
+
+                                <div class="scratcher-preview">
+
+                                    <div class="scratcher-hero-image-container" fxFlex="150px;">
+                                        <app-image
+                                            [uuid]="content.uuid"
+                                            [key]="'hero-scratcher'">
+                                        </app-image>
+                                    </div>
+
+                                    <div class="scratcher-overlay-body-container" fxFlex="300px;">
+                                        <app-image
+                                            [uuid]="content.uuid"
+                                            [key]="'overlay-scratcher'">
+                                        </app-image>
+                                    </div>
+
+                                </div>
+
+                            </md-tab>
+
+                            <!-- SCRATCHER INTERIOR LAYER -->
+                            <md-tab label="Scratcher">
+
+                                <div class="creator-section-label">
+                                    Scratcher Preview
+                                </div>
+
+                                <div class="scratcher-preview">
+
+                                    <div class="scratcher-hero-image-container" fxFlex="150px;">
+                                        <app-image
+                                            [uuid]="content.uuid"
+                                            [key]="'hero-offer'">
+                                        </app-image>
+                                    </div>
+
+                                    <div class="scratcher-body" fxFlex="300px;" fxLayout="column">
+
+                                        <div fxFlex></div>
+
+                                        <h3 class="scratcher-heading center" fxLayout="row" fxFlex="10" fxLayoutAlign="center">
+                                            <span>
+                                                {{ content.scratcher_name }}
+                                            </span>
+                                        </h3>
+
+                                        <h2 class="scratcher-heading center" fxLayout="row" fxFlex="10" fxLayoutAlign="center">
+                                            <span>
+                                                {{ content.scratcher_description }}
+                                            </span>
+                                        </h2>
+
+                                        <div fxLayout="row" fxFlex="10" fxLayoutAlign="center">
+                                            <small>
+                                                from Payless Shoes
+                                            </small>
+                                        </div>
+
+                                        <div fxLayout="row" fxFlex="40">
+                                            <button type="button" name="button" md-raised-button color="primary" fxFlexAlign="end" fxFlex="100">
+                                                Save to Wallet
+                                            </button>
+                                        </div>
+
+                                        <div fxFlex></div>
+
+                                        <div fxLayout="row" fxFlex="10" fxLayoutAlign="center">
+                                            No thanks
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </md-tab>
+
+                            <!-- OFFER LAYER -->
+                            <md-tab label="Offer">
+
+                                <div class="creator-section-label">
+                                    Offer Preview
+                                </div>
+
+                                <div class="scratcher-preview">
+
+                                    <div class="scratcher-hero-image-container" fxFlex="150px;">
+                                        <app-image
+                                            [uuid]="content.uuid"
+                                            [key]="'hero-offer'">
+                                        </app-image>
+                                    </div>
+
+                                    <div class="scratcher-body" fxFlex="300px;">
+
+                                        <h3 class="scratcher-heading">{{ content.display_name }}</h3>
+
+                                        <small>from Payless Shoes</small>
+
+                                        <p>{{ content.description }}</p>
+
+                                    </div>
+
+                                </div>
+
+                            </md-tab>
+
+                        </md-tab-group>
+
+                        <div *ngIf="!scratcherEnabled">
+                            <div fxFlex="49px;"></div>
+
+                            <div class="creator-section-label">
+                                Offer Preview
+                            </div>
+
+                            <div class="scratcher-preview">
+
+                                <div class="scratcher-hero-image-container" fxFlex="150px;">
+                                    <app-image
+                                        [uuid]="content.uuid"
+                                        [key]="'hero-offer'">
+                                    </app-image>
+                                </div>
+
+                                <div class="scratcher-body" fxFlex="300px;">
+
+                                    <h3 class="scratcher-heading">{{ content.display_name }}</h3>
+
+                                    <small>from Payless Shoes</small>
+
+                                    <p>{{ content.description }}</p>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="creator-section-label" *ngIf="contentType !== 'message'">
+                            Wallet Item Preview
+                        </div>
+                        <div fxLayout="row" class="wallet-preview" *ngIf="contentType !== 'message'">
+                            <div class="wallet-image-container">
+                                <app-image
+                                    [uuid]="content.uuid"
+                                    [key]="'wallet'">
+                                </app-image>
+                            </div>
+                            <div class="wallet-body-container" fxLayout="column">
+                                <h3 class="wallet-heading" fxFlex="50">{{ content.display_name }}</h3>
+                                <div class="wallet-expiration" fxFlex="50">
+                                    Use by {{ content.end_at | date }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div fxLayout="row" class="terms-button-container" *ngIf="contentType !== 'message'">
+                            <button
+                                fxFlex="100"
+                                type="button"
+                                name="button"
+                                md-raised-button
+                                (click)="launchTerms()">
+                                Terms and Conditions
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div fxLayoutAlign="end" fxFlex="100" *ngIf="contentType">
+            <button
+                type="submit"
+                class="common-form-submit"
+                md-raised-button
+                color="primary">
+                Create
+            </button>
+        </div>
+
+</md-card>

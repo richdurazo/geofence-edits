@@ -24,8 +24,6 @@ export class ContentDetailsComponent implements OnInit {
     ngOnInit() {
         this.sub = this.route.params.subscribe(params => {
             this.id = params['id'];
-            console.log('this.id', this.id);
-
             this.getContent();
         });
     }
@@ -39,7 +37,6 @@ export class ContentDetailsComponent implements OnInit {
         .subscribe(data => {
             this.content = data;
             this.contentType = data.type;
-            console.log('this.content', this.content);
         });
     }
 

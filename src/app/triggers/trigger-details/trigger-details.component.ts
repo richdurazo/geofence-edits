@@ -24,7 +24,6 @@ export class TriggerDetailsComponent implements OnInit {
     ngOnInit() {
         this.sub = this.route.params.subscribe(params => {
             this.id = params['id'];
-            console.log('this.id', this.id);
             this.getTrigger();
         });
     }
@@ -38,7 +37,6 @@ export class TriggerDetailsComponent implements OnInit {
         .subscribe(data => {
             this.trigger = data;
             // this.triggerType = this.trigger.type;
-            console.log('this.trigger', this.trigger);
         });
     }
 

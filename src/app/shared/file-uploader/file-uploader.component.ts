@@ -31,9 +31,7 @@ export class FileUploaderComponent implements OnInit {
     }
 
     showUploader () {
-        console.log('this.config', this.config);
         this.filestack.pick(this.config.pickerOptions).then((results) => {
-            console.log('results', results);
             this.fileExists = !!results.filesUploaded[0];
             this.lastModified = new Date().getTime();
             this.onUpload.emit(this.fileExists);

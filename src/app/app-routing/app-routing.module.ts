@@ -13,6 +13,7 @@ import { CampaignsOverviewComponent } from '../campaigns/campaigns-overview/camp
 
 import { ContentComponent } from '../content/content-component/content.component';
 import { ContentCreatorComponent } from '../content/content-creator/content-creator.component';
+import { ContentDetailsComponent } from '../content/content-details/content-details.component';
 import { ContentOverviewComponent } from '../content/content-overview/content-overview.component';
 
 import { TriggersComponent } from '../triggers/triggers-component/triggers.component';
@@ -73,6 +74,10 @@ const appRoutes: Routes = [
                     {
                         path: 'create',
                         component: ContentCreatorComponent
+                    },
+                    {
+                        path: ':id',
+                        component: ContentDetailsComponent
                     }
                 ]
             },

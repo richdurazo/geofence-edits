@@ -24,6 +24,7 @@ import { CampaignCreatorFormComponent } from './campaigns/campaign-creator/campa
 import { ContentComponent } from './content/content-component/content.component';
 import { ContentCreatorComponent } from './content/content-creator/content-creator.component';
 import { ContentCreatorFormComponent } from './content/content-creator/content-creator-form.component';
+import { ContentDetailsComponent } from './content/content-details/content-details.component';
 import { ContentOverviewComponent } from './content/content-overview/content-overview.component';
 import { TermsDialogComponent } from './content/content-creator/terms-dialog/terms-dialog.component';
 
@@ -67,7 +68,8 @@ import { SortableListComponent } from './shared/sortable-list/sortable-list.comp
         FileUploaderComponent,
         CampaignsListComponent,
         SortableListComponent,
-        TermsDialogComponent
+        TermsDialogComponent,
+        ContentDetailsComponent
     ],
     imports: [
         BrowserModule,

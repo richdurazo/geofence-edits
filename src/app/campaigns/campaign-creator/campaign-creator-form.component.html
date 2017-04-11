@@ -57,7 +57,8 @@
                             type="date"
                             placeholder="Start Date"
                             required
-                            [(ngModel)]="campaign.start_at"
+                            [ngModel]="campaign.start_at | date:'yyyy-MM-dd'"
+                            (ngModelChange)="setDate('start_at', $event)"
                             #start_at="ngModel">
 
                             <md-hint align="start">
@@ -78,7 +79,8 @@
                             type="date"
                             placeholder="End Date"
                             required
-                            [(ngModel)]="campaign.end_at"
+                            [ngModel]="campaign.end_at | date:'yyyy-MM-dd'"
+                            (ngModelChange)="setDate('end_at', $event)"
                             #end_at="ngModel">
 
                             <md-hint align="start">

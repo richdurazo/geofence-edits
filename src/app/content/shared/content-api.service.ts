@@ -7,9 +7,14 @@ export class ContentApiService {
 
     constructor(private authCustomHttp: AuthCustomHttpService) { }
 
-    getContent () {
-        return this.authCustomHttp.get(AppSettings.API_ROOT + '/content')
-        .map(res => res.json())
+    getContent (uuid?: string) {
+        if (uuid) {
+            return this.authCustomHttp.get(AppSettings.API_ROOT + '/content/' + uuid)
+            .map(res => res.json());
+        } else {
+            return this.authCustomHttp.get(AppSettings.API_ROOT + '/content')
+            .map(res => res.json());
+        }
     }
 
     createContent (data) {

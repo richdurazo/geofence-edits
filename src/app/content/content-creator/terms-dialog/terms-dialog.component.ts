@@ -14,7 +14,6 @@ export class TermsDialogComponent implements OnInit {
    }
 
   ngOnInit() {
-      console.log('this.dialogRef', this.dialogRef);
       this.data = {
           terms: this.dialogRef.config.data
       };

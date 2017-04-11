@@ -152,24 +152,21 @@ export class ContentCreatorFormComponent implements OnInit {
         };
         let dialogRef = this.dialog.open(TermsDialogComponent, config);
         dialogRef.afterClosed().subscribe(result => {
-            console.log('terms result', result);
             this.content.terms = result;
         });
     }
 
     public setDate (key, event) {
-        console.log('key, event', key, event);
         this.content[key] = new Date(event);
     }
 
     public setType (event) {
-        console.log('setType event', event);
         this.contentType = event;
         this.setModelDefaults(this.contentType);
     }
 
     public submitForm (form) {
-        console.log('submitForm this.content', this.content);
+        // console.log('submitForm this.content', JSON.stringify(this.content, null, 2));
         if (!form.valid) { return; }
         var obj = JSON.parse(JSON.stringify(this.content));
         obj.start_at = this.dateUtils.formatSQLDate(obj.start_at);
@@ -203,7 +200,6 @@ export class ContentCreatorFormComponent implements OnInit {
 
     private setModelDefaults (type: string) {
         this.content = new ContentModel(this.contentUuid, type, '', '', '', new Date(), new Date());
-        console.log('this.content', this.content);
     }
 
 }

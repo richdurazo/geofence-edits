@@ -1,3 +1,77 @@
-<p>
-  trigger-details works!
-</p>
+<md-card fxFlex="96" fxFlexOffset="2">
+
+        <div fxLayout="row">
+
+            <div fxLayout="column" fxFlex="55">
+
+                <div *ngIf="trigger">
+
+                    <div fxLayout="row">
+                        <div fxFlex="50">
+                            <label>
+                                Type
+                            </label>
+                            <div>
+                                <!-- {{ trigger.type }} -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div fxLayout="row">
+                        <div fxFlex="50">
+                            <label>
+                                Name
+                            </label>
+                            <div>
+                                {{ trigger.name }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div fxLayout="row">
+                        <div fxFlex="100">
+                            <label>
+                                Notes
+                            </label>
+                            <div>
+                                {{ trigger.notes }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div fxLayout="row" *ngIf="trigger.type === 'watermark' || trigger.type === 'touch'">
+                        <div fxFlex="60">
+                            <label>
+                                Value
+                            </label>
+                            <div>
+                                {{ trigger.value }}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+            <div class="right-column" fxFlex="45">
+
+                <div class="media-container" *ngIf="trigger.type === 'watermark' || trigger.type === 'fingerprint'">
+                    <div class="creator-section-label">
+                        Media
+                    </div>
+
+                    <div class="media-upload-container">
+                        <app-image
+                            [uuid]="trigger.uuid"
+                            [key]="'audio-trigger'">
+                        </app-image>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+</md-card>

@@ -34,6 +34,8 @@ export class SortableListComponent implements OnInit {
 
     @Input() rows: Array<any>;
 
+    @Input() root: string;
+
     constructor() { }
 
     ngOnInit() {

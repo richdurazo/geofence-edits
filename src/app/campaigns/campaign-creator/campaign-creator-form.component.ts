@@ -39,6 +39,10 @@ export class CampaignCreatorFormComponent implements OnInit {
         console.log('saved campaign data', data);
     }
 
+    public setDate (key, event) {
+        console.log('key, event', key, event);
+        this.campaign[key] = new Date(event);
+    }
 
     private setModelDefaults () {
         this.campaign = new CampaignModel();

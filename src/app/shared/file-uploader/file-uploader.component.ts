@@ -28,7 +28,6 @@ export class FileUploaderComponent implements OnInit {
 
     ngOnInit () {
         this.mediaPath = this.config.pickerOptions.storeTo.container + this.filestack.generateSaveFilePath(this.config.uuid, this.config.key, this.config.type);
-        console.log('fileExists', this.fileExists);
     }
 
     showUploader () {

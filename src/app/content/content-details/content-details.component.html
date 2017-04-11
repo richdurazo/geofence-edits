@@ -177,19 +177,17 @@
                                 <div class="scratcher-preview">
 
                                     <div class="scratcher-hero-image-container" fxFlex="150px;">
-                                        <app-file-uploader
-                                            [config]="heroScratcherImageConfig"
-                                            [fileExists]="heroScratcherImageExists"
-                                            (onUpload)="heroScratcherImageExists = $event">
-                                        </app-file-uploader>
+                                        <app-image
+                                            [uuid]="content.uuid"
+                                            [key]="'hero-scratcher'">
+                                        </app-image>
                                     </div>
 
                                     <div class="scratcher-overlay-body-container" fxFlex="300px;">
-                                        <app-file-uploader
-                                            [config]="overlayScratcherImageConfig"
-                                            [fileExists]="overlayScratcherImageExists"
-                                            (onUpload)="overlayScratcherImageExists = $event">
-                                        </app-file-uploader>
+                                        <app-image
+                                            [uuid]="content.uuid"
+                                            [key]="'overlay-scratcher'">
+                                        </app-image>
                                     </div>
 
                                 </div>
@@ -206,13 +204,10 @@
                                 <div class="scratcher-preview">
 
                                     <div class="scratcher-hero-image-container" fxFlex="150px;">
-                                        <app-file-uploader
-                                            [config]="heroOfferImageConfig"
-                                            [fileExists]="heroOfferImageExists"
-                                            [lastModified]="heroOfferImageModified"
-                                            (onUpload)="heroOfferImageExists = $event"
-                                            (onChange)="heroOfferImageModified = $event">
-                                        </app-file-uploader>
+                                        <app-image
+                                            [uuid]="content.uuid"
+                                            [key]="'hero-offer'">
+                                        </app-image>
                                     </div>
 
                                     <div class="scratcher-body" fxFlex="300px;" fxLayout="column">
@@ -265,13 +260,10 @@
                                 <div class="scratcher-preview">
 
                                     <div class="scratcher-hero-image-container" fxFlex="150px;">
-                                        <app-file-uploader
-                                            [config]="heroOfferImageConfig"
-                                            [fileExists]="heroOfferImageExists"
-                                            [lastModified]="heroOfferImageModified"
-                                            (onUpload)="heroOfferImageExists = $event"
-                                            (onChange)="heroOfferImageModified = $event">
-                                        </app-file-uploader>
+                                        <app-image
+                                            [uuid]="content.uuid"
+                                            [key]="'hero-offer'">
+                                        </app-image>
                                     </div>
 
                                     <div class="scratcher-body" fxFlex="300px;">
@@ -300,13 +292,10 @@
                             <div class="scratcher-preview">
 
                                 <div class="scratcher-hero-image-container" fxFlex="150px;">
-                                    <app-file-uploader
-                                        [config]="heroOfferImageConfig"
-                                        [fileExists]="heroOfferImageExists"
-                                        [lastModified]="heroOfferImageModified"
-                                        (onUpload)="heroOfferImageExists = $event"
-                                        (onChange)="heroOfferImageModified = $event">
-                                    </app-file-uploader>
+                                    <app-image
+                                        [uuid]="content.uuid"
+                                        [key]="'hero-offer'">
+                                    </app-image>
                                 </div>
 
                                 <div class="scratcher-body" fxFlex="300px;">
@@ -327,9 +316,10 @@
                         </div>
                         <div fxLayout="row" class="wallet-preview" *ngIf="contentType !== 'message'">
                             <div class="wallet-image-container">
-                                <app-file-uploader
-                                    [config]="walletImageConfig">
-                                </app-file-uploader>
+                                <app-image
+                                    [uuid]="content.uuid"
+                                    [key]="'wallet'">
+                                </app-image>
                             </div>
                             <div class="wallet-body-container" fxLayout="column">
                                 <h3 class="wallet-heading" fxFlex="50">{{ content.display_name }}</h3>

@@ -16,6 +16,7 @@ import { OverviewComponent } from './overview/overview.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 import { CampaignsComponent } from './campaigns/campaigns-component/campaigns.component';
+import { CampaignDetailsComponent } from './campaigns/campaign-details/campaign-details.component';
 import { CampaignsListComponent } from './campaigns/campaigns-overview/campaigns-list/campaigns-list.component';
 import { CampaignsOverviewComponent } from './campaigns/campaigns-overview/campaigns-overview.component';
 import { CampaignCreatorComponent } from './campaigns/campaign-creator/campaign-creator.component';
@@ -29,6 +30,7 @@ import { ContentOverviewComponent } from './content/content-overview/content-ove
 import { TermsDialogComponent } from './content/content-creator/terms-dialog/terms-dialog.component';
 
 import { TriggersComponent } from './triggers/triggers-component/triggers.component';
+import { TriggerDetailsComponent } from './triggers/trigger-details/trigger-details.component';
 import { TriggerCreatorComponent } from './triggers/trigger-creator/trigger-creator.component';
 import { TriggerCreatorFormComponent } from './triggers/trigger-creator/trigger-creator-form.component';
 import { TriggersOverviewComponent } from './triggers/triggers-overview/triggers-overview.component';
@@ -45,6 +47,7 @@ import { UuidApiService } from './shared/uuid-api.service';
 import { FilestackService } from './shared/filestack.service';
 import { FileUploaderComponent } from './shared/file-uploader/file-uploader.component';
 import { SortableListComponent } from './shared/sortable-list/sortable-list.component';
+import { ImageComponent } from './shared/image/image.component';
 
 @NgModule({
     declarations: [
@@ -69,7 +72,10 @@ import { SortableListComponent } from './shared/sortable-list/sortable-list.comp
         CampaignsListComponent,
         SortableListComponent,
         TermsDialogComponent,
-        ContentDetailsComponent
+        ContentDetailsComponent,
+        ImageComponent,
+        TriggerDetailsComponent,
+        CampaignDetailsComponent
     ],
     imports: [
         BrowserModule,

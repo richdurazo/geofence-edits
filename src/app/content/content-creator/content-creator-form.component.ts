@@ -169,7 +169,7 @@ export class ContentCreatorFormComponent implements OnInit {
     }
 
     public submitForm (form) {
-        console.log('submitForm this.content', this.content);
+        console.log('submitForm this.content', JSON.stringify(this.content, null, 2));
         if (!form.valid) { return; }
         var obj = JSON.parse(JSON.stringify(this.content));
         obj.start_at = this.dateUtils.formatSQLDate(obj.start_at);

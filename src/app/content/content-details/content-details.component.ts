@@ -15,8 +15,6 @@ export class ContentDetailsComponent implements OnInit {
 
     id: string;
 
-    contentType: string;
-
     private sub: any;
 
     constructor(private route: ActivatedRoute, private contentApi: ContentApiService) { }
@@ -36,7 +34,6 @@ export class ContentDetailsComponent implements OnInit {
         this.contentApi.getContent(this.id)
         .subscribe(data => {
             this.content = data;
-            this.contentType = data.type;
         });
     }
 

@@ -70,7 +70,7 @@
 
                     </div>
 
-                    <div fxLayout="row"  *ngIf="contentType === 'offer'">
+                    <div fxLayout="row"  *ngIf="content.type === 'offer'">
                         <div fxFlex="33">
                             <label>
                                 Redemption Method
@@ -116,7 +116,7 @@
                         </div>
                     </div>
 
-                    <div fxLayout="row" *ngIf="contentType !== 'message'">
+                    <div fxLayout="row" *ngIf="content.type !== 'message'">
                         <div fxFlex="50">
                             <md-slide-toggle
                             name="limit_enabled"
@@ -143,7 +143,7 @@
             </div>
 
             <!-- Right Justified Content -->
-            <div fxLayout="column" fxFlex="45"  *ngIf="contentType">
+            <div fxLayout="column" fxFlex="45"  *ngIf="content.type">
 
                 <div fxLayout="row" fxLayoutAlign="end">
                     <div fxFlex="50" fxLayout="column" class="scratcher-toggle-container">
@@ -311,10 +311,10 @@
                             </div>
                         </div>
 
-                        <div class="creator-section-label" *ngIf="contentType !== 'message'">
+                        <div class="creator-section-label" *ngIf="content.type !== 'message'">
                             Wallet Item Preview
                         </div>
-                        <div fxLayout="row" class="wallet-preview" *ngIf="contentType !== 'message'">
+                        <div fxLayout="row" class="wallet-preview" *ngIf="content.type !== 'message'">
                             <div class="wallet-image-container">
                                 <app-image
                                     [uuid]="content.uuid"
@@ -329,7 +329,7 @@
                             </div>
                         </div>
 
-                        <div fxLayout="row" class="terms-button-container" *ngIf="contentType !== 'message'">
+                        <div fxLayout="row" class="terms-button-container" *ngIf="content.type !== 'message'">
                             <button
                                 fxFlex="100"
                                 type="button"
@@ -347,7 +347,7 @@
 
         </div>
 
-        <div fxLayoutAlign="end" fxFlex="100" *ngIf="contentType">
+        <div fxLayoutAlign="end" fxFlex="100" *ngIf="content.type">
             <button
                 type="submit"
                 class="common-form-submit"

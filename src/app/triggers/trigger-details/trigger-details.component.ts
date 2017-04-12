@@ -36,7 +36,6 @@ export class TriggerDetailsComponent implements OnInit {
         this.triggerApi.getTrigger(this.id)
         .subscribe(data => {
             this.trigger = data;
-            // this.triggerType = this.trigger.type;
         });
     }
 

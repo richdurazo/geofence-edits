@@ -82,65 +82,38 @@
 
                         <div fxFlex="66" fxLayout="column" *ngIf="content.redemption_method">
                             <div fxLayout="row" fxLayoutGap="10px">
-                                <md-input-container fxFlex="50">
-                                    <input
-                                    mdInput
-                                    name="redemption_code"
-                                    type="text"
-                                    placeholder="Redemption Code"
-                                    [(ngModel)]="content.redemption_code"
-                                    #redemption_code="ngModel"
-                                    required>
-
-                                </md-input-container>
-
-                                <div *ngIf="content.redemption_method === 'store' || content.redemption_method === 'both'"  fxFlex="50">
+                                <div fxFlex="50">
                                     <label>
-                                        QR Format
+                                        Redemption Code
                                     </label>
                                     <div>
-                                        {{ content.redemption_code_format }}
+                                        {{ content.redemption_code }}
                                     </div>
                                 </div>
                             </div>
 
                             <div fxLayout="row" fxLayoutGap="10px" *ngIf="content.redemption_method === 'online' || content.redemption_method === 'both'">
-                                <md-input-container fxFlex="100">
-                                    <input
-                                    mdInput
-                                    name="redemption_url"
-                                    type="text"
-                                    placeholder="Redemption URL"
-                                    [(ngModel)]="content.redemption_url"
-                                    #redemption_url="ngModel">
-
-                                </md-input-container>
+                                <div fxFlex="100">
+                                    <label>
+                                        Redemption URL
+                                    </label>
+                                    <div>
+                                        {{ content.redemption_url }}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div fxLayout="row" *ngIf="content.type !== 'message'">
-                        <div fxFlex="50">
-                            <md-slide-toggle
-                            name="limit_enabled"
-                            [color]="'primary'"
-                            [labelPosition]="'before'"
-                            [(ngModel)]="limitEnabled">
-                            Enable Limit
-                            </md-slide-toggle>
+                    <div fxLayout="row" *ngIf="content.type !== 'message' && content.quantity">
+                        <div fxFlex="100">
+                            <label>
+                                Limit
+                            </label>
+                            <div>
+                                {{ content.quantity }}
+                            </div>
                         </div>
-
-                        <md-input-container fxFlex="50">
-                            <input
-                            mdInput
-                            name="quantity"
-                            type="text"
-                            placeholder="Limit"
-                            required="{{ limitEnabled }}"
-                            [(ngModel)]="content.quantity"
-                            #quantity="ngModel"
-                            disabled="{{ !limitEnabled }}">
-                        </md-input-container>
                     </div>
 
             </div>
@@ -150,7 +123,7 @@
 
                 <div fxLayout="row" fxLayoutAlign="end">
                     <div fxFlex="50" fxLayout="column" class="scratcher-toggle-container">
-                        <div fxLayout="row" fxLayoutAlign="center">
+                        <!-- <div fxLayout="row" fxLayoutAlign="center">
                             <label class="creator-section-label" for="scratcher_enabled">
                                 Enable Scratcher
                             </label>
@@ -163,7 +136,7 @@
                                 [labelPosition]="'before'"
                                 [(ngModel)]="scratcherEnabled">
                             </md-slide-toggle>
-                        </div>
+                        </div> -->
                     </div>
 
                     <div class="right-column" fxLayout="column">

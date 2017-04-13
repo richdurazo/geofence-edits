@@ -55,7 +55,7 @@
 
             </div>
 
-            <div class="right-column" fxFlex="45">
+            <div class="right-column" fxFlex="45" *ngIf="content">
 
                 <div class="media-container" *ngIf="trigger.type === 'watermark' || trigger.type === 'fingerprint'">
                     <div class="creator-section-label">

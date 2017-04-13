@@ -8,20 +8,18 @@ import { AuthService } from './auth.service';
 @Injectable()
 export class AuthGuardService implements CanActivate {
 
-  constructor(private authService: AuthService) {}
+    constructor(private authService: AuthService, private router: Router) {}
 
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): Observable<boolean>|Promise<boolean>|boolean {
-      console.log('this.authService', this.authService);
-      if(this.authService.loggedIn()) {
-          console.log('navigation true')
-        return true;
-      } else {
-        this.authService.setUrl(state.url);
-        console.log('navigation prevented')
-        return false;
-      }
-  }
+    canActivate(
+        route: ActivatedRouteSnapshot,
+        state: RouterStateSnapshot
+    ): Observable<boolean>|Promise<boolean>|boolean {
+        if(this.authService.loggedIn()) {
+            return true;
+        } else {
+            this.authService.setUrl(state.url);
+            this.router.navigate(['login']);
+            return false;
+        }
+    }
 }

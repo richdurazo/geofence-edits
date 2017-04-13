@@ -94,11 +94,14 @@
 
                                 </md-input-container>
 
-                                <md-select placeholder="QR Format" name="redemption_format" [(ngModel)]="redemptionFormat" *ngIf="content.redemption_method === 'store' || content.redemption_method === 'both'"  fxFlex="50">
-                                    <md-option *ngFor="let format of redemptionFormats" [value]="format.value">
-                                        {{ format.viewValue }}
-                                    </md-option>
-                                </md-select>
+                                <div *ngIf="content.redemption_method === 'store' || content.redemption_method === 'both'"  fxFlex="50">
+                                    <label>
+                                        QR Format
+                                    </label>
+                                    <div>
+                                        {{ content.redemption_code_format }}
+                                    </div>
+                                </div>
                             </div>
 
                             <div fxLayout="row" fxLayoutGap="10px" *ngIf="content.redemption_method === 'online' || content.redemption_method === 'both'">
@@ -345,16 +348,6 @@
 
             </div>
 
-        </div>
-
-        <div fxLayoutAlign="end" fxFlex="100" *ngIf="content.type">
-            <button
-                type="submit"
-                class="common-form-submit"
-                md-raised-button
-                color="primary">
-                Create
-            </button>
         </div>
 
 </md-card>

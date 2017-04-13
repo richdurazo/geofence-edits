@@ -37,9 +37,6 @@ export class LoginComponent implements OnInit {
             this.router.navigate([url]);
         } else {
             this.router.navigate(['overview']);
-            console.log('url', url);
-            console.log('url!== ""', url !== "");
-            console.log('!!url', !!url);
         }
     }
 

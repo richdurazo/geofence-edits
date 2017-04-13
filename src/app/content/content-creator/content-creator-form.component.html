@@ -195,7 +195,12 @@
                                     </md-hint>
                                 </md-input-container>
 
-                                <md-select placeholder="QR Format" name="redemption_format" [(ngModel)]="redemptionFormat" *ngIf="content.redemption_method === 'store' || content.redemption_method === 'both'"  fxFlex="50">
+                                <md-select
+                                    placeholder="QR Format"
+                                    name="redemption_format"
+                                    [(ngModel)]="content.redemption_code_format"
+                                    *ngIf="content.redemption_method === 'store' || content.redemption_method === 'both'"
+                                    fxFlex="50">
                                     <md-option *ngFor="let format of redemptionFormats" [value]="format.value">
                                         {{ format.viewValue }}
                                     </md-option>

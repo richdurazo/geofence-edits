@@ -14,10 +14,13 @@ export class AuthGuardService implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean>|Promise<boolean>|boolean {
+      console.log('this.authService', this.authService);
       if(this.authService.loggedIn()) {
+          console.log('navigation true')
         return true;
       } else {
         this.authService.setUrl(state.url);
+        console.log('navigation prevented')
         return false;
       }
   }

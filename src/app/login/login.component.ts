@@ -32,10 +32,14 @@ export class LoginComponent implements OnInit {
 
     processSuccess () {
         let url = this.authService.getRedirectUrl();
+
         if (!!url && url !== '') {
             this.router.navigate([url]);
         } else {
-            this.router.navigate(['/overview']);
+            this.router.navigate(['overview']);
+            console.log('url', url);
+            console.log('url!== ""', url !== "");
+            console.log('!!url', !!url);
         }
     }
 

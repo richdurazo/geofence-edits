@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MdDialogRef } from '@angular/material';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-terms-dialog',
@@ -8,15 +8,15 @@ import { MdDialogRef } from '@angular/material';
 })
 export class TermsDialogComponent implements OnInit {
 
-    data: any;
+    terms: any;
 
-  constructor(public dialogRef: MdDialogRef<TermsDialogComponent>) {
+  constructor(public dialogRef: MdDialogRef<TermsDialogComponent>, @Inject(MD_DIALOG_DATA) private data: any) {
+      this.data = {
+          terms: data
+      };
    }
 
   ngOnInit() {
-      this.data = {
-          terms: this.dialogRef.config.data
-      };
   }
 
   public submitForm (form) {

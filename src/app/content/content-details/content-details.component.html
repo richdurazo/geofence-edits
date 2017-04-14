@@ -1,4 +1,4 @@
-<md-card class="creator-form-card" fxFlex="96" fxFlexOffset="2" fxLayout="column">
+<md-card class="creator-form-card content-details" fxFlex="96" fxFlexOffset="2" fxLayout="column">
 
         <div fxLayout="row" fxLayout.md="column" fxLayout.sm="column" *ngIf="content">
 
@@ -59,7 +59,7 @@
 
                     </div>
 
-                    <div class="form-highlight-well" fxFlex="100" *ngIf="scratcherEnabled">
+                    <div class="form-highlight-well" fxFlex="100" *ngIf="content.scratcher_name">
                         <div fxFlex="100" fxLayout="column" class="details-display-container">
                             <label>
                                 Scratcher Exclamation
@@ -151,7 +151,7 @@
 
                     <div class="right-column" fxLayout="column">
 
-                        <md-tab-group *ngIf="scratcherEnabled">
+                        <md-tab-group *ngIf="content.scratcher_name">
 
                             <!-- SCRATCHER LAYER -->
                             <md-tab label="Overlay">
@@ -170,10 +170,13 @@
                                     </div>
 
                                     <div class="scratcher-overlay-body-container" fxFlex="300px;">
-                                        <app-image
-                                            [uuid]="content.uuid"
-                                            [key]="'overlay-scratcher'">
-                                        </app-image>
+                                        <div class="uploader-zone" fxFlex="100">
+                                            <app-image
+                                                *ngIf="content.custom_scratcher"
+                                                [uuid]="content.uuid"
+                                                [key]="'overlay-scratcher'">
+                                            </app-image>
+                                        </div>
                                     </div>
 
                                 </div>
@@ -268,7 +271,7 @@
 
                         </md-tab-group>
 
-                        <div *ngIf="!scratcherEnabled">
+                        <div *ngIf="!content.scratcher_name">
                             <div fxFlex="49px;"></div>
 
                             <div class="creator-section-label">

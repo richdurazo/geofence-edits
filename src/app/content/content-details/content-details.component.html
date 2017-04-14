@@ -1,4 +1,4 @@
-<md-card class="creator-form-card" fxFlex="96" fxFlexOffset="2">
+<md-card class="creator-form-card" fxFlex="96" fxFlexOffset="2" fxLayout="column">
 
         <div fxLayout="row" fxLayout.md="column" fxLayout.sm="column" *ngIf="content">
 
@@ -6,8 +6,10 @@
             <div fxLayout="column" fxFlex="55">
 
                     <div fxLayout="row">
-                        <div fxFlex="50">
-                            <label>Title</label>
+                        <div fxFlex="50" fxLayout="column" class="details-display-container">
+                            <label>
+                                Title
+                            </label>
                             <div>
                                 {{ content.name }}
                             </div>
@@ -16,15 +18,19 @@
 
                     <div fxLayout="row" fxLayout.sm="column" fxLayoutGap="10px" fxFlex="66">
 
-                        <div fxFlex="33">
-                            <label>Start Date</label>
+                        <div fxFlex="33" fxLayout="column" class="details-display-container">
+                            <label>
+                                Start Date
+                            </label>
                             <div>
                                 {{ content.start_at }}
                             </div>
                         </div>
 
-                        <div fxFlex="33">
-                            <label>End Date</label>
+                        <div fxFlex="33" fxLayout="column" class="details-display-container">
+                            <label>
+                                End Date
+                            </label>
                             <div>
                                 {{ content.end_at }}
                             </div>
@@ -33,15 +39,19 @@
                     </div>
 
                     <div class="form-highlight-well" fxFlex="100">
-                        <div fxFlex="100" fxLayout="row">
-                            <label>Display Title</label>
+                        <div fxFlex="100" fxLayout="column" class="details-display-container">
+                            <label>
+                                Display Title
+                            </label>
                             <div>
                                 {{ content.display_name }}
                             </div>
                         </div>
 
-                        <div fxFlex="100" fxLayout="row">
-                            <label>Description</label>
+                        <div fxFlex="100" fxLayout="column" class="details-display-container">
+                            <label>
+                                Description
+                            </label>
                             <div>
                                 {{ content.description }}
                             </div>
@@ -50,7 +60,7 @@
                     </div>
 
                     <div class="form-highlight-well" fxFlex="100" *ngIf="scratcherEnabled">
-                        <div fxFlex="100" fxLayout="row">
+                        <div fxFlex="100" fxLayout="column" class="details-display-container">
                             <label>
                                 Scratcher Exclamation
                             </label>
@@ -59,7 +69,7 @@
                             </div>
                         </div>
 
-                        <div fxFlex="100" fxLayout="row">
+                        <div fxFlex="100" fxLayout="column" class="details-display-container">
                             <label>
                                 Scratcher Description
                             </label>
@@ -71,7 +81,7 @@
                     </div>
 
                     <div fxLayout="row"  *ngIf="content.type === 'offer'">
-                        <div fxFlex="33">
+                        <div fxFlex="33" fxLayout="column" class="details-display-container">
                             <label>
                                 Redemption Method
                             </label>
@@ -82,7 +92,7 @@
 
                         <div fxFlex="66" fxLayout="column" *ngIf="content.redemption_method">
                             <div fxLayout="row" fxLayoutGap="10px">
-                                <div fxFlex="50">
+                                <div fxFlex="50" fxLayout="column" class="details-display-container">
                                     <label>
                                         Redemption Code
                                     </label>
@@ -93,7 +103,7 @@
                             </div>
 
                             <div fxLayout="row" fxLayoutGap="10px" *ngIf="content.redemption_method === 'online' || content.redemption_method === 'both'">
-                                <div fxFlex="100">
+                                <div fxFlex="100" fxLayout="column" class="details-display-container">
                                     <label>
                                         Redemption URL
                                     </label>
@@ -106,7 +116,7 @@
                     </div>
 
                     <div fxLayout="row" *ngIf="content.type !== 'message' && content.quantity">
-                        <div fxFlex="100">
+                        <div fxFlex="100" fxLayout="column" class="details-display-container">
                             <label>
                                 Limit
                             </label>

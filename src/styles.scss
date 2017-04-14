@@ -328,4 +328,12 @@ body {
         }
     }
 
+    .details-display-container {
+        margin-bottom: $common-margin;
+        label {
+            font-size: 9px;
+            margin-bottom: 5px;
+        }
+    }
+
 }

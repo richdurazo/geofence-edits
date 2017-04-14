@@ -36942,7 +36942,7 @@ var AppSettings = (function () {
     return AppSettings;
 }());
 
-AppSettings.API_ROOT = 'https://api.app';
+AppSettings.API_ROOT = 'http://api.app';
 //# sourceMappingURL=app-settings.js.map
 
 /***/ }),

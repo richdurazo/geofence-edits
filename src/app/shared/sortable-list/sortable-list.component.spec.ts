@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { SortableListComponent } from './sortable-list.component';
 
@@ -8,7 +9,10 @@ describe('SortableListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SortableListComponent ]
+      declarations: [ SortableListComponent ],
+      // schemas: [
+      //   CUSTOM_ELEMENTS_SCHEMA
+      // ]
     })
     .compileComponents();
   }));

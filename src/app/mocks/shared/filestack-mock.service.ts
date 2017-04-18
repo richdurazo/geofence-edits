@@ -6,7 +6,11 @@ export class FilestackMockService {
     constructor() {}
 
     public pick () {
-      return false;
+        return false;
+    }
+
+    public generateSaveFilePath () {
+        return false;
     }
 
 }

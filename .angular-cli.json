@@ -24,6 +24,8 @@
                 "../node_modules/roboto-fontface/css/roboto/sass/roboto-fontface.scss"
             ],
             "scripts": [
+                "../node_modules/filestack-js/dist/filestack.js",
+                "../node_modules/moment/moment.js"
             ],
             "environmentSource": "environments/environment.ts",
             "environments": {

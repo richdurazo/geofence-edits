@@ -9,6 +9,12 @@ import { ContentApiMockService } from '../../mocks/content/content-api-mock.serv
 import { DateUtilsService } from '../../shared/date-utils.service';
 import { DateUtilsMockService } from '../../mocks/shared/date-utils-mock.service';
 
+import { FilestackService } from '../../shared/filestack.service';
+import { FilestackMockService } from '../../mocks/shared/filestack-mock.service';
+
+import { UuidApiService } from '../../shared/uuid-api.service';
+import { UuidApiMockService } from '../../mocks/shared/uuid-api-mock.service';
+
 import { ContentCreatorFormComponent } from './content-creator-form.component';
 
 describe('ContentCreatorFormComponent', () => {
@@ -25,7 +31,9 @@ describe('ContentCreatorFormComponent', () => {
       ],
       providers: [
         { provide: ContentApiService, useClass: ContentApiMockService },
-        { provide: DateUtilsService, useClass: DateUtilsMockService }
+        { provide: DateUtilsService, useClass: DateUtilsMockService },
+        { provide: FilestackService, useClass: FilestackMockService },
+        { provide: UuidApiService, useClass: UuidApiMockService }
       ],
       imports: [FormsModule]
     })

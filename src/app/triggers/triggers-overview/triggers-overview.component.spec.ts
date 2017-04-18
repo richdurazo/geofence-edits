@@ -1,5 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Observable } from "rxjs/Rx";
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { TriggerApiService } from '../shared/trigger-api.service';
 import { TriggerApiMockService } from '../../mocks/triggers/trigger-api-mock.service';
@@ -16,6 +18,12 @@ describe('TriggersOverviewComponent', () => {
       declarations: [ TriggersOverviewComponent ],
       providers: [
           { provide: TriggerApiService, useClass: TriggerApiMockService }
+      ],
+      schemas: [
+        CUSTOM_ELEMENTS_SCHEMA
+      ],
+      imports: [
+        RouterTestingModule
       ]
     })
     .compileComponents();

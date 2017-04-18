@@ -1,5 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Observable } from "rxjs/Rx";
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { ContentApiService } from '../shared/content-api.service';
 import { ContentApiMockService } from '../../mocks/content/content-api-mock.service';
@@ -14,8 +16,14 @@ describe('ContentOverviewComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ ContentOverviewComponent ],
+      schemas: [
+        CUSTOM_ELEMENTS_SCHEMA
+      ],
       providers: [
         { provide: ContentApiService, useClass: ContentApiMockService }
+      ],
+      imports: [
+        RouterTestingModule
       ]
     })
     .compileComponents();

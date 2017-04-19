@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
+import { Observable } from "rxjs/Rx";
 
 import { ContentApiService } from '../shared/content-api.service';
 import { ContentApiMockService } from '../../mocks/content/content-api-mock.service';
@@ -28,6 +29,7 @@ describe('ContentDetailsComponent', () => {
     .compileComponents();
 
     contentApi = TestBed.get(ContentApiService);
+    spyOn(contentApi, 'getContent').and.returnValue(Observable.of([{foo:'bar'}, {hay: 'guyz'}]));
   }));
 
   beforeEach(() => {

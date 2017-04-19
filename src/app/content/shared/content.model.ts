@@ -1,6 +1,6 @@
 export class ContentModel {
     uuid: string;
-    id: string;
+    id?: number;
     type: string;
     name: string;
     display_name: string;

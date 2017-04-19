@@ -2,6 +2,9 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
+import { MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
+import { MdDialogRefMock, MD_DIALOG_DATA_MOCK } from '../../../mocks/shared/md-dialog-ref-mock.service';
+
 import { TermsDialogComponent } from './terms-dialog.component';
 
 describe('TermsDialogComponent', () => {
@@ -16,7 +19,11 @@ describe('TermsDialogComponent', () => {
       ],
       imports: [
         FormsModule
-      ]
+    ],
+    providers: [
+        { provide: MdDialogRef, useClass: MdDialogRefMock },
+        { provide: MD_DIALOG_DATA, useClass: MD_DIALOG_DATA_MOCK }
+    ]
     })
     .compileComponents();
   }));

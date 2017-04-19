@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
+import { Observable } from "rxjs/Rx";
 
 import { CampaignApiService } from '../shared/campaign-api.service';
 import { CampaignApiMockService } from '../../mocks/campaigns/campaign-api-mock.service';
@@ -28,6 +29,9 @@ describe('CampaignDetailsComponent', () => {
             ]
         })
         .compileComponents();
+
+        campaignApi = TestBed.get(CampaignApiService);
+        spyOn(campaignApi, 'getCampaign').and.returnValue(Observable.of([{foo:'bar'}, {hay: 'guyz'}]));
     }));
 
     beforeEach(() => {

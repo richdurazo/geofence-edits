@@ -19,6 +19,7 @@ describe('TriggerCreatorFormComponent', () => {
     let component: TriggerCreatorFormComponent;
     let fixture: ComponentFixture<TriggerCreatorFormComponent>;
     let triggerApi: TriggerApiMockService;
+    let uuidApi: UuidApiMockService;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -36,6 +37,8 @@ describe('TriggerCreatorFormComponent', () => {
         .compileComponents();
 
         triggerApi = TestBed.get(TriggerApiService);
+        uuidApi = TestBed.get(UuidApiService);
+        spyOn(uuidApi, 'fetchUuid').and.returnValue(Observable.of({uuid: 'foo'}));
     }));
 
     beforeEach(() => {
@@ -54,10 +57,10 @@ describe('TriggerCreatorFormComponent', () => {
             expect(typeof component.ngOnInit).toEqual('function');
         });
 
-        it('should call setModelDefaults', () => {
-            expect(component.trigger.constructor.name).toEqual('TriggerModel');
-            expect(component.trigger.name).toEqual('');
-            expect(component.trigger.campaign_id).toEqual('');
+        it('should call fetchUuid', () => {
+            spyOn(component, 'fetchUuid');
+            component.ngOnInit();
+            expect(component.fetchUuid).toHaveBeenCalled();
         });
     });
 
@@ -72,8 +75,9 @@ describe('TriggerCreatorFormComponent', () => {
           spyOn(component, 'processSuccess');
           expect(triggerApi.createTrigger).not.toHaveBeenCalled();
           expect(component.processSuccess).not.toHaveBeenCalled();
+          component.trigger = { name: '', value: 0, campaign_id: '', type: '' };
           component.submitForm({valid: true});
-          expect(triggerApi.createTrigger).toHaveBeenCalledWith({ name: '', value: '', campaign_id: '' });
+          expect(triggerApi.createTrigger).toHaveBeenCalledWith({ name: '', value: 0, campaign_id: '', type: '' });
           expect(component.processSuccess).toHaveBeenCalledWith({ foo: 'bar' });
         });
     });

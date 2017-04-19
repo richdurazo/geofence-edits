@@ -52,14 +52,14 @@ describe('AuthGuardService', () => {
     it ('should return false if the AuthService.loggedIn() returns false', () => {
       spyOn(authService, 'loggedIn').and.returnValue(false);
       spyOn(authService, 'setUrl').and.returnValue(false);
-      expect(authGuardService.canActivate()).toEqual(false);
+      expect(authGuardService.canActivate(null, state)).toEqual(false);
     });
 
     it ('should call setUrl on the AuthService with the RouterStateSnapshot url value if AuthService.loggedIn() returns false', () => {
-      router.snapshot.url = '/url';
+      state.url = '/url';
       spyOn(authService, 'loggedIn').and.returnValue(false);
       spyOn(authService, 'setUrl').and.returnValue(false);
-      authGuardService.canActivate();
+      authGuardService.canActivate(null, state);
       expect(authService.setUrl).toHaveBeenCalledWith('/url');
     });
 

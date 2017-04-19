@@ -13,4 +13,11 @@ export class FilestackMockService {
         return false;
     }
 
+    public createMediaConfig () {
+        return false;
+    }
+
+    public createImageConfig () {
+        return false;
+    }
 }

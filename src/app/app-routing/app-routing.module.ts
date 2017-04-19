@@ -109,6 +109,10 @@ const appRoutes: Routes = [
                 path: '',
                 redirectTo: '/overview',
                 pathMatch: 'full'
+            },
+            {
+                path: '**',
+                component: PageNotFoundComponent,
             }
         ]
     }

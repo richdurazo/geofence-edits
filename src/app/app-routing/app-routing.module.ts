@@ -106,13 +106,13 @@ const appRoutes: Routes = [
                 ]
             },
             {
-                path: '**',
-                component: PageNotFoundComponent,
+                path: '',
+                redirectTo: '/overview',
+                pathMatch: 'full'
             },
             {
-                path: '',
-                redirectTo: '/login',
-                pathMatch: 'full'
+                path: '**',
+                component: PageNotFoundComponent,
             }
         ]
     }

@@ -32,7 +32,7 @@ describe('CampaignCreatorFormComponent', () => {
         })
         .compileComponents();
 
-        campaignApi = TestBed.get(CampaignApiService);
+        // campaignApi = TestBed.get(CampaignApiService);
         dateUtils = TestBed.get(DateUtilsService);
     }));
 

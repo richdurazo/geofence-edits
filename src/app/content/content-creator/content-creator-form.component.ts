@@ -168,7 +168,7 @@ export class ContentCreatorFormComponent implements OnInit {
     public submitForm (form) {
         // console.log('submitForm this.content', JSON.stringify(this.content, null, 2));
         if (!form.valid) { return; }
-        var obj = JSON.parse(JSON.stringify(this.content));
+        var obj = Object.assign({}, this.content);
         obj.start_at = this.dateUtils.formatSQLDate(obj.start_at);
         obj.end_at = this.dateUtils.formatSQLDate(obj.end_at);
         this.contentApi.createContent(obj)
@@ -181,7 +181,7 @@ export class ContentCreatorFormComponent implements OnInit {
         console.log('saved content data', data);
     }
 
-    private fetchUuid () {
+    public fetchUuid () {
         this.uuidApi.fetchUuid()
         .subscribe(
             data => {

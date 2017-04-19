@@ -4,6 +4,12 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Observable } from "rxjs/Rx";
 
+import { FilestackService } from '../../shared/filestack.service';
+import { FilestackMockService } from '../../mocks/shared/filestack-mock.service';
+
+import { UuidApiService } from '../../shared/uuid-api.service';
+import { UuidApiMockService } from '../../mocks/shared/uuid-api-mock.service';
+
 import { TriggerApiService } from '../shared/trigger-api.service';
 import { TriggerApiMockService } from '../../mocks/triggers/trigger-api-mock.service';
 
@@ -13,6 +19,7 @@ describe('TriggerCreatorFormComponent', () => {
     let component: TriggerCreatorFormComponent;
     let fixture: ComponentFixture<TriggerCreatorFormComponent>;
     let triggerApi: TriggerApiMockService;
+    let uuidApi: UuidApiMockService;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -22,12 +29,16 @@ describe('TriggerCreatorFormComponent', () => {
                 CUSTOM_ELEMENTS_SCHEMA
             ],
             providers: [
-                { provide: TriggerApiService, useClass: TriggerApiMockService }
+                { provide: FilestackService, useClass: FilestackMockService },
+                { provide: TriggerApiService, useClass: TriggerApiMockService },
+                { provide: UuidApiService, useClass: UuidApiMockService }
             ]
         })
         .compileComponents();
 
         triggerApi = TestBed.get(TriggerApiService);
+        uuidApi = TestBed.get(UuidApiService);
+        spyOn(uuidApi, 'fetchUuid').and.returnValue(Observable.of({uuid: 'foo'}));
     }));
 
     beforeEach(() => {
@@ -46,10 +57,10 @@ describe('TriggerCreatorFormComponent', () => {
             expect(typeof component.ngOnInit).toEqual('function');
         });
 
-        it('should call setModelDefaults', () => {
-            expect(component.trigger.constructor.name).toEqual('TriggerModel');
-            expect(component.trigger.name).toEqual('');
-            expect(component.trigger.campaign_id).toEqual('');
+        it('should call fetchUuid', () => {
+            spyOn(component, 'fetchUuid');
+            component.ngOnInit();
+            expect(component.fetchUuid).toHaveBeenCalled();
         });
     });
 
@@ -64,8 +75,9 @@ describe('TriggerCreatorFormComponent', () => {
           spyOn(component, 'processSuccess');
           expect(triggerApi.createTrigger).not.toHaveBeenCalled();
           expect(component.processSuccess).not.toHaveBeenCalled();
+          component.trigger = { name: '', value: 0, campaign_id: '', type: '' };
           component.submitForm({valid: true});
-          expect(triggerApi.createTrigger).toHaveBeenCalledWith({ name: '', value: '', campaign_id: '' });
+          expect(triggerApi.createTrigger).toHaveBeenCalledWith({ name: '', value: 0, campaign_id: '', type: '' });
           expect(component.processSuccess).toHaveBeenCalledWith({ foo: 'bar' });
         });
     });

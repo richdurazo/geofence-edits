@@ -1,5 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { FilestackService } from '../../shared/filestack.service';
+import { FilestackMockService } from '../../mocks/shared/filestack-mock.service';
+
 import { ImageComponent } from './image.component';
 
 describe('ImageComponent', () => {
@@ -8,7 +11,10 @@ describe('ImageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ImageComponent ]
+      declarations: [ ImageComponent ],
+      providers: [
+          { provide: FilestackService, useClass: FilestackMockService }
+      ]
     })
     .compileComponents();
   }));

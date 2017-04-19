@@ -22,8 +22,6 @@ export class FileUploaderComponent implements OnInit {
 
     @Output() onChange = new EventEmitter<number>();
 
-    stagedPhoto: any;
-
     constructor ( private filestack: FilestackService ) {}
 
     ngOnInit () {

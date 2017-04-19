@@ -105,11 +105,11 @@ const appRoutes: Routes = [
                     }
                 ]
             },
-            // {
-            //     path: '',
-            //     redirectTo: '/overview',
-            //     pathMatch: 'full'
-            // },
+            {
+                path: '',
+                redirectTo: '/overview',
+                pathMatch: 'full'
+            },
             {
                 path: '**',
                 component: PageNotFoundComponent,
@@ -120,7 +120,7 @@ const appRoutes: Routes = [
 
 @NgModule({
     imports: [
-        RouterModule.forRoot(appRoutes)
+        RouterModule.forRoot(appRoutes, { useHash: true })
     ],
     exports: [
         RouterModule

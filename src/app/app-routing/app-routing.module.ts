@@ -45,7 +45,9 @@ const appRoutes: Routes = [
     {
         path: '',
         component: AppNavigationComponent,
-        canActivate: [AuthGuardService],
+        canActivate: [
+            AuthGuardService
+        ],
         children: [
             {
                 path: 'overview',
@@ -128,7 +130,10 @@ const appRoutes: Routes = [
         {
             provide: AuthHttp,
             useFactory: authHttpServiceFactory,
-            deps: [Http, RequestOptions]
+            deps: [
+                Http, 
+                RequestOptions
+            ]
         }
     ]
 })

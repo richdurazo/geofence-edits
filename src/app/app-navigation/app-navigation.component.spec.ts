@@ -12,6 +12,7 @@ import { AppNavigationComponent } from './app-navigation.component';
 describe('AppNavigationComponent', () => {
   let component: AppNavigationComponent;
   let fixture: ComponentFixture<AppNavigationComponent>;
+  let authService: AuthMockService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -33,9 +34,19 @@ describe('AppNavigationComponent', () => {
     fixture = TestBed.createComponent(AppNavigationComponent);
     fixture.detectChanges();
     component = fixture.componentInstance;
+    authService = TestBed.get(AuthService);
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  describe('logOut', () => {
+      it('should call the logOut method on the AuthService', () => {
+          spyOn(authService, 'logOut');
+          expect(authService.logOut).not.toHaveBeenCalled();
+          component.logOut();
+          expect(authService.logOut).toHaveBeenCalled();
+      });
   });
 });

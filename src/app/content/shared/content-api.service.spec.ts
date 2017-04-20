@@ -43,6 +43,17 @@ describe('ContentApiService', () => {
             expect(data).toEqual([{foo:'bar'}, {hay: 'guyz'}]);
         });
       });
+
+      it ('should call the AuthCustomHttpService and return the response if passed an id', () => {
+        let responseOptions = new ResponseOptions({ body : JSON.stringify([{ foo:'bar' }, { hay: 'guyz' }]) });
+        let response = new Response(responseOptions);
+        spyOn(authHttp, 'get').and.returnValue(Observable.of(response));
+        service.getContent('2')
+        .subscribe( data => {
+            expect(authHttp.get).toHaveBeenCalledWith('http://api.app/content/2');
+            expect(data).toEqual([{foo:'bar'}, {hay: 'guyz'}]);
+        });
+      });
     });
 
     describe('createContent', () => {

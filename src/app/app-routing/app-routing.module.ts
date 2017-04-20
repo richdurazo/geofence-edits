@@ -107,12 +107,8 @@ const appRoutes: Routes = [
             },
             {
                 path: '',
-                redirectTo: '/login',
+                redirectTo: '/overview',
                 pathMatch: 'full'
-            },
-            {
-                path: '**',
-                component: PageNotFoundComponent,
             }
         ]
     }
@@ -120,7 +116,7 @@ const appRoutes: Routes = [
 
 @NgModule({
     imports: [
-        RouterModule.forRoot(appRoutes)
+        RouterModule.forRoot(appRoutes, { useHash: true })
     ],
     exports: [
         RouterModule

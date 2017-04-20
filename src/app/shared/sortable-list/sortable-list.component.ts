@@ -7,30 +7,12 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class SortableListComponent implements OnInit {
 
-    headers: [
-        {
-            value: "name",
-            viewValue: "Name"
-        },
-        {
-            value: "start_at",
-            viewValue: "Start Date"
-        },
-        {
-            value: "start_at",
-            viewValue: "Start Date"
-        },
-        {
-            value: "end_at",
-            viewValue: "End Date"
-        },
-        {
-            value: "action",
-            viewValue: "Actions"
-        }
-    ]
+    tiles: {
+        rows: number;
+        columns: number;
+    };
 
-    @Input() listTitle: string;
+    tileRows: number;
 
     @Input() rows: Array<any>;
 
@@ -39,28 +21,21 @@ export class SortableListComponent implements OnInit {
     constructor() { }
 
     ngOnInit() {
-        this.headers = [
-            {
-                value: "name",
-                viewValue: "Name"
-            },
-            {
-                value: "start_at",
-                viewValue: "Start Date"
-            },
-            {
-                value: "start_at",
-                viewValue: "Start Date"
-            },
-            {
-                value: "end_at",
-                viewValue: "End Date"
-            },
-            {
-                value: "action",
-                viewValue: "Actions"
+        this.toggleLayout();
+    }
+
+    public toggleLayout () {
+        if (this.tiles && this.tiles.rows === 1 && this.tiles.columns === 3) {
+            this.tiles = {
+                rows: 3,
+                columns: 1
             }
-        ]
+        } else {
+            this.tiles = {
+                rows: 1,
+                columns: 3
+            };
+        }
     }
 
 }

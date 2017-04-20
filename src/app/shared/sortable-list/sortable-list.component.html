@@ -1,16 +1,35 @@
 <div class="sortable-list" fxLayout="column" fxFlex="100">
 
-    <div fxLayout="row">
+    <div fxLayout="row" class="search-input-row">
         <div fxFlex="60">
-            <input type="text" name="" value="" placeholder="Search {{ root }}">
+            <md-card fxLayout="row" fxFlex="100" class="search-input-card" fxLayoutAlign="space-around center">
+                <div>
+                    <md-icon>search</md-icon>
+                </div>
+
+                <input class="search-input" type="text" name="" value="" placeholder="Search {{ root }}">
+            </md-card>
         </div>
 
-        <div fxFlex="30">
-            <button type="button" name="button" (click)="toggleLayout()">Toggle</button>
+        <div fxFlex="30" fxFlexOffset="10px">
+            <md-card class="search-input-card" fxLayoutAlign="space-around center">
+                <md-select [floatPlaceholder]="'never'" class="search-input" name="" placeholder="Filter">
+                    <md-option value="something">Option</md-option>
+                    <md-option value="something">Option2</md-option>
+                </md-select>
+
+            </md-card>
+        </div>
+
+        <div fxFlex="10" fxFlexOffset="10px">
+            <button type="button" name="button" (click)="toggleLayout()" md-fab color="primary">
+                <md-icon *ngIf="tiles.columns === 1">view_list</md-icon>
+                <md-icon *ngIf="tiles.columns === 3">view_module</md-icon>
+            </button>
         </div>
     </div>
 
-    <div class="list-header-row" fxLayout="row">
+    <div class="list-header-row" fxLayout="row" fxLayoutOffset="20px;">
 
         <md-grid-list cols="3" rowHeight="75px" gutterSize="20px" fxFlex="100">
 

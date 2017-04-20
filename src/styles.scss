@@ -344,6 +344,30 @@ body {
     }
 
     .sortable-list {
+        .search-input-row {
+            margin-bottom: 20px;
+            .search-input-card {
+                padding: 5px;
+
+                .search-input {
+                    line-height: 24px;
+                    font-size: 16px;
+                    width: 100%;
+                    border: none;
+                    outline: none;
+                    box-shadow: none;
+
+                    .mat-select-underline {
+                        display: none;
+                    }
+
+                    .mat-select-value-text, .mat-select-placeholder {
+                        font-size: 16px;
+                    }
+                }
+            }
+        }
+
         .mat-grid-tile {
             overflow: visible;
         }

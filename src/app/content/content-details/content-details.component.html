@@ -1,11 +1,24 @@
-<md-card class="creator-form-card content-details" fxFlex="96" fxFlexOffset="2" fxLayout="column">
+<md-card class="creator-form-card content-details" fxFlex="96" fxFlexOffset="2">
+
+    <div fxLayout="column">
 
         <div fxLayout="row" fxLayout.md="column" fxLayout.sm="column" *ngIf="content">
 
             <!-- Left Justified Content -->
             <div fxLayout="column" fxFlex="55">
 
-                    <div fxLayout="row">
+                    <div>
+                        <div fxFlex="50" fxLayout="column" class="details-display-container">
+                            <label>
+                                Type
+                            </label>
+                            <div>
+                                {{ content.type }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
                         <div fxFlex="50" fxLayout="column" class="details-display-container">
                             <label>
                                 Title
@@ -16,14 +29,14 @@
                         </div>
                     </div>
 
-                    <div fxLayout="row" fxLayout.sm="column" fxLayoutGap="10px" fxFlex="66">
+                    <div fxLayout="row" fxLayout.sm="column" fxLayoutGap="10px">
 
                         <div fxFlex="33" fxLayout="column" class="details-display-container">
                             <label>
                                 Start Date
                             </label>
                             <div>
-                                {{ content.start_at }}
+                                {{ content.start_at | date: 'dd/MM/yyyy' }}
                             </div>
                         </div>
 
@@ -32,49 +45,57 @@
                                 End Date
                             </label>
                             <div>
-                                {{ content.end_at }}
+                                {{ content.end_at | date: 'dd/MM/yyyy' }}
                             </div>
                         </div>
 
                     </div>
 
                     <div class="form-highlight-well" fxFlex="100">
-                        <div fxFlex="100" fxLayout="column" class="details-display-container">
-                            <label>
-                                Display Title
-                            </label>
-                            <div>
-                                {{ content.display_name }}
+                        <div fxFlex="100" fxLayout="row">
+                            <div fxLayout="column" class="details-display-container">
+                                <label>
+                                    Display Title
+                                </label>
+                                <div>
+                                    {{ content.display_name }}
+                                </div>
                             </div>
                         </div>
 
-                        <div fxFlex="100" fxLayout="column" class="details-display-container">
-                            <label>
-                                Description
-                            </label>
-                            <div>
-                                {{ content.description }}
+                        <div fxFlex="100" fxLayout="row">
+                            <div fxLayout="column" class="details-display-container">
+                                <label>
+                                    Description
+                                </label>
+                                <div>
+                                    {{ content.description }}
+                                </div>
                             </div>
                         </div>
 
                     </div>
 
                     <div class="form-highlight-well" fxFlex="100" *ngIf="content.scratcher_name">
-                        <div fxFlex="100" fxLayout="column" class="details-display-container">
-                            <label>
-                                Scratcher Exclamation
-                            </label>
-                            <div>
-                                {{ content.scratcher_name }}
+                        <div fxFlex="100" fxLayout="row">
+                            <div fxLayout="column" class="details-display-container">
+                                <label>
+                                    Scratcher Exclamation
+                                </label>
+                                <div>
+                                    {{ content.scratcher_name }}
+                                </div>
                             </div>
                         </div>
 
-                        <div fxFlex="100" fxLayout="column" class="details-display-container">
-                            <label>
-                                Scratcher Description
-                            </label>
-                            <div>
-                                {{ content.scratcher_description }}
+                        <div fxFlex="100" fxLayout="row">
+                            <div fxLayout="column" class="details-display-container">
+                                <label>
+                                    Scratcher Description
+                                </label>
+                                <div>
+                                    {{ content.scratcher_description }}
+                                </div>
                             </div>
                         </div>
 
@@ -335,5 +356,7 @@
             </div>
 
         </div>
+
+    </div>
 
 </md-card>

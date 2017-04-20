@@ -83,7 +83,7 @@ describe('ContentCreatorFormComponent', () => {
             expect(component.setModelDefaults).not.toHaveBeenCalled();
             component.setType('foo');
             expect(component.contentType).toEqual('foo');
-            expect(component.setModelDefaults).toHaveBeenCalledWith('poo');
+            expect(component.setModelDefaults).toHaveBeenCalledWith('foo');
         });
     });
 

@@ -76,6 +76,17 @@ describe('ContentCreatorFormComponent', () => {
         });
     });
 
+    describe('setType', () => {
+        it('should set the contentType and call setModelDefaults with the value', () => {
+            spyOn(component, 'setModelDefaults');
+            expect(component.contentType).not.toBeDefined();
+            expect(component.setModelDefaults).not.toHaveBeenCalled();
+            component.setType('foo');
+            expect(component.contentType).toEqual('foo');
+            expect(component.setModelDefaults).toHaveBeenCalledWith('poo');
+        });
+    });
+
     describe('submitForm', () => {
         it('should have a submitForm function', () => {
             expect(component.submitForm).toBeTruthy();

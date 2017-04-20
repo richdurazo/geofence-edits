@@ -191,14 +191,14 @@ export class ContentCreatorFormComponent implements OnInit {
         )
     }
 
-    private setImageConfig () {
+    public setImageConfig () {
         this.heroOfferImageConfig = this.filestack.createImageConfig('hero-offer', this.contentUuid, 2/1);
         this.heroScratcherImageConfig = this.filestack.createImageConfig('hero-scratcher', this.contentUuid, 2/1);
         this.overlayScratcherImageConfig = this.filestack.createImageConfig('overlay-scratcher', this.contentUuid, 9/10);
         this.walletImageConfig = this.filestack.createImageConfig('wallet', this.contentUuid, 1/1);
     }
 
-    private setModelDefaults (type: string) {
+    public setModelDefaults (type: string) {
         this.content = new ContentModel(this.contentUuid, type, '', '', '', new Date(), new Date());
     }
 

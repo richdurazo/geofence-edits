@@ -49,6 +49,7 @@ import { FileUploaderComponent } from './shared/file-uploader/file-uploader.comp
 import { SortableListComponent } from './shared/sortable-list/sortable-list.component';
 import { ImageComponent } from './shared/image/image.component';
 import { SortableListItemComponent } from './shared/sortable-list/sortable-list-item/sortable-list-item.component';
+import { ContentListComponent } from './content/content-overview/content-list/content-list.component';
 
 @NgModule({
     declarations: [
@@ -77,7 +78,8 @@ import { SortableListItemComponent } from './shared/sortable-list/sortable-list-
         ImageComponent,
         TriggerDetailsComponent,
         CampaignDetailsComponent,
-        SortableListItemComponent
+        SortableListItemComponent,
+        ContentListComponent
     ],
     imports: [
         BrowserModule,

@@ -45,7 +45,9 @@ const appRoutes: Routes = [
     {
         path: '',
         component: AppNavigationComponent,
-        canActivate: [AuthGuardService],
+        canActivate: [
+            AuthGuardService
+        ],
         children: [
             {
                 path: 'overview',
@@ -107,12 +109,8 @@ const appRoutes: Routes = [
             },
             {
                 path: '',
-                redirectTo: '/login',
+                redirectTo: '/overview',
                 pathMatch: 'full'
-            },
-            {
-                path: '**',
-                component: PageNotFoundComponent,
             }
         ]
     }
@@ -120,7 +118,7 @@ const appRoutes: Routes = [
 
 @NgModule({
     imports: [
-        RouterModule.forRoot(appRoutes)
+        RouterModule.forRoot(appRoutes, { useHash: true })
     ],
     exports: [
         RouterModule
@@ -132,7 +130,10 @@ const appRoutes: Routes = [
         {
             provide: AuthHttp,
             useFactory: authHttpServiceFactory,
-            deps: [Http, RequestOptions]
+            deps: [
+                Http, 
+                RequestOptions
+            ]
         }
     ]
 })

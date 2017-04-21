@@ -40,7 +40,6 @@ export class CampaignCreatorFormComponent implements OnInit {
     }
 
     public setDate (key, event) {
-        console.log('key, event', key, event);
         this.campaign[key] = new Date(event);
     }
 

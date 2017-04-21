@@ -1,4 +1,4 @@
-<md-card class="creator-form-card" fxFlex="96" fxFlexOffset="2">
+<md-card class="creator-form-card" fxFlex="100">
 
     <form #form="ngForm" (ngSubmit)="submitForm(form)" novalidate fxLayout="column">
 
@@ -184,7 +184,7 @@
                                     name="redemption_code"
                                     type="text"
                                     placeholder="Redemption Code"
-                                    [(ngModel)]="content.redemptionCode"
+                                    [(ngModel)]="content.redemption_code"
                                     #redemption_code="ngModel"
                                     required>
 
@@ -195,7 +195,12 @@
                                     </md-hint>
                                 </md-input-container>
 
-                                <md-select placeholder="QR Format" name="redemption_format" [(ngModel)]="redemptionFormat" *ngIf="content.redemption_method === 'store' || content.redemption_method === 'both'"  fxFlex="50">
+                                <md-select
+                                    placeholder="QR Format"
+                                    name="redemption_format"
+                                    [(ngModel)]="content.redemption_code_format"
+                                    *ngIf="content.redemption_method === 'store' || content.redemption_method === 'both'"
+                                    fxFlex="50">
                                     <md-option *ngFor="let format of redemptionFormats" [value]="format.value">
                                         {{ format.viewValue }}
                                     </md-option>
@@ -209,7 +214,7 @@
                                     name="redemption_url"
                                     type="text"
                                     placeholder="Redemption URL"
-                                    [(ngModel)]="content.redemptionUrl"
+                                    [(ngModel)]="content.redemption_url"
                                     #redemption_url="ngModel">
 
                                     <md-hint align="start">

@@ -152,26 +152,23 @@ export class ContentCreatorFormComponent implements OnInit {
         };
         let dialogRef = this.dialog.open(TermsDialogComponent, config);
         dialogRef.afterClosed().subscribe(result => {
-            console.log('terms result', result);
             this.content.terms = result;
         });
     }
 
     public setDate (key, event) {
-        console.log('key, event', key, event);
         this.content[key] = new Date(event);
     }
 
     public setType (event) {
-        console.log('setType event', event);
         this.contentType = event;
         this.setModelDefaults(this.contentType);
     }
 
     public submitForm (form) {
-        console.log('submitForm this.content', this.content);
+        // console.log('submitForm this.content', JSON.stringify(this.content, null, 2));
         if (!form.valid) { return; }
-        var obj = JSON.parse(JSON.stringify(this.content));
+        var obj = Object.assign({}, this.content);
         obj.start_at = this.dateUtils.formatSQLDate(obj.start_at);
         obj.end_at = this.dateUtils.formatSQLDate(obj.end_at);
         this.contentApi.createContent(obj)
@@ -184,7 +181,7 @@ export class ContentCreatorFormComponent implements OnInit {
         console.log('saved content data', data);
     }
 
-    private fetchUuid () {
+    public fetchUuid () {
         this.uuidApi.fetchUuid()
         .subscribe(
             data => {
@@ -194,16 +191,15 @@ export class ContentCreatorFormComponent implements OnInit {
         )
     }
 
-    private setImageConfig () {
+    public setImageConfig () {
         this.heroOfferImageConfig = this.filestack.createImageConfig('hero-offer', this.contentUuid, 2/1);
         this.heroScratcherImageConfig = this.filestack.createImageConfig('hero-scratcher', this.contentUuid, 2/1);
         this.overlayScratcherImageConfig = this.filestack.createImageConfig('overlay-scratcher', this.contentUuid, 9/10);
         this.walletImageConfig = this.filestack.createImageConfig('wallet', this.contentUuid, 1/1);
     }
 
-    private setModelDefaults (type: string) {
+    public setModelDefaults (type: string) {
         this.content = new ContentModel(this.contentUuid, type, '', '', '', new Date(), new Date());
-        console.log('this.content', this.content);
     }
 
 }

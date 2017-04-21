@@ -24,8 +24,6 @@ export class CampaignDetailsComponent implements OnInit {
     ngOnInit() {
         this.sub = this.route.params.subscribe(params => {
             this.id = params['id'];
-            console.log('this.id', this.id);
-
             this.getCampaign();
         });
     }
@@ -38,7 +36,6 @@ export class CampaignDetailsComponent implements OnInit {
         this.campaignApi.getCampaign(this.id)
         .subscribe(data => {
             this.campaign = data;
-            console.log('this.campaign', this.campaign);
         });
     }
 

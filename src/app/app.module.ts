@@ -9,6 +9,7 @@ import 'hammerjs';
 import * as moment from 'moment/moment.d';
 
 import { AppComponent } from './app.component';
+import { AppNavigationComponent } from './app-navigation/app-navigation.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 
 import { LoginComponent } from './login/login.component';
@@ -40,14 +41,14 @@ import { CampaignApiService } from './campaigns/shared/campaign-api.service';
 import { ContentApiService } from './content/shared/content-api.service';
 import { TriggerApiService } from './triggers/shared/trigger-api.service';
 import { UserApiService } from './users/shared/user-api.service';
-import { AppNavigationComponent } from './app-navigation/app-navigation.component';
+import { UuidApiService } from './shared/uuid-api.service';
 
 import { DateUtilsService } from './shared/date-utils.service';
-import { UuidApiService } from './shared/uuid-api.service';
 import { FilestackService } from './shared/filestack.service';
 import { FileUploaderComponent } from './shared/file-uploader/file-uploader.component';
 import { SortableListComponent } from './shared/sortable-list/sortable-list.component';
 import { ImageComponent } from './shared/image/image.component';
+import { SortableListItemComponent } from './shared/sortable-list/sortable-list-item/sortable-list-item.component';
 
 @NgModule({
     declarations: [
@@ -75,7 +76,8 @@ import { ImageComponent } from './shared/image/image.component';
         ContentDetailsComponent,
         ImageComponent,
         TriggerDetailsComponent,
-        CampaignDetailsComponent
+        CampaignDetailsComponent,
+        SortableListItemComponent
     ],
     imports: [
         BrowserModule,

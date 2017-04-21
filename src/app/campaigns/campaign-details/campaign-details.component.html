@@ -1,11 +1,33 @@
-<md-card fxFlex="96" fxFlexOffset="2">
+<md-card fxFlex="100">
 
     <div fxLayout="row" *ngIf="campaign">
 
         <div fxLayout="column" fxFlex="55">
 
-            <div fxLayout="row">
-                <div fxFlex="60">
+            <div fxFlex="100" fxLayout="row">
+                <div fxLayout="column" class="details-display-container">
+                    <label>
+                        Title
+                    </label>
+                    <div>
+                        {{ campaign.name }}
+                    </div>
+                </div>
+            </div>
+
+            <div fxFlex="100" fxLayout="row">
+                <div fxLayout="column" class="details-display-container">
+                    <label>
+                        Description
+                    </label>
+                    <div>
+                        {{ campaign.description }}
+                    </div>
+                </div>
+            </div>
+
+            <div fxFlex="100" fxLayout="row">
+                <div fxLayout="column" class="details-display-container">
                     <label>
                         Title
                     </label>
@@ -16,18 +38,9 @@
             </div>
 
 
-            <div fxLayout="row">
-                <label>
-                    Description
-                </label>
-                <div>
-                    {{ campaign.description }}
-                </div>
-            </div>
+            <div fxFlex="100" fxLayout="row" fxLayoutGap="10px">
 
-            <div fxLayout="row" fxLayout.sm="column" fxLayoutGap="10px">
-
-                <div fxFlex="33">
+                <div class="details-display-container" fxFlex="33">
                     <label>
                         Start Date
                     </label>
@@ -36,7 +49,7 @@
                     </div>
                 </div>
 
-                <div fxFlex="33">
+                <div class="details-display-container" fxFlex="33">
                     <label>
                         End Date
                     </label>

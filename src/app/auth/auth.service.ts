@@ -14,7 +14,7 @@ export class AuthService {
 
     // public methods
     public loggedIn () {
-        return tokenNotExpired();
+        return tokenNotExpired('id_token', localStorage.getItem('id_token'));
     }
 
     public logOut () {
@@ -45,6 +45,7 @@ export class AuthService {
 
     // private methods
     private processSuccess (data) {
+        console.log('data', data);
         localStorage.setItem('id_token', data.token);
     }
 

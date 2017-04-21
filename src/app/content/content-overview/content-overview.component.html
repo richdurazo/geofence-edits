@@ -1,19 +1,23 @@
-<h1 class="color-primary page-heading" fxFlex="96" fxFlexOffset="2">
+<h1 class="color-primary page-heading" fxFlex="100">
     Overview
 </h1>
 
-<div class="content-thing row col col-xs-12 " *ngFor="let contentItem of content; let i = index;">
-    <div class="col col-xs-3">
-        <a routerLink="/content/{{  contentItem.id }}">
-            {{ contentItem.name }}
-        </a>
-    </div>
+<md-card fxFlex="100">
 
-    <div class="col col-xs-3">
-        {{ contentItem.description }}
-    </div>
+    <div class="content-thing row col col-xs-12 " *ngFor="let contentItem of content; let i = index;">
+        <div class="col col-xs-3">
+            <a routerLink="/content/{{  contentItem.id }}">
+                {{ contentItem.name }}
+            </a>
+        </div>
 
-    <div class="col col-xs-6">
-        <button type="button" class="btn btn-danger" name="delete" (click)="deleteItem(i)">Delete Campaign</button>
+        <div class="col col-xs-3">
+            {{ contentItem.description }}
+        </div>
+
+        <div class="col col-xs-6">
+            <button type="button" class="btn btn-danger" name="delete" (click)="deleteItem(i)">Delete Campaign</button>
+        </div>
     </div>
-</div>
+    
+</md-card>

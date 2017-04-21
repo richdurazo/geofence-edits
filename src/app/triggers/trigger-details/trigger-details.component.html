@@ -1,4 +1,4 @@
-<md-card fxFlex="96" fxFlexOffset="2">
+<md-card fxFlex="100">
 
         <div fxLayout="row">
 
@@ -7,18 +7,18 @@
                 <div *ngIf="trigger">
 
                     <div fxLayout="row">
-                        <div fxFlex="50">
+                        <div fxFlex="50" fxLayout="column" class="details-display-container">
                             <label>
                                 Type
                             </label>
                             <div>
-                                <!-- {{ trigger.type }} -->
+                                {{ trigger.type }}
                             </div>
                         </div>
                     </div>
 
                     <div fxLayout="row">
-                        <div fxFlex="50">
+                        <div fxFlex="50" fxLayout="column" class="details-display-container">
                             <label>
                                 Name
                             </label>
@@ -29,7 +29,7 @@
                     </div>
 
                     <div fxLayout="row">
-                        <div fxFlex="100">
+                        <div fxFlex="100" fxLayout="column" class="details-display-container">
                             <label>
                                 Notes
                             </label>
@@ -40,7 +40,7 @@
                     </div>
 
                     <div fxLayout="row" *ngIf="trigger.type === 'watermark' || trigger.type === 'touch'">
-                        <div fxFlex="60">
+                        <div fxFlex="60" fxLayout="column" class="details-display-container">
                             <label>
                                 Value
                             </label>
@@ -52,10 +52,9 @@
 
                 </div>
 
-
             </div>
 
-            <div class="right-column" fxFlex="45">
+            <div class="right-column" fxFlex="45" *ngIf="trigger">
 
                 <div class="media-container" *ngIf="trigger.type === 'watermark' || trigger.type === 'fingerprint'">
                     <div class="creator-section-label">

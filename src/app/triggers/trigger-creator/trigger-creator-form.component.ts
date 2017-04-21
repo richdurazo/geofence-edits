@@ -66,7 +66,7 @@ export class TriggerCreatorFormComponent implements OnInit {
         ];
     }
 
-    private fetchUuid () {
+    public fetchUuid () {
         this.uuidApi.fetchUuid()
         .subscribe(
             data => {
@@ -80,8 +80,8 @@ export class TriggerCreatorFormComponent implements OnInit {
         if (!form.valid) {
             return;
         }
-
-        var obj = JSON.parse(JSON.stringify(this.trigger));
+        console.log('this.trigger', this.trigger);
+        var obj = Object.assign({}, this.trigger);
 
         this.triggerApi.createTrigger(obj)
         .subscribe(

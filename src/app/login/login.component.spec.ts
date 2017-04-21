@@ -103,28 +103,28 @@ describe('LoginComponent', () => {
             expect(router.navigate).toHaveBeenCalledWith(['foo']);
         });
 
-        it('should get the redirect url from the AuthService and call the router to redirect to /overview if passed an undefined value', () => {
+        it('should get the redirect url from the AuthService and call the router to redirect to overview if passed an undefined value', () => {
             spyOn(authService, 'getRedirectUrl').and.returnValue(undefined);
             spyOn(router, 'navigate');
             comp.processSuccess();
             expect(authService.getRedirectUrl).toHaveBeenCalled();
-            expect(router.navigate).toHaveBeenCalledWith(['/overview']);
+            expect(router.navigate).toHaveBeenCalledWith(['overview']);
         });
 
-        it('should get the redirect url from the AuthService and call the router to redirect to /overview if passed an undefined value', () => {
+        it('should get the redirect url from the AuthService and call the router to redirect to overview if passed an undefined value', () => {
             spyOn(authService, 'getRedirectUrl').and.returnValue(null);
             spyOn(router, 'navigate');
             comp.processSuccess();
             expect(authService.getRedirectUrl).toHaveBeenCalled();
-            expect(router.navigate).toHaveBeenCalledWith(['/overview']);
+            expect(router.navigate).toHaveBeenCalledWith(['overview']);
         });
 
-        it('should get the redirect url from the AuthService and call the router to redirect to /overview if passed and empty string', () => {
+        it('should get the redirect url from the AuthService and call the router to redirect to overview if passed and empty string', () => {
             spyOn(authService, 'getRedirectUrl').and.returnValue('');
             spyOn(router, 'navigate');
             comp.processSuccess();
             expect(authService.getRedirectUrl).toHaveBeenCalled();
-            expect(router.navigate).toHaveBeenCalledWith(['/overview']);
+            expect(router.navigate).toHaveBeenCalledWith(['overview']);
         });
     });
 

@@ -1,28 +1,27 @@
-import { Component, OnInit } from '@angular/core';
-import { MdDialogRef } from '@angular/material';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
 
 @Component({
-  selector: 'app-terms-dialog',
-  templateUrl: './terms-dialog.component.html',
-  styleUrls: ['./terms-dialog.component.scss']
+    selector: 'app-terms-dialog',
+    templateUrl: './terms-dialog.component.html',
+    styleUrls: ['./terms-dialog.component.scss']
 })
 export class TermsDialogComponent implements OnInit {
 
-    data: any;
+    model: any;
 
-  constructor(public dialogRef: MdDialogRef<TermsDialogComponent>) {
-   }
+    constructor(public dialogRef: MdDialogRef<TermsDialogComponent>, @Inject(MD_DIALOG_DATA) private data: any) {
+        this.model = {
+            terms: this.data
+        };
+    }
 
-  ngOnInit() {
-      console.log('this.dialogRef', this.dialogRef);
-      this.data = {
-          terms: this.dialogRef.config.data
-      };
-  }
+    ngOnInit() {
+    }
 
-  public submitForm (form) {
-      if (form.valid) {
-          this.dialogRef.close(this.data.terms);
-      }
-  }
+    public submitForm (form) {
+        if (form.valid) {
+            this.dialogRef.close(this.model.terms);
+        }
+    }
 }

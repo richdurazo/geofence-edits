@@ -26,17 +26,17 @@ export class LoginComponent implements OnInit {
     }
 
     login (form) {
-        console.log('this.credentials', this.credentials);
         if (!form.valid) { return false; }
         this.authService.login(this.credentials, this.processSuccess.bind(this), this.processError.bind(this));
     }
 
     processSuccess () {
         let url = this.authService.getRedirectUrl();
+
         if (!!url && url !== '') {
             this.router.navigate([url]);
         } else {
-            this.router.navigate(['/overview']);
+            this.router.navigate(['overview']);
         }
     }
 

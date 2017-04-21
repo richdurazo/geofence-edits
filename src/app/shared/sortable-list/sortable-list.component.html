@@ -1,45 +1,51 @@
 <div class="sortable-list" fxLayout="column" fxFlex="100">
-    <md-card-title>
-        {{ listTitle }}
-    </md-card-title>
 
+    <div fxLayout="row" class="search-input-row">
+        <div fxFlex="60">
+            <md-card fxLayout="row" fxFlex="100" class="search-input-card" fxLayoutAlign="space-around center">
+                <div>
+                    <md-icon>search</md-icon>
+                </div>
 
-    <div class="list-header-row" fxLayout="row">
-        <table fxFlex="100" fxLayout="column">
-            <tr fxLayout="row">
-                <th class="list-header" *ngFor="let header of headers; let i = index;" fxFlex="100">
-                    {{ header.viewValue }}
-                </th>
-            </tr>
+                <input class="search-input" type="text" name="" value="" placeholder="Search {{ root }}">
+            </md-card>
+        </div>
 
-            <tbody fxLayout="column">
+        <div fxFlex="30" fxFlexOffset="10px">
+            <md-card class="search-input-card" fxLayoutAlign="space-around center">
+                <md-select [floatPlaceholder]="'never'" class="search-input" name="" placeholder="Filter">
+                    <md-option value="something">Option</md-option>
+                    <md-option value="something">Option2</md-option>
+                </md-select>
 
-                <tr class="sortable-list-item" *ngFor="let row of rows; let i = index;" fxLayout="row" fxFlex="100">
-                    <td fxLayout="row" fxFlex="100"  *ngFor="let header of headers; let i = index;">
-                        <span
-                            *ngIf="header.value !== 'action' && header.value !== 'start_at' && header.value !== 'name' && header.value !== 'end_at'">
-                            {{ row[header.value] }}
-                        </span>
-                        <span
-                            *ngIf="header.value !== 'action' && (header.value === 'start_at' && header.value !== 'name' || header.value === 'end_at')">
-                            {{ row[header.value] | date }}
-                        </span>
-                        <a *ngIf="header.value === 'name'" routerLink="{{ '/' + root + '/' + row.id }}">
-                            {{ row[header.value] }}
-                        </a>
-                        <button
-                            *ngIf="header.value === 'action'"
-                            type="button"
-                            class="btn btn-danger"
-                            name="delete"
-                            (click)="deleteItem(i)">
-                            Delete Campaign
-                        </button>
-                    </td>
-                </tr>
+            </md-card>
+        </div>
 
-            </tbody>
-        </table>
+        <div fxFlex="10" fxFlexOffset="10px" fxLayoutAlign="space-around center">
+            <button type="button" name="button" (click)="toggleLayout()" md-fab color="primary">
+                <md-icon *ngIf="tiles.columns === 1">view_list</md-icon>
+                <md-icon *ngIf="tiles.columns === 3">view_module</md-icon>
+            </button>
+        </div>
+    </div>
+
+    <div class="list-header-row" fxLayout="row" fxLayoutOffset="20px;">
+
+        <md-grid-list cols="3" rowHeight="75px" gutterSize="20px" fxFlex="100">
+
+          <md-grid-tile
+              *ngFor="let row of rows; let i = index;"
+              [colspan]="tiles.columns"
+              [rowspan]="tiles.rows"
+              fxFlex="100">
+
+              <app-sortable-list-item [root]="root" [item]="row" fxFlex="100" [layout]="listLayout">
+              </app-sortable-list-item>
+
+          </md-grid-tile>
+
+        </md-grid-list>
+
     </div>
 
 </div>

@@ -11,10 +11,13 @@ export class SortableListItemComponent implements OnInit {
 
     @Input() layout: string;
 
+    @Input() root: string;
+
   constructor() { }
 
   ngOnInit() {
       console.log('item', this.item);
+      console.log('root', this.root);
   }
 
 }

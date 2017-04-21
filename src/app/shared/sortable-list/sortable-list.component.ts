@@ -14,6 +14,8 @@ export class SortableListComponent implements OnInit {
 
     tileRows: number;
 
+    listLayout: string;
+
     @Input() rows: Array<any>;
 
     @Input() root: string;
@@ -27,14 +29,16 @@ export class SortableListComponent implements OnInit {
     public toggleLayout () {
         if (this.tiles && this.tiles.rows === 1 && this.tiles.columns === 3) {
             this.tiles = {
-                rows: 3,
+                rows: 4,
                 columns: 1
             }
+            this.listLayout = 'card';
         } else {
             this.tiles = {
                 rows: 1,
                 columns: 3
             };
+            this.listLayout = 'row';
         }
     }
 

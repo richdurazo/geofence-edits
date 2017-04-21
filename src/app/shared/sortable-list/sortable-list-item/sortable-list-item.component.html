@@ -1,0 +1,51 @@
+<md-card fxFlex="100">
+
+    <div fxFlex="100" *ngIf="layout === 'row'" fxLayout="row" fxLayoutAlign="space-around center">
+
+        <div fxFlex="40">
+            {{ item.name }}
+        </div>
+
+        <div fxFlex="20">
+            Start Date: {{ item.start_at | date: 'dd/MM/yyyy' }}
+        </div>
+
+        <div fxFlex="20">
+            End Date{{ item.end_at | date: 'dd/MM/yyyy' }}
+        </div>
+
+        <div fxFlex="20">
+            Impressions: 100,000,000
+        </div>
+    </div>
+
+    <div fxFlex="100" *ngIf="layout === 'card'" fxLayout="column">
+        <div fxFlex="150px">
+            GRAPH
+        </div>
+        <div fxFlex="150px">
+            <div fxFlex="20">
+                {{ item.name }}
+            </div>
+
+            <div fxFlex="20">
+                Description: {{ item.description }}
+            </div>
+
+            <div fxFlex="20">
+                Start Date: {{ item.start_at | date: 'dd/MM/yyyy' }}
+            </div>
+
+            <div fxFlex="20">
+                End Date: {{ item.end_at | date: 'dd/MM/yyyy' }}
+            </div>
+
+            <div fxFlex="20">
+                Impressions: 100,000,000
+            </div>
+        </div>
+
+    </div>
+
+
+</md-card>

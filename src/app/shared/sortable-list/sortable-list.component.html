@@ -21,7 +21,7 @@
             </md-card>
         </div>
 
-        <div fxFlex="10" fxFlexOffset="10px">
+        <div fxFlex="10" fxFlexOffset="10px" fxLayoutAlign="space-around center">
             <button type="button" name="button" (click)="toggleLayout()" md-fab color="primary">
                 <md-icon *ngIf="tiles.columns === 1">view_list</md-icon>
                 <md-icon *ngIf="tiles.columns === 3">view_module</md-icon>
@@ -39,21 +39,8 @@
               [rowspan]="tiles.rows"
               fxFlex="100">
 
-              <md-card fxFlex="100">
-
-                  <span>
-                      {{ row.name }}
-                  </span>
-
-                  <button
-                      type="button"
-                      class="btn btn-danger"
-                      name="delete"
-                      (click)="deleteItem(i)">
-                      Delete Campaign
-                  </button>
-
-              </md-card>
+              <app-sortable-list-item [item]="row" fxFlex="100" [layout]="listLayout">
+              </app-sortable-list-item>
 
           </md-grid-tile>
 

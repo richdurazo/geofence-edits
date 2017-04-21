@@ -48,6 +48,7 @@ import { FilestackService } from './shared/filestack.service';
 import { FileUploaderComponent } from './shared/file-uploader/file-uploader.component';
 import { SortableListComponent } from './shared/sortable-list/sortable-list.component';
 import { ImageComponent } from './shared/image/image.component';
+import { SortableListItemComponent } from './shared/sortable-list/sortable-list-item/sortable-list-item.component';
 
 @NgModule({
     declarations: [
@@ -75,7 +76,8 @@ import { ImageComponent } from './shared/image/image.component';
         ContentDetailsComponent,
         ImageComponent,
         TriggerDetailsComponent,
-        CampaignDetailsComponent
+        CampaignDetailsComponent,
+        SortableListItemComponent
     ],
     imports: [
         BrowserModule,

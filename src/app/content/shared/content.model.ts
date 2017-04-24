@@ -1,10 +1,17 @@
 export class ContentModel {
     uuid: string;
     id?: number;
-    type: string;
+    type: number;
     name: string;
     display_name: string;
     description: string;
+    scratcher_enabled: boolean;
+    scratcher_name?: string;
+    scratcher_description?: string;
+    redemption_method: number;
+    redemption_code?: string;
+    redemption_code_format?: number;
+    redemption_url?: string;
     quantity: number;
     start_at: Date;
     end_at: Date;
@@ -12,7 +19,7 @@ export class ContentModel {
 
     constructor (
         uuid: string,
-        type: string,
+        type: number,
         name: string,
         display_name: string,
         description: string,

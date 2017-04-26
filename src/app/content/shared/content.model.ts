@@ -33,6 +33,7 @@ export class ContentModel {
         this.description = description;
         this.start_at = start_at;
         this.end_at = end_at;
+        this.scratcher_enabled = false;
     }
 
 }

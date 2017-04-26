@@ -20,15 +20,15 @@ export class ContentCreatorFormComponent implements OnInit {
 
     contentTypes: [
         {
-            value: "offer",
+            value: 0,
             viewValue: "Offer"
         },
         {
-            value: "prize",
+            value: 1,
             viewValue: "Prize"
         },
         {
-            value: "message",
+            value: 2,
             viewValue: "Message"
         }
     ];
@@ -63,7 +63,7 @@ export class ContentCreatorFormComponent implements OnInit {
         }
     ];
 
-    contentType: string;
+    contentType: number;
 
     contentUuid: string;
 
@@ -101,15 +101,15 @@ export class ContentCreatorFormComponent implements OnInit {
         this.fetchUuid();
         this.contentTypes = [
             {
-                value: "offer",
+                value: 0,
                 viewValue: "Offer"
             },
             {
-                value: "prize",
+                value: 1,
                 viewValue: "Prize"
             },
             {
-                value: "message",
+                value: 2,
                 viewValue: "Message"
             }
         ];
@@ -161,6 +161,7 @@ export class ContentCreatorFormComponent implements OnInit {
     }
 
     public setType (event) {
+        console.log('event', event);
         this.contentType = event;
         this.setModelDefaults(this.contentType);
     }
@@ -198,7 +199,7 @@ export class ContentCreatorFormComponent implements OnInit {
         this.walletImageConfig = this.filestack.createImageConfig('wallet', this.contentUuid, 1/1);
     }
 
-    public setModelDefaults (type: string) {
+    public setModelDefaults (type: number) {
         this.content = new ContentModel(this.contentUuid, type, '', '', '', new Date(), new Date());
     }
 

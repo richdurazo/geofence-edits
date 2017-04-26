@@ -126,7 +126,7 @@
 
                     </div>
 
-                    <div class="form-highlight-well" fxFlex="100" *ngIf="scratcherEnabled">
+                    <div class="form-highlight-well" fxFlex="100" *ngIf="content.scratcher_enabled">
                         <div fxFlex="100" fxLayout="row">
                             <md-input-container fxFlex="50">
                                 <input
@@ -277,14 +277,14 @@
                                 name="scratcher_enabled"
                                 [color]="'primary'"
                                 [labelPosition]="'before'"
-                                [(ngModel)]="scratcherEnabled">
+                                [(ngModel)]="content.scratcher_enabled">
                             </md-slide-toggle>
                         </div>
                     </div>
 
                     <div class="right-column" fxLayout="column">
 
-                        <md-tab-group *ngIf="scratcherEnabled">
+                        <md-tab-group *ngIf="content.scratcher_enabled">
 
                             <!-- SCRATCHER LAYER -->
                             <md-tab label="Overlay">
@@ -409,7 +409,7 @@
 
                         </md-tab-group>
 
-                        <div *ngIf="!scratcherEnabled">
+                        <div *ngIf="!content.scratcher_enabled">
                             <div fxFlex="49px;"></div>
 
                             <div class="creator-section-label">

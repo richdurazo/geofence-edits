@@ -1,7 +1,7 @@
 export class ContentModel {
     uuid: string;
     id?: number;
-    type: number;
+    type: string;
     name: string;
     display_name: string;
     description: string;
@@ -19,7 +19,7 @@ export class ContentModel {
 
     constructor (
         uuid: string,
-        type: number,
+        type: string,
         name: string,
         display_name: string,
         description: string,

@@ -20,15 +20,15 @@ export class ContentCreatorFormComponent implements OnInit {
 
     contentTypes: [
         {
-            value: 0,
+            value: "offer",
             viewValue: "Offer"
         },
         {
-            value: 1,
+            value: "prize",
             viewValue: "Prize"
         },
         {
-            value: 2,
+            value: "message",
             viewValue: "Message"
         }
     ];
@@ -199,7 +199,7 @@ export class ContentCreatorFormComponent implements OnInit {
         this.walletImageConfig = this.filestack.createImageConfig('wallet', this.contentUuid, 1/1);
     }
 
-    public setModelDefaults (type: number) {
+    public setModelDefaults (type: string) {
         this.content = new ContentModel(this.contentUuid, type, '', '', '', new Date(), new Date());
     }
 

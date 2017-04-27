@@ -101,15 +101,15 @@ export class ContentCreatorFormComponent implements OnInit {
         this.fetchUuid();
         this.contentTypes = [
             {
-                value: 0,
+                value: "offer",
                 viewValue: "Offer"
             },
             {
-                value: 1,
+                value: "prize",
                 viewValue: "Prize"
             },
             {
-                value: 2,
+                value: "message",
                 viewValue: "Message"
             }
         ];

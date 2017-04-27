@@ -63,7 +63,7 @@ export class ContentCreatorFormComponent implements OnInit {
         }
     ];
 
-    contentType: number;
+    contentType: string;
 
     contentUuid: string;
 

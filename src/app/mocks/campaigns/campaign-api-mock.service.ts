@@ -13,6 +13,10 @@ export class CampaignApiMockService {
       return false;
     }
 
+    getCampaignTriggers () {
+        return false;
+    }
+
     createCampaign (data) {
       return false;
     }

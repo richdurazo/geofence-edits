@@ -14,6 +14,7 @@ import { ContentModel } from '../shared/content.model';
     templateUrl: './content-creator-form.component.html',
     styleUrls: ['./content-creator-form.component.scss']
 })
+
 export class ContentCreatorFormComponent implements OnInit {
 
     content: ContentModel;

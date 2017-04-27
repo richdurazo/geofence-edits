@@ -50,6 +50,7 @@ import { SortableListComponent } from './shared/sortable-list/sortable-list.comp
 import { ImageComponent } from './shared/image/image.component';
 import { SortableListItemComponent } from './shared/sortable-list/sortable-list-item/sortable-list-item.component';
 import { ContentListComponent } from './content/content-overview/content-list/content-list.component';
+import { TriggerListComponent } from './triggers/triggers-overview/trigger-list/trigger-list.component';
 
 @NgModule({
     declarations: [
@@ -79,7 +80,8 @@ import { ContentListComponent } from './content/content-overview/content-list/co
         TriggerDetailsComponent,
         CampaignDetailsComponent,
         SortableListItemComponent,
-        ContentListComponent
+        ContentListComponent,
+        TriggerListComponent
     ],
     imports: [
         BrowserModule,

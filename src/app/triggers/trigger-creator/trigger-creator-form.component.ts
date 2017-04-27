@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+
+import { CampaignModel } from '../../campaigns/shared/campaign.model';
+import { CampaignApiService } from '../../campaigns/shared/campaign-api.service';
 
 import { FilestackService } from '../../shared/filestack.service';
 import { UuidApiService } from '../../shared/uuid-api.service';
@@ -12,6 +15,8 @@ import { TriggerModel } from '../shared/trigger.model';
 })
 export class TriggerCreatorFormComponent implements OnInit {
 
+    @Input() parentCampaign: CampaignModel;
+
     trigger: TriggerModel;
 
     triggerMediaConfig: any;
@@ -19,6 +24,10 @@ export class TriggerCreatorFormComponent implements OnInit {
     triggerMediaExists: boolean = false;
 
     triggerType: string;
+
+    triggerCampaign: CampaignModel;
+
+    campaigns: CampaignModel[];
 
     triggerTypes: [
         {
@@ -41,10 +50,14 @@ export class TriggerCreatorFormComponent implements OnInit {
 
     triggerUuid: string;
 
-    constructor(private uuidApi: UuidApiService, private triggerApi: TriggerApiService, private filestack: FilestackService) { }
+    constructor(private uuidApi: UuidApiService, private triggerApi: TriggerApiService, private campaignApi: CampaignApiService, private filestack: FilestackService) { }
 
     ngOnInit() {
         this.fetchUuid();
+
+        if (!this.parentCampaign) {
+            this.getCampaigns();
+        }
 
         this.triggerTypes = [
             {
@@ -102,7 +115,15 @@ export class TriggerCreatorFormComponent implements OnInit {
             this.trigger.type = this.triggerType;
         }
 
+        if (this.parentCampaign) {
+            this.trigger.campaign_id = this.parentCampaign.id;
+        }
         this.getTriggerValue();
+    }
+
+    public setCampaign (data) {
+        this.trigger.campaign_id = data.id;
+        console.log('this.trigger', this.trigger);
     }
 
     public getTriggerValue () {
@@ -116,7 +137,15 @@ export class TriggerCreatorFormComponent implements OnInit {
         } else if (this.trigger.value && (this.trigger.type === 'fingerprint' || this.trigger.type === 'beacon')) {
             this.trigger.value = null;
         }
+    }
 
+    public getCampaigns () {
+        this.campaignApi.getCampaigns()
+        .subscribe(
+            (data) => {
+                this.campaigns = data;
+            }
+        )
     }
 
 }

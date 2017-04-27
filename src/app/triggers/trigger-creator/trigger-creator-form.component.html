@@ -24,6 +24,18 @@
 
                 <div *ngIf="triggerType">
 
+                    <div fxLayout="row" *ngIf="!parentCampaign">
+                        <md-select
+                        placeholder="Campaign"
+                        name="camnpaign"
+                        [ngModel]="triggerCampaign"
+                        (ngModelChange)="setCampaign($event)">
+                            <md-option *ngFor="let campaign of campaigns" [value]="campaign">
+                                {{ campaign.name }}
+                            </md-option>
+                        </md-select>
+                    </div>
+
                     <div fxLayout="row">
                         <md-input-container fxFlex="50">
                             <input

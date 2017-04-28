@@ -28,17 +28,6 @@
                         </div>
                     </div>
 
-                    <div fxLayout="row">
-                        <div fxFlex="100" fxLayout="column" class="details-display-container">
-                            <label>
-                                Notes
-                            </label>
-                            <div>
-                                {{ trigger.notes }}
-                            </div>
-                        </div>
-                    </div>
-
                     <div fxLayout="row" *ngIf="trigger.type === 'watermark' || trigger.type === 'touch'">
                         <div fxFlex="60" fxLayout="column" class="details-display-container">
                             <label>

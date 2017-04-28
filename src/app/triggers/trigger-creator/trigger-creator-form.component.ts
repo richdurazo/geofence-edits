@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { CampaignModel } from '../../campaigns/shared/campaign.model';
 import { CampaignApiService } from '../../campaigns/shared/campaign-api.service';
@@ -16,6 +16,8 @@ import { TriggerModel } from '../shared/trigger.model';
 export class TriggerCreatorFormComponent implements OnInit {
 
     @Input() parentCampaign: CampaignModel;
+
+    @Output() onCreate: EventEmitter<any> = new EventEmitter();
 
     trigger: TriggerModel;
 
@@ -104,6 +106,19 @@ export class TriggerCreatorFormComponent implements OnInit {
 
     processSuccess (data) {
         console.log('saved trigger data', data);
+        this.attachTrigger(data);
+    }
+
+    public attachTrigger (savedTrigger) {
+        this.campaignApi.attachTrigger(this.trigger.campaign_id, savedTrigger.id)
+        .subscribe(
+            data => {
+                console.log('attachTrigger data', data);
+                if (this.onCreate) {
+                    this.onCreate.emit('created');
+                }
+            }
+        )
     }
 
     public setType (event) {

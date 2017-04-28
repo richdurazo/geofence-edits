@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { TriggerApiService } from '../shared/trigger-api.service';
@@ -11,7 +11,7 @@ import { TriggerModel } from '../shared/trigger.model';
 })
 export class TriggerDetailsComponent implements OnInit {
 
-    trigger: TriggerModel;
+    @Input() trigger: TriggerModel;
 
     id: string;
 
@@ -22,14 +22,18 @@ export class TriggerDetailsComponent implements OnInit {
     constructor(private route: ActivatedRoute, private triggerApi: TriggerApiService) { }
 
     ngOnInit() {
-        this.sub = this.route.params.subscribe(params => {
-            this.id = params['id'];
-            this.getTrigger();
-        });
+        if (!this.trigger) {
+            this.sub = this.route.params.subscribe(params => {
+                this.id = params['id'];
+                this.getTrigger();
+            });
+        }
     }
 
     ngOnDestroy() {
-        this.sub.unsubscribe();
+        if (this.sub) {
+            this.sub.unsubscribe();
+        }
     }
 
     private getTrigger () {

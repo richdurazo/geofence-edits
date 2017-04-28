@@ -27,6 +27,11 @@ export class CampaignApiService {
         .map(res => res.json())
     }
 
+    attachTrigger (campaign_id, trigger_id) {
+        return this.authCustomHttp.post(AppSettings.API_ROOT + '/campaign/' + campaign_id + '/triggers/' + trigger_id, {})
+        .map(res => res.json())
+    }
+
     deleteCampaign (data) {
         return this.authCustomHttp.delete(AppSettings.API_ROOT + '/campaign/' + data.id)
         .map(res => res.json())

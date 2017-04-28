@@ -55,18 +55,6 @@
                         </md-input-container>
                     </div>
 
-                    <div fxLayout="row">
-                        <md-input-container fxFlex="60">
-                            <input
-                            mdInput
-                            name="notes"
-                            type="text"
-                            placeholder="Notes"
-                            [(ngModel)]="trigger.notes"
-                            #notes="ngModel">
-                        </md-input-container>
-                    </div>
-
                     <div fxLayout="row" *ngIf="triggerType === 'watermark' || triggerType === 'touch'">
                         <md-input-container fxFlex="60">
                             <input

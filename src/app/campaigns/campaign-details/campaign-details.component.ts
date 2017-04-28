@@ -17,6 +17,8 @@ export class CampaignDetailsComponent implements OnInit {
 
     triggers: TriggerModel[];
 
+    adding: boolean;
+
     id: string;
 
     campaignType: string;
@@ -49,10 +51,15 @@ export class CampaignDetailsComponent implements OnInit {
         .subscribe(data => {
             this.triggers = data;
             console.log('this.triggers', this.triggers);
+            this.adding = false;
         }, error => {
             console.log('error', error);
         })
     }
 
+    public triggerCreated (event) {
+        console.log('event', event);
+        this.getCampaignTriggers();
+    }
 
 }

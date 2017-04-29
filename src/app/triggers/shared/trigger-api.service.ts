@@ -17,6 +17,11 @@ export class TriggerApiService {
       .map(res => res.json())
   }
 
+  getTriggerContentGroups (id) {
+      return this.authCustomHttp.get(AppSettings.API_ROOT + '/trigger/' + id + '/content-group')
+      .map(res => res.json())
+  }
+
   createTrigger (data) {
       return this.authCustomHttp.post(AppSettings.API_ROOT + '/trigger', data)
       .map(res => res.json())

@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+import { ContentGroupModel } from '../../content/shared/content-group.model';
+
 import { TriggerApiService } from '../shared/trigger-api.service';
 import { TriggerModel } from '../shared/trigger.model';
 
@@ -17,12 +19,16 @@ export class TriggerDetailsComponent implements OnInit {
 
     triggerType: string;
 
+    contentGroups: ContentGroupModel[];
+
     private sub: any;
 
     constructor(private route: ActivatedRoute, private triggerApi: TriggerApiService) { }
 
     ngOnInit() {
-        if (!this.trigger) {
+        if (this.trigger) {
+            this.getContentGroups();
+        } else {
             this.sub = this.route.params.subscribe(params => {
                 this.id = params['id'];
                 this.getTrigger();
@@ -40,6 +46,14 @@ export class TriggerDetailsComponent implements OnInit {
         this.triggerApi.getTrigger(this.id)
         .subscribe(data => {
             this.trigger = data;
+        });
+    }
+
+    public getContentGroups () {
+        this.triggerApi.getTriggerContentGroups(this.trigger.id)
+        .subscribe(data => {
+            console.log('data', data);
+            this.contentGroups = data;
         });
     }
 

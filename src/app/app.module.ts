@@ -51,6 +51,7 @@ import { ImageComponent } from './shared/image/image.component';
 import { SortableListItemComponent } from './shared/sortable-list/sortable-list-item/sortable-list-item.component';
 import { ContentListComponent } from './content/content-overview/content-list/content-list.component';
 import { TriggerListComponent } from './triggers/triggers-overview/trigger-list/trigger-list.component';
+import { ContentGroupComponent } from './content/content-group/content-group.component';
 
 @NgModule({
     declarations: [
@@ -81,7 +82,8 @@ import { TriggerListComponent } from './triggers/triggers-overview/trigger-list/
         CampaignDetailsComponent,
         SortableListItemComponent,
         ContentListComponent,
-        TriggerListComponent
+        TriggerListComponent,
+        ContentGroupComponent
     ],
     imports: [
         BrowserModule,

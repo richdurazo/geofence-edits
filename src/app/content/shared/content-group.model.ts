@@ -2,6 +2,8 @@ export class ContentGroupModel {
     id?: number;
     name: string;
 
-    constructor () {};
+    constructor (name: string) {
+        this.name = name;
+    };
 
 }

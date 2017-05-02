@@ -18,7 +18,7 @@ export class CampaignApiService {
     }
 
     getCampaignTriggers (id) {
-        return this.authCustomHttp.get(AppSettings.API_ROOT + '/campaign/' + id + '/triggers')
+        return this.authCustomHttp.get(AppSettings.API_ROOT + '/campaign/' + id + '/trigger')
         .map(res => res.json())
     }
 
@@ -28,7 +28,7 @@ export class CampaignApiService {
     }
 
     attachTrigger (campaign_id, trigger_id) {
-        return this.authCustomHttp.post(AppSettings.API_ROOT + '/campaign/' + campaign_id + '/triggers/' + trigger_id, {})
+        return this.authCustomHttp.post(AppSettings.API_ROOT + '/campaign/' + campaign_id + '/trigger/' + trigger_id, {})
         .map(res => res.json())
     }
 

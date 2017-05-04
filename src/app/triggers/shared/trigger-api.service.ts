@@ -32,11 +32,6 @@ export class TriggerApiService {
       .map(res => res.json())
   }
 
-  getTriggerValue () {
-      return this.authCustomHttp.get(AppSettings.API_ROOT + '/trigger/value')
-      .map(res => res.json())
-  }
-
   attachContentGroup (trigger_id, content_group_id) {
       return this.authCustomHttp.post(AppSettings.API_ROOT + '/trigger/' + trigger_id + '/content-group/' + content_group_id, {})
       .map(res => res.json())

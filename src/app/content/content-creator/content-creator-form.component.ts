@@ -153,6 +153,7 @@ export class ContentCreatorFormComponent implements OnInit {
         };
         let dialogRef = this.dialog.open(TermsDialogComponent, config);
         dialogRef.afterClosed().subscribe(result => {
+            console.log('result', result);
             this.content.terms = result;
         });
     }

@@ -123,25 +123,11 @@ export class TriggerCreatorFormComponent implements OnInit {
         if (this.parentCampaign) {
             this.trigger.campaign_id = this.parentCampaign.id;
         }
-        this.getTriggerValue();
     }
 
     public setCampaign (data) {
         this.trigger.campaign_id = data.id;
         console.log('this.trigger', this.trigger);
-    }
-
-    public getTriggerValue () {
-        if (!this.trigger.value && (this.trigger.type === 'watermark' || this.trigger.type === 'touch')) {
-            this.triggerApi.getTriggerValue()
-            .subscribe(
-                data => {
-                    this.trigger.value = data.trigger.value;
-                }
-            )
-        } else if (this.trigger.value && (this.trigger.type === 'fingerprint' || this.trigger.type === 'beacon')) {
-            this.trigger.value = null;
-        }
     }
 
     public getCampaigns () {

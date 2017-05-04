@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Optional } from '@angular/core';
 import { MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
 
 @Component({
@@ -10,7 +10,7 @@ export class TermsDialogComponent implements OnInit {
 
     model: any;
 
-    constructor(public dialogRef: MdDialogRef<TermsDialogComponent>, @Inject(MD_DIALOG_DATA) private data: any) {
+    constructor(public dialogRef: MdDialogRef<TermsDialogComponent>, @Optional() @Inject(MD_DIALOG_DATA) private data: any) {
         this.model = {
             terms: this.data
         };

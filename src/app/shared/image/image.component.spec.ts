@@ -8,6 +8,7 @@ import { ImageComponent } from './image.component';
 describe('ImageComponent', () => {
   let component: ImageComponent;
   let fixture: ComponentFixture<ImageComponent>;
+  let filestack: FilestackMockService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -17,6 +18,11 @@ describe('ImageComponent', () => {
       ]
     })
     .compileComponents();
+
+
+    filestack = TestBed.get(FilestackService);
+
+    spyOn(filestack, 'generateSaveFilePath');
   }));
 
   beforeEach(() => {

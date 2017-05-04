@@ -1,7 +1,7 @@
 export class TriggerModel {
     name: string;
     type: string;
-    id: number;
+    id?: number;
     campaign_id: number;
 
     constructor (

@@ -52,6 +52,7 @@ import { SortableListItemComponent } from './shared/sortable-list/sortable-list-
 import { ContentListComponent } from './content/content-overview/content-list/content-list.component';
 import { TriggerListComponent } from './triggers/triggers-overview/trigger-list/trigger-list.component';
 import { ContentGroupComponent } from './content/content-group/content-group.component';
+import { VideoComponent } from './shared/video/video.component';
 
 @NgModule({
     declarations: [
@@ -83,7 +84,8 @@ import { ContentGroupComponent } from './content/content-group/content-group.com
         SortableListItemComponent,
         ContentListComponent,
         TriggerListComponent,
-        ContentGroupComponent
+        ContentGroupComponent,
+        VideoComponent
     ],
     imports: [
         BrowserModule,

@@ -29,8 +29,6 @@ export class TriggerCreatorFormComponent implements OnInit {
 
     triggerCampaign: CampaignModel;
 
-    campaignId: number;
-
     campaigns: CampaignModel[];
 
     triggerTypes: [
@@ -108,19 +106,9 @@ export class TriggerCreatorFormComponent implements OnInit {
 
     processSuccess (data) {
         console.log('saved trigger data', data);
-        this.attachTrigger(data);
-    }
-
-    public attachTrigger (savedTrigger) {
-        this.campaignApi.attachTrigger(this.campaignId, savedTrigger.id)
-        .subscribe(
-            data => {
-                console.log('attachTrigger data', data);
-                if (this.onCreate) {
-                    this.onCreate.emit('created');
-                }
-            }
-        )
+        if (this.onCreate) {
+            this.onCreate.emit('created');
+        }
     }
 
     public setType (event) {
@@ -133,13 +121,13 @@ export class TriggerCreatorFormComponent implements OnInit {
         }
 
         if (this.parentCampaign) {
-            this.campaignId = this.parentCampaign.id;
+            this.trigger.campaign_id = this.parentCampaign.id;
         }
         this.getTriggerValue();
     }
 
     public setCampaign (data) {
-        this.campaignId = data.id;
+        this.trigger.campaign_id = data.id;
         console.log('this.trigger', this.trigger);
     }
 

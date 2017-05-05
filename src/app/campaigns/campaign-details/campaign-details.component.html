@@ -1,7 +1,5 @@
 <div  fxLayout="column">
-    <md-card fxLayout="row">
-
-        <div fxLayout="row" fxFlex="100" *ngIf="campaign">
+    <md-card fxLayout="row" fxFlex="100" *ngIf="campaign">
 
             <div fxLayout="column" fxFlex="55">
 
@@ -67,40 +65,36 @@
             <div fxFlex="45">
             </div>
 
-        </div>
-
     </md-card>
 
 </div>
 
-<div fxFlexLayout="column">
-    <h1 class="section-heading">
-        Triggers
-    </h1>
-    <app-trigger-details
-        [trigger]="trigger"
-        *ngFor="let trigger of triggers"
-        fxFlexLayout="column"
-        fxFlexOffset="20px">
-    </app-trigger-details>
+<div fxLayout="column" fxLayoutGap="20px">
+    <div>
+        <h1 class="section-heading">
+            Triggers
+        </h1>
+    </div>
 
-    <app-trigger-creator-form
-        [parentCampaign]="campaign"
-        fxFlexLayout="column"
-        fxFlexOffset="20px"
-        *ngIf="adding"
-        (onCreate)="triggerCreated($event)">
-    </app-trigger-creator-form>
+        <app-trigger-details
+            [trigger]="trigger"
+            *ngFor="let trigger of triggers">
+        </app-trigger-details>
 
-    <button
-        type="button"
-        name="button"
-        md-fab
-        color="primary"
-        *ngIf="!adding"
-        (click)="adding = true"
-        fxFlexLayout="column"
-        fxFlexOffset="20px">
-        <md-icon>add</md-icon>
-    </button>
+        <app-trigger-creator-form
+            [parentCampaign]="campaign"
+            *ngIf="adding"
+            (onCreate)="triggerCreated($event)">
+        </app-trigger-creator-form>
+
+        <button
+            type="button"
+            name="button"
+            md-fab
+            color="primary"
+            *ngIf="!adding"
+            (click)="adding = true">
+            <md-icon>add</md-icon>
+        </button>
+
 </div>

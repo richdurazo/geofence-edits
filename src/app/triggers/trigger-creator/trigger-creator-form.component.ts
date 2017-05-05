@@ -115,7 +115,7 @@ export class TriggerCreatorFormComponent implements OnInit {
         this.triggerType = event;
 
         if (!this.trigger) {
-            this.trigger = new TriggerModel('', event);
+            this.trigger = new TriggerModel('', event, this.triggerUuid);
         } else {
             this.trigger.type = this.triggerType;
         }

@@ -18,7 +18,7 @@ export class VideoComponent implements OnInit {
     constructor(public filestack: FilestackService) { }
 
     ngOnInit() {
-        this.mediaPath = this.filestack.generateSaveFilePath(this.uuid, this.key, 'image');
+        this.mediaPath = this.filestack.generateSaveFilePath(this.uuid, this.key, 'video');
     }
 
 }

@@ -29,6 +29,8 @@ import { ContentCreatorFormComponent } from './content/content-creator/content-c
 import { ContentDetailsComponent } from './content/content-details/content-details.component';
 import { ContentOverviewComponent } from './content/content-overview/content-overview.component';
 import { TermsDialogComponent } from './content/content-creator/terms-dialog/terms-dialog.component';
+import { TermsApiService } from './content/content-creator/terms-dialog/terms-api.service';
+
 
 import { TriggersComponent } from './triggers/triggers-component/triggers.component';
 import { TriggerDetailsComponent } from './triggers/trigger-details/trigger-details.component';
@@ -88,20 +90,21 @@ import { VideoComponent } from './shared/video/video.component';
         VideoComponent
     ],
     imports: [
-        BrowserModule,
+        AppRoutingModule,
         BrowserAnimationsModule,
+        BrowserModule,
+        FlexLayoutModule,
         FormsModule,
         HttpModule,
         MaterialModule.forRoot(),
-        FlexLayoutModule,
-        AppRoutingModule
     ],
     providers: [
         AuthCustomHttpService,
-        ContentApiService,
-        FilestackService,
         CampaignApiService,
+        ContentApiService,
         DateUtilsService,
+        FilestackService,
+        TermsApiService,
         TriggerApiService,
         UserApiService,
         UuidApiService

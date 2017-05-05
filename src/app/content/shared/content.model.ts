@@ -15,7 +15,7 @@ export class ContentModel {
     quantity: number;
     start_at: Date;
     end_at: Date;
-    terms: string;
+    content_term_id: number;
 
     constructor (
         uuid: string,

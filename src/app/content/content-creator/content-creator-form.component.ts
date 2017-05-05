@@ -148,13 +148,13 @@ export class ContentCreatorFormComponent implements OnInit {
 
     public launchTerms () {
         let config = {
-            data: this.content.terms || '',
+            data: this.content.content_term_id,
             disableClose: true
         };
         let dialogRef = this.dialog.open(TermsDialogComponent, config);
         dialogRef.afterClosed().subscribe(result => {
             console.log('result', result);
-            this.content.terms = result;
+            this.content.content_term_id = result.id;
         });
     }
 

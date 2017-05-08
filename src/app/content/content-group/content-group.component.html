@@ -1,65 +1,68 @@
-<md-card fxFlex="100">
+<md-card class="content-group" fxFlex="100">
+    <app-collapsible-panel [header]="contentGroup.name">
 
-    <form #form="ngForm" (ngSubmit)="submitForm(form)" novalidate fxLayout="column">
+        <form #form="ngForm" (ngSubmit)="submitForm(form)" novalidate fxLayout="column">
 
-        <div fxLayout="row">
+            <div fxLayout="row">
 
-            <div fxLayout="column" fxFlex="55">
+                <div fxLayout="column" fxFlex="55">
 
-                    <div fxLayout="row">
-                        <md-input-container fxFlex="50">
-                            <input
-                            mdInput
-                            name="name"
-                            type="text"
-                            placeholder="Name"
-                            required
-                            [(ngModel)]="contentGroup.name"
-                            #name="ngModel">
+                        <div fxLayout="row">
+                            <md-input-container fxFlex="50">
+                                <input
+                                mdInput
+                                name="name"
+                                type="text"
+                                placeholder="Name"
+                                required
+                                [(ngModel)]="contentGroup.name"
+                                #name="ngModel">
 
-                            <md-hint align="start">
-                                <div  *ngIf="form.submitted && name.errors !== null && name.errors.required">
-                                    Please add a name
-                                </div>
-                            </md-hint>
-                        </md-input-container>
-                    </div>
+                                <md-hint align="start">
+                                    <div  *ngIf="form.submitted && name.errors !== null && name.errors.required">
+                                        Please add a name
+                                    </div>
+                                </md-hint>
+                            </md-input-container>
+                        </div>
 
-
-            </div>
-
-            <div class="right-column" fxFlex="45">
-                <div *ngIf="!creating">
-                    <div fxFlex="100">
-                        <md-select
-                        placeholder="Content"
-                        name="contentOptions"
-                        [ngModel]="selectedContent"
-                        (ngModelChange)="setContent($event)">
-                            <md-option *ngFor="let item of contentOptions" [value]="item">
-                                {{ item.name }}
-                            </md-option>
-                        </md-select>
-                    </div>
-
-                    <div fxFlex="100">
-                        <button type="button"  class="common-form-submit" md-raised-button color="primary" (click)="attachContent()">Attach Content</button>
-                    </div>
-
-                    <h3 fxLayout="row" fxFlex="100" *ngIf="groupContent.length">Content</h3>
-                    <div *ngFor="let item of groupContent" fxLayout="row" fxFlex="100">
-                        {{ item.name }}
-                    </div>
 
                 </div>
+
+                <div class="right-column" fxFlex="45">
+                    <div *ngIf="!creating">
+                        <div fxFlex="100">
+                            <md-select
+                            placeholder="Content"
+                            name="contentOptions"
+                            [ngModel]="selectedContent"
+                            (ngModelChange)="setContent($event)">
+                                <md-option *ngFor="let item of contentOptions" [value]="item">
+                                    {{ item.name }}
+                                </md-option>
+                            </md-select>
+                        </div>
+
+                        <div fxFlex="100">
+                            <button type="button"  class="common-form-submit" md-raised-button (click)="attachContent()">Attach Content</button>
+                        </div>
+
+                        <h3 fxLayout="row" fxFlex="100" *ngIf="groupContent.length">Content</h3>
+                        <div *ngFor="let item of groupContent" fxLayout="row" fxFlex="100">
+                            {{ item.name }}
+                        </div>
+
+                    </div>
+
+                    <div fxLayoutAlign="end" *ngIf="creating">
+                        <button type="submit" class="common-form-submit" md-raised-button color="primary">Create</button>
+                    </div>
+                </div>
+
             </div>
 
-        </div>
+        </form>
 
-        <div fxLayoutAlign="end" fxFlex="100" *ngIf="creating">
-            <button type="submit" class="common-form-submit" md-raised-button color="primary">Create</button>
-        </div>
-
-    </form>
+    </app-collapsible-panel>
 
 </md-card>

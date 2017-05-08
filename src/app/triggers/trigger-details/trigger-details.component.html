@@ -1,4 +1,4 @@
-<div fxLayout="column" fxLayoutGap="20px">
+<div fxLayout="column">
 
     <md-card fxLayout="row" fxFlex="100">
 
@@ -15,9 +15,7 @@
                                     {{ trigger.type }}
                                 </div>
                             </div>
-                        </div>
 
-                        <div fxLayout="row">
                             <div fxFlex="50" fxLayout="column" class="details-display-container">
                                 <label>
                                     Name
@@ -30,16 +28,22 @@
 
                     </div>
 
+                    <div fxFlex="100" fxLayout="column" fxLayoutAlign="end">
+                        <h1 class="section-heading section-heading-no-margin">
+                            Content Groups
+                        </h1>
+                    </div>
+
                 </div>
 
-                <div class="right-column" fxFlex="45" *ngIf="trigger">
+                <div class="right-column" fxFlex="35" *ngIf="trigger" fxLayoutAlign="end">
 
                     <div class="media-container" *ngIf="trigger.type === 'watermark' || trigger.type === 'fingerprint'">
-                        <div class="creator-section-label">
+                        <div class="creator-section-label" style="margin-top: 0;">
                             Media
                         </div>
 
-                        <div class="media-upload-container">
+                        <div class="media-view-container">
                             <app-video
                                 [uuid]="trigger.uuid"
                                 [key]="'audio-trigger'">
@@ -49,10 +53,16 @@
 
                 </div>
 
+                <div fxFlex="10" *ngIf="trigger">
+
+                </div>
+
     </md-card>
 
-    <app-content-group [trigger]="trigger" [contentGroup]="contentGroup" *ngFor="let contentGroup of contentGroups"></app-content-group>
+    <div class="trigger-content-group-container" fxLayout="column" fxFlex="100">
+        <app-content-group class="rendered-content-group" [trigger]="trigger" [contentGroup]="contentGroup" *ngFor="let contentGroup of contentGroups"></app-content-group>
 
-    <app-content-group [trigger]="trigger"></app-content-group>
+        <app-content-group [trigger]="trigger"></app-content-group>
+    </div>
 
 </div>

@@ -42,6 +42,10 @@ body {
     font-weight: 400;
     color: $primary-text-color;
 
+    .mat-card {
+        border-radius: 0;
+    }
+
     .mat-sidenav-container {
         background-color: $body-background-color;
 
@@ -89,6 +93,10 @@ body {
     .section-heading {
         font-size: 18px;
         font-weight: 400;
+
+        &.section-heading-no-margin {
+            margin: 0;
+        }
     }
 
     // INPUTS
@@ -231,9 +239,12 @@ body {
             font-size: $small-font-size;
         }
 
+        .media-view-container, .media-upload-container {
+            height: 152px;
+            width: 270px;
+        }
+
         .media-upload-container {
-            height: 183px;
-            width: 325px;
             margin-bottom: $common-margin;
         }
 
@@ -386,5 +397,23 @@ body {
         }
     }
 
+    .trigger-content-group-container {
+        .rendered-content-group .content-group {
+            background-color: $light-grey;
+        }
 
+        .content-group {
+            border-top: 1px solid darken($dark-grey, 3);
+            padding: 0;
+        }
+    }
+
+    .collapsible-header {
+        border-bottom: 1px solid darken($dark-grey, 3);
+        padding: 24px;
+    }
+
+    .collapsible-content {
+        padding: 24px;
+    }
 }

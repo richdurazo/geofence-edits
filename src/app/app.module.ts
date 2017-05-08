@@ -55,6 +55,7 @@ import { ContentListComponent } from './content/content-overview/content-list/co
 import { TriggerListComponent } from './triggers/triggers-overview/trigger-list/trigger-list.component';
 import { ContentGroupComponent } from './content/content-group/content-group.component';
 import { VideoComponent } from './shared/video/video.component';
+import { CollapsiblePanelComponent } from './shared/collapsible-panel/collapsible-panel.component';
 
 @NgModule({
     declarations: [
@@ -87,7 +88,8 @@ import { VideoComponent } from './shared/video/video.component';
         ContentListComponent,
         TriggerListComponent,
         ContentGroupComponent,
-        VideoComponent
+        VideoComponent,
+        CollapsiblePanelComponent
     ],
     imports: [
         AppRoutingModule,

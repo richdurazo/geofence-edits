@@ -33,7 +33,7 @@
 
     <div class="list-header-row" fxLayout="row" fxLayoutGap="20px;">
 
-        <md-radio-group class="example-radio-group" name="radio_group" [(ngModel)]="selectedItem" (change)="itemSelected(event)" ngDefaultControl>
+        <md-radio-group class="example-radio-group" name="radio_group" [(ngModel)]="selectedItem" (change)="itemSelected($event)" ngDefaultControl>
             <md-grid-list cols="3" rowHeight="75px" gutterSize="20px" fxFlex="100">
 
                     <md-grid-tile

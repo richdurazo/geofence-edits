@@ -87,14 +87,16 @@
             (onCreate)="triggerCreated($event)">
         </app-trigger-creator-form>
 
-        <button
-            type="button"
-            name="button"
-            md-fab
-            color="primary"
-            *ngIf="!adding"
-            (click)="adding = true">
-            <md-icon>add</md-icon>
-        </button>
+        <div fxFlex="100" fxLayoutAlign="end">
+            <button
+                type="button"
+                name="button"
+                md-raised-button
+                color="primary"
+                *ngIf="!adding"
+                (click)="adding = true">
+                Add Trigger
+            </button>
+        </div>
 
 </div>

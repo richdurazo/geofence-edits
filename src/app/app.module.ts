@@ -28,6 +28,10 @@ import { ContentCreatorComponent } from './content/content-creator/content-creat
 import { ContentCreatorFormComponent } from './content/content-creator/content-creator-form.component';
 import { ContentDetailsComponent } from './content/content-details/content-details.component';
 import { ContentOverviewComponent } from './content/content-overview/content-overview.component';
+
+import { ContentGroupCreatorComponent } from './content/content-group-creator/content-group-creator.component';
+import { ContentGroupDetailsComponent } from './content/content-group-details/content-group-details.component';
+
 import { TermsDialogComponent } from './content/content-creator/terms-dialog/terms-dialog.component';
 import { TermsApiService } from './content/content-creator/terms-dialog/terms-api.service';
 
@@ -53,9 +57,8 @@ import { ImageComponent } from './shared/image/image.component';
 import { SortableListItemComponent } from './shared/sortable-list/sortable-list-item/sortable-list-item.component';
 import { ContentListComponent } from './content/content-overview/content-list/content-list.component';
 import { TriggerListComponent } from './triggers/triggers-overview/trigger-list/trigger-list.component';
-import { ContentGroupComponent } from './content/content-group/content-group.component';
 import { VideoComponent } from './shared/video/video.component';
-import { CollapsiblePanelComponent } from './shared/collapsible-panel/collapsible-panel.component';
+import { ExpandablePanelComponent } from './shared/expandable-panel/expandable-panel.component';
 
 @NgModule({
     declarations: [
@@ -87,9 +90,10 @@ import { CollapsiblePanelComponent } from './shared/collapsible-panel/collapsibl
         SortableListItemComponent,
         ContentListComponent,
         TriggerListComponent,
-        ContentGroupComponent,
+        ContentGroupCreatorComponent,
+        ContentGroupDetailsComponent,
         VideoComponent,
-        CollapsiblePanelComponent
+        ExpandablePanelComponent
     ],
     imports: [
         AppRoutingModule,

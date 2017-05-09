@@ -107,7 +107,7 @@ export class TriggerCreatorFormComponent implements OnInit {
     processSuccess (data) {
         console.log('saved trigger data', data);
         if (this.onCreate) {
-            this.onCreate.emit('created');
+            this.onCreate.emit(data);
         }
     }
 

@@ -5,6 +5,11 @@
                 <div fxLayout="column" fxFlex="55">
 
                     <div *ngIf="trigger">
+                        <div fxLayout="row">
+                            <h1 class="section-heading">
+                                {{ trigger.name }}
+                            </h1>
+                        </div>
 
                         <div fxLayout="row">
                             <div fxFlex="50" fxLayout="column" class="details-display-container">
@@ -15,23 +20,8 @@
                                     {{ trigger.type }}
                                 </div>
                             </div>
-
-                            <div fxFlex="50" fxLayout="column" class="details-display-container">
-                                <label>
-                                    Name
-                                </label>
-                                <div>
-                                    {{ trigger.name }}
-                                </div>
-                            </div>
                         </div>
 
-                    </div>
-
-                    <div fxFlex="100" fxLayout="column" fxLayoutAlign="end">
-                        <h1 class="section-heading section-heading-no-margin">
-                            Content Groups
-                        </h1>
                     </div>
 
                 </div>
@@ -59,10 +49,31 @@
 
     </md-card>
 
-    <div class="trigger-content-group-container" fxLayout="column" fxFlex="100">
-        <app-content-group class="rendered-content-group" [trigger]="trigger" [contentGroup]="contentGroup" *ngFor="let contentGroup of contentGroups"></app-content-group>
+    <md-card class="content-group-container-card">
+        <app-expandable-panel [header]="'Content Groups'">
+            <div class="trigger-content-group-container padded-container" fxLayout="column" fxFlex="100">
+                <app-content-group-details
+                    class="rendered-content-group"
+                    [trigger]="trigger"
+                    [contentGroup]="contentGroup"
+                    *ngFor="let contentGroup of contentGroups">
+                </app-content-group-details>
 
-        <app-content-group [trigger]="trigger"></app-content-group>
-    </div>
+                <app-content-group-creator
+                    [trigger]="trigger"
+                    (onCreate)="contentCreated($event)"
+                    *ngIf="adding">
+                </app-content-group-creator>
+
+                <md-card fxLayout="column" *ngIf="!adding">
+                    <div fxLayout="row" fxFlex="100" fxFlexAlign="end">
+                        <button type="button" md-raised-button (click)="adding = !adding">
+                            Add Content Group
+                        </button>
+                    </div>
+                </md-card>
+            </div>
+        </app-expandable-panel>
+    </md-card>
 
 </div>

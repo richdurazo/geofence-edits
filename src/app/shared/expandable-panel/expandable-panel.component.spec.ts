@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CollapsiblePanelComponent } from './collapsible-panel.component';
+import { ExpandablePanelComponent } from './expandable-panel.component';
 
-describe('CollapsiblePanelComponent', () => {
-  let component: CollapsiblePanelComponent;
-  let fixture: ComponentFixture<CollapsiblePanelComponent>;
+describe('ExpandablePanelComponent', () => {
+  let component: ExpandablePanelComponent;
+  let fixture: ComponentFixture<ExpandablePanelComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CollapsiblePanelComponent ]
+      declarations: [ ExpandablePanelComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CollapsiblePanelComponent);
+    fixture = TestBed.createComponent(ExpandablePanelComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

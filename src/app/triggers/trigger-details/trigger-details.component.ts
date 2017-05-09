@@ -21,6 +21,8 @@ export class TriggerDetailsComponent implements OnInit {
 
     contentGroups: ContentGroupModel[];
 
+    adding: boolean = false;
+
     private sub: any;
 
     constructor(private route: ActivatedRoute, private triggerApi: TriggerApiService) { }
@@ -55,6 +57,12 @@ export class TriggerDetailsComponent implements OnInit {
             console.log('data', data);
             this.contentGroups = data;
         });
+    }
+
+    public contentCreated (data) {
+        console.log('data', data);
+        this.contentGroups.push(data);
+        this.adding = false;
     }
 
 }

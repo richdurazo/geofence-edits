@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { TriggerApiService } from '../../triggers/shared/trigger-api.service';
 import { ContentApiService } from '../shared/content-api.service';
@@ -7,11 +7,13 @@ import { ContentModel } from '../shared/content.model';
 import { ContentGroupModel } from '../shared/content-group.model';
 
 @Component({
-    selector: 'app-content-group',
-    templateUrl: './content-group.component.html',
-    styleUrls: ['./content-group.component.scss']
+    selector: 'app-content-group-creator',
+    templateUrl: './content-group-creator.component.html',
+    styleUrls: ['./content-group-creator.component.scss']
 })
-export class ContentGroupComponent implements OnInit {
+export class ContentGroupCreatorComponent implements OnInit {
+
+    @Output() onCreate: EventEmitter<any> = new EventEmitter();
 
     @Input() contentGroup: ContentGroupModel;
 
@@ -49,9 +51,17 @@ export class ContentGroupComponent implements OnInit {
 
     public attachContentGroup (data) {
         this.triggerApi.attachContentGroup(this.trigger.id, data.id)
-        .subscribe(data => {
-            console.log('attachContentGroup data', data);
+        .subscribe(content => {
+            console.log('attachContentGroup content', content);
+            this.processSuccess(data);
         })
+    }
+
+    public processSuccess (data) {
+        console.log('saved content data', data);
+        if (this.onCreate) {
+            this.onCreate.emit(data);
+        }
     }
 
     public setContent (event) {

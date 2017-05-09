@@ -7,7 +7,7 @@ export class TermsApiService {
 
     constructor(private authCustomHttp: AuthCustomHttpService) { }
 
-    // CONTENT ACTIONS
+    // TERMS ACTIONS
     getTerms (id?: string) {
         if (id) {
             return this.authCustomHttp.get(AppSettings.API_ROOT + '/content-term/' + id)

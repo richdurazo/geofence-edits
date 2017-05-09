@@ -1,4 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ExpandablePanelComponent } from './expandable-panel.component';
 
@@ -8,7 +10,13 @@ describe('ExpandablePanelComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ExpandablePanelComponent ]
+      declarations: [ ExpandablePanelComponent ],
+      schemas: [
+          CUSTOM_ELEMENTS_SCHEMA
+      ],
+      imports: [
+          BrowserAnimationsModule
+      ]
     })
     .compileComponents();
   }));

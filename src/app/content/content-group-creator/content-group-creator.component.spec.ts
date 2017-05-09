@@ -7,7 +7,7 @@ import { TriggerApiMockService } from '../../mocks/triggers/trigger-api-mock.ser
 import { ContentApiService } from '../shared/content-api.service';
 import { ContentApiMockService } from '../../mocks/content/content-api-mock.service';
 
-import { ContentGroupCreatorComponent } from './content-group.component';
+import { ContentGroupCreatorComponent } from './content-group-creator.component';
 
 describe('ContentGroupCreatorComponent', () => {
     let component: ContentGroupCreatorComponent;

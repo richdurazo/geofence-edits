@@ -28,7 +28,7 @@ export class ContentGroupDetailsComponent implements OnInit {
     constructor(public contentApi: ContentApiService, public triggerApi: TriggerApiService, private dialog: MdDialog) { }
 
     ngOnInit() {
-            this.getGroupContent();
+        this.getGroupContent();
     }
 
     public setContent (event) {

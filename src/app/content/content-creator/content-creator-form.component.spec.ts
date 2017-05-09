@@ -6,6 +6,7 @@ import { Observable } from "rxjs/Rx";
 import { MdDialog } from '@angular/material';
 import { MdDialogMock } from '../../mocks/shared/md-dialog-mock.service';
 
+import { ContentModel } from '../shared/content.model';
 import { ContentApiService } from '../shared/content-api.service';
 import { ContentApiMockService } from '../../mocks/content/content-api-mock.service';
 
@@ -50,6 +51,8 @@ describe('ContentCreatorFormComponent', () => {
         dateUtils = TestBed.get(DateUtilsService);
         uuidApi = TestBed.get(UuidApiService);
         spyOn(uuidApi, 'fetchUuid').and.returnValue(Observable.of({uuid: 'foo'}));
+        // spyOn(contentApi, 'getGroupContent').and.returnValue(Observable.of([]));
+        // spyOn(contentApi, 'getContent').and.returnValue(Observable.of([]));
     }));
 
     beforeEach(() => {
@@ -100,10 +103,10 @@ describe('ContentCreatorFormComponent', () => {
             expect(dateUtils.formatSQLDate).not.toHaveBeenCalled();
             expect(contentApi.createContent).not.toHaveBeenCalled();
             expect(component.processSuccess).not.toHaveBeenCalled();
-            component.content = { uuid: 'yolobro', type: 'foo', name: '', display_name: '', description: '', start_at: new Date('1/1/17'), end_at: new Date ('2/1/17'), quantity: 0, terms: '' };
+            component.content = new ContentModel('yolobro', 'foo', '', '', '', new Date('1/1/17'), new Date ('2/1/17'));
             component.submitForm({valid: true});
             expect(dateUtils.formatSQLDate).toHaveBeenCalled();
-            expect(contentApi.createContent).toHaveBeenCalledWith({ uuid: 'yolobro', type: 'foo', name: '', display_name: '', description: '', start_at: 'foo', end_at: 'foo', quantity: 0, terms: '' });
+            expect(contentApi.createContent).toHaveBeenCalledWith({ uuid: 'yolobro', type: 'foo', name: '', display_name: '', description: '', start_at: 'foo', end_at: 'foo', scratcher_enabled: false });
             expect(component.processSuccess).toHaveBeenCalledWith({ foo: 'bar' });
         });
     });

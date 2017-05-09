@@ -41,8 +41,8 @@
               [rowspan]="tiles.rows"
               fxFlex="100">
 
-              <app-sortable-list-item [root]="root" [item]="row" fxFlex="100" [layout]="listLayout">
-              </app-sortable-list-item>
+              <ng-content>
+              </ng-content>
 
           </md-grid-tile>
 

@@ -19,14 +19,21 @@ import { trigger, state, animate, transition, style } from '@angular/animations'
       ]),
       trigger('expandChange', [
           state('true' ,
-              style({ height: '0', overflow : 'hidden' }),
+              style({ height: '0', display : 'none' }),
           ),
           state('false',
-              style({ height: '*' })
+              style({ height: '*', display: '*' })
           ),
           transition('void => *', style({ height: '0' })
           ),
-          transition('* => *', animate('.25s ease-in')),
+          transition('true => false', [
+                style({overflow: 'hidden'}),
+                animate('.5s ease-out', style({height: '*'})),
+          ]),
+          transition('false => true', [
+                style({overflow: 'hidden'}),
+                animate('.5s ease-out', style({height: '0'})),
+          ]),
       ]),
       trigger('iconChange', [
           state('true',

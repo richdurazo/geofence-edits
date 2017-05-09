@@ -59,6 +59,8 @@ import { ContentListComponent } from './content/content-overview/content-list/co
 import { TriggerListComponent } from './triggers/triggers-overview/trigger-list/trigger-list.component';
 import { VideoComponent } from './shared/video/video.component';
 import { ExpandablePanelComponent } from './shared/expandable-panel/expandable-panel.component';
+import { ContentRowComponent } from './content/content-row/content-row.component';
+import { ContentSelectorComponent } from './content/content-selector/content-selector.component';
 
 @NgModule({
     declarations: [
@@ -93,7 +95,9 @@ import { ExpandablePanelComponent } from './shared/expandable-panel/expandable-p
         ContentGroupCreatorComponent,
         ContentGroupDetailsComponent,
         VideoComponent,
-        ExpandablePanelComponent
+        ExpandablePanelComponent,
+        ContentRowComponent,
+        ContentSelectorComponent
     ],
     imports: [
         AppRoutingModule,
@@ -116,7 +120,8 @@ import { ExpandablePanelComponent } from './shared/expandable-panel/expandable-p
         UuidApiService
     ],
     entryComponents: [
-        TermsDialogComponent
+        TermsDialogComponent,
+        ContentSelectorComponent
     ],
     bootstrap: [AppComponent]
 })

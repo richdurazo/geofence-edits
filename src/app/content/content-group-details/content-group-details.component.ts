@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
+import {MdDialog} from '@angular/material';
 
 import { TriggerApiService } from '../../triggers/shared/trigger-api.service';
+import { ContentSelectorComponent } from '../content-selector/content-selector.component';
 import { ContentApiService } from '../shared/content-api.service';
 import { ContentModel } from '../shared/content.model';
 
@@ -23,7 +25,7 @@ export class ContentGroupDetailsComponent implements OnInit {
 
     selectedContent: ContentModel;
 
-    constructor(public contentApi: ContentApiService, public triggerApi: TriggerApiService) { }
+    constructor(public contentApi: ContentApiService, public triggerApi: TriggerApiService, private dialog: MdDialog) { }
 
     ngOnInit() {
             this.getGroupContent();
@@ -47,6 +49,16 @@ export class ContentGroupDetailsComponent implements OnInit {
         .subscribe(data => {
             this.groupContent = data;
         })
+    }
+
+    public launchSelector () {
+        let config = {
+            disableClose: true
+        };
+        let dialogRef = this.dialog.open(ContentSelectorComponent, config);
+        dialogRef.afterClosed().subscribe(result => {
+            console.log('result', result);
+        });
     }
 
 }

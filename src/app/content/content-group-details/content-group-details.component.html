@@ -2,12 +2,13 @@
     <app-expandable-panel [header]="contentGroup.name">
 
         <md-card *ngFor="let item of groupContent">
-            {{ item.name }}
+            <app-content-row [item]="item">
+            </app-content-row>
         </md-card>
 
         <md-card>
             <div fxFlex="100" fxLayoutAlign="end">
-                <button type="button" name="button" md-button (click)="addContent()">
+                <button type="button" name="button" md-button (click)="launchSelector()">
                     Add Content
                 </button>
             </div>

@@ -14,6 +14,7 @@ import { ContentModel } from '../shared/content.model';
     templateUrl: './content-creator-form.component.html',
     styleUrls: ['./content-creator-form.component.scss']
 })
+
 export class ContentCreatorFormComponent implements OnInit {
 
     content: ContentModel;
@@ -147,12 +148,13 @@ export class ContentCreatorFormComponent implements OnInit {
 
     public launchTerms () {
         let config = {
-            data: this.content.terms || '',
+            data: this.content.content_term_id,
             disableClose: true
         };
         let dialogRef = this.dialog.open(TermsDialogComponent, config);
         dialogRef.afterClosed().subscribe(result => {
-            this.content.terms = result;
+            console.log('result', result);
+            this.content.content_term_id = result.id;
         });
     }
 
@@ -161,6 +163,7 @@ export class ContentCreatorFormComponent implements OnInit {
     }
 
     public setType (event) {
+        console.log('event', event);
         this.contentType = event;
         this.setModelDefaults(this.contentType);
     }

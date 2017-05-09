@@ -20,4 +20,8 @@ export class ContentApiMockService {
     public fetchUuid () {
         return false;
     }
+
+    public getGroupContent () {
+        return false;
+    }
 }

@@ -1,50 +1,56 @@
 <div class="sortable-list" fxLayout="column" fxFlex="100">
 
     <div fxLayout="row" class="search-input-row">
-        <div fxFlex="60">
-            <md-card fxLayout="row" fxFlex="100" class="search-input-card" fxLayoutAlign="space-around center">
-                <div>
-                    <md-icon>search</md-icon>
-                </div>
+        <form #form="ngForm" novalidate fxLayout="row" fxFlex="100">
+            <div fxFlex="60">
+                <md-card fxLayout="row" fxFlex="100" class="search-input-card" fxLayoutAlign="space-around center">
+                    <div>
+                        <md-icon>search</md-icon>
+                    </div>
 
-                <input class="search-input" type="text" name="" value="" placeholder="Search {{ root }}">
-            </md-card>
-        </div>
+                    <input class="search-input" type="text" name="search" placeholder="Search {{ root }}">
+                </md-card>
+            </div>
 
-        <div fxFlex="30" fxFlexOffset="10px">
-            <md-card class="search-input-card" fxLayoutAlign="space-around center">
-                <md-select [floatPlaceholder]="'never'" class="search-input" name="" placeholder="Filter">
-                    <md-option value="something">Option</md-option>
-                    <md-option value="something">Option2</md-option>
-                </md-select>
+            <div fxFlex="30" fxFlexOffset="10px">
+                <md-card class="search-input-card" fxLayoutAlign="space-around center">
+                    <md-select [floatPlaceholder]="'never'" class="search-input" name="filter" placeholder="Filter">
+                        <md-option value="something">Option</md-option>
+                        <md-option value="something">Option2</md-option>
+                    </md-select>
 
-            </md-card>
-        </div>
+                </md-card>
+            </div>
 
-        <div fxFlex="10" fxFlexOffset="10px" fxLayoutAlign="space-around center">
-            <button type="button" name="button" (click)="toggleLayout()" md-fab color="primary">
-                <md-icon *ngIf="tiles.columns === 1">view_list</md-icon>
-                <md-icon *ngIf="tiles.columns === 3">view_module</md-icon>
-            </button>
-        </div>
+            <div fxFlex="10" fxFlexOffset="10px" fxLayoutAlign="space-around center">
+                <button type="button" name="button" (click)="toggleLayout()" md-fab color="primary">
+                    <md-icon *ngIf="tiles.columns === 1">view_list</md-icon>
+                    <md-icon *ngIf="tiles.columns === 3">view_module</md-icon>
+                </button>
+            </div>
+        </form>
     </div>
 
-    <div class="list-header-row" fxLayout="row" fxLayoutOffset="20px;">
+    <div class="list-header-row" fxLayout="row" fxLayoutGap="20px;">
 
-        <md-grid-list cols="3" rowHeight="75px" gutterSize="20px" fxFlex="100">
+        <md-radio-group class="example-radio-group" name="radio_group" [(ngModel)]="selectedItem" (change)="itemSelected(event)" ngDefaultControl>
+            <md-grid-list cols="3" rowHeight="75px" gutterSize="20px" fxFlex="100">
 
-          <md-grid-tile
-              *ngFor="let row of rows; let i = index;"
-              [colspan]="tiles.columns"
-              [rowspan]="tiles.rows"
-              fxFlex="100">
+                    <md-grid-tile
+                        *ngFor="let row of rows; let i = index;"
+                        [colspan]="tiles.columns"
+                        [rowspan]="tiles.rows"
+                        fxFlex="100">
 
-              <app-sortable-list-item [root]="root" [item]="row" fxFlex="100" [layout]="listLayout">
-              </app-sortable-list-item>
+                            <md-radio-button name="radio" [value]="row" fxLayout="row" fxFlex="100">
+                                <app-sortable-list-item [root]="root" [item]="row" fxFlex="100" [layout]="listLayout">
+                                </app-sortable-list-item>
+                            </md-radio-button>
 
-          </md-grid-tile>
+                    </md-grid-tile>
 
-        </md-grid-list>
+            </md-grid-list>
+        </md-radio-group>
 
     </div>
 

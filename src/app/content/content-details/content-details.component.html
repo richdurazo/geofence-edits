@@ -2,7 +2,7 @@
 
     <div fxLayout="column">
 
-        <div fxLayout="row" fxLayout.md="column" fxLayout.sm="column" *ngIf="content">
+        <div *ngIf="content">
 
             <!-- Left Justified Content -->
             <div fxLayout="column" fxFlex="55">
@@ -36,7 +36,7 @@
                                 Start Date
                             </label>
                             <div>
-                                {{ content.start_at | date: 'dd/MM/yyyy' }}
+                                {{ content.start_at | date: 'M/dd/yyyy' }}
                             </div>
                         </div>
 
@@ -45,7 +45,7 @@
                                 End Date
                             </label>
                             <div>
-                                {{ content.end_at | date: 'dd/MM/yyyy' }}
+                                {{ content.end_at | date: 'M/dd/yyyy' }}
                             </div>
                         </div>
 

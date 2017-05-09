@@ -1,0 +1,19 @@
+<md-card class="content-group" fxFlex="100">
+    <app-expandable-panel [header]="contentGroup.name">
+
+        <md-card *ngFor="let item of groupContent">
+            <app-content-row [item]="item">
+            </app-content-row>
+        </md-card>
+
+        <md-card>
+            <div fxFlex="100" fxLayoutAlign="end">
+                <button type="button" name="button" md-button (click)="launchSelector()">
+                    Add Content
+                </button>
+            </div>
+        </md-card>
+
+    </app-expandable-panel>
+
+</md-card>

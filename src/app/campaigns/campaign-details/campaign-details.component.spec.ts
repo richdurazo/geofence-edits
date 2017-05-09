@@ -32,6 +32,7 @@ describe('CampaignDetailsComponent', () => {
 
         campaignApi = TestBed.get(CampaignApiService);
         spyOn(campaignApi, 'getCampaign').and.returnValue(Observable.of([{foo:'bar'}, {hay: 'guyz'}]));
+        spyOn(campaignApi, 'getCampaignTriggers').and.returnValue(Observable.of([{foo:'bar'}, {hay: 'guyz'}]));
     }));
 
     beforeEach(() => {

@@ -7,6 +7,7 @@ export class ContentApiService {
 
     constructor(private authCustomHttp: AuthCustomHttpService) { }
 
+    // CONTENT ACTIONS
     getContent (uuid?: string) {
         if (uuid) {
             return this.authCustomHttp.get(AppSettings.API_ROOT + '/content/' + uuid)
@@ -27,4 +28,19 @@ export class ContentApiService {
         .map(res => res.json())
     }
 
+    // CONTENT GROUP ACTIONS
+    createContentGroup (data) {
+        return this.authCustomHttp.post(AppSettings.API_ROOT + '/content-group', data)
+        .map(res => res.json())
+    }
+
+    getGroupContent (content_group_id) {
+        return this.authCustomHttp.get(AppSettings.API_ROOT + '/content-group/' + content_group_id + '/content')
+        .map(res => res.json())
+    }
+
+    attachContentToGroup (content_group_id, content_id) {
+        return this.authCustomHttp.post(AppSettings.API_ROOT + '/content-group/' + content_group_id + '/content/' + content_id, {})
+        .map(res => res.json())
+    }
 }

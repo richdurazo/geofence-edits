@@ -1,4 +1,4 @@
-<md-card class="creator-form-card" fxFlex="100">
+<md-card class="creator-form-card">
 
     <form #form="ngForm" (ngSubmit)="submitForm(form)" novalidate fxLayout="column">
 
@@ -23,9 +23,9 @@
                     </p>
                 </div>
 
-                <div *ngIf="contentType">
+                <div fxLayout="column" *ngIf="contentType">
 
-                    <div fxLayout="row">
+                    <div>
                         <md-input-container fxFlex="50">
                             <input
                             mdInput
@@ -85,7 +85,7 @@
                     </div>
 
                     <div class="form-highlight-well" fxFlex="100">
-                        <div fxFlex="100" fxLayout="row">
+                        <div fxLayout="row">
                             <md-input-container fxFlex="50">
                                 <input
                                 mdInput
@@ -104,7 +104,7 @@
                             </md-input-container>
                         </div>
 
-                        <div fxFlex="100" fxLayout="row">
+                        <div fxLayout="row">
                             <md-input-container fxFlex="100">
                                 <textarea
                                 mdInput
@@ -126,8 +126,8 @@
 
                     </div>
 
-                    <div class="form-highlight-well" fxFlex="100" *ngIf="scratcherEnabled">
-                        <div fxFlex="100" fxLayout="row">
+                    <div class="form-highlight-well" fxFlex="100" *ngIf="content.scratcher_enabled">
+                        <div fxLayout="row">
                             <md-input-container fxFlex="50">
                                 <input
                                 mdInput
@@ -146,7 +146,7 @@
                             </md-input-container>
                         </div>
 
-                        <div fxFlex="100" fxLayout="row">
+                        <div fxLayout="row">
                             <md-input-container fxFlex="100">
                                 <input
                                 mdInput
@@ -277,14 +277,14 @@
                                 name="scratcher_enabled"
                                 [color]="'primary'"
                                 [labelPosition]="'before'"
-                                [(ngModel)]="scratcherEnabled">
+                                [(ngModel)]="content.scratcher_enabled">
                             </md-slide-toggle>
                         </div>
                     </div>
 
                     <div class="right-column" fxLayout="column">
 
-                        <md-tab-group *ngIf="scratcherEnabled">
+                        <md-tab-group *ngIf="content.scratcher_enabled">
 
                             <!-- SCRATCHER LAYER -->
                             <md-tab label="Overlay">
@@ -293,7 +293,7 @@
                                     Scratcher Overlay Preview
                                 </div>
 
-                                <div class="scratcher-preview">
+                                <div class="scratcher-preview" fxLayout="column">
 
                                     <div class="scratcher-hero-image-container" fxFlex="150px;">
                                         <app-file-uploader
@@ -322,7 +322,7 @@
                                     Scratcher Preview
                                 </div>
 
-                                <div class="scratcher-preview">
+                                <div class="scratcher-preview" fxLayout="column">
 
                                     <div class="scratcher-hero-image-container" fxFlex="150px;">
                                         <app-file-uploader
@@ -381,7 +381,7 @@
                                     Offer Preview
                                 </div>
 
-                                <div class="scratcher-preview">
+                                <div class="scratcher-preview" fxLayout="column">
 
                                     <div class="scratcher-hero-image-container" fxFlex="150px;">
                                         <app-file-uploader
@@ -409,14 +409,14 @@
 
                         </md-tab-group>
 
-                        <div *ngIf="!scratcherEnabled">
+                        <div fxLayout="column" *ngIf="!content.scratcher_enabled">
                             <div fxFlex="49px;"></div>
 
                             <div class="creator-section-label">
                                 Offer Preview
                             </div>
 
-                            <div class="scratcher-preview">
+                            <div class="scratcher-preview" fxLayout="column">
 
                                 <div class="scratcher-hero-image-container" fxFlex="150px;">
                                     <app-file-uploader

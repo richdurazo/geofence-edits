@@ -42,6 +42,10 @@ body {
     font-weight: 400;
     color: $primary-text-color;
 
+    .mat-card {
+        border-radius: 0;
+    }
+
     .mat-sidenav-container {
         background-color: $body-background-color;
 
@@ -80,10 +84,23 @@ body {
         color: mat-color($primary);
     }
 
+    .padded-container {
+        padding: 24px;
+    }
+
     .page-heading {
         font-size: 22px;
         font-weight: 400;
         margin-top: 0;
+    }
+
+    .section-heading {
+        font-size: 18px;
+        font-weight: 400;
+
+        &.section-heading-no-margin {
+            margin: 0;
+        }
     }
 
     // INPUTS
@@ -226,9 +243,12 @@ body {
             font-size: $small-font-size;
         }
 
+        .media-view-container, .media-upload-container {
+            height: 152px;
+            width: 270px;
+        }
+
         .media-upload-container {
-            height: 183px;
-            width: 325px;
             margin-bottom: $common-margin;
         }
 
@@ -344,6 +364,10 @@ body {
     }
 
     .sortable-list {
+        margin-bottom: $common-margin;
+        min-height: 800px;
+        min-width: 1000px;
+
         .search-input-row {
             margin-bottom: 20px;
             .search-input-card {
@@ -381,5 +405,36 @@ body {
         }
     }
 
+    .content-group-container-card {
+        padding: 0;
+
+        .trigger-content-group-container {
+
+            .rendered-content-group .content-group {
+
+                .expandable-content {
+                    padding: 0;
+                }
+            }
+
+            .content-group {
+                border-top: 1px solid darken($dark-grey, 3);
+                padding: 0;
+            }
+        }
+    }
+
+    .expandable-header {
+        padding: 15px 24px;
+        border-bottom: 1px solid darken($dark-grey, 3);
+        background-color: $light-grey;
+
+
+        .expandable-panel-heading {
+            font-size: 16px;
+            font-weight: 400;
+            margin: 0;
+        }
+    }
 
 }

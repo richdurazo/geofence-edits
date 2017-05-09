@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+
+import { CampaignModel } from '../../campaigns/shared/campaign.model';
+import { CampaignApiService } from '../../campaigns/shared/campaign-api.service';
 
 import { FilestackService } from '../../shared/filestack.service';
 import { UuidApiService } from '../../shared/uuid-api.service';
@@ -12,6 +15,10 @@ import { TriggerModel } from '../shared/trigger.model';
 })
 export class TriggerCreatorFormComponent implements OnInit {
 
+    @Input() parentCampaign: CampaignModel;
+
+    @Output() onCreate: EventEmitter<any> = new EventEmitter();
+
     trigger: TriggerModel;
 
     triggerMediaConfig: any;
@@ -19,6 +26,10 @@ export class TriggerCreatorFormComponent implements OnInit {
     triggerMediaExists: boolean = false;
 
     triggerType: string;
+
+    triggerCampaign: CampaignModel;
+
+    campaigns: CampaignModel[];
 
     triggerTypes: [
         {
@@ -41,10 +52,14 @@ export class TriggerCreatorFormComponent implements OnInit {
 
     triggerUuid: string;
 
-    constructor(private uuidApi: UuidApiService, private triggerApi: TriggerApiService, private filestack: FilestackService) { }
+    constructor(private uuidApi: UuidApiService, private triggerApi: TriggerApiService, private campaignApi: CampaignApiService, private filestack: FilestackService) { }
 
     ngOnInit() {
         this.fetchUuid();
+
+        if (!this.parentCampaign) {
+            this.getCampaigns();
+        }
 
         this.triggerTypes = [
             {
@@ -91,32 +106,37 @@ export class TriggerCreatorFormComponent implements OnInit {
 
     processSuccess (data) {
         console.log('saved trigger data', data);
+        if (this.onCreate) {
+            this.onCreate.emit(data);
+        }
     }
 
     public setType (event) {
         this.triggerType = event;
 
         if (!this.trigger) {
-            this.trigger = new TriggerModel('', event);
+            this.trigger = new TriggerModel('', event, this.triggerUuid);
         } else {
             this.trigger.type = this.triggerType;
         }
 
-        this.getTriggerValue();
+        if (this.parentCampaign) {
+            this.trigger.campaign_id = this.parentCampaign.id;
+        }
     }
 
-    public getTriggerValue () {
-        if (!this.trigger.value && (this.trigger.type === 'watermark' || this.trigger.type === 'touch')) {
-            this.triggerApi.getTriggerValue()
-            .subscribe(
-                data => {
-                    this.trigger.value = data.trigger.value;
-                }
-            )
-        } else if (this.trigger.value && (this.trigger.type === 'fingerprint' || this.trigger.type === 'beacon')) {
-            this.trigger.value = null;
-        }
+    public setCampaign (data) {
+        this.trigger.campaign_id = data.id;
+        console.log('this.trigger', this.trigger);
+    }
 
+    public getCampaigns () {
+        this.campaignApi.getCampaigns()
+        .subscribe(
+            (data) => {
+                this.campaigns = data;
+            }
+        )
     }
 
 }

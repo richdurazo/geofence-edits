@@ -1,76 +1,77 @@
-<md-card fxFlex="100">
+<div fxLayout="column">
 
-        <div fxLayout="row">
+    <md-card fxLayout="row" fxFlex="100">
 
-            <div fxLayout="column" fxFlex="55">
+                <div fxLayout="column" fxFlex="55">
 
-                <div *ngIf="trigger">
-
-                    <div fxLayout="row">
-                        <div fxFlex="50" fxLayout="column" class="details-display-container">
-                            <label>
-                                Type
-                            </label>
-                            <div>
-                                {{ trigger.type }}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div fxLayout="row">
-                        <div fxFlex="50" fxLayout="column" class="details-display-container">
-                            <label>
-                                Name
-                            </label>
-                            <div>
+                    <div *ngIf="trigger">
+                        <div fxLayout="row">
+                            <h1 class="section-heading">
                                 {{ trigger.name }}
+                            </h1>
+                        </div>
+
+                        <div fxLayout="row">
+                            <div fxFlex="50" fxLayout="column" class="details-display-container">
+                                <label>
+                                    Type
+                                </label>
+                                <div>
+                                    {{ trigger.type }}
+                                </div>
                             </div>
                         </div>
+
                     </div>
 
-                    <div fxLayout="row">
-                        <div fxFlex="100" fxLayout="column" class="details-display-container">
-                            <label>
-                                Notes
-                            </label>
-                            <div>
-                                {{ trigger.notes }}
-                            </div>
+                </div>
+
+                <div class="right-column" fxFlex="35" *ngIf="trigger" fxLayoutAlign="end">
+
+                    <div class="media-container" *ngIf="trigger.type === 'watermark' || trigger.type === 'fingerprint'">
+                        <div class="creator-section-label" style="margin-top: 0;">
+                            Media
                         </div>
-                    </div>
 
-                    <div fxLayout="row" *ngIf="trigger.type === 'watermark' || trigger.type === 'touch'">
-                        <div fxFlex="60" fxLayout="column" class="details-display-container">
-                            <label>
-                                Value
-                            </label>
-                            <div>
-                                {{ trigger.value }}
-                            </div>
+                        <div class="media-view-container">
+                            <app-video
+                                [uuid]="trigger.uuid"
+                                [key]="'audio-trigger'">
+                            </app-video>
                         </div>
                     </div>
 
                 </div>
 
-            </div>
+                <div fxFlex="10" *ngIf="trigger"></div>
 
-            <div class="right-column" fxFlex="45" *ngIf="trigger">
+    </md-card>
 
-                <div class="media-container" *ngIf="trigger.type === 'watermark' || trigger.type === 'fingerprint'">
-                    <div class="creator-section-label">
-                        Media
+    <md-card class="content-group-container-card">
+        <app-expandable-panel [header]="'Content Groups'">
+            <div class="trigger-content-group-container padded-container" fxLayout="column" fxFlex="100">
+                <app-content-group-details
+                    class="rendered-content-group"
+                    [trigger]="trigger"
+                    [contentGroup]="contentGroup"
+                    *ngFor="let contentGroup of contentGroups">
+                </app-content-group-details>
+
+                <app-content-group-creator
+                    [trigger]="trigger"
+                    (onCreate)="contentCreated($event)"
+                    *ngIf="adding">
+                </app-content-group-creator>
+
+                <md-card fxLayout="column" *ngIf="!adding">
+                    <div fxLayout="row" fxFlex="100" fxFlexAlign="end">
+                        <button type="button" md-raised-button (click)="adding = !adding">
+                            Add Content Group
+                        </button>
                     </div>
-
-                    <div class="media-upload-container">
-                        <app-image
-                            [uuid]="trigger.uuid"
-                            [key]="'audio-trigger'">
-                        </app-image>
-                    </div>
-                </div>
-
+                </md-card>
             </div>
+        </app-expandable-panel>
+    </md-card>
 
-        </div>
-
-</md-card>
+</div>

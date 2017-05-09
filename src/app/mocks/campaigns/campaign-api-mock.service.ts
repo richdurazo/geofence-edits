@@ -13,8 +13,16 @@ export class CampaignApiMockService {
       return false;
     }
 
+    getCampaignTriggers () {
+        return false;
+    }
+
     createCampaign (data) {
       return false;
+    }
+
+    attachTrigger (campaign_id, trigger_id) {
+        return false;
     }
 
     deleteCampaign (data) {

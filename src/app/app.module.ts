@@ -28,7 +28,13 @@ import { ContentCreatorComponent } from './content/content-creator/content-creat
 import { ContentCreatorFormComponent } from './content/content-creator/content-creator-form.component';
 import { ContentDetailsComponent } from './content/content-details/content-details.component';
 import { ContentOverviewComponent } from './content/content-overview/content-overview.component';
+
+import { ContentGroupCreatorComponent } from './content/content-group-creator/content-group-creator.component';
+import { ContentGroupDetailsComponent } from './content/content-group-details/content-group-details.component';
+
 import { TermsDialogComponent } from './content/content-creator/terms-dialog/terms-dialog.component';
+import { TermsApiService } from './content/content-creator/terms-dialog/terms-api.service';
+
 
 import { TriggersComponent } from './triggers/triggers-component/triggers.component';
 import { TriggerDetailsComponent } from './triggers/trigger-details/trigger-details.component';
@@ -49,6 +55,12 @@ import { FileUploaderComponent } from './shared/file-uploader/file-uploader.comp
 import { SortableListComponent } from './shared/sortable-list/sortable-list.component';
 import { ImageComponent } from './shared/image/image.component';
 import { SortableListItemComponent } from './shared/sortable-list/sortable-list-item/sortable-list-item.component';
+import { ContentListComponent } from './content/content-overview/content-list/content-list.component';
+import { TriggerListComponent } from './triggers/triggers-overview/trigger-list/trigger-list.component';
+import { VideoComponent } from './shared/video/video.component';
+import { ExpandablePanelComponent } from './shared/expandable-panel/expandable-panel.component';
+import { ContentRowComponent } from './content/content-row/content-row.component';
+import { ContentSelectorComponent } from './content/content-selector/content-selector.component';
 
 @NgModule({
     declarations: [
@@ -77,29 +89,39 @@ import { SortableListItemComponent } from './shared/sortable-list/sortable-list-
         ImageComponent,
         TriggerDetailsComponent,
         CampaignDetailsComponent,
-        SortableListItemComponent
+        SortableListItemComponent,
+        ContentListComponent,
+        TriggerListComponent,
+        ContentGroupCreatorComponent,
+        ContentGroupDetailsComponent,
+        VideoComponent,
+        ExpandablePanelComponent,
+        ContentRowComponent,
+        ContentSelectorComponent
     ],
     imports: [
-        BrowserModule,
+        AppRoutingModule,
         BrowserAnimationsModule,
+        BrowserModule,
+        FlexLayoutModule,
         FormsModule,
         HttpModule,
         MaterialModule.forRoot(),
-        FlexLayoutModule,
-        AppRoutingModule
     ],
     providers: [
         AuthCustomHttpService,
-        ContentApiService,
-        FilestackService,
         CampaignApiService,
+        ContentApiService,
         DateUtilsService,
+        FilestackService,
+        TermsApiService,
         TriggerApiService,
         UserApiService,
         UuidApiService
     ],
     entryComponents: [
-        TermsDialogComponent
+        TermsDialogComponent,
+        ContentSelectorComponent
     ],
     bootstrap: [AppComponent]
 })

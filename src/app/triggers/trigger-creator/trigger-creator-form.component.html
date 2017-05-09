@@ -24,6 +24,18 @@
 
                 <div *ngIf="triggerType">
 
+                    <div fxLayout="row" *ngIf="!parentCampaign">
+                        <md-select
+                        placeholder="Campaign"
+                        name="camnpaign"
+                        [ngModel]="triggerCampaign"
+                        (ngModelChange)="setCampaign($event)">
+                            <md-option *ngFor="let campaign of campaigns" [value]="campaign">
+                                {{ campaign.name }}
+                            </md-option>
+                        </md-select>
+                    </div>
+
                     <div fxLayout="row">
                         <md-input-container fxFlex="50">
                             <input
@@ -43,44 +55,12 @@
                         </md-input-container>
                     </div>
 
-                    <div fxLayout="row">
-                        <md-input-container fxFlex="60">
-                            <input
-                            mdInput
-                            name="notes"
-                            type="text"
-                            placeholder="Notes"
-                            [(ngModel)]="trigger.notes"
-                            #notes="ngModel">
-                        </md-input-container>
-                    </div>
-
-                    <div fxLayout="row" *ngIf="triggerType === 'watermark' || triggerType === 'touch'">
-                        <md-input-container fxFlex="60">
-                            <input
-                            mdInput
-                            name="value"
-                            type="text"
-                            placeholder="Value"
-                            required
-                            disabled
-                            [(ngModel)]="trigger.value"
-                            #value="ngModel">
-
-                            <md-hint align="start">
-                                <div  *ngIf="form.submitted && value.errors !== null && value.errors.required">
-                                    Please add a value
-                                </div>
-                            </md-hint>
-                        </md-input-container>
-                    </div>
-
                 </div>
 
 
             </div>
 
-            <div class="right-column" fxFlex="45">
+            <div class="right-column" fxFlex="35" fxLayoutAlign="end">
 
                 <div class="media-container" *ngIf="triggerType === 'watermark' || triggerType === 'fingerprint'">
                     <div class="creator-section-label">
@@ -98,9 +78,13 @@
 
             </div>
 
+            <div fxFlex="10">
+
+            </div>
+
         </div>
 
-        <div fxLayoutAlign="end" fxFlex="100">
+        <div fxLayoutAlign="end" fxFlex="100" *ngIf="triggerType">
             <button type="submit" class="common-form-submit" md-raised-button color="primary">Create</button>
         </div>
 

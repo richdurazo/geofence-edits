@@ -1,14 +1,17 @@
 export class TriggerModel {
     name: string;
-    value: number;
-    campaign_id: string;
     type: string;
+    id?: number;
+    campaign_id: number;
+    uuid: string;
 
     constructor (
         name: string,
-        type: string
+        type: string,
+        uuid: string
     ) {
         this.name = name;
         this.type = type;
+        this.uuid = uuid;
     }
 }

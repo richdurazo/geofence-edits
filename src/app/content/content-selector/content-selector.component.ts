@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MdDialogRef } from '@angular/material';
 
 import { ContentApiService } from '../shared/content-api.service';
 import { ContentModel } from '../shared/content.model';
@@ -12,7 +13,9 @@ export class ContentSelectorComponent implements OnInit {
 
     content: ContentModel[] = [];
 
-    constructor(private contentApi: ContentApiService) { }
+    selectedContent: ContentModel;
+
+    constructor(private contentApi: ContentApiService, public dialogRef: MdDialogRef<ContentSelectorComponent>) { }
 
     ngOnInit() {
         this.getContent();
@@ -27,5 +30,13 @@ export class ContentSelectorComponent implements OnInit {
 
     processGetSuccess (data) {
         this.content = data;
+    }
+
+    contentSelected(event: any) {
+        this.selectedContent = event;
+    }
+
+    submit () {
+        this.dialogRef.close(this.selectedContent);
     }
 }

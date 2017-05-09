@@ -57,6 +57,8 @@ export class ContentGroupDetailsComponent implements OnInit {
         };
         let dialogRef = this.dialog.open(ContentSelectorComponent, config);
         dialogRef.afterClosed().subscribe(result => {
+            this.selectedContent = result;
+            this.attachContent();
             console.log('result', result);
         });
     }

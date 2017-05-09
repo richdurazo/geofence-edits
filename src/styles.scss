@@ -364,6 +364,10 @@ body {
     }
 
     .sortable-list {
+        margin-bottom: $common-margin;
+        min-height: 800px;
+        min-width: 1000px;
+
         .search-input-row {
             margin-bottom: 20px;
             .search-input-card {
@@ -407,7 +411,6 @@ body {
         .trigger-content-group-container {
 
             .rendered-content-group .content-group {
-                background-color: $light-grey;
 
                 .expandable-content {
                     padding: 0;
@@ -424,6 +427,8 @@ body {
     .expandable-header {
         padding: 15px 24px;
         border-bottom: 1px solid darken($dark-grey, 3);
+        background-color: $light-grey;
+
 
         .expandable-panel-heading {
             font-size: 16px;

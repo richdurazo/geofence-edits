@@ -33,20 +33,24 @@
 
     <div class="list-header-row" fxLayout="row" fxLayoutGap="20px;">
 
-        <md-grid-list cols="3" rowHeight="75px" gutterSize="20px" fxFlex="100">
+        <md-radio-group class="example-radio-group" [(ngModel)]="selectedItem" (change)="itemSelected(event)">
+            <md-grid-list cols="3" rowHeight="75px" gutterSize="20px" fxFlex="100">
 
-          <md-grid-tile
-              *ngFor="let row of rows; let i = index;"
-              [colspan]="tiles.columns"
-              [rowspan]="tiles.rows"
-              fxFlex="100">
+                    <md-grid-tile
+                        *ngFor="let row of rows; let i = index;"
+                        [colspan]="tiles.columns"
+                        [rowspan]="tiles.rows"
+                        fxFlex="100">
 
-              <ng-content>
-              </ng-content>
+                            <md-radio-button [value]="row" fxLayout="row" fxFlex="100">
+                                <app-sortable-list-item [root]="root" [item]="row" fxFlex="100" [layout]="listLayout">
+                                </app-sortable-list-item>
+                            </md-radio-button>
 
-          </md-grid-tile>
+                    </md-grid-tile>
 
-        </md-grid-list>
+            </md-grid-list>
+        </md-radio-group>
 
     </div>
 

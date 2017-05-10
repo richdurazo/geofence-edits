@@ -61,6 +61,7 @@ import { VideoComponent } from './shared/video/video.component';
 import { ExpandablePanelComponent } from './shared/expandable-panel/expandable-panel.component';
 import { ContentRowComponent } from './content/content-row/content-row.component';
 import { ContentSelectorComponent } from './content/content-selector/content-selector.component';
+import { ChartComponent } from './shared/chart/chart.component';
 
 @NgModule({
     declarations: [
@@ -97,7 +98,8 @@ import { ContentSelectorComponent } from './content/content-selector/content-sel
         VideoComponent,
         ExpandablePanelComponent,
         ContentRowComponent,
-        ContentSelectorComponent
+        ContentSelectorComponent,
+        ChartComponent
     ],
     imports: [
         AppRoutingModule,

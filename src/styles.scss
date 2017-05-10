@@ -456,4 +456,12 @@ body {
         background-color: darken(mat-color($primary), 5);
     }
 
+    .campaign-details-container {
+        margin-bottom: $common-margin;
+
+        .mat-card {
+            height: 300px;
+        }
+    }
+
 }

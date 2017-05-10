@@ -4,10 +4,14 @@
     </h1>
 </md-toolbar>
 
-<div  fxLayout="column">
+<div class="campaign-details-container" fxLayout="row" fxLayoutGap="24px">
 
-    <div fxLayout="row" fxLayoutGap="24px">
-        <md-card fxLayout="row" fxFlex="40" *ngIf="campaign">
+    <div fxLayout="column" fxFlex="40">
+        <h1 class="section-heading">
+            Details
+        </h1>
+
+        <md-card fxLayout="row" fxFlex="100" *ngIf="campaign">
 
                 <div fxLayout="column" fxFlex="55">
 
@@ -63,42 +67,50 @@
                 </div>
 
         </md-card>
+    </div>
 
-        <md-card fxLayout="row" fxFlex="60" *ngIf="campaign">
+    <div fxLayout="column" fxFlex="60">
+        <h1 class="section-heading">
+            Overview
+        </h1>
+        <md-card *ngIf="campaign" fxFlex="100">
             This is the graph section
         </md-card>
     </div>
 
 </div>
 
-<div fxLayout="column" fxLayoutGap="24px">
+<div fxLayout="column">
     <div>
         <h1 class="section-heading">
             Triggers
         </h1>
     </div>
 
-    <app-trigger-details
-        [trigger]="trigger"
-        *ngFor="let trigger of triggers">
-    </app-trigger-details>
+    <div fxLayout="column" fxLayoutGap="24px">
 
-    <app-trigger-creator-form
-        [parentCampaign]="campaign"
-        *ngIf="adding"
-        (onCreate)="triggerCreated($event)">
-    </app-trigger-creator-form>
+        <app-trigger-details
+            [trigger]="trigger"
+            *ngFor="let trigger of triggers">
+        </app-trigger-details>
 
-    <div fxFlex="100" fxLayoutAlign="end">
-        <button
-            type="button"
-            name="button"
-            md-raised-button
-            color="primary"
-            *ngIf="!adding"
-            (click)="adding = true">
-            Add Trigger
-        </button>
+        <app-trigger-creator-form
+            [parentCampaign]="campaign"
+            *ngIf="adding"
+            (onCreate)="triggerCreated($event)">
+        </app-trigger-creator-form>
+
+        <div fxFlex="100" fxLayoutAlign="end">
+            <button
+                type="button"
+                name="button"
+                md-raised-button
+                color="primary"
+                *ngIf="!adding"
+                (click)="adding = true">
+                Add Trigger
+            </button>
+        </div>
+
     </div>
-
 </div>

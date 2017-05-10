@@ -13,7 +13,7 @@ $dark-blue: #1976D2;
 @include mat-core();
 
 // Define a theme.
-$primary: mat-palette($mat-indigo);
+$primary: mat-palette($mat-light-blue, 500, A400);
 $accent:  mat-palette($mat-amber, A200, A100, A400);
 $warn:  mat-palette($mat-red, A200, A100, A400);
 
@@ -31,7 +31,7 @@ $nav-background-dark-color: $dark-steel;
 $nav-text-color: $dark-grey;
 
 // PIXEL VALUES
-$common-margin: 20px;
+$common-margin: 24px;
 $common-font-size: 13px;
 $small-font-size: 11px;
 
@@ -41,6 +41,7 @@ body {
     font-size: $common-font-size;
     font-weight: 400;
     color: $primary-text-color;
+    margin: 0;
 
     .mat-card {
         border-radius: 0;
@@ -51,14 +52,18 @@ body {
         }
     }
 
-    .mat-sidenav-container {
+    .mat-sidenav-container[fullscreen] {
         background-color: $body-background-color;
+        top: 64px;
 
         .mat-sidenav-content > .containerX {
             max-width: 1150px;
             min-width: 525px;
-            // padding-bottom: 30px;
             padding: $common-margin;
+
+            &.pad-container {
+                padding-top: 88px;
+            }
         }
     }
 
@@ -87,7 +92,7 @@ body {
     }
 
     .padded-container {
-        padding: 24px;
+        padding: $common-margin;
     }
 
     .page-heading {
@@ -102,6 +107,10 @@ body {
 
         &.section-heading-no-margin {
             margin: 0;
+        }
+
+        &.text-grey {
+            color: $nav-text-color;
         }
     }
 
@@ -142,10 +151,11 @@ body {
 
     // COMMON TOOLBAR
     md-toolbar.mat-toolbar {
-        background-color: $toolbar-background-color;
+        position: absolute;
+        z-index: 2;
 
-        .mat-toolbar-row {
-            color: $primary-text-color;
+        .company-logo {
+            color: $nav-text-color;
         }
     }
 
@@ -154,8 +164,13 @@ body {
         background-color: $nav-background-base-color;
         width: 272px;
 
+        .app-sidenav {
+            position: absolute;
+            z-index: 2;
+        }
+
         .mat-nav-list {
-            padding-top: 0;
+            padding-top: $common-margin;
         }
 
         .mat-list-item > .mat-list-item-content {
@@ -166,12 +181,6 @@ body {
             .mat-icon {
                 margin-right: $common-margin;
             }
-        }
-
-        .app-sidenav-list-header {
-            height: 64px;
-            background-color: $nav-background-dark-color;
-            margin-bottom: 40px;
         }
 
         .router-link.active {
@@ -427,7 +436,7 @@ body {
     }
 
     .expandable-header {
-        padding: 15px 24px;
+        padding: 15px $common-margin;
         background-color: darken($light-grey, 1);
 
 
@@ -438,6 +447,13 @@ body {
         }
     }
 
+    .campaign-heading.mat-toolbar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
 
+        background-color: darken(mat-color($primary), 5);
+    }
 
 }

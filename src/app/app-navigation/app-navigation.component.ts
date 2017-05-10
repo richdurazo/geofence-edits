@@ -10,7 +10,7 @@ import { AuthService } from '../auth/auth.service';
 })
 export class AppNavigationComponent implements OnInit {
 
-    activeRoute: string;
+    campaignDetails: boolean = false;
 
     constructor(private authService: AuthService, private router: Router) { }
 
@@ -63,10 +63,19 @@ export class AppNavigationComponent implements OnInit {
         this.router.events.subscribe(event => {
             let self = this;
             if(event instanceof NavigationEnd && event.urlAfterRedirects !== '/login') {
-                let routeObj = this.routes.filter(( obj ) => {
-                  return obj.route.split("/")[1] === event.urlAfterRedirects.split("/")[1];
-                });
-                this.activeRoute = routeObj[0].name;
+                // let routeObj = this.routes.filter(( obj ) => {
+                //   return obj.route.split("/")[1] === event.urlAfterRedirects.split("/")[1];
+                // });
+                // this.activeRoute = routeObj[0].name;
+                // this.activeRoute === ''
+                var urlArr = event.urlAfterRedirects.split('/');
+                if (urlArr.length === 3 && urlArr[1] === 'campaigns' && urlArr[2] !== 'create') {
+                    this.campaignDetails = true;
+                } else {
+                    this.campaignDetails = false;
+                }
+                console.log('this.campaignDetails', this.campaignDetails);
+                console.log("event.urlAfterRedirects.split('/')", event.urlAfterRedirects.split('/'));
             }
         });
     }

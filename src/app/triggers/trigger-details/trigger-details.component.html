@@ -63,7 +63,7 @@
                     *ngIf="adding">
                 </app-content-group-creator>
 
-                <md-card fxLayout="column" *ngIf="!adding">
+                <md-card class="mat-elevation-z3" fxLayout="column" *ngIf="!adding">
                     <div fxLayout="row" fxFlex="100" fxFlexAlign="end">
                         <button type="button" md-raised-button (click)="adding = !adding">
                             Add Content Group

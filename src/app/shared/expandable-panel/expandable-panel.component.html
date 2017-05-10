@@ -1,4 +1,4 @@
-<div class="expandable-header" [@headerChange]="isExpanded + ''" fxLayout="row" (click)="toggleExpanded()">
+<md-card class="expandable-header mat-elevation-z1" fxLayout="row" (click)="toggleExpanded()">
     <h1 class="expandable-panel-heading" fxFlex="100">
         <div fxFlex="90">
             {{ header }}
@@ -8,7 +8,7 @@
             <md-icon [@iconChange]="isExpanded + ''">keyboard_arrow_up</md-icon>
         </div>
     </h1>
-</div>
+</md-card>
 <div class="expandable-content" [@expandChange]="isExpanded + ''">
     <ng-content></ng-content>
 </div>

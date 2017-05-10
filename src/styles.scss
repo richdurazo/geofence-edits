@@ -44,6 +44,11 @@ body {
 
     .mat-card {
         border-radius: 0;
+        color: $primary-text-color;
+
+        &.card-background {
+            background-color: darken($light-grey, 5);
+        }
     }
 
     .mat-sidenav-container {
@@ -62,9 +67,6 @@ body {
         padding: 0 45px;
     }
 
-    .mat-card {
-        color: $primary-text-color;
-    }
 
     .creator-form-card {
         padding-right: 80px;
@@ -426,8 +428,7 @@ body {
 
     .expandable-header {
         padding: 15px 24px;
-        border-bottom: 1px solid darken($dark-grey, 3);
-        background-color: $light-grey;
+        background-color: darken($light-grey, 1);
 
 
         .expandable-panel-heading {
@@ -436,5 +437,7 @@ body {
             margin: 0;
         }
     }
+
+
 
 }

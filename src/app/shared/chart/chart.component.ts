@@ -35,15 +35,11 @@ export class ChartComponent implements AfterViewInit {
     constructor() { }
 
     ngAfterViewInit() {
-        console.log('nv', nv);
-
         if (this.fakeData) {
 
             var chart;
             var self = this;
             nv.addGraph(function() {
-                console.log('self.chartElement', self.chartElement);
-                console.log('self.chartElement.nativeElement', self.chartElement.nativeElement);
                 chart = nv.models.stackedAreaChart()
                 .useInteractiveGuideline(true)
                 .x(function(d) { return d[0] })
@@ -54,8 +50,6 @@ export class ChartComponent implements AfterViewInit {
                 chart.yAxis.tickFormat(d3.format(',.4f'));
                 chart.legend.vers('furious');
 
-                console.log('chart', chart);
-                console.log('self.fakeData', self.fakeData);
                 d3.select(self.chartElement.nativeElement)
                 .datum(self.fakeData)
                 .transition().duration(1000)

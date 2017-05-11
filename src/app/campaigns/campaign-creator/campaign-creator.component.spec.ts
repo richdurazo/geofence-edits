@@ -10,7 +10,7 @@ describe('CampaignCreatorComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
-            declarations: [ CampaignCreatorComponent ]
+            declarations: [ CampaignCreatorComponent ],
         })
         .compileComponents();
     }));

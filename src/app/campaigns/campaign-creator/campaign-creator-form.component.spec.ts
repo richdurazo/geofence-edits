@@ -4,6 +4,9 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { Observable } from "rxjs/Rx";
 import { FormsModule } from '@angular/forms';
 
+import { RouterModule, Router, RouterStateSnapshot } from '@angular/router';
+import { RouterMockService } from '../../mocks/router/router-mock.service';
+
 import { CampaignApiService } from '../shared/campaign-api.service';
 import { CampaignApiMockService } from '../../mocks/campaigns/campaign-api-mock.service';
 
@@ -27,7 +30,8 @@ describe('CampaignCreatorFormComponent', () => {
             ],
             providers: [
                 { provide: CampaignApiService, useClass: CampaignApiMockService },
-                { provide: DateUtilsService, useClass: DateUtilsMockService }
+                { provide: DateUtilsService, useClass: DateUtilsMockService },
+                { provide: Router, useClass: RouterMockService}
             ]
         })
         .compileComponents();

@@ -6,14 +6,14 @@
 
 <div class="campaign-details-container" fxLayout="row" fxLayoutGap="24px">
 
-    <div fxLayout="column" fxFlex="40">
+    <div fxLayout="column" fxFlex="40" *ngIf="campaign">
         <h1 class="section-heading">
             Details
         </h1>
 
-        <md-card fxLayout="row" fxFlex="100" *ngIf="campaign">
+        <md-card fxLayout="row" fxFlex="100">
 
-                <div fxLayout="column" fxFlex="55">
+                <div fxLayout="column" fxFlex="100">
 
                     <div fxFlex="100" fxLayout="row">
                         <div fxLayout="column" class="details-display-container">
@@ -25,18 +25,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <div fxFlex="100" fxLayout="row">
-                        <div fxLayout="column" class="details-display-container">
-                            <label>
-                                Title
-                            </label>
-                            <div>
-                                {{ campaign.name }}
-                            </div>
-                        </div>
-                    </div>
-
 
                     <div fxFlex="100" fxLayout="row" fxLayoutGap="10px">
 
@@ -62,19 +50,16 @@
 
                 </div>
 
-                <!-- Placeholder div -->
-                <div fxFlex="45">
-                </div>
-
         </md-card>
     </div>
 
-    <div fxLayout="column" fxFlex="60">
+    <div fxLayout="column" fxFlex="60" *ngIf="campaign">
         <h1 class="section-heading">
             Overview
         </h1>
-        <md-card *ngIf="campaign" fxFlex="100">
-            This is the graph section
+        <md-card fxFlex="100">
+            <app-chart>
+            </app-chart>
         </md-card>
     </div>
 

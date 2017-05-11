@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { CampaignApiService } from '../shared/campaign-api.service';
 import { CampaignModel } from '../shared/campaign.model';
@@ -13,7 +14,7 @@ export class CampaignCreatorFormComponent implements OnInit {
 
     campaign: CampaignModel;
 
-    constructor (private campaignApi: CampaignApiService, private dateUtils: DateUtilsService) {}
+    constructor (private campaignApi: CampaignApiService, private dateUtils: DateUtilsService, private router: Router) {}
 
     ngOnInit() {
         this.setModelDefaults();
@@ -37,6 +38,7 @@ export class CampaignCreatorFormComponent implements OnInit {
 
     processSuccess (data) {
         console.log('saved campaign data', data);
+        this.router.navigate(['campaigns', data.id]);
     }
 
     public setDate (key, event) {

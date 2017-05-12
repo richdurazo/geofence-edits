@@ -1,4 +1,5 @@
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Observable } from "rxjs/Rx";
 
@@ -12,10 +13,57 @@ import { DateUtilsService } from '../../shared/date-utils.service';
 import { DateUtilsMockService } from '../../mocks/shared/date-utils-mock.service';
 
 import { ContentCreatorFormComponent } from './content-creator-form.component';
-import { ContentCreatorFormComponentMock } from '../../mocks/content/content-creator-form-mock.component';
+
 
 import { ContentCreatorComponent } from './content-creator.component';
 import { ContentModel } from '../shared/content.model';
+
+@Component({
+    selector: 'app-content-creator-form',
+})
+
+export class ContentCreatorFormComponentMock {
+
+    content: ContentModel;
+
+    contentType: string;
+
+    form: NgForm;
+
+    constructor (
+
+    ) {}
+
+    ngOnInit() {
+        return false;
+    }
+
+    public launchTerms () {
+        return false;
+    }
+
+    public setDate (key, event) {
+        return false;
+    }
+
+    public setType (event, form) {
+        return false;
+    }
+
+    public fetchUuid () {
+        return false;
+    }
+
+    public setImageConfig () {
+        return false;
+    }
+
+    public setModelDefaults (type: string) {
+        return false;
+    }
+
+}
+
 
 describe('ContentCreatorComponent', () => {
     let component: ContentCreatorComponent;

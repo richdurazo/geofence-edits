@@ -11,11 +11,17 @@ export class SelectableListItemComponent implements OnInit {
 
     @Input() root: string;
 
+    @Input() selectedItem: any;
+
   constructor() { }
 
   ngOnInit() {
+      if (!this.selectedItem) {
+          this.selectedItem = { id: null };
+      }
       console.log('item', this.item);
       console.log('root', this.root);
+      console.log('selectedItem', this.selectedItem);
   }
 
 }

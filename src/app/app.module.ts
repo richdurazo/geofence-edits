@@ -112,7 +112,7 @@ import { ChartComponent } from './shared/chart/chart.component';
         FlexLayoutModule,
         FormsModule,
         HttpModule,
-        MaterialModule.forRoot(),
+        MaterialModule,
     ],
     providers: [
         AuthCustomHttpService,

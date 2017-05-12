@@ -54,13 +54,11 @@ export class TriggerDetailsComponent implements OnInit {
     public getContentGroups () {
         this.triggerApi.getTriggerContentGroups(this.trigger.id)
         .subscribe(data => {
-            // console.log('data', data);
             this.contentGroups = data;
         });
     }
 
     public contentCreated (data) {
-        // console.log('data', data);
         this.contentGroups.push(data);
         this.adding = false;
     }

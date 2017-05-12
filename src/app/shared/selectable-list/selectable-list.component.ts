@@ -28,7 +28,6 @@ export class SelectableListComponent implements OnInit {
     }
 
     public itemSelected (event) {
-        console.log('this.selectedItem', this.selectedItem);
         this.emitSelectedItem.emit(this.selectedItem);
     }
 

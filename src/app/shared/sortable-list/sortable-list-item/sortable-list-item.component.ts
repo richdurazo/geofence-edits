@@ -16,8 +16,6 @@ export class SortableListItemComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    //   console.log('item', this.item);
-    //   console.log('root', this.root);
   }
 
 }

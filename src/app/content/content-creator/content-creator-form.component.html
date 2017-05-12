@@ -1,6 +1,6 @@
 <div class="content-creator-form">
 
-    <form #form="ngForm" (ngSubmit)="submitForm(form)" novalidate fxLayout="column">
+    <form #form="ngForm" novalidate fxLayout="column">
 
         <div fxLayout="row" fxLayout.md="column" fxLayout.sm="column">
 
@@ -12,7 +12,7 @@
                     placeholder="Type"
                     name="type"
                     [ngModel]="contentType"
-                    (ngModelChange)="setType($event)">
+                    (ngModelChange)="setType($event, form)">
                         <md-option *ngFor="let type of contentTypes" [value]="type.value">
                             {{ type.viewValue }}
                         </md-option>
@@ -474,16 +474,6 @@
 
             </div>
 
-        </div>
-
-        <div fxLayoutAlign="end" fxFlex="100" *ngIf="contentType">
-            <button
-                type="submit"
-                class="common-form-submit"
-                md-raised-button
-                color="primary">
-                Create
-            </button>
         </div>
 
     </form>

@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MdDialogRef } from '@angular/material';
 
+import { DateUtilsService } from '../../shared/date-utils.service';
+
+import { ContentCreatorFormComponent } from '../content-creator/content-creator-form.component';
 import { ContentApiService } from '../shared/content-api.service';
 import { ContentModel } from '../shared/content.model';
 
@@ -11,11 +14,16 @@ import { ContentModel } from '../shared/content.model';
 })
 export class ContentSelectorComponent implements OnInit {
 
+    @ViewChild(ContentCreatorFormComponent)
+    public creatorForm: ContentCreatorFormComponent;
+
     content: ContentModel[] = [];
 
     selectedContent: ContentModel;
 
-    constructor(private contentApi: ContentApiService, public dialogRef: MdDialogRef<ContentSelectorComponent>) { }
+    tabIndex: any;
+
+    constructor( private contentApi: ContentApiService, public dialogRef: MdDialogRef<ContentSelectorComponent>, private dateUtils: DateUtilsService ) { }
 
     ngOnInit() {
         this.getContent();
@@ -36,7 +44,27 @@ export class ContentSelectorComponent implements OnInit {
         this.selectedContent = event;
     }
 
-    submit () {
+    closeSelectWithData () {
         this.dialogRef.close(this.selectedContent);
     }
+
+    public submitForm (event) {
+        if (!this.creatorForm.form.valid) {
+            this.creatorForm.form.onSubmit(event);
+            return;
+        }
+        var obj = Object.assign({}, this.creatorForm.content);
+        obj.start_at = this.dateUtils.formatSQLDate(obj.start_at);
+        obj.end_at = this.dateUtils.formatSQLDate(obj.end_at);
+        this.contentApi.createContent(obj)
+        .subscribe(
+            data => this.processSuccess(data)
+        )
+    }
+
+    processSuccess (data) {
+        this.selectedContent = data;
+        this.closeSelectWithData();
+    }
+
 }

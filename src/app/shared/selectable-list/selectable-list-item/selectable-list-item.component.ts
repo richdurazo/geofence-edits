@@ -19,9 +19,6 @@ export class SelectableListItemComponent implements OnInit {
       if (!this.selectedItem) {
           this.selectedItem = { id: null };
       }
-      console.log('item', this.item);
-      console.log('root', this.root);
-      console.log('selectedItem', this.selectedItem);
   }
 
 }

@@ -49,7 +49,6 @@ export class ExpandablePanelComponent implements OnInit {
     }
 
     toggleExpanded () {
-        console.log('this.isExpanded', this.isExpanded);
         this.isExpanded = !this.isExpanded;
     }
 

@@ -17,7 +17,6 @@ export class AuthCustomHttpService {
     private authIntercept(response: Observable<Response>): Observable<Response> {
         var sharableResponse = response.share()
         sharableResponse.subscribe((data) => {
-            // console.log('authIntercept data', data);
             // localStorage.setItem('id_token', data.token);
         }, (err) => {
             if (this.isUnauthorized(err.status) || err.message === "No JWT present or has expired") {

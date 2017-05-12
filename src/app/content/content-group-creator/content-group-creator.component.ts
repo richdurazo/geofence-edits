@@ -43,7 +43,6 @@ export class ContentGroupCreatorComponent implements OnInit {
         if (form.valid) {
             this.contentApi.createContentGroup(this.contentGroup)
             .subscribe(data => {
-                console.log('data', data);
                 this.attachContentGroup(data);
             })
         }
@@ -52,27 +51,23 @@ export class ContentGroupCreatorComponent implements OnInit {
     public attachContentGroup (data) {
         this.triggerApi.attachContentGroup(this.trigger.id, data.id)
         .subscribe(content => {
-            console.log('attachContentGroup content', content);
             this.processSuccess(data);
         })
     }
 
     public processSuccess (data) {
-        console.log('saved content data', data);
         if (this.onCreate) {
             this.onCreate.emit(data);
         }
     }
 
     public setContent (event) {
-        console.log('event', event);
         this.selectedContent = event;
     }
 
     public attachContent () {
         this.contentApi.attachContentToGroup(this.contentGroup.id, this.selectedContent.id)
         .subscribe(data => {
-            console.log('attachContent data', data);
             this.groupContent = data;
         });
     }
@@ -81,7 +76,6 @@ export class ContentGroupCreatorComponent implements OnInit {
         this.contentApi.getContent()
         .subscribe(data => {
             this.contentOptions = data;
-            console.log('this.contentOptions', this.contentOptions);
         });
     }
 

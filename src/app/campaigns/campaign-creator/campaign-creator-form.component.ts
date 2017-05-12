@@ -37,7 +37,6 @@ export class CampaignCreatorFormComponent implements OnInit {
     }
 
     processSuccess (data) {
-        console.log('saved campaign data', data);
         this.router.navigate(['campaigns', data.id]);
     }
 

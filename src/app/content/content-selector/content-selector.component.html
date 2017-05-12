@@ -1,6 +1,22 @@
-<div fxLayout="column">
-    <app-sortable-list (emitSelectedItem)="contentSelected($event)" [rows]="content" [root]="'content'">
-    </app-sortable-list>
+<div fxLayout="column" class="content-selector">
+    <md-tab-group>
+
+        <md-tab label="Select">
+
+            <app-selectable-list (emitSelectedItem)="contentSelected($event)" [rows]="content" [root]="'content'">
+            </app-selectable-list>
+
+        </md-tab>
+
+        <md-tab label="Create">
+
+            <app-content-creator-form>
+            </app-content-creator-form>
+
+        </md-tab>
+
+    </md-tab-group>
+
     <div fxLayoutAlign="end">
         <button type="submit" class="common-form-submit" md-raised-button color="primary" (click)="submit()">Select Content</button>
     </div>

@@ -52,8 +52,10 @@ import { UuidApiService } from './shared/uuid-api.service';
 import { DateUtilsService } from './shared/date-utils.service';
 import { FilestackService } from './shared/filestack.service';
 import { FileUploaderComponent } from './shared/file-uploader/file-uploader.component';
-import { SortableListComponent } from './shared/sortable-list/sortable-list.component';
 import { ImageComponent } from './shared/image/image.component';
+import { SelectableListComponent } from './shared/selectable-list/selectable-list.component';
+import { SelectableListItemComponent } from './shared/selectable-list/selectable-list-item/selectable-list-item.component';
+import { SortableListComponent } from './shared/sortable-list/sortable-list.component';
 import { SortableListItemComponent } from './shared/sortable-list/sortable-list-item/sortable-list-item.component';
 import { ContentListComponent } from './content/content-overview/content-list/content-list.component';
 import { TriggerListComponent } from './triggers/triggers-overview/trigger-list/trigger-list.component';
@@ -84,13 +86,15 @@ import { ChartComponent } from './shared/chart/chart.component';
         AppNavigationComponent,
         FileUploaderComponent,
         CampaignsListComponent,
+        SelectableListComponent,
+        SelectableListItemComponent,
         SortableListComponent,
+        SortableListItemComponent,
         TermsDialogComponent,
         ContentDetailsComponent,
         ImageComponent,
         TriggerDetailsComponent,
         CampaignDetailsComponent,
-        SortableListItemComponent,
         ContentListComponent,
         TriggerListComponent,
         ContentGroupCreatorComponent,

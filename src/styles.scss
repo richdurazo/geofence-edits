@@ -374,10 +374,8 @@ body {
         }
     }
 
-    .sortable-list {
+    .sortable-list, .selectable-list {
         margin-bottom: $common-margin;
-        min-height: 800px;
-        min-width: 1000px;
 
         .search-input-row {
             margin-bottom: 20px;
@@ -413,6 +411,30 @@ body {
 
         .mat-card {
             height: 100%;
+        }
+    }
+
+    .content-selector {
+        min-height: 500px;
+        width: 1100px;
+
+        .mat-tab-body-content {
+            padding: $common-margin;
+        }
+
+        .content-creator-form {
+            padding: 24px;
+        }
+
+        .selectable-list {
+            .mat-card {
+                padding: 10px $common-margin;
+                width: 1024px;
+
+                .mat-radio-label {
+                    align-items: center;
+                }
+            }
         }
     }
 

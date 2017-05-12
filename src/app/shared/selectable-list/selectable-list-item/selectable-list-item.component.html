@@ -1,0 +1,22 @@
+<md-card fxFlex="100">
+
+    <div fxFlex="100" fxLayout="row" fxLayoutAlign="space-around center">
+
+        <div fxFlex="40">
+            {{ item.name }}
+        </div>
+
+        <div fxFlex="20">
+            Start Date: {{ item.start_at | date: 'M/dd/yyyy' }}
+        </div>
+
+        <div fxFlex="20">
+            End Date: {{ item.end_at | date: 'M/dd/yyyy' }}
+        </div>
+
+        <div fxFlex="20">
+            Impressions: 100,000,000
+        </div>
+    </div>
+
+</md-card>

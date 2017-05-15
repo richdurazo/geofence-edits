@@ -476,6 +476,9 @@ body {
         padding: 15px $common-margin;
         background-color: darken($light-grey, 1);
 
+        &:hover {
+            cursor: pointer;
+        }
 
         .expandable-panel-heading {
             font-size: 16px;

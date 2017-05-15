@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input, ViewChild } from '@angular/core';
 declare var d3, nv: any;
 
 @Component({
@@ -6,7 +6,7 @@ declare var d3, nv: any;
     templateUrl: './chart.component.html',
     styleUrls: ['./chart.component.scss']
 })
-export class ChartComponent implements AfterViewInit {
+export class ChartComponent implements OnInit {
     @ViewChild('chart') chartElement;
 
     @Input() config: any;
@@ -34,7 +34,7 @@ export class ChartComponent implements AfterViewInit {
 
     constructor() { }
 
-    ngAfterViewInit() {
+    ngOnInit() {
         if (this.fakeData) {
 
             var chart;

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { MdDialogRef } from '@angular/material';
 
 import { DateUtilsService } from '../../shared/date-utils.service';
@@ -21,12 +21,18 @@ export class ContentSelectorComponent implements OnInit {
 
     selectedContent: ContentModel;
 
-    tabIndex: any;
+    viewInit: boolean = false;
 
-    constructor( private contentApi: ContentApiService, public dialogRef: MdDialogRef<ContentSelectorComponent>, private dateUtils: DateUtilsService ) { }
+    tabIndex: number = 0;
+
+    constructor( private contentApi: ContentApiService, public dialogRef: MdDialogRef<ContentSelectorComponent>, private dateUtils: DateUtilsService, public changeDetector: ChangeDetectorRef ) { }
 
     ngOnInit() {
         this.getContent();
+    }
+
+    indexChange (event) {
+        this.tabIndex = event;
     }
 
     getContent () {

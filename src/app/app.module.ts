@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpModule, Http, Headers, RequestOptions } from '@angular/http';
@@ -35,7 +35,6 @@ import { ContentGroupDetailsComponent } from './content/content-group-details/co
 import { TermsDialogComponent } from './content/content-creator/terms-dialog/terms-dialog.component';
 import { TermsApiService } from './content/content-creator/terms-dialog/terms-api.service';
 
-
 import { TriggersComponent } from './triggers/triggers-component/triggers.component';
 import { TriggerDetailsComponent } from './triggers/trigger-details/trigger-details.component';
 import { TriggerCreatorComponent } from './triggers/trigger-creator/trigger-creator.component';
@@ -45,6 +44,7 @@ import { TriggersOverviewComponent } from './triggers/triggers-overview/triggers
 import { AuthCustomHttpService } from './auth/auth-custom-http.service';
 import { CampaignApiService } from './campaigns/shared/campaign-api.service';
 import { ContentApiService } from './content/shared/content-api.service';
+import { TargetApiService } from './shared/target-api.service';
 import { TriggerApiService } from './triggers/shared/trigger-api.service';
 import { UserApiService } from './users/shared/user-api.service';
 import { UuidApiService } from './shared/uuid-api.service';
@@ -111,6 +111,7 @@ import { ChartComponent } from './shared/chart/chart.component';
         BrowserModule,
         FlexLayoutModule,
         FormsModule,
+        ReactiveFormsModule,
         HttpModule,
         MaterialModule,
     ],
@@ -120,6 +121,7 @@ import { ChartComponent } from './shared/chart/chart.component';
         ContentApiService,
         DateUtilsService,
         FilestackService,
+        TargetApiService,
         TermsApiService,
         TriggerApiService,
         UserApiService,

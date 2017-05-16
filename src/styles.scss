@@ -14,7 +14,7 @@ $dark-blue: #1976D2;
 
 // Define a theme.
 $primary: mat-palette($mat-light-blue, 500, A400);
-$accent:  mat-palette($mat-amber, A200, A100, A400);
+$accent:  mat-palette($mat-pink, A200, A100, A400);
 $warn:  mat-palette($mat-red, A200, A100, A400);
 
 $theme: mat-light-theme($primary, $accent, $warn);
@@ -97,6 +97,12 @@ body {
 
     .padded-container {
         padding: $common-margin;
+    }
+
+    .cursor-pointer {
+        &:hover {
+            cursor: pointer;
+        }
     }
 
     .page-heading {
@@ -473,16 +479,29 @@ body {
     }
 
     .expandable-header {
-        padding: 15px $common-margin;
         background-color: darken($light-grey, 1);
+        padding: 0;
 
-        &:hover {
-            cursor: pointer;
+        .heading-wrapper {
+            padding: 20px $common-margin;
+
+            .mat-input-container {
+                margin-bottom: 0;
+
+                .mat-input-wrapper {
+                    margin: 0;
+                }
+            }
+        }
+
+        .menu-wrapper {
+            padding: 10px;
         }
 
         .expandable-panel-heading {
             font-size: 16px;
             font-weight: 400;
+            line-height: 32px;
             margin: 0;
         }
     }

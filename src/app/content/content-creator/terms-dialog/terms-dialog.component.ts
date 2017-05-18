@@ -37,6 +37,6 @@ export class TermsDialogComponent implements OnInit {
     }
 
     public processSuccess (data) {
-        this.dialogRef.close(this.model);
+        this.dialogRef.close(data);
     }
 }

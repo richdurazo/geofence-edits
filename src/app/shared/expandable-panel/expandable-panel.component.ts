@@ -116,13 +116,12 @@ export class ExpandablePanelComponent implements OnInit {
     ];
 
     constructor() {
-      this.stateCtrl = new FormControl();
-
     }
 
     ngOnInit() {
+        this.stateCtrl = new FormControl();
         if (this.targetable) {
-            this.headerLayout = 95
+            this.headerLayout = 95;
         } else {
             this.headerLayout = 100;
         }

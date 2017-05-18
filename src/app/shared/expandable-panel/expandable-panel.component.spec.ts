@@ -1,7 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MaterialModule } from '@angular/material';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { ExpandablePanelComponent } from './expandable-panel.component';
 
@@ -17,10 +19,9 @@ describe('ExpandablePanelComponent', () => {
       ],
       imports: [
           BrowserAnimationsModule,
-          ReactiveFormsModule
-      ],
-      providers: [
-          FormControl
+          ReactiveFormsModule,
+          FlexLayoutModule,
+          MaterialModule
       ]
     })
     .compileComponents();

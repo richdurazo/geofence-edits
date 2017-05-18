@@ -1,8 +1,14 @@
 <md-card class="expandable-header mat-elevation-z1" fxLayout="row">
-    <div class="heading-wrapper cursor-pointer" fxFlex="95" (click)="toggleExpanded()" *ngIf="!editing">
+    <div class="heading-wrapper cursor-pointer" fxFlex="{{ headerLayout }}" (click)="toggleExpanded()" *ngIf="!editing">
         <h1 class="expandable-panel-heading" fxLayoutAlign="start center">
-            <div fxFlex="90">
+            <div fxFlex="40">
                 {{ header }}
+            </div>
+
+            <div fxFlex="50" fxLayout="row">
+                <md-chip-list [selectable]="false">
+                  <md-chip *ngFor="let item of targets">{{ item }}</md-chip>
+                </md-chip-list>
             </div>
 
             <div fxFlex="10" fxLayoutAlign="end">
@@ -11,17 +17,17 @@
         </h1>
     </div>
 
-    <div class="heading-wrapper" fxFlex="95" *ngIf="editing">
+    <div class="heading-wrapper" fxFlex="95" *ngIf="targetable && editing">
         <h1 class="expandable-panel-heading" fxLayoutAlign="start center">
 
             <div
                 class="cursor-pointer"
-                fxFlex="20"
+                fxFlex="25"
                 (click)="toggleExpanded()">
                 {{ header }}
             </div>
 
-            <div fxFlex="20">
+            <div fxFlex="15">
                 <md-input-container>
                   <input
                       mdInput
@@ -40,7 +46,7 @@
                 </md-autocomplete>
             </div>
 
-            <div fxFlex="60" fxLayout="row">
+            <div fxFlex="50" fxLayout="row">
                 <md-chip-list [selectable]="false">
                   <md-chip *ngFor="let item of targets">{{ item }}</md-chip>
                 </md-chip-list>
@@ -57,7 +63,7 @@
         </h1>
     </div>
 
-    <div class="menu-wrapper" fxFlex="5" fxLayoutAlign="center center">
+    <div class="menu-wrapper" fxFlex="5" fxLayoutAlign="center center" *ngIf="targetable">
         <md-menu #appMenu="mdMenu">
           <button
               md-menu-item

@@ -46,6 +46,10 @@ export class ExpandablePanelComponent implements OnInit {
 
     @Input() header: string;
 
+    @Input() targetable: boolean;
+
+    headerLayout: number;
+
     targets: any = [];
 
     isExpanded: boolean = true;
@@ -58,7 +62,7 @@ export class ExpandablePanelComponent implements OnInit {
 
     filteredResults: any;
 
-    states = [
+    options = [
       'Alabama',
       'Alaska',
       'Arizona',
@@ -117,7 +121,12 @@ export class ExpandablePanelComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.setFilteredResults()
+        if (this.targetable) {
+            this.headerLayout = 95
+        } else {
+            this.headerLayout = 100;
+        }
+        this.setFilteredResults();
     }
 
     setFilteredResults () {
@@ -127,8 +136,8 @@ export class ExpandablePanelComponent implements OnInit {
     }
 
     filterStates(val: string) {
-      return val ? this.states.filter(s => new RegExp(`^${val}`, 'gi').test(s))
-                 : this.states;
+      return val ? this.options.filter(s => new RegExp(`^${val}`, 'gi').test(s))
+                 : this.options;
     }
 
     toggleExpanded () {
@@ -140,8 +149,6 @@ export class ExpandablePanelComponent implements OnInit {
     }
 
     itemSelected (event) {
-        console.log('event.source.value', event.source.value);
-        console.log('this.stateCtrl', this.stateCtrl);
         if (this.targets.indexOf(event.source.value) === -1) {
             this.targets.push(event.source.value);
         }

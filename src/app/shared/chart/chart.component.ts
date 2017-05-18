@@ -55,12 +55,10 @@ export class ChartComponent implements OnInit {
                 .transition().duration(1000)
                 .call(chart)
                 .each('start', function() {
-                    setTimeout(function() {
-                        d3.selectAll(self.chartElement.nativeElement).each(function() {
-                            if(this.__transition__)
-                            this.__transition__.duration = 1;
-                        })
-                    }, 0)
+                    d3.selectAll(self.chartElement.nativeElement).each(function() {
+                        if(this.__transition__)
+                        this.__transition__.duration = 1;
+                    })
                 });
                 nv.utils.windowResize(chart.update);
                 return chart;

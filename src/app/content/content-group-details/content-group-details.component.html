@@ -1,5 +1,5 @@
 <md-card class="content-group" fxFlex="100">
-    <app-expandable-panel [header]="contentGroup.name" [targetable]="true">
+    <app-expandable-panel [item]="contentGroup" [targetable]="true">
 
         <md-card *ngFor="let item of groupContent">
             <app-content-row [item]="item">

@@ -2,7 +2,7 @@
     <div class="heading-wrapper cursor-pointer" fxFlex="{{ headerLayout }}" (click)="toggleExpanded()" *ngIf="!editing">
         <h1 class="expandable-panel-heading" fxLayoutAlign="start center">
             <div fxFlex="40">
-                {{ header }}
+                {{ item.name }}
             </div>
 
             <div fxFlex="50" fxLayout="row">
@@ -20,11 +20,16 @@
     <div class="heading-wrapper" fxFlex="95" *ngIf="targetable && editing">
         <h1 class="expandable-panel-heading" fxLayoutAlign="start center">
 
-            <div
-                class="cursor-pointer"
-                fxFlex="25"
-                (click)="toggleExpanded()">
-                {{ header }}
+            <div fxFlex="25">
+                <md-input-container>
+                    <input
+                    mdInput
+                    name="name"
+                    type="text"
+                    placeholder="Name"
+                    required
+                    [(ngModel)]="item.name">
+                </md-input-container>
             </div>
 
             <div fxFlex="15">
@@ -73,11 +78,13 @@
           </button>
           <button
               md-menu-item
-              (click)="editing = false"
+              (click)="updateItem()"
               *ngIf="editing">
               Save
           </button>
-          <button md-menu-item>
+          <button
+              md-menu-item
+              (click)="removeItem()">
                   Remove
               </button>
         </md-menu>

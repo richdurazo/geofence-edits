@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { trigger, state, animate, transition, style } from '@angular/animations';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
+import { ContentApiService } from '../../content/shared/content-api.service';
+
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
 
@@ -44,7 +46,7 @@ import 'rxjs/add/operator/map';
 
 export class ExpandablePanelComponent implements OnInit {
 
-    @Input() header: string;
+    @Input() item: any;
 
     @Input() targetable: boolean;
 
@@ -115,7 +117,7 @@ export class ExpandablePanelComponent implements OnInit {
       'Wyoming',
     ];
 
-    constructor() {
+    constructor(private contentApi: ContentApiService) {
     }
 
     ngOnInit() {
@@ -153,6 +155,23 @@ export class ExpandablePanelComponent implements OnInit {
         }
         this.stateCtrl.setValue(null);
         this.setFilteredResults();
+    }
+
+    updateItem () {
+        console.log('this.item', this.item);
+        this.contentApi.updateContentGroup(this.item)
+        .subscribe(
+            data => this.processUpdateSuccess(data)
+        )
+    }
+
+    processUpdateSuccess (data) {
+        console.log('data', data);
+        this.editing = false;
+    }
+
+    removeItem () {
+        console.log('this.item', this.item);
     }
 
 }

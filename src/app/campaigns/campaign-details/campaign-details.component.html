@@ -1,80 +1,78 @@
-<div  fxLayout="column">
-    <md-card fxLayout="row" fxFlex="100" *ngIf="campaign">
+<md-toolbar class="campaign-heading">
+    <h1 class="section-heading text-grey" *ngIf="campaign">
+        {{ campaign.name }}
+    </h1>
+</md-toolbar>
 
-            <div fxLayout="column" fxFlex="55">
+<div class="campaign-details-container" fxLayout="row" fxLayoutGap="24px">
 
-                <div fxFlex="100" fxLayout="row">
-                    <div fxLayout="column" class="details-display-container">
-                        <label>
-                            Title
-                        </label>
-                        <div>
-                            {{ campaign.name }}
-                        </div>
-                    </div>
-                </div>
+    <div fxLayout="column" fxFlex="40" *ngIf="campaign">
+        <h1 class="section-heading">
+            Details
+        </h1>
 
-                <div fxFlex="100" fxLayout="row">
-                    <div fxLayout="column" class="details-display-container">
-                        <label>
-                            Description
-                        </label>
-                        <div>
-                            {{ campaign.description }}
-                        </div>
-                    </div>
-                </div>
+        <md-card fxLayout="row" fxFlex="100">
 
-                <div fxFlex="100" fxLayout="row">
-                    <div fxLayout="column" class="details-display-container">
-                        <label>
-                            Title
-                        </label>
-                        <div>
-                            {{ campaign.name }}
-                        </div>
-                    </div>
-                </div>
+                <div fxLayout="column" fxFlex="100">
 
-
-                <div fxFlex="100" fxLayout="row" fxLayoutGap="10px">
-
-                    <div class="details-display-container" fxFlex="33">
-                        <label>
-                            Start Date
-                        </label>
-                        <div>
-                            {{ campaign.start_at | date: 'M/dd/yyyy' }}
+                    <div fxFlex="100" fxLayout="row">
+                        <div fxLayout="column" class="details-display-container">
+                            <label>
+                                Description
+                            </label>
+                            <div>
+                                {{ campaign.description }}
+                            </div>
                         </div>
                     </div>
 
-                    <div class="details-display-container" fxFlex="33">
-                        <label>
-                            End Date
-                        </label>
-                        <div>
-                            {{ campaign.end_at | date: 'M/dd/yyyy' }}
+                    <div fxFlex="100" fxLayout="row" fxLayoutGap="10px">
+
+                        <div class="details-display-container" fxFlex="33">
+                            <label>
+                                Start Date
+                            </label>
+                            <div>
+                                {{ campaign.start_at | date: 'M/dd/yyyy' }}
+                            </div>
                         </div>
+
+                        <div class="details-display-container" fxFlex="33">
+                            <label>
+                                End Date
+                            </label>
+                            <div>
+                                {{ campaign.end_at | date: 'M/dd/yyyy' }}
+                            </div>
+                        </div>
+
                     </div>
 
                 </div>
 
-            </div>
+        </md-card>
+    </div>
 
-            <!-- Placeholder div -->
-            <div fxFlex="45">
-            </div>
-
-    </md-card>
+    <div fxLayout="column" fxFlex="60" *ngIf="campaign">
+        <h1 class="section-heading">
+            Overview
+        </h1>
+        <md-card fxFlex="100">
+            <app-chart>
+            </app-chart>
+        </md-card>
+    </div>
 
 </div>
 
-<div fxLayout="column" fxLayoutGap="20px">
+<div fxLayout="column">
     <div>
         <h1 class="section-heading">
             Triggers
         </h1>
     </div>
+
+    <div fxLayout="column" fxLayoutGap="24px">
 
         <app-trigger-details
             [trigger]="trigger"
@@ -95,8 +93,12 @@
                 color="primary"
                 *ngIf="!adding"
                 (click)="adding = true">
+                <md-icon>
+                    add
+                </md-icon>
                 Add Trigger
             </button>
         </div>
 
+    </div>
 </div>

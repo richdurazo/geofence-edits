@@ -13,7 +13,6 @@ export class TermsDialogComponent implements OnInit {
     model: any;
 
     constructor(public dialogRef: MdDialogRef<TermsDialogComponent>, public termsApi: TermsApiService, @Optional() @Inject(MD_DIALOG_DATA) private id: any) {
-        console.log('id', id);
         this.model = {
             body: ''
         };
@@ -29,17 +28,15 @@ export class TermsDialogComponent implements OnInit {
     }
 
     public submitForm (form) {
-        console.log('this.model', this.model);
         if (form.valid && !this.id) {
             this.termsApi.createTerms(this.model)
             .subscribe(data => {
-                console.log('submitForm data', data);
                 this.processSuccess(data);
             });
         }
     }
 
     public processSuccess (data) {
-        this.dialogRef.close(this.model);
+        this.dialogRef.close(data);
     }
 }

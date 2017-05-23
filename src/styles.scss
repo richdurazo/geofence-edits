@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@import '~@angular/material/theming';
+@import '~@angular/material/_theming.scss';
 
 // COLOR VARIABLES
 $light-grey: #F9F9F9;
@@ -13,8 +13,8 @@ $dark-blue: #1976D2;
 @include mat-core();
 
 // Define a theme.
-$primary: mat-palette($mat-indigo);
-$accent:  mat-palette($mat-amber, A200, A100, A400);
+$primary: mat-palette($mat-light-blue, 500, A400);
+$accent:  mat-palette($mat-pink, A200, A100, A400);
 $warn:  mat-palette($mat-red, A200, A100, A400);
 
 $theme: mat-light-theme($primary, $accent, $warn);
@@ -31,7 +31,7 @@ $nav-background-dark-color: $dark-steel;
 $nav-text-color: $dark-grey;
 
 // PIXEL VALUES
-$common-margin: 20px;
+$common-margin: 24px;
 $common-font-size: 13px;
 $small-font-size: 11px;
 
@@ -41,19 +41,33 @@ body {
     font-size: $common-font-size;
     font-weight: 400;
     color: $primary-text-color;
+    margin: 0;
 
     .mat-card {
         border-radius: 0;
+        color: $primary-text-color;
+
+        &.card-background {
+            background-color: darken($light-grey, 5);
+        }
+
+        &.add-content-row {
+            padding: 10px $common-margin;
+        }
     }
 
-    .mat-sidenav-container {
+    .mat-sidenav-container[fullscreen] {
         background-color: $body-background-color;
+        top: 64px;
 
         .mat-sidenav-content > .containerX {
             max-width: 1150px;
             min-width: 525px;
-            // padding-bottom: 30px;
             padding: $common-margin;
+
+            &.pad-container {
+                padding-top: 88px;
+            }
         }
     }
 
@@ -62,9 +76,6 @@ body {
         padding: 0 45px;
     }
 
-    .mat-card {
-        color: $primary-text-color;
-    }
 
     .creator-form-card {
         padding-right: 80px;
@@ -85,7 +96,13 @@ body {
     }
 
     .padded-container {
-        padding: 24px;
+        padding: $common-margin;
+    }
+
+    .cursor-pointer {
+        &:hover {
+            cursor: pointer;
+        }
     }
 
     .page-heading {
@@ -100,6 +117,10 @@ body {
 
         &.section-heading-no-margin {
             margin: 0;
+        }
+
+        &.text-grey {
+            color: $nav-text-color;
         }
     }
 
@@ -140,10 +161,11 @@ body {
 
     // COMMON TOOLBAR
     md-toolbar.mat-toolbar {
-        background-color: $toolbar-background-color;
+        position: absolute;
+        z-index: 2;
 
-        .mat-toolbar-row {
-            color: $primary-text-color;
+        .company-logo {
+            color: $nav-text-color;
         }
     }
 
@@ -152,8 +174,13 @@ body {
         background-color: $nav-background-base-color;
         width: 272px;
 
+        .app-sidenav {
+            position: absolute;
+            z-index: 2;
+        }
+
         .mat-nav-list {
-            padding-top: 0;
+            padding-top: $common-margin;
         }
 
         .mat-list-item > .mat-list-item-content {
@@ -164,12 +191,6 @@ body {
             .mat-icon {
                 margin-right: $common-margin;
             }
-        }
-
-        .app-sidenav-list-header {
-            height: 64px;
-            background-color: $nav-background-dark-color;
-            margin-bottom: 40px;
         }
 
         .router-link.active {
@@ -220,7 +241,7 @@ body {
     .creator-section-label {
         font-size: $small-font-size;
         margin-bottom: 10px;
-        margin-top: $common-margin;
+        margin-top: 10px;
     }
 
     .scratcher-toggle-container {
@@ -350,7 +371,7 @@ body {
     }
 
     .details-display-container {
-        margin-bottom: $common-margin;
+        // margin-bottom: $common-margin;
         label {
             font-size: 9px;
             margin-bottom: 5px;
@@ -363,10 +384,8 @@ body {
         }
     }
 
-    .sortable-list {
+    .sortable-list, .selectable-list {
         margin-bottom: $common-margin;
-        min-height: 800px;
-        min-width: 1000px;
 
         .search-input-row {
             margin-bottom: 20px;
@@ -405,6 +424,41 @@ body {
         }
     }
 
+    .content-selector {
+        width: 1100px;
+
+        .content-creator-form {
+            padding: 24px;
+
+            .mat-tab-body-content {
+                padding: 0;
+                overflow-y: hidden;
+            }
+        }
+
+        .selectable-list {
+            padding: 10px 5px;
+
+            .mat-radio-container {
+                display: none;
+            }
+
+            .mat-radio-label-content {
+                padding: 0;
+                height: auto;
+
+                .selectable-list-item {
+                    padding: 10px $common-margin;
+                    width: 1090px;
+
+                    &.selected {
+                        background-color: lighten(mat-color($primary), 45);;
+                    }
+                }
+            }
+        }
+    }
+
     .content-group-container-card {
         padding: 0;
 
@@ -425,15 +479,57 @@ body {
     }
 
     .expandable-header {
-        padding: 15px 24px;
-        border-bottom: 1px solid darken($dark-grey, 3);
-        background-color: $light-grey;
+        background-color: darken($light-grey, 1);
+        padding: 0;
 
+        .heading-wrapper {
+            padding: 20px $common-margin;
+
+            .mat-input-container {
+                margin-bottom: 0;
+
+                .mat-input-wrapper {
+                    margin: 0;
+                }
+            }
+        }
+
+        .menu-wrapper {
+            padding: 10px;
+        }
 
         .expandable-panel-heading {
             font-size: 16px;
             font-weight: 400;
+            line-height: 32px;
             margin: 0;
+        }
+    }
+
+    .campaign-heading.mat-toolbar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+
+        background-color: darken(mat-color($primary), 5);
+    }
+
+    .campaign-details-container {
+        margin-bottom: $common-margin;
+
+        .mat-card {
+            height: 300px;
+        }
+    }
+
+    .trigger-details-card {
+        .section-heading {
+            margin-top: 0;
+        }
+
+        .details-display-container {
+            margin-bottom: 0;
         }
     }
 

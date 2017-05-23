@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpModule, Http, Headers, RequestOptions } from '@angular/http';
@@ -35,7 +35,6 @@ import { ContentGroupDetailsComponent } from './content/content-group-details/co
 import { TermsDialogComponent } from './content/content-creator/terms-dialog/terms-dialog.component';
 import { TermsApiService } from './content/content-creator/terms-dialog/terms-api.service';
 
-
 import { TriggersComponent } from './triggers/triggers-component/triggers.component';
 import { TriggerDetailsComponent } from './triggers/trigger-details/trigger-details.component';
 import { TriggerCreatorComponent } from './triggers/trigger-creator/trigger-creator.component';
@@ -45,6 +44,7 @@ import { TriggersOverviewComponent } from './triggers/triggers-overview/triggers
 import { AuthCustomHttpService } from './auth/auth-custom-http.service';
 import { CampaignApiService } from './campaigns/shared/campaign-api.service';
 import { ContentApiService } from './content/shared/content-api.service';
+import { TargetApiService } from './shared/target-api.service';
 import { TriggerApiService } from './triggers/shared/trigger-api.service';
 import { UserApiService } from './users/shared/user-api.service';
 import { UuidApiService } from './shared/uuid-api.service';
@@ -52,8 +52,10 @@ import { UuidApiService } from './shared/uuid-api.service';
 import { DateUtilsService } from './shared/date-utils.service';
 import { FilestackService } from './shared/filestack.service';
 import { FileUploaderComponent } from './shared/file-uploader/file-uploader.component';
-import { SortableListComponent } from './shared/sortable-list/sortable-list.component';
 import { ImageComponent } from './shared/image/image.component';
+import { SelectableListComponent } from './shared/selectable-list/selectable-list.component';
+import { SelectableListItemComponent } from './shared/selectable-list/selectable-list-item/selectable-list-item.component';
+import { SortableListComponent } from './shared/sortable-list/sortable-list.component';
 import { SortableListItemComponent } from './shared/sortable-list/sortable-list-item/sortable-list-item.component';
 import { ContentListComponent } from './content/content-overview/content-list/content-list.component';
 import { TriggerListComponent } from './triggers/triggers-overview/trigger-list/trigger-list.component';
@@ -61,6 +63,7 @@ import { VideoComponent } from './shared/video/video.component';
 import { ExpandablePanelComponent } from './shared/expandable-panel/expandable-panel.component';
 import { ContentRowComponent } from './content/content-row/content-row.component';
 import { ContentSelectorComponent } from './content/content-selector/content-selector.component';
+import { ChartComponent } from './shared/chart/chart.component';
 
 @NgModule({
     declarations: [
@@ -83,13 +86,15 @@ import { ContentSelectorComponent } from './content/content-selector/content-sel
         AppNavigationComponent,
         FileUploaderComponent,
         CampaignsListComponent,
+        SelectableListComponent,
+        SelectableListItemComponent,
         SortableListComponent,
+        SortableListItemComponent,
         TermsDialogComponent,
         ContentDetailsComponent,
         ImageComponent,
         TriggerDetailsComponent,
         CampaignDetailsComponent,
-        SortableListItemComponent,
         ContentListComponent,
         TriggerListComponent,
         ContentGroupCreatorComponent,
@@ -97,7 +102,8 @@ import { ContentSelectorComponent } from './content/content-selector/content-sel
         VideoComponent,
         ExpandablePanelComponent,
         ContentRowComponent,
-        ContentSelectorComponent
+        ContentSelectorComponent,
+        ChartComponent
     ],
     imports: [
         AppRoutingModule,
@@ -105,8 +111,9 @@ import { ContentSelectorComponent } from './content/content-selector/content-sel
         BrowserModule,
         FlexLayoutModule,
         FormsModule,
+        ReactiveFormsModule,
         HttpModule,
-        MaterialModule.forRoot(),
+        MaterialModule,
     ],
     providers: [
         AuthCustomHttpService,
@@ -114,6 +121,7 @@ import { ContentSelectorComponent } from './content/content-selector/content-sel
         ContentApiService,
         DateUtilsService,
         FilestackService,
+        TargetApiService,
         TermsApiService,
         TriggerApiService,
         UserApiService,

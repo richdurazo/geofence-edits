@@ -8,6 +8,9 @@ import { MdDialogRefMock, MD_DIALOG_DATA_MOCK } from '../../mocks/shared/md-dial
 import { ContentApiService } from '../shared/content-api.service';
 import { ContentApiMockService } from '../../mocks/content/content-api-mock.service';
 
+import { DateUtilsMockService } from '../../mocks/shared/date-utils-mock.service';
+import { DateUtilsService } from '../../shared/date-utils.service';
+
 import { ContentSelectorComponent } from './content-selector.component';
 
 describe('ContentSelectorComponent', () => {
@@ -22,6 +25,7 @@ describe('ContentSelectorComponent', () => {
       ],
       providers: [
           { provide: ContentApiService, useClass: ContentApiMockService },
+          { provide: DateUtilsService, useClass: DateUtilsMockService },
           { provide: MdDialogRef, useClass: MdDialogRefMock }
       ],
       schemas: [

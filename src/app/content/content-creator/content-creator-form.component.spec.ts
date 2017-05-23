@@ -84,41 +84,9 @@ describe('ContentCreatorFormComponent', () => {
             spyOn(component, 'setModelDefaults');
             expect(component.contentType).not.toBeDefined();
             expect(component.setModelDefaults).not.toHaveBeenCalled();
-            component.setType('foo');
+            component.setType('foo', {});
             expect(component.contentType).toEqual('foo');
             expect(component.setModelDefaults).toHaveBeenCalledWith('foo');
-        });
-    });
-
-    describe('submitForm', () => {
-        it('should have a submitForm function', () => {
-            expect(component.submitForm).toBeTruthy();
-            expect(typeof component.submitForm).toEqual('function');
-        });
-
-        it('should format the request and call the ContentApiService', () => {
-            spyOn(dateUtils, 'formatSQLDate').and.returnValue('foo');
-            spyOn(contentApi, 'createContent').and.returnValue(Observable.of({foo: 'bar'}));
-            spyOn(component, 'processSuccess');
-            expect(dateUtils.formatSQLDate).not.toHaveBeenCalled();
-            expect(contentApi.createContent).not.toHaveBeenCalled();
-            expect(component.processSuccess).not.toHaveBeenCalled();
-            component.content = new ContentModel('yolobro', 'foo', '', '', '', new Date('1/1/17'), new Date ('2/1/17'));
-            component.submitForm({valid: true});
-            expect(dateUtils.formatSQLDate).toHaveBeenCalled();
-            expect(contentApi.createContent).toHaveBeenCalledWith({ uuid: 'yolobro', type: 'foo', name: '', display_name: '', description: '', start_at: 'foo', end_at: 'foo', scratcher_enabled: false });
-            expect(component.processSuccess).toHaveBeenCalledWith({ foo: 'bar' });
-        });
-    });
-
-    describe('processSuccess', () => {
-        it('should have a processSuccess function', () => {
-            expect(component.processSuccess).toBeTruthy();
-            expect(typeof component.processSuccess).toEqual('function');
-        });
-
-        it('should handle the response from a successful create call', () => {
-            component.processSuccess({foo: 'bar'});
         });
     });
 

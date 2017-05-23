@@ -95,7 +95,6 @@ export class TriggerCreatorFormComponent implements OnInit {
         if (!form.valid) {
             return;
         }
-        console.log('this.trigger', this.trigger);
         var obj = Object.assign({}, this.trigger);
 
         this.triggerApi.createTrigger(obj)
@@ -105,7 +104,6 @@ export class TriggerCreatorFormComponent implements OnInit {
     }
 
     processSuccess (data) {
-        console.log('saved trigger data', data);
         if (this.onCreate) {
             this.onCreate.emit(data);
         }
@@ -127,7 +125,6 @@ export class TriggerCreatorFormComponent implements OnInit {
 
     public setCampaign (data) {
         this.trigger.campaign_id = data.id;
-        console.log('this.trigger', this.trigger);
     }
 
     public getCampaigns () {

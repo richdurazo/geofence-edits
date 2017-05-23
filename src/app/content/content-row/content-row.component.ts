@@ -15,8 +15,6 @@ export class ContentRowComponent implements OnInit {
     constructor() { }
 
     ngOnInit() {
-        console.log('this.item', this.item);
-        console.log('this.layout', this.layout);
     }
 
 }

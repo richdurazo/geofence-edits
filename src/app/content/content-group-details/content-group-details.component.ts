@@ -32,14 +32,12 @@ export class ContentGroupDetailsComponent implements OnInit {
     }
 
     public setContent (event) {
-        console.log('event', event);
         this.selectedContent = event;
     }
 
     public attachContent () {
         this.contentApi.attachContentToGroup(this.contentGroup.id, this.selectedContent.id)
         .subscribe(data => {
-            console.log('attachContent data', data);
             this.groupContent = data;
         });
     }
@@ -53,13 +51,14 @@ export class ContentGroupDetailsComponent implements OnInit {
 
     public launchSelector () {
         let config = {
-            disableClose: true
+            disableClose: false
         };
         let dialogRef = this.dialog.open(ContentSelectorComponent, config);
         dialogRef.afterClosed().subscribe(result => {
-            this.selectedContent = result;
-            this.attachContent();
-            console.log('result', result);
+            if (!!result) {
+                this.selectedContent = result;
+                this.attachContent();
+            }
         });
     }
 

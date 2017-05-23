@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {MdDialog} from '@angular/material';
+import { NgForm } from '@angular/forms';
+import { MdDialog } from '@angular/material';
 
 import { TermsDialogComponent } from './terms-dialog/terms-dialog.component';
 
-import { DateUtilsService } from '../../shared/date-utils.service';
 import { FilestackService } from '../../shared/filestack.service';
 import { UuidApiService } from '../../shared/uuid-api.service';
-import { ContentApiService } from '../shared/content-api.service';
 import { ContentModel } from '../shared/content.model';
 
 @Component({
@@ -90,11 +89,11 @@ export class ContentCreatorFormComponent implements OnInit {
 
     walletImageConfig: any;
 
+    form: NgForm;
+
     constructor (
-        private contentApi: ContentApiService,
         private uuidApi: UuidApiService,
         private filestack: FilestackService,
-        private dateUtils: DateUtilsService,
         private dialog: MdDialog
     ) {}
 
@@ -144,6 +143,7 @@ export class ContentCreatorFormComponent implements OnInit {
                 viewValue: "Format 3"
             }
         ];
+
     }
 
     public launchTerms () {
@@ -153,7 +153,6 @@ export class ContentCreatorFormComponent implements OnInit {
         };
         let dialogRef = this.dialog.open(TermsDialogComponent, config);
         dialogRef.afterClosed().subscribe(result => {
-            console.log('result', result);
             this.content.content_term_id = result.id;
         });
     }
@@ -162,26 +161,10 @@ export class ContentCreatorFormComponent implements OnInit {
         this.content[key] = new Date(event);
     }
 
-    public setType (event) {
-        console.log('event', event);
+    public setType (event, form) {
+        this.form = form;
         this.contentType = event;
         this.setModelDefaults(this.contentType);
-    }
-
-    public submitForm (form) {
-        // console.log('submitForm this.content', JSON.stringify(this.content, null, 2));
-        if (!form.valid) { return; }
-        var obj = Object.assign({}, this.content);
-        obj.start_at = this.dateUtils.formatSQLDate(obj.start_at);
-        obj.end_at = this.dateUtils.formatSQLDate(obj.end_at);
-        this.contentApi.createContent(obj)
-        .subscribe(
-            data => this.processSuccess(data)
-        )
-    }
-
-    processSuccess (data) {
-        console.log('saved content data', data);
     }
 
     public fetchUuid () {

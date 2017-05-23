@@ -83,9 +83,9 @@ describe('TriggerCreatorFormComponent', () => {
           spyOn(component, 'processSuccess');
           expect(triggerApi.createTrigger).not.toHaveBeenCalled();
           expect(component.processSuccess).not.toHaveBeenCalled();
-          component.trigger = { name: '', campaign_id: 1, type: '' };
+          component.trigger = { name: '', campaign_id: 1, type: '', uuid: '' };
           component.submitForm({valid: true});
-          expect(triggerApi.createTrigger).toHaveBeenCalledWith({ name: '', campaign_id: 1, type: '' });
+          expect(triggerApi.createTrigger).toHaveBeenCalledWith({ name: '', campaign_id: 1, type: '', uuid: '' });
           expect(component.processSuccess).toHaveBeenCalledWith({ foo: 'bar' });
         });
     });

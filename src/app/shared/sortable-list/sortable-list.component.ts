@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
     selector: 'app-sortable-list',
@@ -22,17 +22,10 @@ export class SortableListComponent implements OnInit {
 
     @Input() root: string;
 
-    @Output() emitSelectedItem: EventEmitter<any> = new EventEmitter();
-
     constructor() { }
 
     ngOnInit() {
         this.toggleLayout();
-    }
-
-    public itemSelected (event) {
-        console.log('this.selectedItem', this.selectedItem);
-        this.emitSelectedItem.emit(this.selectedItem);
     }
 
     public toggleLayout () {

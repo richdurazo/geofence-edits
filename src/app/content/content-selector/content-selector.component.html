@@ -1,7 +1,24 @@
-<div fxLayout="column">
-    <app-sortable-list (emitSelectedItem)="contentSelected($event)" [rows]="content" [root]="'content'">
-    </app-sortable-list>
+<div fxLayout="column" class="content-selector">
+    <md-tab-group (selectedIndexChange)="indexChange($event)" #tabGroup>
+
+        <md-tab label="Select">
+
+            <app-selectable-list (emitSelectedItem)="contentSelected($event)" [rows]="content" [root]="'content'">
+            </app-selectable-list>
+
+        </md-tab>
+
+        <md-tab label="Create">
+
+            <app-content-creator-form>
+            </app-content-creator-form>
+
+        </md-tab>
+
+    </md-tab-group>
+
     <div fxLayoutAlign="end">
-        <button type="submit" class="common-form-submit" md-raised-button color="primary" (click)="submit()">Select Content</button>
+        <button type="submit" class="common-form-submit" md-raised-button color="primary" (click)="closeSelectWithData()" *ngIf="tabIndex === 0">Attach Content</button>
+        <button type="submit" class="common-form-submit" md-raised-button color="primary" (click)="submitForm($event)" *ngIf="tabIndex === 1 && creatorForm.contentType">Attach Content</button>
     </div>
 </div>

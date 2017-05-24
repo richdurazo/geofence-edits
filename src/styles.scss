@@ -419,7 +419,7 @@ body {
             height: 100%;
 
             &:hover {
-                background-color: $light-grey;
+                background-color: lighten(mat-color($primary), 45);
             }
         }
 
@@ -456,7 +456,7 @@ body {
                     width: 1090px;
 
                     &.selected {
-                        background-color: lighten(mat-color($primary), 45);;
+                        background-color: lighten(mat-color($primary), 45);
                     }
                 }
             }

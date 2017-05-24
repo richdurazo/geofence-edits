@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sortable-list-item',
@@ -13,9 +14,13 @@ export class SortableListItemComponent implements OnInit {
 
     @Input() root: string;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
+  }
+
+  navigate () {
+      this.router.navigate([this.root, this.item.id]);
   }
 
 }

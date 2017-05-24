@@ -1,11 +1,9 @@
-<md-card fxFlex="100">
+<md-card fxFlex="100" class="sortable-list-item cursor-pointer" (click)="navigate()">
 
     <div fxFlex="100" *ngIf="layout === 'row'" fxLayout="row" fxLayoutAlign="space-around center">
 
         <div fxFlex="40">
-            <a routerLink="/{{ root }}/{{ item.id }}">
-                {{ item.name }}
-            </a>
+            {{ item.name }}
         </div>
 
         <div fxFlex="20">
@@ -50,6 +48,5 @@
         </div>
 
     </div>
-
 
 </md-card>

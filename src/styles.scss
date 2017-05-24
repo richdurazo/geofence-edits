@@ -415,8 +415,12 @@ body {
             overflow: visible;
         }
 
-        app-sortable-list-item {
+        .sortable-list-item {
             height: 100%;
+
+            &:hover {
+                background-color: $light-grey;
+            }
         }
 
         .mat-card {

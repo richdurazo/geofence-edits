@@ -67,9 +67,19 @@ export class ExpandablePanelComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.getGroupTargets();
         this.fetchTargetOptions();
         this.targetCtrl = new FormControl();
         this.setFilteredResults();
+    }
+
+    getGroupTargets () {
+        this.contentApi.getGroupTargets(this.item.id)
+        .subscribe(
+            data => {
+                this.targets = data;
+            }
+        )
     }
 
     fetchTargetOptions () {
@@ -103,12 +113,10 @@ export class ExpandablePanelComponent implements OnInit {
     }
 
     itemSelected (event) {
-        console.log('event', event);
         if (this.targets.indexOf(event.source.value) === -1) {
             this.targetCtrl.setValue(event.source.value.display_name);
             this.contentApi.attachTargetToGroup(this.item.id, event.source.value.id)
             .subscribe(data => {
-                console.log('data', data);
                 this.targets.push(event.source.value);
                 this.targetCtrl.setValue(null);
                 this.setFilteredResults();

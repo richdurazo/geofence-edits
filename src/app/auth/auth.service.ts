@@ -45,7 +45,6 @@ export class AuthService {
 
     // private methods
     private processSuccess (data) {
-        console.log('data', data);
         localStorage.setItem('id_token', data.token);
     }
 

@@ -418,8 +418,13 @@ body {
         .sortable-list-item {
             height: 100%;
 
+            transition-timing-function: ease;
+            transition: .5s;
+
             &:hover {
                 background-color: lighten(mat-color($primary), 45);
+                transition-timing-function: ease;
+                transition: .5s;
             }
         }
 

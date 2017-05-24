@@ -1,13 +1,13 @@
-<md-card class="expandable-header mat-elevation-z1" fxLayout="row">
-    <div class="heading-wrapper cursor-pointer" fxFlex="{{ headerLayout }}" (click)="toggleExpanded()" *ngIf="!editing">
+<md-card class="expandable-header mat-elevation-z0" fxLayout="row">
+    <div class="heading-wrapper cursor-pointer" fxFlex="95" (click)="toggleExpanded()" *ngIf="!editing">
         <h1 class="expandable-panel-heading" fxLayoutAlign="start center">
-            <div fxFlex="40">
+            <div fxFlex="45">
                 {{ item.name }}
             </div>
 
-            <div fxFlex="50" fxLayout="row">
+            <div fxFlex="45" fxLayout="row">
                 <md-chip-list [selectable]="false">
-                  <md-chip *ngFor="let item of targets">{{ item }}</md-chip>
+                  <md-chip *ngFor="let item of targets">{{ item.display_name }}</md-chip>
                 </md-chip-list>
             </div>
 
@@ -17,7 +17,7 @@
         </h1>
     </div>
 
-    <div class="heading-wrapper" fxFlex="95" *ngIf="targetable && editing">
+    <div class="heading-wrapper" fxFlex="95" *ngIf="editing">
         <h1 class="expandable-panel-heading" fxLayoutAlign="start center">
 
             <div fxFlex="25">
@@ -32,28 +32,28 @@
                 </md-input-container>
             </div>
 
-            <div fxFlex="15">
+            <div fxFlex="20">
                 <md-input-container>
                   <input
                       mdInput
                       placeholder="Add Targeting"
                       [mdAutocomplete]="auto"
-                      [formControl]="stateCtrl">
+                      [formControl]="targetCtrl">
                 </md-input-container>
 
                 <md-autocomplete #auto="mdAutocomplete">
                   <md-option
-                      *ngFor="let state of filteredResults | async"
-                      [value]="state"
+                      *ngFor="let item of filteredResults | async"
+                      [value]="item"
                       (onSelectionChange)="itemSelected($event)">
-                    {{ state }}
+                    {{ item.display_name }}
                   </md-option>
                 </md-autocomplete>
             </div>
 
-            <div fxFlex="50" fxLayout="row">
+            <div fxFlex="45" fxLayout="row">
                 <md-chip-list [selectable]="false">
-                  <md-chip *ngFor="let item of targets">{{ item }}</md-chip>
+                  <md-chip *ngFor="let item of targets">{{ item.display_name }}</md-chip>
                 </md-chip-list>
             </div>
 
@@ -68,7 +68,7 @@
         </h1>
     </div>
 
-    <div class="menu-wrapper" fxFlex="5" fxLayoutAlign="center center" *ngIf="targetable">
+    <div class="menu-wrapper" fxFlex="5" fxLayoutAlign="center center">
         <md-menu #appMenu="mdMenu">
           <button
               md-menu-item

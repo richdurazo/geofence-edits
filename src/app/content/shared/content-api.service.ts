@@ -48,4 +48,9 @@ export class ContentApiService {
         return this.authCustomHttp.post(AppSettings.API_ROOT + '/content-group/' + content_group_id + '/content/' + content_id, {})
         .map(res => res.json())
     }
+
+    attachTargetToGroup (content_group_id, target_id) {
+        return this.authCustomHttp.post(AppSettings.API_ROOT + '/content-group/' + content_group_id + '/content/' + target_id, {})
+        .map(res => res.json())
+    }
 }

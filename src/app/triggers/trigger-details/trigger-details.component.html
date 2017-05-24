@@ -48,8 +48,9 @@
     </md-card>
 
     <md-card class="content-group-container-card">
-        <app-expandable-panel [item]="{ name: 'Content Groups' }">
-            <div class="trigger-content-group-container padded-container" fxLayout="column" fxFlex="100">
+        <div class="trigger-content-group-container" fxLayout="column" fxFlex="100">
+
+            <div class="padded-container">
                 <app-content-group-details
                     class="rendered-content-group"
                     [trigger]="trigger"
@@ -62,19 +63,19 @@
                     (onCreate)="contentCreated($event)"
                     *ngIf="adding">
                 </app-content-group-creator>
-
-                <md-card class="mat-elevation-z3 add-content-row" fxLayout="column" *ngIf="!adding">
-                    <div fxLayout="row" fxFlex="100" fxFlexAlign="end">
-                        <button type="button" md-raised-button (click)="adding = !adding">
-                            <md-icon>
-                                add
-                            </md-icon>
-                            Add Content Group
-                        </button>
-                    </div>
-                </md-card>
             </div>
-        </app-expandable-panel>
+
+            <div class="add-content-group-row" fxLayout="column" *ngIf="!adding">
+                <div fxLayout="row" fxFlex="100" fxFlexAlign="end">
+                    <button type="button" md-raised-button (click)="adding = !adding">
+                        <md-icon>
+                            add
+                        </md-icon>
+                        Add Content Group
+                    </button>
+                </div>
+            </div>
+        </div>
     </md-card>
 
 </div>

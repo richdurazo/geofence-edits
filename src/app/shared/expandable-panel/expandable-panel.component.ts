@@ -100,15 +100,14 @@ export class ExpandablePanelComponent implements OnInit {
 
     setFilteredResults () {
         this.filteredResults = this.targetCtrl.valueChanges
-            .startWith(null)
-            .map(name => this.filterStates(name));
+        .startWith(null)
+        .map(name => this.filterStates(name));
     }
 
     filterStates(val: string) {
       return !!val && val.length ? this.options.filter(s => {
           return s.display_name.toLowerCase().indexOf(val.toLowerCase()) != -1;
-      })
-                 : this.options;
+      }) : this.options;
     }
 
     toggleExpanded () {

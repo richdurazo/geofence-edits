@@ -119,14 +119,14 @@ export class ExpandablePanelComponent implements OnInit {
         this.editing = true;
     }
 
-    itemSelected (event) {
-        if (this.targets.indexOf(event.source.value) === -1) {
-            this.targetCtrl.setValue(event.source.value.display_name);
-            this.contentApi.attachTargetToGroup(this.item.id, event.source.value.id)
+    itemSelected (selectedItem, event) {
+        if (event.isUserInput && this.targets.indexOf(selectedItem) === -1) {
+            this.targetCtrl.setValue(selectedItem.display_name);
+            this.contentApi.attachTargetToGroup(this.item.id, selectedItem.id)
             .subscribe(data => {
-                this.targets.push(event.source.value);
-                this.targetCtrl.setValue(null);
+                this.targets = data;
                 this.setFilteredResults();
+                this.targetCtrl.setValue(null);
             })
         }
     }

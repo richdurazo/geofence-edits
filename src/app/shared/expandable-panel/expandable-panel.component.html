@@ -45,7 +45,7 @@
                   <md-option
                       *ngFor="let item of filteredResults | async"
                       [value]="item"
-                      (onSelectionChange)="itemSelected($event)">
+                      (onSelectionChange)="itemSelected(item, $event)">
                     {{ item.display_name }}
                   </md-option>
                 </md-autocomplete>

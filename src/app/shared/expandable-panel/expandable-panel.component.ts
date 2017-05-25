@@ -91,6 +91,13 @@ export class ExpandablePanelComponent implements OnInit {
         )
     }
 
+    removeTarget (target) {
+        this.contentApi.detachTargetFromGroup(this.item.id, target.id)
+        .subscribe(data => {
+            this.targets = data;
+        })
+    }
+
     setFilteredResults () {
         this.filteredResults = this.targetCtrl.valueChanges
             .startWith(null)

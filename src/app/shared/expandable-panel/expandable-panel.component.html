@@ -17,7 +17,7 @@
         </h1>
     </div>
 
-    <div class="heading-wrapper" fxFlex="95" *ngIf="editing">
+    <div class="heading-wrapper editing" fxFlex="95" *ngIf="editing">
         <h1 class="expandable-panel-heading" fxLayoutAlign="start center">
 
             <div fxFlex="25">
@@ -53,7 +53,12 @@
 
             <div fxFlex="45" fxLayout="row">
                 <md-chip-list [selectable]="false">
-                  <md-chip *ngFor="let item of targets">{{ item.display_name }}</md-chip>
+                  <md-chip *ngFor="let item of targets">
+                      {{ item.display_name }}
+                      <button type="button" md-icon-button (click)="removeTarget(item)">
+                          <md-icon>close</md-icon>
+                      </button>
+                  </md-chip>
                 </md-chip-list>
             </div>
 

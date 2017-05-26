@@ -157,6 +157,10 @@ body {
         padding-left: $common-margin;
         padding-right: $common-margin;
         padding-top: $common-margin;
+
+        &.details-well {
+            padding-bottom: $common-margin;
+        }
     }
 
     // COMMON TOOLBAR

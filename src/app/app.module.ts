@@ -64,6 +64,7 @@ import { ExpandablePanelComponent } from './shared/expandable-panel/expandable-p
 import { ContentRowComponent } from './content/content-row/content-row.component';
 import { ContentSelectorComponent } from './content/content-selector/content-selector.component';
 import { ChartComponent } from './shared/chart/chart.component';
+import { TargetTypeaheadComponent } from './shared/target-typeahead/target-typeahead.component';
 
 @NgModule({
     declarations: [
@@ -103,7 +104,8 @@ import { ChartComponent } from './shared/chart/chart.component';
         ExpandablePanelComponent,
         ContentRowComponent,
         ContentSelectorComponent,
-        ChartComponent
+        ChartComponent,
+        TargetTypeaheadComponent
     ],
     imports: [
         AppRoutingModule,

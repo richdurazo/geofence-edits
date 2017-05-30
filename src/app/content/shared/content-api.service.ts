@@ -48,4 +48,19 @@ export class ContentApiService {
         return this.authCustomHttp.post(AppSettings.API_ROOT + '/content-group/' + content_group_id + '/content/' + content_id, {})
         .map(res => res.json())
     }
+
+    getGroupTargets (content_group_id) {
+        return this.authCustomHttp.get(AppSettings.API_ROOT + '/content-group/' + content_group_id + '/target')
+        .map(res => res.json())
+    }
+
+    attachTargetToGroup (content_group_id, target_id) {
+        return this.authCustomHttp.post(AppSettings.API_ROOT + '/content-group/' + content_group_id + '/target/' + target_id, {})
+        .map(res => res.json())
+    }
+
+    detachTargetFromGroup (content_group_id, target_id) {
+        return this.authCustomHttp.delete(AppSettings.API_ROOT + '/content-group/' + content_group_id + '/target/' + target_id, {})
+        .map(res => res.json())
+    }
 }

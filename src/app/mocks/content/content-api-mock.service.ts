@@ -24,4 +24,8 @@ export class ContentApiMockService {
     public getGroupContent () {
         return false;
     }
+
+    public getGroupTargets () {
+        return false;
+    }
 }

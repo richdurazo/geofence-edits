@@ -33,22 +33,7 @@
             </div>
 
             <div fxFlex="20">
-                <md-input-container>
-                  <input
-                      mdInput
-                      placeholder="Add Targeting"
-                      [mdAutocomplete]="auto"
-                      [formControl]="targetCtrl">
-                </md-input-container>
-
-                <md-autocomplete #auto="mdAutocomplete">
-                  <md-option
-                      *ngFor="let item of filteredResults | async"
-                      [value]="item"
-                      (onSelectionChange)="itemSelected(item, $event)">
-                    {{ item.display_name }}
-                  </md-option>
-                </md-autocomplete>
+                <app-target-typeahead (emitSelectedItem)="targetSelected($event)"></app-target-typeahead>
             </div>
 
             <div fxFlex="45" fxLayout="row">

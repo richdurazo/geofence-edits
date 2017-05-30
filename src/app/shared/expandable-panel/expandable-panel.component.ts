@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { trigger, state, animate, transition, style } from '@angular/animations';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 import { ContentApiService } from '../../content/shared/content-api.service';
 import { TargetApiService } from '../../shared/target-api.service';
@@ -57,20 +56,11 @@ export class ExpandablePanelComponent implements OnInit {
 
     searchString: string = "";
 
-    targetCtrl: FormControl;
-
-    filteredResults: any;
-
-    options = [];
-
     constructor(private contentApi: ContentApiService, private targetApi: TargetApiService) {
     }
 
     ngOnInit() {
         this.getGroupTargets();
-        this.fetchTargetOptions();
-        this.targetCtrl = new FormControl();
-        this.setFilteredResults();
     }
 
     getGroupTargets () {
@@ -82,32 +72,11 @@ export class ExpandablePanelComponent implements OnInit {
         )
     }
 
-    fetchTargetOptions () {
-        this.targetApi.fetchTargets()
-        .subscribe(
-            data => {
-                this.options = data;
-            }
-        )
-    }
-
     removeTarget (target) {
         this.contentApi.detachTargetFromGroup(this.item.id, target.id)
         .subscribe(data => {
             this.targets = data;
         })
-    }
-
-    setFilteredResults () {
-        this.filteredResults = this.targetCtrl.valueChanges
-        .startWith(null)
-        .map(name => this.filterStates(name));
-    }
-
-    filterStates(val: string) {
-      return !!val && val.length ? this.options.filter(s => {
-          return s.display_name.toLowerCase().indexOf(val.toLowerCase()) != -1;
-      }) : this.options;
     }
 
     toggleExpanded () {
@@ -118,14 +87,14 @@ export class ExpandablePanelComponent implements OnInit {
         this.editing = true;
     }
 
-    itemSelected (selectedItem, event) {
-        if (event.isUserInput && this.targets.indexOf(selectedItem) === -1) {
-            this.targetCtrl.setValue(selectedItem.display_name);
+    targetSelected (selectedItem) {
+        var targetExists = this.targets.some(function (item) {
+          return item.id === selectedItem.id;
+        });
+        if (!targetExists) {
             this.contentApi.attachTargetToGroup(this.item.id, selectedItem.id)
             .subscribe(data => {
-                this.targets = data;
-                this.setFilteredResults();
-                this.targetCtrl.setValue(null);
+                this.targets = data;;
             })
         }
     }

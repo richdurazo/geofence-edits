@@ -53,10 +53,6 @@
                                 {{ type.viewValue }}
                             </md-option>
                         </md-select>
-
-                        <p *ngIf="!triggerType">
-                            To get started, please select a type.
-                        </p>
                     </div>
 
                     <div fxFlex="33" *ngIf="triggerType">
@@ -65,13 +61,18 @@
                         name="deliveryMode"
                         [ngModel]="deliveryMode"
                         (ngModelChange)="setDeliveryMode($event)">
-                            <md-option *ngFor="let mode of deliveryModes" [value]="mode.value">
-                                {{ mode.viewValue }}
+                            <md-option *ngFor="let mode of deliveryModes" [value]="mode.id">
+                                {{ mode.name }}
                             </md-option>
                         </md-select>
                     </div>                
 
                 </div>
+
+                <div fxLayout="row" fxLayout.sm="column" fxLayoutGap="10px" *ngIf="!triggerType">
+                    <p>To get started, please select a type.</p>
+                </div>
+
             </div>
 
             <div class="right-column" fxFlex="33" fxLayoutAlign="end">

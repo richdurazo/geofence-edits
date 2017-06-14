@@ -7,6 +7,7 @@ import { FilestackService } from '../../shared/filestack.service';
 import { UuidApiService } from '../../shared/uuid-api.service';
 import { TriggerApiService } from '../shared/trigger-api.service';
 import { TriggerModel } from '../shared/trigger.model';
+import { DeliveryModeModel } from '../shared/delivery-mode.model';
 
 @Component({
     selector: 'app-trigger-creator-form',
@@ -31,7 +32,9 @@ export class TriggerCreatorFormComponent implements OnInit {
 
     campaigns: CampaignModel[];
 
-    deliveryMode: string;
+    deliveryModes: DeliveryModeModel[];
+
+    deliveryMode: DeliveryModeModel;
 
     triggerTypes: [
         {
@@ -51,31 +54,18 @@ export class TriggerCreatorFormComponent implements OnInit {
             viewValue: "Beacon"
         }
     ];
-    deliveryModes: [
-        {
-            value: 'standard',
-            viewValue: 'Standard'
-        },
-        {
-            value: 'multipleOffer',
-            viewValue: 'Multiple Offer'
-        },
-        {
-            value: 'sequential',
-            viewValue: 'Sequential'
-        },
-        {
-            value: 'random',
-            viewValue: 'Random'
-        }
-    ];
 
     triggerUuid: string;
 
-    constructor(private uuidApi: UuidApiService, private triggerApi: TriggerApiService, private campaignApi: CampaignApiService, private filestack: FilestackService) { }
+    constructor( private uuidApi: UuidApiService,
+                 private triggerApi: TriggerApiService,
+                 private campaignApi: CampaignApiService,
+                 private filestack: FilestackService
+                 ) { }
 
     ngOnInit() {
         this.fetchUuid();
+        this.getDeliveryModes();
 
         if (!this.parentCampaign) {
             this.getCampaigns();
@@ -99,24 +89,6 @@ export class TriggerCreatorFormComponent implements OnInit {
                 viewValue: "Beacon"
             }
         ];
-        this.deliveryModes = [
-            {
-                value: 'standard',
-                viewValue: 'Standard'
-            },
-            {
-                value: 'multipleOffer',
-                viewValue: 'Multiple Offer'
-            },
-            {
-                value: 'sequential',
-                viewValue: 'Sequential'
-            },
-            {
-                value: 'random',
-                viewValue: 'Random'
-            }
-        ];
     }
 
 
@@ -128,6 +100,15 @@ export class TriggerCreatorFormComponent implements OnInit {
                 this.triggerMediaConfig = this.filestack.createMediaConfig('audio-trigger', this.triggerUuid);
             }
         )
+    }
+
+    public getDeliveryModes() {
+        this.triggerApi.getDeliveryModes()
+        .subscribe(
+            data => {
+                this.deliveryModes = data;
+            }
+        );
     }
 
     public submitForm (form) {

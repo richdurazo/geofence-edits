@@ -31,6 +31,8 @@ export class TriggerCreatorFormComponent implements OnInit {
 
     campaigns: CampaignModel[];
 
+    deliveryMode: string;
+
     triggerTypes: [
         {
             value: "touch",
@@ -47,6 +49,24 @@ export class TriggerCreatorFormComponent implements OnInit {
         {
             value: "beacon",
             viewValue: "Beacon"
+        }
+    ];
+    deliveryModes: [
+        {
+            value: 'standard',
+            viewValue: 'Standard'
+        },
+        {
+            value: 'multipleOffer',
+            viewValue: 'Multiple Offer'
+        },
+        {
+            value: 'sequential',
+            viewValue: 'Sequential'
+        },
+        {
+            value: 'random',
+            viewValue: 'Random'
         }
     ];
 
@@ -79,7 +99,26 @@ export class TriggerCreatorFormComponent implements OnInit {
                 viewValue: "Beacon"
             }
         ];
+        this.deliveryModes = [
+            {
+                value: 'standard',
+                viewValue: 'Standard'
+            },
+            {
+                value: 'multipleOffer',
+                viewValue: 'Multiple Offer'
+            },
+            {
+                value: 'sequential',
+                viewValue: 'Sequential'
+            },
+            {
+                value: 'random',
+                viewValue: 'Random'
+            }
+        ];
     }
+
 
     public fetchUuid () {
         this.uuidApi.fetchUuid()
@@ -133,7 +172,11 @@ export class TriggerCreatorFormComponent implements OnInit {
             (data) => {
                 this.campaigns = data;
             }
-        )
+        );
+    }
+
+    public setDeliveryMode(data) {
+        this.trigger.delivery_mode_id = data.id;
     }
 
 }

@@ -4,6 +4,7 @@ export class TriggerModel {
     id?: number;
     campaign_id: number;
     uuid: string;
+    delivery_mode_id: number;
 
     constructor (
         name: string,

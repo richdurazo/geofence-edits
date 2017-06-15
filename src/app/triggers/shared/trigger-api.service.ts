@@ -37,4 +37,9 @@ export class TriggerApiService {
       .map(res => res.json())
   }
 
+  getDeliveryModes() {
+      return this.authCustomHttp.get(AppSettings.API_ROOT + '/delivery-mode')
+      .map(res => res.json())
+    }
+
 }

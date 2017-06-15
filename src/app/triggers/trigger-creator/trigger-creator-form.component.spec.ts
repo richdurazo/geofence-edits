@@ -45,6 +45,7 @@ describe('TriggerCreatorFormComponent', () => {
         uuidApi = TestBed.get(UuidApiService);
         campaignApi = TestBed.get(CampaignApiService);
         spyOn(uuidApi, 'fetchUuid').and.returnValue(Observable.of({uuid: 'foo'}));
+        spyOn(triggerApi, 'getDeliveryModes').and.returnValue(Observable.of([{foo: 'bar'}, {hay: 'guyz'}]));
         spyOn(campaignApi, 'getCampaigns').and.returnValue(Observable.of([{uuid: 'foo'}, {uuid: 'bar'}]));
         spyOn(campaignApi, 'getCampaignTriggers').and.returnValue(Observable.of([{uuid: 'foo'}, {uuid: 'bar'}]));
     }));
@@ -70,6 +71,24 @@ describe('TriggerCreatorFormComponent', () => {
             component.ngOnInit();
             expect(component.fetchUuid).toHaveBeenCalled();
         });
+
+        it('should call getDeliveryModes', () => {
+            spyOn(component, 'getDeliveryModes');
+            component.ngOnInit();
+            expect(component.getDeliveryModes).toHaveBeenCalled();
+        });
+    });
+
+    describe('getDeliveryModes', () => {
+      it('should have a getContent function', () => {
+          expect(component.getDeliveryModes).toBeTruthy();
+          expect(typeof component.getDeliveryModes).toEqual('function');
+      });
+
+      it('should call the triggerApi', () => {
+          component.getDeliveryModes();
+          expect(triggerApi.getDeliveryModes).toHaveBeenCalled();
+      });
     });
 
     describe('submitForm', () => {
@@ -83,9 +102,16 @@ describe('TriggerCreatorFormComponent', () => {
           spyOn(component, 'processSuccess');
           expect(triggerApi.createTrigger).not.toHaveBeenCalled();
           expect(component.processSuccess).not.toHaveBeenCalled();
-          component.trigger = { name: '', campaign_id: 1, type: '', uuid: '' };
+          component.trigger = {
+              name: '',
+              type: '',
+              id: 1,
+              campaign_id: 1,
+              uuid: '',
+              delivery_mode_id: 1
+            };
           component.submitForm({valid: true});
-          expect(triggerApi.createTrigger).toHaveBeenCalledWith({ name: '', campaign_id: 1, type: '', uuid: '' });
+          expect(triggerApi.createTrigger).toHaveBeenCalledWith({ name: '', type: '', id: 1, campaign_id: 1, uuid: '', delivery_mode_id: 1 });
           expect(component.processSuccess).toHaveBeenCalledWith({ foo: 'bar' });
         });
     });

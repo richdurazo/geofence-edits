@@ -4,23 +4,7 @@
 
         <div fxLayout="row">
 
-            <div fxLayout="column" fxFlex="55">
-
-                <div>
-                    <md-select
-                    placeholder="Type"
-                    name="type"
-                    [ngModel]="triggerType"
-                    (ngModelChange)="setType($event)">
-                        <md-option *ngFor="let type of triggerTypes" [value]="type.value">
-                            {{ type.viewValue }}
-                        </md-option>
-                    </md-select>
-
-                    <p *ngIf="!triggerType">
-                        To get started, please select a type.
-                    </p>
-                </div>
+            <div fxLayout="column" fxFlex="50">
 
                 <div *ngIf="triggerType">
 
@@ -57,10 +41,41 @@
 
                 </div>
 
+                 <div fxLayout="row" fxLayout.sm="column" fxLayoutGap="10px">
+
+                    <div fxFlex="33">
+                        <md-select
+                        placeholder="Type"
+                        name="type"
+                        [ngModel]="triggerType"
+                        (ngModelChange)="setType($event)">
+                            <md-option *ngFor="let type of triggerTypes" [value]="type.value">
+                                {{ type.viewValue }}
+                            </md-option>
+                        </md-select>
+                    </div>
+
+                    <div fxFlex="33" *ngIf="triggerType">
+                        <md-select
+                        placeholder="Delivery Mode"
+                        name="deliveryMode"
+                        [ngModel]="deliveryMode"
+                        (ngModelChange)="setDeliveryMode($event)">
+                            <md-option *ngFor="let mode of deliveryModes" [value]="mode.id">
+                                {{ mode.name }}
+                            </md-option>
+                        </md-select>
+                    </div>                
+
+                </div>
+
+                <div fxLayout="row" fxLayout.sm="column" fxLayoutGap="10px" *ngIf="!triggerType">
+                    <p>To get started, please select a type.</p>
+                </div>
 
             </div>
 
-            <div class="right-column" fxFlex="35" fxLayoutAlign="end">
+            <div class="right-column" fxFlex="33" fxLayoutAlign="end">
 
                 <div class="media-container" *ngIf="triggerType === 'watermark' || triggerType === 'fingerprint'">
                     <div class="creator-section-label">

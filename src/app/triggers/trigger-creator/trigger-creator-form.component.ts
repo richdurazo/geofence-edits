@@ -7,6 +7,7 @@ import { FilestackService } from '../../shared/filestack.service';
 import { UuidApiService } from '../../shared/uuid-api.service';
 import { TriggerApiService } from '../shared/trigger-api.service';
 import { TriggerModel } from '../shared/trigger.model';
+import { DeliveryModeModel } from '../shared/delivery-mode.model';
 
 @Component({
     selector: 'app-trigger-creator-form',
@@ -31,6 +32,10 @@ export class TriggerCreatorFormComponent implements OnInit {
 
     campaigns: CampaignModel[];
 
+    deliveryModes: DeliveryModeModel[];
+
+    deliveryMode: DeliveryModeModel;
+
     triggerTypes: [
         {
             value: "touch",
@@ -52,10 +57,15 @@ export class TriggerCreatorFormComponent implements OnInit {
 
     triggerUuid: string;
 
-    constructor(private uuidApi: UuidApiService, private triggerApi: TriggerApiService, private campaignApi: CampaignApiService, private filestack: FilestackService) { }
+    constructor( private uuidApi: UuidApiService,
+                 private triggerApi: TriggerApiService,
+                 private campaignApi: CampaignApiService,
+                 private filestack: FilestackService
+                 ) { }
 
     ngOnInit() {
         this.fetchUuid();
+        this.getDeliveryModes();
 
         if (!this.parentCampaign) {
             this.getCampaigns();
@@ -81,6 +91,7 @@ export class TriggerCreatorFormComponent implements OnInit {
         ];
     }
 
+
     public fetchUuid () {
         this.uuidApi.fetchUuid()
         .subscribe(
@@ -89,6 +100,15 @@ export class TriggerCreatorFormComponent implements OnInit {
                 this.triggerMediaConfig = this.filestack.createMediaConfig('audio-trigger', this.triggerUuid);
             }
         )
+    }
+
+    public getDeliveryModes() {
+        this.triggerApi.getDeliveryModes()
+        .subscribe(
+            data => {
+                this.deliveryModes = data;
+            }
+        );
     }
 
     public submitForm (form) {
@@ -133,7 +153,11 @@ export class TriggerCreatorFormComponent implements OnInit {
             (data) => {
                 this.campaigns = data;
             }
-        )
+        );
+    }
+
+    public setDeliveryMode(data) {
+        this.trigger.delivery_mode_id = data.id;
     }
 
 }

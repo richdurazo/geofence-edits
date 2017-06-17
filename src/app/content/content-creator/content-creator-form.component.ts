@@ -1,3 +1,4 @@
+import { ActivatedRoute, Params } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MdDialog } from '@angular/material';
@@ -17,6 +18,7 @@ import { ContentModel } from '../shared/content.model';
 export class ContentCreatorFormComponent implements OnInit {
 
     content: ContentModel;
+    editMode = false;
 
     contentTypes: [
         {
@@ -94,11 +96,20 @@ export class ContentCreatorFormComponent implements OnInit {
     constructor (
         private uuidApi: UuidApiService,
         private filestack: FilestackService,
-        private dialog: MdDialog
+        private dialog: MdDialog,
+        private route: ActivatedRoute,
     ) {}
 
     ngOnInit() {
         this.fetchUuid();
+        this.route.params
+            .subscribe(
+                (params: Params) => {
+                this.editMode = params['id'] != null;
+                console.log('editMode', this.editMode);
+                this.initForm();
+            });
+
         this.contentTypes = [
             {
                 value: "offer",
@@ -186,6 +197,14 @@ export class ContentCreatorFormComponent implements OnInit {
 
     public setModelDefaults (type: string) {
         this.content = new ContentModel(this.contentUuid, type, '', '', '', new Date(), new Date());
+    }
+
+    public initForm() {
+        if (this.editMode) {
+            this.contentType = "offer";
+        } else {
+            console.log(this.editMode);
+        }
     }
 
 }

@@ -1,5 +1,9 @@
-<h1 class="page-heading">
+<h1 class="page-heading" *ngIf="!editMode">
     Create
+</h1>
+
+<h1 class="page-heading" *ngIf="editMode">
+    Edit 
 </h1>
 
 <md-card class="creator-form-card" fxLayout="column">
@@ -12,8 +16,27 @@
             class="common-form-submit"
             md-raised-button
             color="primary"
-            (click)="submitForm($event)">
+            (click)="submitForm($event)"
+            *ngIf="!editMode">
             Create
+        </button>
+        <button
+            type="button"
+            class="common-form-submit"
+            md-button
+            color="primary"
+            (click)="onCancel()"
+            *ngIf="editMode">
+            Cancel
+        </button>
+        <button
+            type="submit"
+            class="common-form-submit"
+            md-raised-button
+            color="primary"
+            (click)="updateForm($event)"
+            *ngIf="editMode">
+            Update
         </button>
     </div>
 

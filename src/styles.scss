@@ -76,12 +76,20 @@ body {
         padding: 0 45px;
     }
 
+    .mat-button {
+        line-height: 45px;
+        padding: 0 45px;
+    }
+
 
     .creator-form-card {
         padding-right: 80px;
         padding-left: 40px;
 
         .mat-raised-button.common-form-submit {
+            margin-bottom: 10px;
+        }
+        .mat-button.common-form-submit {
             margin-bottom: 10px;
         }
     }

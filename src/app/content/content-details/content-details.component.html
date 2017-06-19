@@ -1,137 +1,9 @@
-<md-card class="creator-form-card content-details">
+<md-card class="creator-form-card content-details" fxLayout="column" fxFlex="100">
 
-    <!-- Left Justified Content -->
-
-  <div class="Grid Grid--gutters Grid--cols-2" *ngIf="content">
-      
-    <div class="Grid-cell">
-        
-        <div class="Real content-1of2">
-
-              <div class="Grid Grid--nested">
-                  <div class="Grid-cell">
-                      <div class="Real content-1of1">
-                        <label>
-                            Type
-                        </label>
-                        <div>
-                            {{ content.type }}
-                        </div>
-                      </div>
-                  </div>
-              </div>
-
-              <div class="Grid Grid--nested">
-                  <div class="Grid-cell">
-                      <div class="Real content-1of1">
-                        <label>
-                            Title
-                        </label>
-                        <div>
-                            {{ content.name }}
-                        </div>
-                      </div>
-                  </div>
-              </div>
-            
-            <div class="Grid Grid-nested Grid--cols-2">
-                
-                <div class="Grid-cell">
-                    <div class="Real content-1of2">
-                        <label>
-                            Start Date
-                        </label>
-                        <div>
-                            {{ content.start_at | date: 'M/dd/yyyy' }}
-                        </div>
-                    </div>
-                </div>
-                <div class="Grid-cell">
-                    <div class="Real content-1of2">
-                        <label>
-                            End Date
-                        </label>
-                        <div>
-                            {{ content.end_at | date: 'M/dd/yyyy' }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <md-card>
-                <div>
-                    <label>
-                        Display Title
-                    </label>
-                    <div>
-                        {{ content.display_name }}
-                    </div>
-                </div>
-                <div>
-                    <label>
-                        Description
-                    </label>
-                    <div>
-                        {{ content.description }}
-                    </div>
-                </div>
-            </md-card>
-        </div>
-    </div>
-    <md-card>
-
-    </md-card>
-    <!-- Righ Justified Content -->
-
-    <div class="Grid-cell">
-        <div class="Demo content-1of2">
-          <div class="Grid Grid--gutters Grid--1of3 Grid--nested">
-            <div class="Grid-cell"><div class="Demo content-1of3"></div></div>
-            <div class="Grid-cell"><div class="Demo">auto</div></div>
-          </div>  
-        </div>
-    </div>
-  </div>
-
-    <div class="Grid Grid--full u-textCenter">
-    <div class="Grid-cell">
-        <div class="Demo content-1of1">   
-            <button
-                type="button"
-                class="common-form-submit"
-                md-raised-button
-                color="primary"
-                (click)="onEditContent()">
-                Edit
-            </button>
-        </div>
-    </div>
-    
-  </div>
-
-<!--<div class="Grid Grid--gutters Grid--1of3 Grid--nested">
-    <div class="Grid-cell"><div class="Demo content-1of3"></div></div>
-    <div class="Grid-cell"><div class="Demo">     
-      <div class="Grid Grid--gutters Grid--1of3 Grid--nested">
-        <div class="Grid-cell"><div class="Demo content-1of3"></div></div>
-        <div class="Grid-cell"><div class="Demo">
-          <div class="Grid Grid--gutters Grid--1of3 Grid--nested">
-            <div class="Grid-cell"><div class="Demo content-1of3"></div></div>
-            <div class="Grid-cell"><div class="Demo">auto</div></div>
-          </div>        
-        </div></div>
-      </div>      
-    </div>
-    </div>
-  </div>
-  <hr /> -->
-</md-card>
-
-<!--<md-card class="creator-form-card content-details" fxLayout="column" fxFlex="100">
-
-        <div fxLayout="row" *ngIf="content">-->
+        <div fxLayout="row" *ngIf="content">
 
             <!-- Left Justified Content -->
-<!--            <div fxLayout="column" fxFlex="55">
+            <div fxLayout="column" fxFlex="55">
 
                     <div>
                         <div fxLayout="column" class="details-display-container">
@@ -274,12 +146,12 @@
                     </div>
 
             </div>
--->
+
             <!-- Right Justified Content -->
- <!--           <div fxLayout="column" fxFlex="45"  *ngIf="content.type">
+            <div fxLayout="column" fxFlex="45"  *ngIf="content.type">
 
                 <div fxLayout="row" fxLayoutAlign="end">
-                    <div fxFlex="50" fxLayout="column" class="scratcher-toggle-container">-->
+                    <div fxFlex="50" fxLayout="column" class="scratcher-toggle-container">
                         <!-- <div fxLayout="row" fxLayoutAlign="center">
                             <label class="creator-section-label" for="scratcher_enabled">
                                 Enable Scratcher
@@ -294,14 +166,14 @@
                                 [(ngModel)]="scratcherEnabled">
                             </md-slide-toggle>
                         </div> -->
-           <!--         </div>
+                    </div>
 
                     <div class="right-column" fxLayout="column">
 
-                        <md-tab-group *ngIf="content.scratcher_name">-->
+                        <md-tab-group *ngIf="content.scratcher_name">
 
                             <!-- SCRATCHER LAYER -->
-                      <!--      <md-tab label="Overlay">
+                            <md-tab label="Overlay">
 
                                 <div class="creator-section-label">
                                     Scratcher Overlay Preview
@@ -328,10 +200,10 @@
 
                                 </div>
 
-                            </md-tab>-->
+                            </md-tab>
 
                             <!-- SCRATCHER INTERIOR LAYER -->
-   <!--                         <md-tab label="Scratcher">
+                            <md-tab label="Scratcher">
 
                                 <div class="creator-section-label">
                                     Scratcher Preview
@@ -384,10 +256,10 @@
 
                                 </div>
 
-                            </md-tab>-->
+                            </md-tab>
 
                             <!-- OFFER LAYER -->
-<!--                            <md-tab label="Offer">
+                            <md-tab label="Offer">
 
                                 <div class="creator-section-label">
                                     Offer Preview
@@ -481,17 +353,21 @@
 
             </div>
 
-        </div>
-    <div>
-        <button
-            type="button"
-            class="common-form-submit"
-            md-raised-button
-            color="primary"
-            (click)="onEditContent()">
-            Edit
-        </button>
-    </div>
-</md-card>
--->
 
+
+
+        </div>
+
+            <div fxLayout="row" fxLayoutAlign="end end"  >
+              
+                    <button
+                        type="button"
+                        class="common-form-submit"
+                        md-raised-button
+                        color="primary"
+                        (click)="onEditContent()">
+                        Edit
+                    </button>
+        
+            </div>
+</md-card>

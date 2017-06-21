@@ -24,16 +24,20 @@ export class ContentModel {
         display_name: string,
         description: string,
         start_at: Date,
-        end_at: Date
+        end_at: Date,
+        redemption_method: number,
+        redemption_code: string,
     ) {
         this.uuid = uuid;
         this.type = type;
         this.name = name;
-        this.display_name = display_name,
+        this.display_name = display_name;
         this.description = description;
         this.start_at = start_at;
         this.end_at = end_at;
         this.scratcher_enabled = false;
+        this.redemption_method = redemption_method;
+        this.redemption_code = redemption_code;
     }
 
 }

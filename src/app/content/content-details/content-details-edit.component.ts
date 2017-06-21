@@ -62,13 +62,7 @@ export class ContentDetailsEditComponent implements OnInit {
         this.content = data;
         this.contentType = this.content.type;
 
-      })
-  }
-
-
-  onSubmit() {
-    console.log(this.form);
-    // this.contentApi.updateContent(this.id, this.contentForm.value)
+      });
   }
 
 }

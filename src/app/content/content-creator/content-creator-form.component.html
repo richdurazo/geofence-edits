@@ -167,18 +167,63 @@
 
                     </div>
 
-                    <div fxLayout="row"  *ngIf="contentType === 'offer'">
-                        <div fxFlex="33">
-                            <md-select placeholder="Redemption Method" name="redemption_method" [(ngModel)]="content.redemption_method">
-                                <md-option *ngFor="let method of redemptionMethods" [value]="method.value">
-                                    {{ method.viewValue }}
-                                </md-option>
-                            </md-select>
-                        </div>
+                    <!--REDEMPTION OPTIONS-->
 
-                        <div fxFlex="66" fxLayout="column" *ngIf="content.redemption_method">
+                    <div fxLayout="row" *ngIf="contentType === 'offer'">
+
+                            <div fxLayout="column" fxFlex="55">
+                                <md-select
+                                    placeholder="Redemption Method" 
+                                    name="redemption_method" 
+                                    [(ngModel)]="content.redemption_method">
+                                    <md-option *ngFor="let method of redemptionMethods" [value]="method.value">
+                                        {{ method.viewValue }}
+                                    </md-option>
+                                </md-select>
+
+                                <div fxLayout="row" *ngIf="RedemptionCodeOptions === 'manual'">
+                                    <md-select
+                                        placeholder="QR Format"
+                                        name="redemption_format"
+                                        [(ngModel)]="content.redemption_code_format"
+                                        *ngIf="content.redemption_method === 2 || content.redemption_method === 3">
+                                        <md-option *ngFor="let format of redemptionFormats" [value]="format.value">
+                                            {{ format.viewValue }}
+                                        </md-option>
+                                    </md-select>
+                                </div>
+
+                                <div fxLayout="row" fxLayoutGap="10px" class="wallet-preview" *ngIf="RedemptionCodeOptions === 'upload'">
+                                    <div class="wallet-image-container">
+                                        <app-file-uploader
+                                            [config]="walletImageConfig">
+                                        </app-file-uploader>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        <div fxLayout="column" fxFlex="55" *ngIf="content.redemption_method">
                             <div fxLayout="row" fxLayoutGap="10px">
-                                <md-input-container fxFlex="50">
+                                <md-select
+                                    placeholder="Redemption Code Options"
+                                    name="codeOption"
+                                    [(ngModel)]="RedemptionCodeOptions"
+                                    *ngIf="content.redemption_method"
+                                    fxFlex="100">
+                                    <md-option 
+                                        value="none"
+                                        *ngIf="content.redemption_method !== 2">
+                                        None
+                                    </md-option>
+                                    <md-option value="manual">Manual</md-option>
+                                    <md-option value="upload">Upload</md-option>
+                                </md-select>
+
+
+                            </div>
+                            <div fxLayout="row" fxLayoutGap="10px">
+                                <md-input-container *ngIf="RedemptionCodeOptions === 'manual'">
                                     <input
                                     mdInput
                                     name="redemption_code"
@@ -195,19 +240,9 @@
                                     </md-hint>
                                 </md-input-container>
 
-                                <md-select
-                                    placeholder="QR Format"
-                                    name="redemption_format"
-                                    [(ngModel)]="content.redemption_code_format"
-                                    *ngIf="content.redemption_method === 'store' || content.redemption_method === 'both'"
-                                    fxFlex="50">
-                                    <md-option *ngFor="let format of redemptionFormats" [value]="format.value">
-                                        {{ format.viewValue }}
-                                    </md-option>
-                                </md-select>
                             </div>
 
-                            <div fxLayout="row" fxLayoutGap="10px" *ngIf="content.redemption_method === 'online' || content.redemption_method === 'both'">
+                            <div fxLayout="row" fxLayoutGap="10px" *ngIf="content.redemption_method === 1 || content.redemption_method === 3">
                                 <md-input-container fxFlex="100">
                                     <input
                                     mdInput
@@ -225,6 +260,7 @@
                                 </md-input-container>
                             </div>
                         </div>
+
                     </div>
 
                     <div fxLayout="row" *ngIf="contentType !== 'message'">

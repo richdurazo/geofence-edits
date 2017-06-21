@@ -35,52 +35,124 @@ export class ContentCreatorComponent implements OnInit {
                     this.editMode = params['id'] != null;
             });
       if (this.editMode) {
-
           this.initForm();
-
       }
 
   }
 
   public submitForm (event) {
+      /*coppied validation pattern from v3 for now*/
+    let barcode = this.creatorForm.form.value.redemption_code;
+
+      if (this.creatorForm.form.value.codeOption === 'manual') {
+          switch (this.creatorForm.form.value.redemption_format) {
+              case 'CODABAR':
+              if (barcode.length < 3) {
+                  alert('invalid redemption code');
+                  return false;
+              }
+              if (
+                  ['a', 'A', 'b', 'B', 'c', 'C', 'd', 'D']
+                  .indexOf(barcode[0]) === -1 || ['a', 'A', 'b', 'B', 'c', 'C', 'd', 'D']
+                  .indexOf(barcode[barcode.length - 1]) === -1
+                  ) {
+                      alert('invald redemption code');
+                      return false;
+                    }
+                    break;
+                    case 'EAN_8':
+                    if (barcode.length !== 8 || isNaN(barcode)) {
+                        alert('invald redemption code');
+                        return false;
+                    }
+                    break;
+                    case 'EAN_13':
+                    if (barcode.length !== 13 || isNaN(barcode)) {
+                        alert('invald redemption code');
+                        return false;
+                    }
+                    break;
+                    case 'ITF':
+                    case 'RSS_14':
+                    if (isNaN(barcode)) {
+                        alert('invald redemption code');
+                        return false;
+                    }
+                    break;
+                    case 'RSS_EXPANDED':
+                    if (barcode.length < 14){
+                        alert('invald redemption code');
+                        return false;
+                    }
+                    break;
+                    case 'UPC_A':
+                    if (barcode.length !== 12 || isNaN(barcode)) {
+                        alert('invald redemption code');
+                        return false;
+                    }
+                    break;
+                    case 'UPC_E':
+                    if (barcode.length !== 6 || isNaN(barcode)) {
+                        alert('invald redemption code');
+                        return false;
+                    }
+                    break;
+                    case 'CODE_39':
+                    case 'CODE_93':
+                    case 'CODE_128':
+                    case 'QR_CODE':
+                    case 'AZTEC':
+                    case 'DATA_MATRIX':
+                    case 'MAXICODE':
+                    case 'PDF_417':
+                    case 'UPC_EAN_EXTENSION':
+                    if (barcode.length < 1) {
+                        alert('invald redemption code');
+                        return false;
+                    }
+                    break;
+                    case 'OTHER':
+                    break;
+                    default:
+                    alert('invalid format');
+                    return false;
+                    }
+      }
       if (!this.creatorForm.form.valid) {
           this.creatorForm.form.onSubmit(event);
           return;
       }
-      var obj = Object.assign({}, this.creatorForm.content);
-      obj.start_at = this.dateUtils.formatSQLDate(obj.start_at);
-      obj.end_at = this.dateUtils.formatSQLDate(obj.end_at);
-      console.log('submitted form', obj);
-      this.contentApi.createContent(obj)
-      .subscribe(
-          data => this.processSuccess(data)
-      )
+
+        let obj = Object.assign({}, this.creatorForm.content);
+        obj.start_at = this.dateUtils.formatSQLDate(obj.start_at);
+        obj.end_at = this.dateUtils.formatSQLDate(obj.end_at);
+
+        if (!this.editMode) {
+            this.contentApi.createContent(obj)
+            .subscribe(
+                data => this.processSuccess(data)
+            );
+        } else {
+           this.contentApi.updateContent(obj)
+            .subscribe(
+                data => this.processSuccess(data)
+            );
+       }
+
   }
 
   processSuccess (data) {
       this.router.navigate(['content', data.id]);
   }
 
-  public updateForm(event) {
-      console.log('update', event);
-  }
-
     public initForm() {
         this.contentApi.getContent(this.id)
         .subscribe(
             (data) => {
-                console.log('data', data);
-            this.creatorForm.content = data;
-            this.creatorForm.contentType = data.type;
-
-                                console.log('creatorForm', this.creatorForm.content);
-
+                this.creatorForm.content = data;
+                this.creatorForm.contentType = data.type;
+                this.creatorForm.content.redemption_code = data.redemption_method;
         });
-/*        if (this.editMode) {
-            this.contentType = "offer";
-        } else {
-            console.log(this.editMode);
-        }*/
     }
     onCancel() {
         this.router.navigate(['../'], {relativeTo: this.route});

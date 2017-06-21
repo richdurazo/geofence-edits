@@ -39,7 +39,6 @@ export class ContentDetailsComponent implements OnInit, OnDestroy {
         });
     }
     onEditContent() {
-        console.log("form data to pass", this.content)
         this.router.navigate(['edit'], {relativeTo: this.route});
     }
 

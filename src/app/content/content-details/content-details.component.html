@@ -178,7 +178,7 @@
                                     Scratcher Overlay Preview
                                 </div>
 
-                                <div class="scratcher-preview">
+                                <div class="scratcher-preview" fxLayout="column">
 
                                     <div class="scratcher-hero-image-container" fxFlex="150px;">
                                         <app-image
@@ -208,7 +208,7 @@
                                     Scratcher Preview
                                 </div>
 
-                                <div class="scratcher-preview">
+                                <div class="scratcher-preview"  fxLayout="column">
 
                                     <div class="scratcher-hero-image-container" fxFlex="150px;">
                                         <app-image
@@ -264,7 +264,7 @@
                                     Offer Preview
                                 </div>
 
-                                <div class="scratcher-preview">
+                                <div class="scratcher-preview"  fxLayout="column">
 
                                     <div class="scratcher-hero-image-container" fxFlex="150px;">
                                         <app-image
@@ -273,13 +273,17 @@
                                         </app-image>
                                     </div>
 
-                                    <div class="scratcher-body" fxFlex="300px;">
-
-                                        <h3 class="scratcher-heading">{{ content.display_name }}</h3>
-
-                                        <small>from Payless Shoes</small>
-
-                                        <p>{{ content.description }}</p>
+                                    <div class="scratcher-body" fxFlex="300px;" fxLayout="column" fxLayoutAlign="start center">
+                                        <div fxFlex="10" fxLayoutAlign="start center"></div>
+                                            <div fxLayout="row" fxFlex="10" fxLayoutAlign="start start">
+                                                <h3 class="scratcher-heading">{{ content.display_name }}</h3>
+                                            </div>
+                                            <div fxLayout="row" fxFlex="10" fxLayoutAlign="start start">
+                                                <small>from Payless Shoes</small>
+                                            </div>
+                                            <div fxLayout="row" fxFlex="10" fxLayoutAlign="start start">
+                                                <p class="scratcher-heading">{{ content.description }}</p>
+                                            </div>
 
                                     </div>
 
@@ -289,14 +293,14 @@
 
                         </md-tab-group>
 
-                        <div *ngIf="!content.scratcher_name">
+                        <div fxLayout="column" *ngIf="!content.scratcher_name">
                             <div fxFlex="49px;"></div>
 
                             <div class="creator-section-label">
                                 Offer Preview
                             </div>
 
-                            <div class="scratcher-preview">
+                            <div class="scratcher-preview" fxLayout="column">
 
                                 <div class="scratcher-hero-image-container" fxFlex="150px;">
                                     <app-image

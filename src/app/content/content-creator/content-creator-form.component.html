@@ -196,7 +196,8 @@
                                 <div fxLayout="row" fxLayoutGap="10px" class="wallet-preview" *ngIf="RedemptionCodeOptions === 'upload'">
                                     <div class="wallet-image-container">
                                         <app-file-uploader
-                                            [config]="walletImageConfig">
+                                            [config]="csvFileConfig"
+                                            [fileExists]="csvFileExists">
                                         </app-file-uploader>
                                     </div>
                                 </div>

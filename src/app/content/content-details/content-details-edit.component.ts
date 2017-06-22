@@ -60,7 +60,9 @@ export class ContentDetailsEditComponent implements OnInit {
     this.contentApi.getContent(this.id)
       .subscribe(data => {
         this.content = data;
+        console.log(data)
         this.contentType = this.content.type;
+        this.content.scratcher_enabled = true;
 
       });
   }

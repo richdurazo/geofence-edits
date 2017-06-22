@@ -67,13 +67,38 @@ export class FilestackService {
         };
     }
 
+    public createCsvConfig (key, uuid) {
+        return {
+            key: key,
+            uuid: uuid,
+            type: 'csv',
+            pickerOptions: {
+                accept: 'text/csv',
+                onFileSelected: function(file) {
+                    console.log(file.mimetype);
+                    if (file.mimetype !== 'text/csv') {
+                    throw new Error('Please select a file that is a CSV');
+                    }
+                },
+                maxFiles: 1,
+                uploadInBackground: false,
+                storeTo: {
+                    location: 's3',
+                    container: 'garythebucket',
+                    region: 'us-west-1',
+                    access: 'public',
+                }
+            }
+        };
+    }
+
 
     public generateSaveFilePath (uuid, key, type) {
         let ext;
         if (type === 'image') {
-            ext = '.jpg'
+            ext = '.jpg';
         } else {
-            ext = '.mp4'
+            ext = '.mp4';
         }
 
         return '/' + uuid[0] + '/' + uuid[1] + '/' + uuid + '/' + type + '/' + key + ext;

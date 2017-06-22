@@ -170,6 +170,10 @@ export class ContentCreatorFormComponent implements OnInit {
 
     walletImageConfig: any;
 
+    csvFileConfig: any;
+
+    csvFileExists: boolean = false;
+
     form: NgForm;
 
     constructor (
@@ -308,7 +312,7 @@ export class ContentCreatorFormComponent implements OnInit {
     public launchTerms () {
         let config = {
             data: this.content.content_term_id,
-            disableClose: true
+            disableClose: false
         };
         let dialogRef = this.dialog.open(TermsDialogComponent, config);
         dialogRef.afterClosed().subscribe(result => {
@@ -341,10 +345,23 @@ export class ContentCreatorFormComponent implements OnInit {
         this.heroScratcherImageConfig = this.filestack.createImageConfig('hero-scratcher', this.contentUuid, 2/1);
         this.overlayScratcherImageConfig = this.filestack.createImageConfig('overlay-scratcher', this.contentUuid, 9/10);
         this.walletImageConfig = this.filestack.createImageConfig('wallet', this.contentUuid, 1/1);
+        this.csvFileConfig = this.filestack.createCsvConfig('csv', this.contentUuid);
+
     }
 
     public setModelDefaults (type: string) {
-        this.content = new ContentModel(this.contentUuid, type, '', '', '', new Date(), new Date(), null, '');
+        this.content = new ContentModel(
+            this.contentUuid,
+            type,
+            '',
+            '',
+            '',
+            new Date(),
+            new Date(),
+            false,
+            null,
+            ''
+            );
     }
 
 }

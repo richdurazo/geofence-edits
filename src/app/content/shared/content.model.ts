@@ -25,6 +25,7 @@ export class ContentModel {
         description: string,
         start_at: Date,
         end_at: Date,
+        scratcher_enabled: boolean,
         redemption_method: number,
         redemption_code: string,
     ) {

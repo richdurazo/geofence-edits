@@ -25,7 +25,8 @@ export class FileUploaderComponent implements OnInit {
     constructor ( private filestack: FilestackService ) {}
 
     ngOnInit () {
-        this.mediaPath = this.config.pickerOptions.storeTo.container + this.filestack.generateSaveFilePath(this.config.uuid, this.config.key, this.config.type);
+        this.mediaPath = this.config.pickerOptions.storeTo.container +
+        this.filestack.generateSaveFilePath(this.config.uuid, this.config.key, this.config.type);
     }
 
     showUploader () {

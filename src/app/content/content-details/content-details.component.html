@@ -1,148 +1,108 @@
 <md-card class="creator-form-card content-details" fxLayout="column" fxFlex="100">
 
-        <div fxLayout="row" *ngIf="content">
+    <div fxLayout="row" *ngIf="content">
 
             <!-- Left Justified Content -->
-            <div fxLayout="column" fxFlex="55">
+            <div fxLayout="column" fxFlex="100%">
 
-                    <div>
-                        <div fxLayout="column" class="details-display-container">
-                            <label>
-                                Type
-                            </label>
-                            <div>
-                                {{ content.type }}
-                            </div>
-                        </div>
+                <div fxLayout="row" fxLayoutGap="10px">
+
+                    <div fxLayout="column" fxFlex="55">
+                        <label md-line>Type</label>
+                        <p md-line>{{ content.type }}</p>
+                        <label md-line>Title</label>
+                        <p md-line>{{ content.name }}</p>
                     </div>
 
-                    <div>
-                        <div fxLayout="column" class="details-display-container">
-                            <label>
-                                Title
-                            </label>
-                            <div>
-                                {{ content.name }}
-                            </div>
-                        </div>
+                </div>
+
+                <div fxLayout="row" fxLayoutGap="10px">
+
+                    <div fxLayout="column">
+                        <label md-line>Start Date</label>
+                        <p md-line>
+                            {{ content.start_at | date: 'M/dd/yyyy' }}
+                        </p>
                     </div>
 
-                    <div fxLayout="row" fxLayout.sm="column" fxLayoutGap="10px">
-
-                        <div fxFlex="33" fxLayout="column" class="details-display-container">
-                            <label>
-                                Start Date
-                            </label>
-                            <div>
-                                {{ content.start_at | date: 'M/dd/yyyy' }}
-                            </div>
-                        </div>
-
-                        <div fxFlex="33" fxLayout="column" class="details-display-container">
-                            <label>
-                                End Date
-                            </label>
-                            <div>
-                                {{ content.end_at | date: 'M/dd/yyyy' }}
-                            </div>
-                        </div>
-
+                    <div fxLayout="column">
+                        <label md-line>End Date</label>
+                        <p md-line>
+                            {{ content.end_at | date: 'M/dd/yyyy' }}
+                        </p>
                     </div>
 
-                    <div class="form-highlight-well details-well" fxLayout="column">
-                        <div fxLayout="row">
-                            <div fxLayout="column" >
-                          
-                                <label>
-                                    Display Title
-                                </label>
-                               
-                                    <p>{{ content.display_name }}</p>
-                                
-                            </div>
+                </div>
+
+                <div fxLayout="row" fxLayoutGap="10px">
+
+                    <div class="form-highlight-well details-well" fxLayout="column" fxFlex="100%">
+                        <label md-line>Title</label>
+                        <p md-line>{{ content.display_name }}</p>
+                        <label md-line>Description</label>
+                        <p md-line>{{ content.description }}</p>
+                    </div>
+
+                </div>
+
+                <div fxLayout="row" fxLayoutGap="5px">
+
+                    <div class="form-highlight-well details-well" fxLayout="column" fxFlex="100%">
+
+                    <div *ngIf="content.scratcher_name">
+                        
+                        <div class="column">
+                            <label md-line>Scratcher Exclamation</label>
+                            <p md-line>{{ content.scratcher_name }}</p>
                         </div>
 
-                        <div fxLayout="row">
-                            <div fxLayout="column">
-                                <label>
-                                    Description
-                                </label>
-                                    <p>{{ content.description }}</p>
-                            </div>
+                        <div class="column">
+                            <label md-line>Description</label>
+                            <p md-line>{{ content.scratcher_description }}</p>
                         </div>
 
                     </div>
 
-                    <div class="form-highlight-well details-well" fxFlex="100" *ngIf="content.scratcher_name">
-                        <div fxFlex="100" fxLayout="row">
-                            <div fxLayout="column" class="details-display-container">
-                                <label>
-                                    Scratcher Exclamation
-                                </label>
-                                <div>
-                                    {{ content.scratcher_name }}
-                                </div>
+                    <div class="row">
+
+                        <div fxLayout="column" fxFlex="50%">
+                            <div *ngIf="content.type === 'offer'">
+                                <label md-line>Redemption Method</label>
+                                <p md-line>{{ content.redemption_method }}</p>
                             </div>
                         </div>
-
-                        <div fxFlex="100" fxLayout="row">
-                            <div fxLayout="column" class="details-display-container">
-                                <label>
-                                    Scratcher Description
-                                </label>
-                                <div>
-                                    {{ content.scratcher_description }}
-                                </div>
+                        <div fxLayout="column" fxFlex="50%">
+                            <div *ngIf="content.redemption_method">
+                                <label md-line>Redemption Code</label>
+                                <p md-line>{{ content.redemption_code }}</p>
                             </div>
                         </div>
 
                     </div>
 
-                    <div fxLayout="row"  *ngIf="content.type === 'offer'">
-                        <div fxFlex="33" fxLayout="column" class="details-display-container">
-                            <label>
-                                Redemption Method
-                            </label>
-                            <div>
-                                {{ content.redemption_method }}
-                            </div>
-                        </div>
-
-                        <div fxFlex="66" fxLayout="column" *ngIf="content.redemption_method">
-                            <div fxLayout="row" fxLayoutGap="10px">
-                                <div fxFlex="50" fxLayout="column" class="details-display-container">
-                                    <label>
-                                        Redemption Code
-                                    </label>
-                                    <div>
-                                        {{ content.redemption_code }}
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div fxLayout="row" fxLayoutGap="10px" *ngIf="content.redemption_method === 'online' || content.redemption_method === 'both'">
-                                <div fxFlex="100" fxLayout="column" class="details-display-container">
-                                    <label>
-                                        Redemption URL
-                                    </label>
-                                    <div>
-                                        {{ content.redemption_url }}
-                                    </div>
-                                </div>
+                    <div fxLayout="row">
+                        <div fxLayout="column" fxFlex="100%">
+                            <div *ngIf="content.redemption_method === 1 || content.redemption_method === 3">
+                                <label md-line>Redemption URL</label>
+                                <p md-line>{{ content.redemption_url }}</p>
                             </div>
                         </div>
                     </div>
 
-                    <div fxLayout="row" *ngIf="content.type !== 'message' && content.quantity">
-                        <div fxFlex="100" fxLayout="column" class="details-display-container">
-                            <label>
-                                Limit
-                            </label>
-                            <div>
-                                {{ content.quantity }}
-                            </div>
-                        </div>
                     </div>
+
+                </div>
+
+                <div fxLayout="row" *ngIf="content.type !== 'message' && content.quantity">
+                
+                    <div fxLayout="column" fxLayout="column" fxFlex="50%">
+                        <p md-line>Limit</p>
+                    </div>
+                    <div fxLayout="column" fxLayout="column" fxFlex="50%">
+                        <p md-line>{{ content.quantity }}</p>
+                    </div>
+
+                </div>
 
             </div>
 
@@ -181,7 +141,7 @@
                                 <div class="scratcher-preview" fxLayout="column">
 
                                     <div class="scratcher-hero-image-container" fxFlex="150px;">
-                                        <app-image
+                                        <app-image class="scratcher-hero-image-container"
                                             [uuid]="content.uuid"
                                             [key]="'hero-scratcher'">
                                         </app-image>
@@ -211,7 +171,7 @@
                                 <div class="scratcher-preview"  fxLayout="column">
 
                                     <div class="scratcher-hero-image-container" fxFlex="150px;">
-                                        <app-image
+                                        <app-image class="scratcher-hero-image-container" 
                                             [uuid]="content.uuid"
                                             [key]="'hero-offer'">
                                         </app-image>
@@ -267,7 +227,7 @@
                                 <div class="scratcher-preview"  fxLayout="column">
 
                                     <div class="scratcher-hero-image-container" fxFlex="150px;">
-                                        <app-image
+                                        <app-image class="scratcher-hero-image-container"
                                             [uuid]="content.uuid"
                                             [key]="'hero-offer'">
                                         </app-image>
@@ -303,7 +263,7 @@
                             <div class="scratcher-preview" fxLayout="column">
 
                                 <div class="scratcher-hero-image-container" fxFlex="150px;">
-                                    <app-image
+                                    <app-image class="scratcher-hero-image-container"
                                         [uuid]="content.uuid"
                                         [key]="'hero-offer'">
                                     </app-image>
@@ -327,7 +287,7 @@
                         </div>
                         <div fxLayout="row" class="wallet-preview" *ngIf="content.type !== 'message'">
                             <div class="wallet-image-container">
-                                <app-image
+                                <app-image class="wallet-image-container"
                                     [uuid]="content.uuid"
                                     [key]="'wallet'">
                                 </app-image>
@@ -355,9 +315,6 @@
                 </div>
 
             </div>
-
-
-
 
         </div>
 

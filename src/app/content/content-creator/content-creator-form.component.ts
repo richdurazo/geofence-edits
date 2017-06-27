@@ -174,6 +174,8 @@ export class ContentCreatorFormComponent implements OnInit {
 
     csvFileExists: boolean = false;
 
+    companyName: string;
+
     form: NgForm;
 
     constructor (
@@ -183,7 +185,12 @@ export class ContentCreatorFormComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        this.fetchUuid();
+        if (this.editMode) {
+            this.initForm();
+        } else {
+            this.fetchUuid();
+
+        }
 
 
         this.contentTypes = [
@@ -331,13 +338,19 @@ export class ContentCreatorFormComponent implements OnInit {
     }
 
     public fetchUuid () {
-        this.uuidApi.fetchUuid()
-        .subscribe(
-            data => {
-                this.contentUuid = data.uuid;
-                this.setImageConfig();
-            }
-        )
+        if (this.editMode === false) {
+            this.uuidApi.fetchUuid()
+            .subscribe(
+                    data => {
+                    this.contentUuid = data.uuid;
+                    this.setImageConfig();
+                    this.setCsvConfig();
+                }
+            )
+        } else {
+            console.log(this.contentUuid, this.contentType, this.scratcherEnabled);
+            this.setImageConfig();
+        }
     }
 
     public setImageConfig () {
@@ -345,8 +358,9 @@ export class ContentCreatorFormComponent implements OnInit {
         this.heroScratcherImageConfig = this.filestack.createImageConfig('hero-scratcher', this.contentUuid, 2/1);
         this.overlayScratcherImageConfig = this.filestack.createImageConfig('overlay-scratcher', this.contentUuid, 9/10);
         this.walletImageConfig = this.filestack.createImageConfig('wallet', this.contentUuid, 1/1);
-        this.csvFileConfig = this.filestack.createCsvConfig('csv', this.contentUuid);
-
+    }
+    public setCsvConfig() {
+        this.csvFileConfig = this.filestack.createCsvConfig('code-csv', this.contentUuid);
     }
 
     public setModelDefaults (type: string) {
@@ -360,8 +374,14 @@ export class ContentCreatorFormComponent implements OnInit {
             new Date(),
             false,
             null,
-            ''
+            '',
+            '',
+            null
             );
+    }
+
+    initForm() {
+        console.log(this.content)
     }
 
 }

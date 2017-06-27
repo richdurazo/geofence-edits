@@ -7,7 +7,7 @@
             <!-- Left Justified Content -->
             <div fxLayout="column" fxFlex="55">
 
-                <div>
+                <div *ngIf="editMode;else other_content">
                     <md-select
                     placeholder="Type"
                     name="type"
@@ -16,12 +16,26 @@
                         <md-option *ngFor="let type of contentTypes" [value]="type.value">
                             {{ type.viewValue }}
                         </md-option>
-                    </md-select>
+                    </md-select> 
+                </div>
+                <ng-template #other_content>
+                    <div>
+                        <md-select
+                        placeholder="Type"
+                        name="type"
+                        [ngModel]="contentType"
+                        (ngModelChange)="setType($event, form)">
+                            <md-option *ngFor="let type of contentTypes" [value]="type.value">
+                                {{ type.viewValue }}
+                            </md-option>
+                        </md-select>
+                    </div>
 
                     <p *ngIf="!contentType">
                         To get started, please select a type.
                     </p>
-                </div>
+                </ng-template>
+
 
                 <div fxLayout="column" *ngIf="contentType">
 
@@ -39,6 +53,24 @@
                             <md-hint align="start">
                                 <div  *ngIf="form.submitted && name.errors !== null && name.errors.required">
                                     Please add a name
+                                </div>
+                            </md-hint>
+                        </md-input-container>
+                    </div>
+                    <div>
+                        <md-input-container fxFlex="50">
+                            <input
+                            mdInput
+                            name="company_name"
+                            type="text"
+                            placeholder="Company Name"
+                            required
+                            [(ngModel)]="content.company_name"
+                            #company_name="ngModel">
+
+                            <md-hint align="start">
+                                <div  *ngIf="form.submitted && company_name.errors !== null && company_name.errors.required">
+                                    Please add a company name
                                 </div>
                             </md-hint>
                         </md-input-container>
@@ -389,7 +421,7 @@
 
                                         <div fxLayout="row" fxFlex="10" fxLayoutAlign="center">
                                             <small>
-                                                from Payless Shoes
+                                                from {{ content.company_name }}
                                             </small>
                                         </div>
 
@@ -434,7 +466,7 @@
 
                                         <h3 class="scratcher-heading">{{ content.display_name }}</h3>
 
-                                        <small>from Payless Shoes</small>
+                                        <small>from {{ content.company_name }}</small>
 
                                         <p>{{ content.description }}</p>
 
@@ -469,7 +501,7 @@
 
                                     <h3 class="scratcher-heading">{{ content.display_name }}</h3>
 
-                                    <small>from Payless Shoes</small>
+                                    <small>from {{ content.company_name }}</small>
 
                                     <p>{{ content.description }}</p>
 

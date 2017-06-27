@@ -14,7 +14,7 @@ import { ContentModel } from '../shared/content.model';
   styleUrls: ['./content-creator.component.scss']
 })
 export class ContentCreatorComponent implements OnInit {
-    editMode = false;
+    editMode: boolean;
     id: string;
     @ViewChild(ContentCreatorFormComponent)
     public creatorForm: ContentCreatorFormComponent;
@@ -35,6 +35,7 @@ export class ContentCreatorComponent implements OnInit {
                     this.editMode = params['id'] != null;
             });
       if (this.editMode) {
+          this.creatorForm.editMode = true;
           this.initForm();
       }
 
@@ -128,11 +129,13 @@ export class ContentCreatorComponent implements OnInit {
         obj.end_at = this.dateUtils.formatSQLDate(obj.end_at);
 
         if (!this.editMode) {
+            console.log('submited form', obj);
             this.contentApi.createContent(obj)
             .subscribe(
                 data => this.processSuccess(data)
             );
         } else {
+            console.log('update form', obj);
            this.contentApi.updateContent(obj)
             .subscribe(
                 data => this.processSuccess(data)
@@ -149,9 +152,21 @@ export class ContentCreatorComponent implements OnInit {
         this.contentApi.getContent(this.id)
         .subscribe(
             (data) => {
+                console.log('we are in the content creator form component', data)
                 this.creatorForm.content = data;
+                this.creatorForm.contentUuid =  data.uuid;
                 this.creatorForm.contentType = data.type;
                 this.creatorForm.content.redemption_code = data.redemption_method;
+                if (this.creatorForm.content.quantity) {
+                    this.creatorForm.limitEnabled = true;
+                }
+                if (this.creatorForm.content.scratcher_name) {
+                    this.creatorForm.scratcherEnabled = true;
+                    this.creatorForm.content.scratcher_enabled = true;
+                    this.creatorForm.setImageConfig();
+                    this.creatorForm.heroOfferImageExists = true;
+                    this.creatorForm.heroScratcherImageExists = true;
+                }
         });
     }
     onCancel() {

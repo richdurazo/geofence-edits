@@ -16,6 +16,7 @@ export class ContentModel {
     start_at: Date;
     end_at: Date;
     content_term_id: number;
+    company_name: string;
 
     constructor (
         uuid: string,
@@ -28,6 +29,9 @@ export class ContentModel {
         scratcher_enabled: boolean,
         redemption_method: number,
         redemption_code: string,
+        company_name: string,
+        content_term_id: number,
+
     ) {
         this.uuid = uuid;
         this.type = type;
@@ -39,6 +43,9 @@ export class ContentModel {
         this.scratcher_enabled = false;
         this.redemption_method = redemption_method;
         this.redemption_code = redemption_code;
+        this.company_name = company_name;
+        this.content_term_id = content_term_id;
+
     }
 
 }

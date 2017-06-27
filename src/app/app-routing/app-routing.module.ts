@@ -90,7 +90,7 @@ const appRoutes: Routes = [
                     },
                     {
                         path: ':id/edit',
-                        component: ContentDetailsEditComponent
+                        component: ContentCreatorComponent
                     },
                 ]
             },

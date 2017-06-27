@@ -10,7 +10,7 @@ export class FilestackService {
     constructor() { }
 
     public initFilestack () {
-        this.uploader = filestack.init("AfK7thvLTRoyjflG6yqz3z");
+        this.uploader = filestack.init('AfK7thvLTRoyjflG6yqz3z');
     }
 
     public pick (config) {
@@ -73,13 +73,7 @@ export class FilestackService {
             uuid: uuid,
             type: 'csv',
             pickerOptions: {
-                accept: 'text/csv',
-                onFileSelected: function(file) {
-                    console.log(file.mimetype);
-                    if (file.mimetype !== 'text/csv') {
-                    throw new Error('Please select a file that is a CSV');
-                    }
-                },
+                accept: ['.csv'],
                 maxFiles: 1,
                 uploadInBackground: false,
                 storeTo: {
@@ -87,6 +81,7 @@ export class FilestackService {
                     container: 'garythebucket',
                     region: 'us-west-1',
                     access: 'public',
+                    path: this.generateSaveFilePath(uuid, key, 'csv')
                 }
             }
         };
@@ -97,10 +92,11 @@ export class FilestackService {
         let ext;
         if (type === 'image') {
             ext = '.jpg';
-        } else {
+        } else if (type === 'video') {
             ext = '.mp4';
+        } else if (type === 'csv') {
+            ext = '.csv';
         }
-
         return '/' + uuid[0] + '/' + uuid[1] + '/' + uuid + '/' + type + '/' + key + ext;
     }
 

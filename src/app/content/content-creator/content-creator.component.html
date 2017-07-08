@@ -1,14 +1,20 @@
-<h1 class="page-heading" *ngIf="!editMode">
+<h1 class="page-heading" *ngIf="!editMode && !viewMode">
     Create
+</h1>
+
+<h1 class="page-heading" *ngIf="viewMode">
+    Details
 </h1>
 
 <h1 class="page-heading" *ngIf="editMode">
     Edit 
 </h1>
 
+
 <md-card class="creator-form-card" fxLayout="column">
 
     <app-content-creator-form></app-content-creator-form>
+
 
     <div fxLayoutAlign="end" fxFlex="100" *ngIf="creatorForm.contentType">
         <button
@@ -17,7 +23,7 @@
             md-raised-button
             color="primary"
             (click)="submitForm($event)"
-            *ngIf="!editMode">
+            *ngIf="!editMode && !viewMode">
             Create
         </button>
         <button
@@ -37,6 +43,15 @@
             (click)="submitForm($event)"
             *ngIf="editMode">
             Update
+        </button>
+        <button
+            type="button"
+            class="common-form-submit"
+            md-raised-button
+            color="primary"
+            (click)="onEditContent()"
+            *ngIf="viewMode">
+            Edit
         </button>
     </div>
 

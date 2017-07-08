@@ -14,139 +14,145 @@ import { ContentModel } from '../shared/content.model';
   styleUrls: ['./content-creator.component.scss']
 })
 export class ContentCreatorComponent implements OnInit {
-    editMode: boolean;
+    editMode: boolean = false;
+    viewMode: boolean;
     id: string;
     @ViewChild(ContentCreatorFormComponent)
     public creatorForm: ContentCreatorFormComponent;
 
-  constructor(
-      private dateUtils: DateUtilsService,
-      private contentApi: ContentApiService,
-      private router: Router,
-     private route: ActivatedRoute,
+    constructor(
+        private dateUtils: DateUtilsService,
+        private contentApi: ContentApiService,
+        private router: Router,
+        private route: ActivatedRoute,
+        ) { }
 
-  ) { }
-
-  ngOnInit() {
+    ngOnInit() {
+    
         this.route.params
-            .subscribe(
-                (params: Params) => {
-                    this.id = params['id'];
-                    this.editMode = params['id'] != null;
-            });
-      if (this.editMode) {
-          this.creatorForm.editMode = true;
-          this.initForm();
-      }
+                .subscribe(
+                    (params: Params) => {
+                        this.id = params['id'];
+                        this.viewMode = params['id'] != null;
+                        console.log('viewMode', this.viewMode)
+                                                console.log('editMode', this.editMode)
 
-  }
+                });
+        if (this.viewMode) {
+            this.creatorForm.viewMode = true;
+            this.initForm();
+        }
 
-  public submitForm (event) {
-      /*coppied validation pattern from v3 for now*/
-    let barcode = this.creatorForm.form.value.redemption_code;
+    }
 
-      if (this.creatorForm.form.value.codeOption === 'manual') {
-          switch (this.creatorForm.form.value.redemption_format) {
-              case 'CODABAR':
-              if (barcode.length < 3) {
-                  alert('invalid redemption code');
-                  return false;
-              }
-              if (
-                  ['a', 'A', 'b', 'B', 'c', 'C', 'd', 'D']
-                  .indexOf(barcode[0]) === -1 || ['a', 'A', 'b', 'B', 'c', 'C', 'd', 'D']
-                  .indexOf(barcode[barcode.length - 1]) === -1
-                  ) {
-                      alert('invald redemption code');
-                      return false;
-                    }
-                    break;
-                    case 'EAN_8':
-                    if (barcode.length !== 8 || isNaN(barcode)) {
-                        alert('invald redemption code');
-                        return false;
-                    }
-                    break;
-                    case 'EAN_13':
-                    if (barcode.length !== 13 || isNaN(barcode)) {
-                        alert('invald redemption code');
-                        return false;
-                    }
-                    break;
-                    case 'ITF':
-                    case 'RSS_14':
-                    if (isNaN(barcode)) {
-                        alert('invald redemption code');
-                        return false;
-                    }
-                    break;
-                    case 'RSS_EXPANDED':
-                    if (barcode.length < 14){
-                        alert('invald redemption code');
-                        return false;
-                    }
-                    break;
-                    case 'UPC_A':
-                    if (barcode.length !== 12 || isNaN(barcode)) {
-                        alert('invald redemption code');
-                        return false;
-                    }
-                    break;
-                    case 'UPC_E':
-                    if (barcode.length !== 6 || isNaN(barcode)) {
-                        alert('invald redemption code');
-                        return false;
-                    }
-                    break;
-                    case 'CODE_39':
-                    case 'CODE_93':
-                    case 'CODE_128':
-                    case 'QR_CODE':
-                    case 'AZTEC':
-                    case 'DATA_MATRIX':
-                    case 'MAXICODE':
-                    case 'PDF_417':
-                    case 'UPC_EAN_EXTENSION':
-                    if (barcode.length < 1) {
-                        alert('invald redemption code');
-                        return false;
-                    }
-                    break;
-                    case 'OTHER':
-                    break;
-                    default:
-                    alert('invalid format');
+    public submitForm(event) {
+        console.log(event)
+        console.log(this.editMode)
+        console.log(this.creatorForm.content)
+        let barcode = this.creatorForm.form.value.redemption_code;
+
+        if (this.creatorForm.form.value.codeOption === 'manual') {
+            switch (this.creatorForm.form.value.redemption_format) {
+                case 'CODABAR':
+                if (barcode.length < 3) {
+                    alert('invalid redemption code');
                     return false;
-                    }
-      }
-      if (!this.creatorForm.form.valid) {
-          this.creatorForm.form.onSubmit(event);
-          return;
-      }
+                }
+                if (
+                    ['a', 'A', 'b', 'B', 'c', 'C', 'd', 'D']
+                    .indexOf(barcode[0]) === -1 || ['a', 'A', 'b', 'B', 'c', 'C', 'd', 'D']
+                    .indexOf(barcode[barcode.length - 1]) === -1
+                    ) {
+                        alert('invald redemption code');
+                        return false;
+                        }
+                        break;
+                        case 'EAN_8':
+                        if (barcode.length !== 8 || isNaN(barcode)) {
+                            alert('invald redemption code');
+                            return false;
+                        }
+                        break;
+                        case 'EAN_13':
+                        if (barcode.length !== 13 || isNaN(barcode)) {
+                            alert('invald redemption code');
+                            return false;
+                        }
+                        break;
+                        case 'ITF':
+                        case 'RSS_14':
+                        if (isNaN(barcode)) {
+                            alert('invald redemption code');
+                            return false;
+                        }
+                        break;
+                        case 'RSS_EXPANDED':
+                        if (barcode.length < 14){
+                            alert('invald redemption code');
+                            return false;
+                        }
+                        break;
+                        case 'UPC_A':
+                        if (barcode.length !== 12 || isNaN(barcode)) {
+                            alert('invald redemption code');
+                            return false;
+                        }
+                        break;
+                        case 'UPC_E':
+                        if (barcode.length !== 6 || isNaN(barcode)) {
+                            alert('invald redemption code');
+                            return false;
+                        }
+                        break;
+                        case 'CODE_39':
+                        case 'CODE_93':
+                        case 'CODE_128':
+                        case 'QR_CODE':
+                        case 'AZTEC':
+                        case 'DATA_MATRIX':
+                        case 'MAXICODE':
+                        case 'PDF_417':
+                        case 'UPC_EAN_EXTENSION':
+                        if (barcode.length < 1) {
+                            alert('invald redemption code');
+                            return false;
+                        }
+                        break;
+                        case 'OTHER':
+                        break;
+                        default:
+                        alert('invalid format');
+                        return false;
+                        }
+        }
+        if (!this.creatorForm.form.valid) {
+            this.creatorForm.form.onSubmit(event);
+            return;
+        }
 
-        let obj = Object.assign({}, this.creatorForm.content);
-        obj.start_at = this.dateUtils.formatSQLDate(obj.start_at);
-        obj.end_at = this.dateUtils.formatSQLDate(obj.end_at);
+            let obj = Object.assign({}, this.creatorForm.content);
+            obj.start_at = this.dateUtils.formatSQLDate(obj.start_at);
+            obj.end_at = this.dateUtils.formatSQLDate(obj.end_at);
 
-        if (!this.editMode) {
-            console.log('submited form', obj);
-            this.contentApi.createContent(obj)
-            .subscribe(
-                data => this.processSuccess(data)
-            );
-        } else {
-            console.log('update form', obj);
-           this.contentApi.updateContent(obj)
-            .subscribe(
-                data => this.processSuccess(data)
-            );
-       }
+            if (!this.editMode) {
+                console.log('submited form', obj);
+                this.contentApi.createContent(obj)
+                .subscribe(
+                    data => this.processSuccess(data)
+                );
+            } else {
+                console.log('update form', obj);
+            this.contentApi.updateContent(obj)
+                .subscribe(
+                    data => this.processSuccess(data)
+                );
+        }
 
-  }
+    }
 
-  processSuccess (data) {
-      this.router.navigate(['content', data.id]);
-  }
+    processSuccess (data) {
+        this.router.navigate(['content', data.id]);
+    }
 
     public initForm() {
         this.contentApi.getContent(this.id)
@@ -167,10 +173,24 @@ export class ContentCreatorComponent implements OnInit {
                     this.creatorForm.heroOfferImageExists = true;
                     this.creatorForm.heroScratcherImageExists = true;
                 }
+                if (!data.redemption_code) {
+                    this.creatorForm.codeOption = 'none';
+                } else {
+                    this.creatorForm.codeOption = 'manual';
+                }
         });
     }
     onCancel() {
-        this.router.navigate(['../'], {relativeTo: this.route});
+        this.creatorForm.editMode = false;
+        this.creatorForm.viewMode = true;
+        this.editMode = false;
+        this.viewMode = true;    
+    }
+    onEditContent() {
+        this.creatorForm.editMode = true;
+        this.creatorForm.viewMode = false;
+        this.editMode = true;
+        this.viewMode = false;
     }
 
 }

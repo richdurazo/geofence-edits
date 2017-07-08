@@ -1,6 +1,27 @@
-<md-card class="creator-form-card content-details" fxLayout="column" fxFlex="100">
+<md-card fxLayout="column" fxFlex="100" *ngIf="content">
+        <div class="menu-details" fxLayout="row" fxLayoutAlign="end end">
+            <div class="menu-wrapper" fxFlex="5" fxLayoutAlign="end end">
+                <md-menu #appMenu="mdMenu">
+                <button
+                    md-menu-item
+                    (click)="onEditContent()"
+                    *ngIf="!editing">
+                    Edit
+                </button>
+                <button
+                    md-menu-item
+                    (click)="removeItem()">
+                        Remove
+                    </button>
+                </md-menu>
 
-    <div fxLayout="row" *ngIf="content">
+                <button md-icon-button [mdMenuTriggerFor]="appMenu">
+                <md-icon>more_vert</md-icon>
+                </button>
+            </div>
+        </div>
+    <div class="creator-form-card" fxLayout="row" *ngIf="content">
+
 
             <!-- Left Justified Content -->
             <div fxLayout="column" fxFlex="100%">
@@ -12,7 +33,7 @@
                         <p md-line>{{ content.type }}</p>
                         <label md-line>Title</label>
                         <p md-line>{{ content.name }}</p>
-                    </div>
+                    </div> 
 
                 </div>
 
@@ -68,7 +89,7 @@
                         <div fxLayout="column" fxFlex="50%">
                             <div *ngIf="content.type === 'offer'">
                                 <label md-line>Redemption Method</label>
-                                <p md-line>{{ content.redemption_method }}</p>
+                                <p md-line>{{ redemptionMethod }}</p>
                             </div>
                         </div>
                         <div fxLayout="column" fxFlex="50%">
@@ -194,6 +215,8 @@
                                         </h2>
 
                                         <div fxLayout="row" fxFlex="10" fxLayoutAlign="center">
+                                        </div>
+                                        <div fxLayout="row" fxFlex="10" fxLayoutAlign="center">
                                             <small>
                                                 from Payless Shoes
                                             </small>
@@ -306,7 +329,7 @@
                                 type="button"
                                 name="button"
                                 md-raised-button
-                                (click)="launchTerms()">
+                                (click)="launchTermsView()">
                                 Terms and Conditions
                             </button>
                         </div>
@@ -318,7 +341,7 @@
 
         </div>
 
-            <div fxLayout="row" fxLayoutAlign="end end"  >
+            <div fxLayout="row" fxLayoutAlign="end end">
               
                     <button
                         type="button"

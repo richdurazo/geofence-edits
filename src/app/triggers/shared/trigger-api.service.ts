@@ -17,6 +17,11 @@ export class TriggerApiService {
       .map(res => res.json())
   }
 
+    getDeliveryPreset (id) {
+      return this.authCustomHttp.get(AppSettings.API_ROOT + '/trigger/' + id)
+      .map(res => res.json())
+  }
+
   getTriggerContentGroups (id) {
       return this.authCustomHttp.get(AppSettings.API_ROOT + '/trigger/' + id + '/content-group')
       .map(res => res.json())
@@ -27,18 +32,23 @@ export class TriggerApiService {
       .map(res => res.json())
   }
 
+  createTouchTrigger (data) {
+      return this.authCustomHttp.post(AppSettings.API_ROOT + '/touch', data)
+      .map(res => res.json())
+  }
+
   deleteTrigger (data) {
       return this.authCustomHttp.delete(AppSettings.API_ROOT + '/trigger/' + data.id)
       .map(res => res.json())
   }
 
   attachContentGroup (trigger_id, content_group_id) {
-      return this.authCustomHttp.post(AppSettings.API_ROOT + '/trigger/' + trigger_id + '/content-group/' + content_group_id, {})
+      return this.authCustomHttp.post(AppSettings.API_ROOT + '/delivery-preset/'+ '/trigger/' + trigger_id + '/content-group/' + content_group_id, {})
       .map(res => res.json())
   }
 
-  getDeliveryModes() {
-      return this.authCustomHttp.get(AppSettings.API_ROOT + '/delivery-mode')
+  getDeliveryPresets() {
+      return this.authCustomHttp.get(AppSettings.API_ROOT + '/delivery-preset')
       .map(res => res.json())
     }
 

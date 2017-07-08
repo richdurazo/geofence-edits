@@ -7,7 +7,6 @@ import { FilestackService } from '../../shared/filestack.service';
 import { UuidApiService } from '../../shared/uuid-api.service';
 import { TriggerApiService } from '../shared/trigger-api.service';
 import { TriggerModel } from '../shared/trigger.model';
-import { DeliveryModeModel } from '../shared/delivery-mode.model';
 
 @Component({
     selector: 'app-trigger-creator-form',
@@ -31,10 +30,6 @@ export class TriggerCreatorFormComponent implements OnInit {
     triggerCampaign: CampaignModel;
 
     campaigns: CampaignModel[];
-
-    deliveryModes: DeliveryModeModel[];
-
-    deliveryMode: DeliveryModeModel;
 
     triggerTypes: [
         {
@@ -65,7 +60,6 @@ export class TriggerCreatorFormComponent implements OnInit {
 
     ngOnInit() {
         this.fetchUuid();
-        this.getDeliveryModes();
 
         if (!this.parentCampaign) {
             this.getCampaigns();
@@ -102,15 +96,6 @@ export class TriggerCreatorFormComponent implements OnInit {
         )
     }
 
-    public getDeliveryModes() {
-        this.triggerApi.getDeliveryModes()
-        .subscribe(
-            data => {
-                this.deliveryModes = data;
-            }
-        );
-    }
-
     public submitForm (form) {
         if (!form.valid) {
             return;
@@ -133,7 +118,7 @@ export class TriggerCreatorFormComponent implements OnInit {
         this.triggerType = event;
 
         if (!this.trigger) {
-            this.trigger = new TriggerModel('', event, this.triggerUuid);
+            this.trigger = new TriggerModel('', event, this.triggerUuid, this.trigger.campaign_id, this.trigger.delivery_preset_id);
         } else {
             this.trigger.type = this.triggerType;
         }
@@ -154,10 +139,6 @@ export class TriggerCreatorFormComponent implements OnInit {
                 this.campaigns = data;
             }
         );
-    }
-
-    public setDeliveryMode(data) {
-        this.trigger.delivery_mode_id = data.id;
     }
 
 }

@@ -45,7 +45,6 @@ describe('TriggerCreatorFormComponent', () => {
         uuidApi = TestBed.get(UuidApiService);
         campaignApi = TestBed.get(CampaignApiService);
         spyOn(uuidApi, 'fetchUuid').and.returnValue(Observable.of({uuid: 'foo'}));
-        spyOn(triggerApi, 'getDeliveryModes').and.returnValue(Observable.of([{foo: 'bar'}, {hay: 'guyz'}]));
         spyOn(campaignApi, 'getCampaigns').and.returnValue(Observable.of([{uuid: 'foo'}, {uuid: 'bar'}]));
         spyOn(campaignApi, 'getCampaignTriggers').and.returnValue(Observable.of([{uuid: 'foo'}, {uuid: 'bar'}]));
     }));
@@ -72,24 +71,8 @@ describe('TriggerCreatorFormComponent', () => {
             expect(component.fetchUuid).toHaveBeenCalled();
         });
 
-        it('should call getDeliveryModes', () => {
-            spyOn(component, 'getDeliveryModes');
-            component.ngOnInit();
-            expect(component.getDeliveryModes).toHaveBeenCalled();
-        });
     });
 
-    describe('getDeliveryModes', () => {
-      it('should have a getContent function', () => {
-          expect(component.getDeliveryModes).toBeTruthy();
-          expect(typeof component.getDeliveryModes).toEqual('function');
-      });
-
-      it('should call the triggerApi', () => {
-          component.getDeliveryModes();
-          expect(triggerApi.getDeliveryModes).toHaveBeenCalled();
-      });
-    });
 
     describe('submitForm', () => {
         it('should have a submitForm function', () => {
@@ -108,10 +91,10 @@ describe('TriggerCreatorFormComponent', () => {
               id: 1,
               campaign_id: 1,
               uuid: '',
-              delivery_mode_id: 1
+              delivery_preset_id: 1
             };
           component.submitForm({valid: true});
-          expect(triggerApi.createTrigger).toHaveBeenCalledWith({ name: '', type: '', id: 1, campaign_id: 1, uuid: '', delivery_mode_id: 1 });
+          expect(triggerApi.createTrigger).toHaveBeenCalledWith({ name: '', type: '', id: 1, campaign_id: 1, uuid: '', delivery_preset_id: 1 });
           expect(component.processSuccess).toHaveBeenCalledWith({ foo: 'bar' });
         });
     });

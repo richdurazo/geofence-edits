@@ -95,6 +95,9 @@ body {
     }
 
     // COMMON UTILITIES
+    fieldset {
+    border: 0;
+}
     .relative {
         position: relative;
     }

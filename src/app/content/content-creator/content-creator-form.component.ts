@@ -18,6 +18,7 @@ export class ContentCreatorFormComponent implements OnInit {
 
     content: ContentModel;
     editMode = false;
+    viewMode = false;
 
     contentTypes: [
         {
@@ -185,7 +186,9 @@ export class ContentCreatorFormComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        if (this.editMode) {
+        console.log('edit', this.editMode)
+        console.log('view', this.viewMode)
+        if (this.editMode || this.viewMode) {
             this.initForm();
         } else {
             this.fetchUuid();
@@ -338,7 +341,7 @@ export class ContentCreatorFormComponent implements OnInit {
     }
 
     public fetchUuid () {
-        if (this.editMode === false) {
+        if (this.editMode === false || this.viewMode === false) {
             this.uuidApi.fetchUuid()
             .subscribe(
                     data => {
@@ -348,7 +351,6 @@ export class ContentCreatorFormComponent implements OnInit {
                 }
             )
         } else {
-            console.log(this.contentUuid, this.contentType, this.scratcherEnabled);
             this.setImageConfig();
         }
     }

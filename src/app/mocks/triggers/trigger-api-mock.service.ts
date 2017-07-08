@@ -21,8 +21,4 @@ export class TriggerApiMockService {
       return false;
     }
 
-    getDeliveryModes() {
-      return false;
-    }
-
 }

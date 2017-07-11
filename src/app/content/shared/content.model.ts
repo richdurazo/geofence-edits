@@ -20,7 +20,6 @@ export class ContentModel {
 
     constructor (
         uuid: string,
-        id: number,
         type: string,
         name: string,
         display_name: string,
@@ -30,14 +29,10 @@ export class ContentModel {
         scratcher_enabled: boolean,
         redemption_method: number,
         redemption_code: string,
-        company_name: string,
         content_term_id: number,
-        redemption_code_format?: any,
-
 
     ) {
         this.uuid = uuid;
-        this.id = id;
         this.type = type;
         this.name = name;
         this.display_name = display_name;
@@ -47,10 +42,7 @@ export class ContentModel {
         this.scratcher_enabled = false;
         this.redemption_method = redemption_method;
         this.redemption_code = redemption_code;
-        this.company_name = company_name;
         this.content_term_id = content_term_id;
-        this.redemption_code_format = redemption_code_format;
-
     }
 
 }

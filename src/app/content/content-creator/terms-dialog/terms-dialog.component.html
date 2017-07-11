@@ -39,11 +39,19 @@
                 class="common-form-submit"
                 md-raised-button
                 color="primary"
-                fxFlex="50">
+                fxFlex="100">
                 Update Terms
             </button>
+            <button
+                type="button"
+                class="common-form-submit"
+                md-button
+                color="primary"
+                (click)="dialogRef.close(true)"
+                fxFlex="100">
+                Cancel
+            </button>
         </div>
-
     </form>
 
 </div>

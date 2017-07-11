@@ -10,22 +10,27 @@
     Edit 
 </h1>
 
-
 <md-card  fxLayout="column">
-        <div class="menu-details" fxLayout="row" fxLayoutAlign="end end">
+        <div class="menu-details" fxLayout="row" fxLayoutAlign="end end" *ngIf="viewMode || editMode">
             <div class="menu-wrapper" fxFlex="5" fxLayoutAlign="end end">
                 <md-menu #appMenu="mdMenu">
-                <button
-                    md-menu-item
-                    (click)="onEditContent()"
-                    *ngIf="!editMode">
-                    Edit
-                </button>
-                <button
-                    md-menu-item
-                    (click)="launchConfirmRemove()"
-                    *ngIf="editMode">
+                    <button
+                        md-menu-item
+                        (click)="onEditContent()"
+                        *ngIf="viewMode">
+                        Edit
+                    </button>
+                    <button
+                        md-menu-item
+                        (click)="launchConfirmRemove()"
+                        *ngIf="editMode">
                         Remove
+                    </button>
+                    <button
+                        md-menu-item
+                        (click)="onCancel()"
+                        *ngIf="editMode">
+                        Cancel
                     </button>
                 </md-menu>
 
@@ -71,7 +76,7 @@
             class="common-form-submit"
             md-raised-button
             color="primary"
-            (click)="onEditContent($ngForm)"
+            (click)="onEditContent()"
             *ngIf="viewMode">
             Edit
         </button>

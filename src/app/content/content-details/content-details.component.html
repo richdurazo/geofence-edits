@@ -1,139 +1,9 @@
-<md-card fxLayout="column" fxFlex="100" *ngIf="content">
-        <div class="menu-details" fxLayout="row" fxLayoutAlign="end end">
-            <div class="menu-wrapper" fxFlex="5" fxLayoutAlign="end end">
-                <md-menu #appMenu="mdMenu">
-                <button
-                    md-menu-item
-                    (click)="onEditContent()"
-                    *ngIf="!editing">
-                    Edit
-                </button>
-                <button
-                    md-menu-item
-                    (click)="removeItem()">
-                        Remove
-                    </button>
-                </md-menu>
+            <div fxLayout="column">
 
-                <button md-icon-button [mdMenuTriggerFor]="appMenu">
-                <md-icon>more_vert</md-icon>
-                </button>
-            </div>
-        </div>
-    <div class="creator-form-card" fxLayout="row" *ngIf="content">
-
-
-            <!-- Left Justified Content -->
-            <div fxLayout="column" fxFlex="100%">
-
-                <div fxLayout="row" fxLayoutGap="10px">
-
-                    <div fxLayout="column" fxFlex="55">
-                        <label md-line>Type</label>
-                        <p md-line>{{ content.type }}</p>
-                        <label md-line>Title</label>
-                        <p md-line>{{ content.name }}</p>
-                    </div> 
-
-                </div>
-
-                <div fxLayout="row" fxLayoutGap="10px">
-
-                    <div fxLayout="column">
-                        <label md-line>Start Date</label>
-                        <p md-line>
-                            {{ content.start_at | date: 'M/dd/yyyy' }}
-                        </p>
-                    </div>
-
-                    <div fxLayout="column">
-                        <label md-line>End Date</label>
-                        <p md-line>
-                            {{ content.end_at | date: 'M/dd/yyyy' }}
-                        </p>
-                    </div>
-
-                </div>
-
-                <div fxLayout="row" fxLayoutGap="10px">
-
-                    <div class="form-highlight-well details-well" fxLayout="column" fxFlex="100%">
-                        <label md-line>Title</label>
-                        <p md-line>{{ content.display_name }}</p>
-                        <label md-line>Description</label>
-                        <p md-line>{{ content.description }}</p>
-                    </div>
-
-                </div>
-
-                <div fxLayout="row" fxLayoutGap="5px">
-
-                    <div class="form-highlight-well details-well" fxLayout="column" fxFlex="100%">
-
-                    <div *ngIf="content.scratcher_name">
-                        
-                        <div class="column">
-                            <label md-line>Scratcher Exclamation</label>
-                            <p md-line>{{ content.scratcher_name }}</p>
-                        </div>
-
-                        <div class="column">
-                            <label md-line>Description</label>
-                            <p md-line>{{ content.scratcher_description }}</p>
-                        </div>
-
-                    </div>
-
-                    <div class="row">
-
-                        <div fxLayout="column" fxFlex="50%">
-                            <div *ngIf="content.type === 'offer'">
-                                <label md-line>Redemption Method</label>
-                                <p md-line>{{ redemptionMethod }}</p>
-                            </div>
-                        </div>
-                        <div fxLayout="column" fxFlex="50%">
-                            <div *ngIf="content.redemption_method">
-                                <label md-line>Redemption Code</label>
-                                <p md-line>{{ content.redemption_code }}</p>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div fxLayout="row">
-                        <div fxLayout="column" fxFlex="100%">
-                            <div *ngIf="content.redemption_method === 1 || content.redemption_method === 3">
-                                <label md-line>Redemption URL</label>
-                                <p md-line>{{ content.redemption_url }}</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    </div>
-
-                </div>
-
-                <div fxLayout="row" *ngIf="content.type !== 'message' && content.quantity">
-                
-                    <div fxLayout="column" fxLayout="column" fxFlex="50%">
-                        <p md-line>Limit</p>
-                    </div>
-                    <div fxLayout="column" fxLayout="column" fxFlex="50%">
-                        <p md-line>{{ content.quantity }}</p>
-                    </div>
-
-                </div>
-
-            </div>
-
-            <!-- Right Justified Content -->
-            <div fxLayout="column" fxFlex="45"  *ngIf="content.type">
-
-                <div fxLayout="row" fxLayoutAlign="end">
+                <div fxLayout="row" fxLayoutAlign="end" *ngIf="content">
                     <div fxFlex="50" fxLayout="column" class="scratcher-toggle-container">
-                        <!-- <div fxLayout="row" fxLayoutAlign="center">
-                            <label class="creator-section-label" for="scratcher_enabled">
+                    <div fxLayout="row" fxLayoutAlign="center">
+                           <label class="creator-section-label" for="scratcher_enabled">
                                 Enable Scratcher
                             </label>
                         </div>
@@ -145,7 +15,7 @@
                                 [labelPosition]="'before'"
                                 [(ngModel)]="scratcherEnabled">
                             </md-slide-toggle>
-                        </div> -->
+                        </div> 
                     </div>
 
                     <div class="right-column" fxLayout="column">
@@ -214,7 +84,7 @@
                                             </span>
                                         </h2>
 
-                                        <div fxLayout="row" fxFlex="10" fxLayoutAlign="center">
+                                        <div fxLayout="row" fxFlex="20" fxLayoutAlign="center">
                                         </div>
                                         <div fxLayout="row" fxFlex="10" fxLayoutAlign="center">
                                             <small>
@@ -329,7 +199,7 @@
                                 type="button"
                                 name="button"
                                 md-raised-button
-                                (click)="launchTermsView()">
+                                disabled>
                                 Terms and Conditions
                             </button>
                         </div>
@@ -337,20 +207,5 @@
                     </div>
                 </div>
 
-            </div>
 
         </div>
-
-            <div fxLayout="row" fxLayoutAlign="end end">
-              
-                    <button
-                        type="button"
-                        class="common-form-submit"
-                        md-raised-button
-                        color="primary"
-                        (click)="onEditContent()">
-                        Edit
-                    </button>
-        
-            </div>
-</md-card>

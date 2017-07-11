@@ -65,7 +65,6 @@ import { ContentRowComponent } from './content/content-row/content-row.component
 import { ContentSelectorComponent } from './content/content-selector/content-selector.component';
 import { ChartComponent } from './shared/chart/chart.component';
 import { TargetTypeaheadComponent } from './shared/target-typeahead/target-typeahead.component';
-import { ContentDetailsEditComponent } from './content/content-details/content-details-edit.component';
 import { DialogConfirmComponent } from './shared/dialog-confirm/dialog-confirm.component';
 
 @NgModule({
@@ -108,7 +107,6 @@ import { DialogConfirmComponent } from './shared/dialog-confirm/dialog-confirm.c
         ContentSelectorComponent,
         ChartComponent,
         TargetTypeaheadComponent,
-        ContentDetailsEditComponent,
         DialogConfirmComponent
     ],
     imports: [

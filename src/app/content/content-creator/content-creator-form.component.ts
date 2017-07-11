@@ -329,7 +329,7 @@ export class ContentCreatorFormComponent implements OnInit {
         };
         let dialogRef = this.dialog.open(TermsDialogComponent, config);
         dialogRef.afterClosed().subscribe(result => {
-            this.content.content_term_id = result.id;
+            this.content.content_term_id = result.id || this.content.content_term_id;
         });
     }
 
@@ -367,23 +367,6 @@ export class ContentCreatorFormComponent implements OnInit {
     }
 
     public setModelDefaults (type: string) {
-            this.content = new ContentModel(
-                this.contentUuid,
-                null,
-                type,
-                '',
-                '',
-                '',
-                new Date(),
-                new Date(),
-                false,
-                null,
-                '',
-                '',
-                null,
-                ''
-                );
-        }
-
-
+            this.content = new ContentModel(this.contentUuid, type, '', '', '', new Date(), new Date(), false, null, '', null);
+    }
 }

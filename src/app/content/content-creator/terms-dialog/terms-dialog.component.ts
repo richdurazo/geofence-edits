@@ -41,14 +41,11 @@ export class TermsDialogComponent implements OnInit {
             this.termsApi.createTerms(this.model)
             .subscribe(data => {
                 this.processSuccess(data);
-                console.log('new', data)
-
             });
         } else {
             this.termsApi.updateTerms(this.model)
             .subscribe(data => {
                 this.processSuccess(this.model);
-                console.log('edit', data)
             });
         }
     }

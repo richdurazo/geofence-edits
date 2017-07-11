@@ -1,6 +1,5 @@
 import { MdDialog } from '@angular/material';
 import { DialogConfirmComponent } from './../../shared/dialog-confirm/dialog-confirm.component';
-import { NgForm, FormGroup } from '@angular/forms';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
@@ -10,12 +9,12 @@ import { ContentApiService } from '../shared/content-api.service';
 import { ContentCreatorFormComponent } from './content-creator-form.component';
 import { ContentModel } from '../shared/content.model';
 
-
 @Component({
   selector: 'app-content-creator',
   templateUrl: './content-creator.component.html',
   styleUrls: ['./content-creator.component.scss']
 })
+
 export class ContentCreatorComponent implements OnInit {
     editMode = false;
     viewMode: boolean;
@@ -24,8 +23,7 @@ export class ContentCreatorComponent implements OnInit {
     barcode: any = null;
     codeOption: string;
     codeFormat: string;
-
-    @ViewChild('ngForm') form: NgForm;
+    redemptionMethod: number;
 
     @ViewChild(ContentCreatorFormComponent)
     public creatorForm: ContentCreatorFormComponent;
@@ -44,7 +42,6 @@ export class ContentCreatorComponent implements OnInit {
                     (params: Params) => {
                         this.id = +params['id'];
                         this.viewMode = params['id'] != null;
-
                 });
 
         if (this.viewMode) {
@@ -59,26 +56,27 @@ export class ContentCreatorComponent implements OnInit {
         if (this.editMode) {
              this.barcode = content.redemption_code;
              this.codeFormat = content.redemption_code_format;
+             this.redemptionMethod = content.redemption_method;
         } else {
             this.barcode = this.creatorForm.form.value.redemption_code;
             this.codeOption = this.creatorForm.form.value.codeOption;
             this.codeFormat = this.creatorForm.form.value.redemption_format;
+            this.redemptionMethod = this.creatorForm.form.value.redemption_method;
         }
 
-        if (this.codeOption === 'manual' || this.barcode !== null) {
-            switch (this.codeFormat) {
-                case 'CODABAR':
-                if (this.barcode.length < 3) {
-                    alert('invalid redemption code');
-                    return false;
-                }
-                if (
-                    ['a', 'A', 'b', 'B', 'c', 'C', 'd', 'D']
-                    .indexOf(this.barcode[0]) === -1 || ['a', 'A', 'b', 'B', 'c', 'C', 'd', 'D']
-                    .indexOf(this.barcode[this.barcode.length - 1]) === -1
-                    ) {
-                        alert('invald redemption code');
+        if (this.redemptionMethod && this.redemptionMethod !== 1) {
+            if (this.codeOption === 'manual' || this.barcode !== null) {
+                switch (this.codeFormat) {
+                    case 'CODABAR':
+                    if (this.barcode.length < 3) {
+                        alert('invalid redemption code');
                         return false;
+                    }
+                    if (['a', 'A', 'b', 'B', 'c', 'C', 'd', 'D']
+                        .indexOf(this.barcode[0]) === -1 || ['a', 'A', 'b', 'B', 'c', 'C', 'd', 'D']
+                        .indexOf(this.barcode[this.barcode.length - 1]) === -1) {
+                            alert('invald redemption code');
+                            return false;
                         }
                         break;
                         case 'EAN_8':
@@ -137,13 +135,16 @@ export class ContentCreatorComponent implements OnInit {
                         default:
                         alert('invalid format');
                         return false;
-                        }
+                }
+            }
         }
 
-        if (this.creatorForm.form.valid) {
+        if (!this.creatorForm.form.valid) {
             this.creatorForm.form.onSubmit(event);
+            alert('invalid Form')
             return;
         }
+
         let obj = Object.assign({}, this.creatorForm.content);
         obj.start_at = this.dateUtils.formatSQLDate(obj.start_at);
         obj.end_at = this.dateUtils.formatSQLDate(obj.end_at);
@@ -171,7 +172,7 @@ export class ContentCreatorComponent implements OnInit {
             .subscribe(data => {
                 this.creatorForm.content = data;
                 this.initForm(this.creatorForm.content);
-            })
+            });
     }
 
     public initForm(data) {

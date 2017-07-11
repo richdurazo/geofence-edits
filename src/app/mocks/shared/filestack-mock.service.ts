@@ -20,4 +20,7 @@ export class FilestackMockService {
     public createImageConfig () {
         return false;
     }
+    public createCsvConfig () {
+        return false;
+    }
 }

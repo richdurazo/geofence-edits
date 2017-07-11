@@ -1,3 +1,5 @@
+import { RouterMockService } from './../../../mocks/router/router-mock.service';
+import { Router } from '@angular/router';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -15,6 +17,7 @@ describe('TermsDialogComponent', () => {
     let component: TermsDialogComponent;
     let fixture: ComponentFixture<TermsDialogComponent>;
     let termsApi: TermsApiMockService;
+    let router: Router;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -30,12 +33,16 @@ describe('TermsDialogComponent', () => {
             providers: [
                 { provide: MdDialogRef, useClass: MdDialogRefMock },
                 { provide: MD_DIALOG_DATA, useClass: MD_DIALOG_DATA_MOCK },
-                { provide: TermsApiService, useClass: TermsApiMockService }
+                { provide: TermsApiService, useClass: TermsApiMockService },
+                { provide: Router, useClass: RouterMockService}
+
             ]
         })
         .compileComponents();
 
         termsApi = TestBed.get(TermsApiService);
+        router = TestBed.get(Router);
+
 
         spyOn(termsApi, 'getTerms').and.returnValue(Observable.of({hay: 'guyz'}));
     }));

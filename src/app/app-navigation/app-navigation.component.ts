@@ -48,14 +48,7 @@ export class AppNavigationComponent implements OnInit {
         {
             route: "/triggers",
             name: "Trigger",
-            icon: "memory",
-            subroutes: [
-                {
-                    route: "/triggers/create",
-                    name: "Create Triggers",
-                    icon: "edit"
-                }
-            ]
+            icon: "memory"
         }
     ];
 

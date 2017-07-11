@@ -215,7 +215,7 @@
                                     </md-option>
                                 </md-select>
 
-                                <div fxLayout="row" *ngIf="RedemptionCodeOptions === 'manual'">
+                                <div fxLayout="row" *ngIf="codeOption === 'manual'">
                                     <md-select
                                     [disabled]="viewMode"
                                     placeholder="QR Format"
@@ -228,7 +228,7 @@
                                     </md-select>
                                 </div>
 
-                                <div fxLayout="row" fxLayoutGap="10px" class="wallet-preview" *ngIf="RedemptionCodeOptions === 'upload'">
+                                <div fxLayout="row" fxLayoutGap="10px" class="wallet-preview" *ngIf="codeOption === 'upload'">
                                     <div class="wallet-image-container">
                                         <app-file-uploader
                                             [config]="csvFileConfig"
@@ -245,7 +245,7 @@
                                     [disabled]="viewMode"
                                     placeholder="Redemption Code Options"
                                     name="codeOption"
-                                    [(ngModel)]="RedemptionCodeOptions"
+                                    [(ngModel)]="codeOption"
                                     *ngIf="content.redemption_method"
                                     fxFlex="100">
                                     <md-option 
@@ -260,7 +260,7 @@
 
                             </div>
                             <div fxLayout="row" fxLayoutGap="10px">
-                                <md-input-container *ngIf="RedemptionCodeOptions === 'manual'">
+                                <md-input-container *ngIf="codeOption === 'manual'">
                                     <input
                                     mdInput
                                     name="redemption_code"
@@ -337,7 +337,7 @@
             <!-- Right Justified Content -->
             <div fxLayout="column" fxFlex="45"  *ngIf="contentType && !viewMode">
 
-                <div fxLayout="row" fxLayoutAlign="end">
+                <div fxLayout="row" fxLayoutAlign="end" *ngIf="content">
                     <div fxFlex="50" fxLayout="column" class="scratcher-toggle-container">
                         <div fxLayout="row" fxLayoutAlign="center">
                             <label class="creator-section-label" for="scratcher_enabled">
@@ -523,7 +523,11 @@
                         <div fxLayout="row" class="wallet-preview" *ngIf="contentType !== 'message'">
                             <div class="wallet-image-container">
                                 <app-file-uploader
-                                    [config]="walletImageConfig">
+                                    [config]="walletImageConfig"
+                                    [fileExists]="walletImageExists"
+                                    [lastModified]="walletImageModified"
+                                    (onUpload)="walletImageExists = $event"
+                                    (onChange)="walletImageModified = $event">
                                 </app-file-uploader>
                             </div>
                             <div class="wallet-body-container" fxLayout="column">
@@ -552,7 +556,7 @@
             <!-- Right Justified Content -->
             <div fxLayout="column" fxFlex="45"  *ngIf="contentType && viewMode">
 
-                <div fxLayout="row" fxLayoutAlign="end">
+                <div fxLayout="row" fxLayoutAlign="end" *ngIf="content">
                     <div fxFlex="50" fxLayout="column" class="scratcher-toggle-container">
                         <!-- <div fxLayout="row" fxLayoutAlign="center">
                             <label class="creator-section-label" for="scratcher_enabled">

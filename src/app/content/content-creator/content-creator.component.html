@@ -11,12 +11,34 @@
 </h1>
 
 
-<md-card class="creator-form-card" fxLayout="column">
+<md-card  fxLayout="column">
+        <div class="menu-details" fxLayout="row" fxLayoutAlign="end end">
+            <div class="menu-wrapper" fxFlex="5" fxLayoutAlign="end end">
+                <md-menu #appMenu="mdMenu">
+                <button
+                    md-menu-item
+                    (click)="onEditContent()"
+                    *ngIf="!editMode">
+                    Edit
+                </button>
+                <button
+                    md-menu-item
+                    (click)="launchConfirmRemove()"
+                    *ngIf="editMode">
+                        Remove
+                    </button>
+                </md-menu>
 
-    <app-content-creator-form></app-content-creator-form>
+                <button md-icon-button [mdMenuTriggerFor]="appMenu">
+                <md-icon>more_vert</md-icon>
+                </button>
+            </div>
+        </div>
+
+    <app-content-creator-form class="creator-form-card"></app-content-creator-form>
 
 
-    <div fxLayoutAlign="end" fxFlex="100" *ngIf="creatorForm.contentType">
+    <div class="creator-form-card" fxLayoutAlign="end" fxFlex="100" *ngIf="creatorForm.contentType">
         <button
             type="submit"
             class="common-form-submit"
@@ -45,11 +67,11 @@
             Update
         </button>
         <button
-            type="button"
+            type="submit"
             class="common-form-submit"
             md-raised-button
             color="primary"
-            (click)="onEditContent()"
+            (click)="onEditContent($ngForm)"
             *ngIf="viewMode">
             Edit
         </button>

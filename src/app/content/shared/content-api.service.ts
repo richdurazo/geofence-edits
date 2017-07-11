@@ -29,7 +29,7 @@ export class ContentApiService {
     }
 
     updateContent(data) {
-        return this.authCustomHttp.patch(AppSettings.API_ROOT + '/content/' + data.id, data)
+        return this.authCustomHttp.put(AppSettings.API_ROOT + '/content/' + data.id, data)
         .map(res => res.json())
     }
 

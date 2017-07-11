@@ -1,0 +1,19 @@
+<p>ConFirm Delete</p>
+<p> Are you sure you would like to remove {{data.name}}</p>
+<button
+  type="button" 
+  md-raised-button
+  color="warn"
+  (click)="onDelete()">
+  Delete
+</button>
+<button
+  type="button"
+  md-button color="primary"
+  (click)="dialogRef.close(true)">
+  Cancel
+</button>
+
+
+
+

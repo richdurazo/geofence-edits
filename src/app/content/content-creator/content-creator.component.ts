@@ -1,3 +1,6 @@
+import { MdDialog } from '@angular/material';
+import { DialogConfirmComponent } from './../../shared/dialog-confirm/dialog-confirm.component';
+import { NgForm, FormGroup } from '@angular/forms';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
@@ -14,9 +17,16 @@ import { ContentModel } from '../shared/content.model';
   styleUrls: ['./content-creator.component.scss']
 })
 export class ContentCreatorComponent implements OnInit {
-    editMode: boolean = false;
+    editMode = false;
     viewMode: boolean;
-    id: string;
+    id: any;
+    content: ContentModel;
+    barcode: any = null;
+    codeOption: string;
+    codeFormat: string;
+
+    @ViewChild('ngForm') form: NgForm;
+
     @ViewChild(ContentCreatorFormComponent)
     public creatorForm: ContentCreatorFormComponent;
 
@@ -25,81 +35,85 @@ export class ContentCreatorComponent implements OnInit {
         private contentApi: ContentApiService,
         private router: Router,
         private route: ActivatedRoute,
+        private dialog: MdDialog,
         ) { }
 
     ngOnInit() {
-    
         this.route.params
                 .subscribe(
                     (params: Params) => {
-                        this.id = params['id'];
+                        this.id = +params['id'];
                         this.viewMode = params['id'] != null;
-                        console.log('viewMode', this.viewMode)
-                                                console.log('editMode', this.editMode)
 
                 });
+
         if (this.viewMode) {
             this.creatorForm.viewMode = true;
-            this.initForm();
+            this.getContent();
         }
 
     }
 
     public submitForm(event) {
-        console.log(event)
-        console.log(this.editMode)
-        console.log(this.creatorForm.content)
-        let barcode = this.creatorForm.form.value.redemption_code;
+        const content = this.creatorForm.content;
+        if (this.editMode) {
+             this.barcode = content.redemption_code;
+             this.codeFormat = content.redemption_code_format;
+        } else {
+            this.barcode = this.creatorForm.form.value.redemption_code;
+            this.codeOption = this.creatorForm.form.value.codeOption;
+            this.codeFormat = this.creatorForm.form.value.redemption_format;
+        }
 
-        if (this.creatorForm.form.value.codeOption === 'manual') {
-            switch (this.creatorForm.form.value.redemption_format) {
+        if (this.codeOption === 'manual' || this.barcode !== null) {
+            switch (this.codeFormat) {
                 case 'CODABAR':
-                if (barcode.length < 3) {
+                if (this.barcode.length < 3) {
                     alert('invalid redemption code');
                     return false;
                 }
                 if (
                     ['a', 'A', 'b', 'B', 'c', 'C', 'd', 'D']
-                    .indexOf(barcode[0]) === -1 || ['a', 'A', 'b', 'B', 'c', 'C', 'd', 'D']
-                    .indexOf(barcode[barcode.length - 1]) === -1
+                    .indexOf(this.barcode[0]) === -1 || ['a', 'A', 'b', 'B', 'c', 'C', 'd', 'D']
+                    .indexOf(this.barcode[this.barcode.length - 1]) === -1
                     ) {
                         alert('invald redemption code');
                         return false;
                         }
                         break;
                         case 'EAN_8':
-                        if (barcode.length !== 8 || isNaN(barcode)) {
+                        if (this.barcode.length !== 8 || isNaN(this.barcode)) {
                             alert('invald redemption code');
                             return false;
                         }
                         break;
                         case 'EAN_13':
-                        if (barcode.length !== 13 || isNaN(barcode)) {
+                        if (this.barcode.length !== 13 || isNaN(this.barcode)) {
                             alert('invald redemption code');
                             return false;
                         }
                         break;
                         case 'ITF':
                         case 'RSS_14':
-                        if (isNaN(barcode)) {
+                        if (isNaN(this.barcode)) {
                             alert('invald redemption code');
                             return false;
                         }
                         break;
                         case 'RSS_EXPANDED':
-                        if (barcode.length < 14){
+                        if (this.barcode.length < 14){
                             alert('invald redemption code');
                             return false;
                         }
                         break;
                         case 'UPC_A':
-                        if (barcode.length !== 12 || isNaN(barcode)) {
+                        if (this.barcode.length !== 12 || isNaN(this.barcode)) {
                             alert('invald redemption code');
                             return false;
                         }
                         break;
                         case 'UPC_E':
-                        if (barcode.length !== 6 || isNaN(barcode)) {
+                        if (this.barcode.length !== 6 || isNaN(this.barcode)) {
                             alert('invald redemption code');
                             return false;
                         }
@@ -113,7 +127,7 @@ export class ContentCreatorComponent implements OnInit {
                         case 'MAXICODE':
                         case 'PDF_417':
                         case 'UPC_EAN_EXTENSION':
-                        if (barcode.length < 1) {
+                        if (this.barcode.length < 1) {
                             alert('invald redemption code');
                             return false;
                         }
@@ -125,72 +139,88 @@ export class ContentCreatorComponent implements OnInit {
                         return false;
                         }
         }
-        if (!this.creatorForm.form.valid) {
+
+        if (this.creatorForm.form.valid) {
             this.creatorForm.form.onSubmit(event);
             return;
         }
+        let obj = Object.assign({}, this.creatorForm.content);
+        obj.start_at = this.dateUtils.formatSQLDate(obj.start_at);
+        obj.end_at = this.dateUtils.formatSQLDate(obj.end_at);
 
-            let obj = Object.assign({}, this.creatorForm.content);
-            obj.start_at = this.dateUtils.formatSQLDate(obj.start_at);
-            obj.end_at = this.dateUtils.formatSQLDate(obj.end_at);
-
-            if (!this.editMode) {
-                console.log('submited form', obj);
-                this.contentApi.createContent(obj)
+        if (!this.editMode) {
+            this.contentApi.createContent(obj)
                 .subscribe(
                     data => this.processSuccess(data)
                 );
             } else {
-                console.log('update form', obj);
-            this.contentApi.updateContent(obj)
-                .subscribe(
-                    data => this.processSuccess(data)
-                );
+                this.contentApi.updateContent(obj)
+                    .subscribe(
+                        data => this.processSuccess(data)
+                    );
+            }
+
+    }
+
+    processSuccess(data) {
+        this.onCancel();
+    }
+
+    getContent() {
+        this.contentApi.getContent(this.id)
+            .subscribe(data => {
+                this.creatorForm.content = data;
+                this.initForm(this.creatorForm.content);
+            })
+    }
+
+    public initForm(data) {
+        this.creatorForm.form = this.creatorForm.editForm;
+        this.creatorForm.contentUuid =  data.uuid;
+        this.creatorForm.contentType = data.type;
+        this.creatorForm.content.redemption_code = data.redemption_code;
+        if (this.creatorForm.content.quantity) {
+            this.creatorForm.limitEnabled = true;
+        }
+        if (this.creatorForm.content.scratcher_name) {
+            this.creatorForm.scratcherEnabled = true;
+            this.creatorForm.content.scratcher_enabled = true;
+            this.creatorForm.setImageConfig();
+            this.creatorForm.heroOfferImageExists = true;
+            this.creatorForm.heroScratcherImageExists = true;
+            this.creatorForm.walletImageExists = true;
+        }
+        if (data.redemption_code) {
+            this.creatorForm.codeOption = 'manual';
+            this.creatorForm.content.redemption_code = data.redemption_code;
+        } else {
+            this.creatorForm.codeOption = 'none';
         }
 
     }
 
-    processSuccess (data) {
-        this.router.navigate(['content', data.id]);
-    }
-
-    public initForm() {
-        this.contentApi.getContent(this.id)
-        .subscribe(
-            (data) => {
-                console.log('we are in the content creator form component', data)
-                this.creatorForm.content = data;
-                this.creatorForm.contentUuid =  data.uuid;
-                this.creatorForm.contentType = data.type;
-                this.creatorForm.content.redemption_code = data.redemption_method;
-                if (this.creatorForm.content.quantity) {
-                    this.creatorForm.limitEnabled = true;
-                }
-                if (this.creatorForm.content.scratcher_name) {
-                    this.creatorForm.scratcherEnabled = true;
-                    this.creatorForm.content.scratcher_enabled = true;
-                    this.creatorForm.setImageConfig();
-                    this.creatorForm.heroOfferImageExists = true;
-                    this.creatorForm.heroScratcherImageExists = true;
-                }
-                if (!data.redemption_code) {
-                    this.creatorForm.codeOption = 'none';
-                } else {
-                    this.creatorForm.codeOption = 'manual';
-                }
-        });
-    }
     onCancel() {
         this.creatorForm.editMode = false;
         this.creatorForm.viewMode = true;
         this.editMode = false;
-        this.viewMode = true;    
+        this.viewMode = true;
+              this.router.navigate(['content']);
+
     }
+
     onEditContent() {
         this.creatorForm.editMode = true;
         this.creatorForm.viewMode = false;
         this.editMode = true;
         this.viewMode = false;
+    }
+
+    public launchConfirmRemove () {
+        let config = {
+            disableClose: false
+        };
+        let dialogRef = this.dialog.open(DialogConfirmComponent, config);
+        dialogRef.componentInstance.data = this.creatorForm.content;
     }
 
 }

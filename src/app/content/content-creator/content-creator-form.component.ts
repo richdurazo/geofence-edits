@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MdDialog } from '@angular/material';
 
@@ -15,6 +15,8 @@ import { ContentModel } from '../shared/content.model';
 })
 
 export class ContentCreatorFormComponent implements OnInit {
+
+    @ViewChild('form') editForm: NgForm;
 
     content: ContentModel;
     editMode = false;
@@ -169,6 +171,10 @@ export class ContentCreatorFormComponent implements OnInit {
 
     overlayScratcherImageConfig: any;
 
+    walletImageExists: boolean = false;
+
+    walletImageModified: number;
+
     walletImageConfig: any;
 
     csvFileConfig: any;
@@ -186,11 +192,8 @@ export class ContentCreatorFormComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        console.log('edit', this.editMode)
-        console.log('view', this.viewMode)
-        if (this.editMode || this.viewMode) {
-            this.initForm();
-        } else {
+        if (!this.editMode || !this.viewMode) {
+
             this.fetchUuid();
 
         }
@@ -341,7 +344,7 @@ export class ContentCreatorFormComponent implements OnInit {
     }
 
     public fetchUuid () {
-        if (this.editMode === false || this.viewMode === false) {
+        if (this.editMode === false && this.viewMode === false) {
             this.uuidApi.fetchUuid()
             .subscribe(
                     data => {
@@ -350,9 +353,7 @@ export class ContentCreatorFormComponent implements OnInit {
                     this.setCsvConfig();
                 }
             )
-        } else {
-            this.setImageConfig();
-        }
+        } 
     }
 
     public setImageConfig () {
@@ -366,24 +367,23 @@ export class ContentCreatorFormComponent implements OnInit {
     }
 
     public setModelDefaults (type: string) {
-        this.content = new ContentModel(
-            this.contentUuid,
-            type,
-            '',
-            '',
-            '',
-            new Date(),
-            new Date(),
-            false,
-            null,
-            '',
-            '',
-            null
-            );
-    }
+            this.content = new ContentModel(
+                this.contentUuid,
+                null,
+                type,
+                '',
+                '',
+                '',
+                new Date(),
+                new Date(),
+                false,
+                null,
+                '',
+                '',
+                null,
+                ''
+                );
+        }
 
-    initForm() {
-        console.log(this.content)
-    }
 
 }

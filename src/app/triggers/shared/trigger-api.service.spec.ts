@@ -45,13 +45,6 @@ describe('TriggerApiService', () => {
       });
     });
 
-    describe('getDeliveryModes', () => {
-      it ('should have a getDeliveryModes function', () => {
-        expect(service.getDeliveryModes).toBeTruthy();
-        expect(typeof service.getDeliveryModes).toEqual('function');
-      });
-    });
-
     describe('createTrigger', () => {
       it ('should have a createTrigger function', () => {
         expect(service.createTrigger).toBeTruthy();

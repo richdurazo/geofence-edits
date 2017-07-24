@@ -28,6 +28,11 @@ export class ContentApiService {
         .map(res => res.json())
     }
 
+    updateContent(data) {
+        return this.authCustomHttp.put(AppSettings.API_ROOT + '/content/' + data.id, data)
+        .map(res => res.json())
+    }
+
     // CONTENT GROUP ACTIONS
     createContentGroup (data) {
         return this.authCustomHttp.post(AppSettings.API_ROOT + '/content-group', data)

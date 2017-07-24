@@ -65,6 +65,7 @@ import { ContentRowComponent } from './content/content-row/content-row.component
 import { ContentSelectorComponent } from './content/content-selector/content-selector.component';
 import { ChartComponent } from './shared/chart/chart.component';
 import { TargetTypeaheadComponent } from './shared/target-typeahead/target-typeahead.component';
+import { DialogConfirmComponent } from './shared/dialog-confirm/dialog-confirm.component';
 
 @NgModule({
     declarations: [
@@ -105,7 +106,8 @@ import { TargetTypeaheadComponent } from './shared/target-typeahead/target-typea
         ContentRowComponent,
         ContentSelectorComponent,
         ChartComponent,
-        TargetTypeaheadComponent
+        TargetTypeaheadComponent,
+        DialogConfirmComponent
     ],
     imports: [
         AppRoutingModule,
@@ -131,7 +133,8 @@ import { TargetTypeaheadComponent } from './shared/target-typeahead/target-typea
     ],
     entryComponents: [
         TermsDialogComponent,
-        ContentSelectorComponent
+        ContentSelectorComponent,
+        DialogConfirmComponent
     ],
     bootstrap: [AppComponent]
 })

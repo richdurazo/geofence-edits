@@ -22,7 +22,7 @@
             </md-input-container>
         </div>
 
-        <div fxLayout="row">
+        <div *ngIf="!id" fxLayout="row">
             <button
                 type="submit"
                 class="common-form-submit"
@@ -33,6 +33,25 @@
             </button>
         </div>
 
+        <div *ngIf="id" fxLayout="row">
+            <button
+                type="submit"
+                class="common-form-submit"
+                md-raised-button
+                color="primary"
+                fxFlex="100">
+                Update Terms
+            </button>
+            <button
+                type="button"
+                class="common-form-submit"
+                md-button
+                color="primary"
+                (click)="dialogRef.close(true)"
+                fxFlex="100">
+                Cancel
+            </button>
+        </div>
     </form>
 
 </div>

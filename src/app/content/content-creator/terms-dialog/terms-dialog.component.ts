@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit, Inject, Optional } from '@angular/core';
 import { MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
 import { TermsApiService } from './terms-api.service';
@@ -12,10 +13,17 @@ export class TermsDialogComponent implements OnInit {
 
     model: any;
 
-    constructor(public dialogRef: MdDialogRef<TermsDialogComponent>, public termsApi: TermsApiService, @Optional() @Inject(MD_DIALOG_DATA) private id: any) {
-        this.model = {
-            body: ''
-        };
+    editMode: boolean;
+
+    viewMode: boolean;
+
+    constructor (public dialogRef: MdDialogRef<TermsDialogComponent>,
+                 public termsApi: TermsApiService,
+                 @Optional() @Inject(MD_DIALOG_DATA) private id: any,
+                 private router: Router) {
+                    this.model = {
+                        body: ''
+                    };
     }
 
     ngOnInit() {
@@ -23,6 +31,7 @@ export class TermsDialogComponent implements OnInit {
             this.termsApi.getTerms(this.id)
             .subscribe(data => {
                 this.model = data;
+                this.id = data.id;
             });
         }
     }
@@ -33,10 +42,19 @@ export class TermsDialogComponent implements OnInit {
             .subscribe(data => {
                 this.processSuccess(data);
             });
+        } else {
+            this.termsApi.updateTerms(this.model)
+            .subscribe(data => {
+                this.processSuccess(this.model);
+            });
         }
     }
 
     public processSuccess (data) {
         this.dialogRef.close(data);
+    }
+
+    onCancel() {
+        this.dialogRef.close();
     }
 }

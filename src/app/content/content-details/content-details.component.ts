@@ -1,8 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-
-import { ContentApiService } from '../shared/content-api.service';
-import { ContentModel } from '../shared/content.model';
+import { ContentCreatorFormComponent } from './../content-creator/content-creator-form.component';
+import { Component, OnInit, OnDestroy, Input, ViewChild } from '@angular/core';
 
 @Component({
     selector: 'app-content-details',
@@ -10,31 +7,15 @@ import { ContentModel } from '../shared/content.model';
     styleUrls: ['./content-details.component.scss']
 })
 export class ContentDetailsComponent implements OnInit {
-
-    content: ContentModel;
+    @Input() content: any;
+    @ViewChild(ContentCreatorFormComponent)
+    public creatorForm: ContentCreatorFormComponent;
 
     id: string;
 
-    private sub: any;
-
-    constructor(private route: ActivatedRoute, private contentApi: ContentApiService) { }
+    constructor() { }
 
     ngOnInit() {
-        this.sub = this.route.params.subscribe(params => {
-            this.id = params['id'];
-            this.getContent();
-        });
-    }
-
-    ngOnDestroy() {
-        this.sub.unsubscribe();
-    }
-
-    private getContent () {
-        this.contentApi.getContent(this.id)
-        .subscribe(data => {
-            this.content = data;
-        });
     }
 
 }

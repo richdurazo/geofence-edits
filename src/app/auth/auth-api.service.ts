@@ -14,6 +14,7 @@ export class AuthApiService {
       let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
       let options = new RequestOptions({ headers: headers });
       let params: URLSearchParams = new URLSearchParams();
+
       params.set("email", credentials.email);
       params.set("password", credentials.password);
 

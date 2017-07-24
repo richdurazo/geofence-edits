@@ -1,19 +1,84 @@
-<h1 class="page-heading">
+<h1 class="page-heading" *ngIf="!editMode && !viewMode">
     Create
 </h1>
 
-<md-card class="creator-form-card" fxLayout="column">
+<h1 class="page-heading" *ngIf="viewMode">
+    Details
+</h1>
 
-    <app-content-creator-form></app-content-creator-form>
+<h1 class="page-heading" *ngIf="editMode">
+    Edit 
+</h1>
 
-    <div fxLayoutAlign="end" fxFlex="100" *ngIf="creatorForm.contentType">
+<md-card  fxLayout="column">
+        <div class="menu-details" fxLayout="row" fxLayoutAlign="end end" *ngIf="viewMode || editMode">
+            <div class="menu-wrapper" fxFlex="5" fxLayoutAlign="end end">
+                <md-menu #appMenu="mdMenu">
+                    <button
+                        md-menu-item
+                        (click)="onEditContent()"
+                        *ngIf="viewMode">
+                        Edit
+                    </button>
+                    <button
+                        md-menu-item
+                        (click)="launchConfirmRemove()"
+                        *ngIf="editMode">
+                        Remove
+                    </button>
+                    <button
+                        md-menu-item
+                        (click)="onCancel()"
+                        *ngIf="editMode">
+                        Cancel
+                    </button>
+                </md-menu>
+
+                <button md-icon-button [mdMenuTriggerFor]="appMenu">
+                <md-icon>more_vert</md-icon>
+                </button>
+            </div>
+        </div>
+
+    <app-content-creator-form class="creator-form-card"></app-content-creator-form>
+
+
+    <div class="creator-form-card" fxLayoutAlign="end" fxFlex="100" *ngIf="creatorForm.contentType">
         <button
             type="submit"
             class="common-form-submit"
             md-raised-button
             color="primary"
-            (click)="submitForm($event)">
+            (click)="submitForm($event)"
+            *ngIf="!editMode && !viewMode">
             Create
+        </button>
+        <button
+            type="button"
+            class="common-form-submit"
+            md-button
+            color="primary"
+            (click)="onCancel()"
+            *ngIf="editMode">
+            Cancel
+        </button>
+        <button
+            type="submit"
+            class="common-form-submit"
+            md-raised-button
+            color="primary"
+            (click)="submitForm($event)"
+            *ngIf="editMode">
+            Update
+        </button>
+        <button
+            type="submit"
+            class="common-form-submit"
+            md-raised-button
+            color="primary"
+            (click)="onEditContent()"
+            *ngIf="viewMode">
+            Edit
         </button>
     </div>
 

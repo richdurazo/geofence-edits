@@ -76,6 +76,11 @@ body {
         padding: 0 45px;
     }
 
+    .mat-button {
+        line-height: 45px;
+        padding: 0 45px;
+    }
+
 
     .creator-form-card {
         padding-right: 80px;
@@ -84,9 +89,15 @@ body {
         .mat-raised-button.common-form-submit {
             margin-bottom: 10px;
         }
+        .mat-button.common-form-submit {
+            margin-bottom: 10px;
+        }
     }
 
     // COMMON UTILITIES
+    fieldset {
+    border: 0;
+}
     .relative {
         position: relative;
     }

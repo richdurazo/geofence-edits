@@ -12,6 +12,8 @@ export class FileUploaderComponent implements OnInit {
 
     mediaPath: string;
 
+    fileName: string;
+
     @Input() lastModified: number;
 
     @Input() config: any;
@@ -25,7 +27,8 @@ export class FileUploaderComponent implements OnInit {
     constructor ( private filestack: FilestackService ) {}
 
     ngOnInit () {
-        this.mediaPath = this.config.pickerOptions.storeTo.container + this.filestack.generateSaveFilePath(this.config.uuid, this.config.key, this.config.type);
+            this.mediaPath = this.config.pickerOptions.storeTo.container +
+            this.filestack.generateSaveFilePath(this.config.uuid, this.config.key, this.config.type);
     }
 
     showUploader () {
@@ -34,7 +37,11 @@ export class FileUploaderComponent implements OnInit {
             this.lastModified = new Date().getTime();
             this.onUpload.emit(this.fileExists);
             this.onChange.emit(this.lastModified);
+            this.fileName = results.filesUploaded[0].filename;
         });
+    }
+    onDeleteCsv() {
+        this.fileExists = false;
     }
 
 }

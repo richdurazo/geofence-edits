@@ -1,159 +1,9 @@
-<md-card class="creator-form-card content-details" fxLayout="column" fxFlex="100">
+            <div fxLayout="column">
 
-        <div fxLayout="row" *ngIf="content">
-
-            <!-- Left Justified Content -->
-            <div fxLayout="column" fxFlex="55">
-
-                    <div>
-                        <div fxLayout="column" class="details-display-container">
-                            <label>
-                                Type
-                            </label>
-                            <div>
-                                {{ content.type }}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div>
-                        <div fxLayout="column" class="details-display-container">
-                            <label>
-                                Title
-                            </label>
-                            <div>
-                                {{ content.name }}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div fxLayout="row" fxLayout.sm="column" fxLayoutGap="10px">
-
-                        <div fxFlex="33" fxLayout="column" class="details-display-container">
-                            <label>
-                                Start Date
-                            </label>
-                            <div>
-                                {{ content.start_at | date: 'M/dd/yyyy' }}
-                            </div>
-                        </div>
-
-                        <div fxFlex="33" fxLayout="column" class="details-display-container">
-                            <label>
-                                End Date
-                            </label>
-                            <div>
-                                {{ content.end_at | date: 'M/dd/yyyy' }}
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="form-highlight-well details-well" fxLayout="column">
-                        <div fxLayout="row">
-                            <div fxLayout="column" class="details-display-container">
-                                <label>
-                                    Display Title
-                                </label>
-                                <div>
-                                    {{ content.display_name }}
-                                </div>
-                            </div>
-                        </div>
-
-                        <div fxLayout="row">
-                            <div fxLayout="column" class="details-display-container">
-                                <label>
-                                    Description
-                                </label>
-                                <div>
-                                    {{ content.description }}
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="form-highlight-well details-well" fxFlex="100" *ngIf="content.scratcher_name">
-                        <div fxFlex="100" fxLayout="row">
-                            <div fxLayout="column" class="details-display-container">
-                                <label>
-                                    Scratcher Exclamation
-                                </label>
-                                <div>
-                                    {{ content.scratcher_name }}
-                                </div>
-                            </div>
-                        </div>
-
-                        <div fxFlex="100" fxLayout="row">
-                            <div fxLayout="column" class="details-display-container">
-                                <label>
-                                    Scratcher Description
-                                </label>
-                                <div>
-                                    {{ content.scratcher_description }}
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div fxLayout="row"  *ngIf="content.type === 'offer'">
-                        <div fxFlex="33" fxLayout="column" class="details-display-container">
-                            <label>
-                                Redemption Method
-                            </label>
-                            <div>
-                                {{ content.redemption_method }}
-                            </div>
-                        </div>
-
-                        <div fxFlex="66" fxLayout="column" *ngIf="content.redemption_method">
-                            <div fxLayout="row" fxLayoutGap="10px">
-                                <div fxFlex="50" fxLayout="column" class="details-display-container">
-                                    <label>
-                                        Redemption Code
-                                    </label>
-                                    <div>
-                                        {{ content.redemption_code }}
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div fxLayout="row" fxLayoutGap="10px" *ngIf="content.redemption_method === 'online' || content.redemption_method === 'both'">
-                                <div fxFlex="100" fxLayout="column" class="details-display-container">
-                                    <label>
-                                        Redemption URL
-                                    </label>
-                                    <div>
-                                        {{ content.redemption_url }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div fxLayout="row" *ngIf="content.type !== 'message' && content.quantity">
-                        <div fxFlex="100" fxLayout="column" class="details-display-container">
-                            <label>
-                                Limit
-                            </label>
-                            <div>
-                                {{ content.quantity }}
-                            </div>
-                        </div>
-                    </div>
-
-            </div>
-
-            <!-- Right Justified Content -->
-            <div fxLayout="column" fxFlex="45"  *ngIf="content.type">
-
-                <div fxLayout="row" fxLayoutAlign="end">
+                <div fxLayout="row" fxLayoutAlign="end" *ngIf="content">
                     <div fxFlex="50" fxLayout="column" class="scratcher-toggle-container">
-                        <!-- <div fxLayout="row" fxLayoutAlign="center">
-                            <label class="creator-section-label" for="scratcher_enabled">
+                    <div fxLayout="row" fxLayoutAlign="center">
+                           <label class="creator-section-label" for="scratcher_enabled">
                                 Enable Scratcher
                             </label>
                         </div>
@@ -165,7 +15,7 @@
                                 [labelPosition]="'before'"
                                 [(ngModel)]="scratcherEnabled">
                             </md-slide-toggle>
-                        </div> -->
+                        </div> 
                     </div>
 
                     <div class="right-column" fxLayout="column">
@@ -179,10 +29,10 @@
                                     Scratcher Overlay Preview
                                 </div>
 
-                                <div class="scratcher-preview">
+                                <div class="scratcher-preview" fxLayout="column">
 
                                     <div class="scratcher-hero-image-container" fxFlex="150px;">
-                                        <app-image
+                                        <app-image class="scratcher-hero-image-container"
                                             [uuid]="content.uuid"
                                             [key]="'hero-scratcher'">
                                         </app-image>
@@ -209,10 +59,10 @@
                                     Scratcher Preview
                                 </div>
 
-                                <div class="scratcher-preview">
+                                <div class="scratcher-preview"  fxLayout="column">
 
                                     <div class="scratcher-hero-image-container" fxFlex="150px;">
-                                        <app-image
+                                        <app-image class="scratcher-hero-image-container" 
                                             [uuid]="content.uuid"
                                             [key]="'hero-offer'">
                                         </app-image>
@@ -234,11 +84,15 @@
                                             </span>
                                         </h2>
 
+                                        <!--company name-->
+
+<!--                                        <div fxLayout="row" fxFlex="20" fxLayoutAlign="center">
+                                        </div>
                                         <div fxLayout="row" fxFlex="10" fxLayoutAlign="center">
                                             <small>
                                                 from Payless Shoes
                                             </small>
-                                        </div>
+                                        </div>-->
 
                                         <div fxLayout="row" fxFlex="40">
                                             <button type="button" name="button" md-raised-button color="primary" fxFlexAlign="end" fxFlex="100">
@@ -265,22 +119,27 @@
                                     Offer Preview
                                 </div>
 
-                                <div class="scratcher-preview">
+                                <div class="scratcher-preview"  fxLayout="column">
 
                                     <div class="scratcher-hero-image-container" fxFlex="150px;">
-                                        <app-image
+                                        <app-image class="scratcher-hero-image-container"
                                             [uuid]="content.uuid"
                                             [key]="'hero-offer'">
                                         </app-image>
                                     </div>
 
-                                    <div class="scratcher-body" fxFlex="300px;">
-
-                                        <h3 class="scratcher-heading">{{ content.display_name }}</h3>
-
-                                        <small>from Payless Shoes</small>
-
-                                        <p>{{ content.description }}</p>
+                                    <div class="scratcher-body" fxFlex="300px;" fxLayout="column" fxLayoutAlign="start center">
+                                        <div fxFlex="10" fxLayoutAlign="start center"></div>
+                                            <div fxLayout="row" fxFlex="10" fxLayoutAlign="start start">
+                                                <h3 class="scratcher-heading">{{ content.display_name }}</h3>
+                                            </div>
+                                            <!--company name-->
+<!--                                            <div fxLayout="row" fxFlex="10" fxLayoutAlign="start start">
+                                                <small>from Payless Shoes</small>
+                                            </div>-->
+                                            <div fxLayout="row" fxFlex="10" fxLayoutAlign="start start">
+                                                <p class="scratcher-heading">{{ content.description }}</p>
+                                            </div>
 
                                     </div>
 
@@ -290,17 +149,17 @@
 
                         </md-tab-group>
 
-                        <div *ngIf="!content.scratcher_name">
+                        <div fxLayout="column" *ngIf="!content.scratcher_name">
                             <div fxFlex="49px;"></div>
 
                             <div class="creator-section-label">
                                 Offer Preview
                             </div>
 
-                            <div class="scratcher-preview">
+                            <div class="scratcher-preview" fxLayout="column">
 
                                 <div class="scratcher-hero-image-container" fxFlex="150px;">
-                                    <app-image
+                                    <app-image class="scratcher-hero-image-container"
                                         [uuid]="content.uuid"
                                         [key]="'hero-offer'">
                                     </app-image>
@@ -310,7 +169,9 @@
 
                                     <h3 class="scratcher-heading">{{ content.display_name }}</h3>
 
-                                    <small>from Payless Shoes</small>
+                                    <!--company Name-->
+
+                                    <!--<small>from Payless Shoes</small>-->
 
                                     <p>{{ content.description }}</p>
 
@@ -324,7 +185,7 @@
                         </div>
                         <div fxLayout="row" class="wallet-preview" *ngIf="content.type !== 'message'">
                             <div class="wallet-image-container">
-                                <app-image
+                                <app-image class="wallet-image-container"
                                     [uuid]="content.uuid"
                                     [key]="'wallet'">
                                 </app-image>
@@ -343,7 +204,7 @@
                                 type="button"
                                 name="button"
                                 md-raised-button
-                                (click)="launchTerms()">
+                                disabled>
                                 Terms and Conditions
                             </button>
                         </div>
@@ -351,8 +212,5 @@
                     </div>
                 </div>
 
-            </div>
 
         </div>
-
-</md-card>

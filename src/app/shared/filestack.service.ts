@@ -10,7 +10,7 @@ export class FilestackService {
     constructor() { }
 
     public initFilestack () {
-        this.uploader = filestack.init("AfK7thvLTRoyjflG6yqz3z");
+        this.uploader = filestack.init('AfK7thvLTRoyjflG6yqz3z');
     }
 
     public pick (config) {
@@ -67,15 +67,36 @@ export class FilestackService {
         };
     }
 
+    public createCsvConfig (key, uuid) {
+        return {
+            key: key,
+            uuid: uuid,
+            type: 'csv',
+            pickerOptions: {
+                accept: ['.csv'],
+                maxFiles: 1,
+                uploadInBackground: false,
+                storeTo: {
+                    location: 's3',
+                    container: 'garythebucket',
+                    region: 'us-west-1',
+                    access: 'public',
+                    path: this.generateSaveFilePath(uuid, key, 'csv')
+                }
+            }
+        };
+    }
+
 
     public generateSaveFilePath (uuid, key, type) {
         let ext;
         if (type === 'image') {
-            ext = '.jpg'
-        } else {
-            ext = '.mp4'
+            ext = '.jpg';
+        } else if (type === 'video') {
+            ext = '.mp4';
+        } else if (type === 'csv') {
+            ext = '.csv';
         }
-
         return '/' + uuid[0] + '/' + uuid[1] + '/' + uuid + '/' + type + '/' + key + ext;
     }
 

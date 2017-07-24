@@ -47,14 +47,4 @@ describe('TriggerApiMockService', () => {
       expect(triggerApiMockService.deleteTrigger()).toEqual(false);
     })
   });
-
-  describe('getDeliveryModes', () => {
-    it('should be a function', () => {
-      expect(typeof triggerApiMockService.getDeliveryModes).toEqual('function');
-    });
-
-    it('should return false', () => {
-      expect(triggerApiMockService.getDeliveryModes()).toEqual(false);
-    })
-  });
 });

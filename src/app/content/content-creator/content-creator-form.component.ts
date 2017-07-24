@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MdDialog } from '@angular/material';
 
@@ -16,7 +16,11 @@ import { ContentModel } from '../shared/content.model';
 
 export class ContentCreatorFormComponent implements OnInit {
 
+    @ViewChild('form') editForm: NgForm;
+
     content: ContentModel;
+    editMode = false;
+    viewMode = false;
 
     contentTypes: [
         {
@@ -35,35 +39,113 @@ export class ContentCreatorFormComponent implements OnInit {
 
     redemptionFormats: [
         {
-            value: "format1",
-            viewValue: "Format 1"
+            value: 'AZTEC',
+            viewValue: 'AZTEC'
         },
         {
-            value: "format2",
-            viewValue: "Format 2"
+            value: 'CODABAR',
+            viewValue: 'CODABAR'
         },
         {
-            value: "format3",
-            viewValue: "Format 3"
+            value: 'CODE_39',
+            viewValue: 'CODE 39'
+        },
+        {
+            value: 'CODE_93',
+            viewValue: 'CODE 93'
+        },
+        {
+            value: 'CODE_128',
+            viewValue: 'CODE 128'
+        },
+        {
+            value: 'DATA_MATRIX',
+            viewValue: 'DATA MATRIX'
+        },
+        {
+            value: 'EAN_8',
+            viewValue: 'EAN 8'
+        },
+        {
+            value: 'EAN_13',
+            viewValue: 'EAN 13'
+        },
+        {
+            value: 'ITF',
+            viewValue: 'ITF'
+        },
+        {
+            value: 'MAXICODE',
+            viewValue: 'MAXICODE'
+        },
+        {
+            value: 'PDF_417',
+            viewValue: 'PDF 417'
+        },
+        {
+            value: 'QR_CODE',
+            viewValue: 'QR CODE'
+        },
+        {
+            value: 'RSS_14',
+            viewValue: 'RSS 14'
+        },
+        {
+            value: 'RSS_EXPANDED',
+            viewValue: 'RSS EXPANDED'
+        },
+        {
+            value: 'UPC_A',
+            viewValue: 'UPC A'
+        },
+        {
+            value: 'UPC_E',
+            viewValue: 'UPC E'
+        },
+        {
+            value: 'UPC_EAN_EXTENSION',
+            viewValue: 'UPC EAN EXTENSION'
+        },
+        {
+            value: 'OTHER',
+            viewValue: 'Other'
         }
-    ]
+    ];
+
 
     redemptionMethods: [
         {
-            value: "online",
+            value: 1,
             viewValue: "Online"
         },
         {
-            value: "store",
+            value: 2,
             viewValue: "In Store"
         },
         {
-            value: "both",
+            value: 3,
             viewValue: "Online & In Store"
         }
     ];
 
+    redemptionCodeOptions = [
+            {
+                value: "none",
+                viewValue: "None"
+            },
+            {
+                value: "manual",
+                viewValue: "Manual"
+            },
+            {
+                value: "upload",
+                viewValue: "Upload"
+            }
+        ];
+
     contentType: string;
+
+    codeOption: string;
 
     contentUuid: string;
 
@@ -72,6 +154,8 @@ export class ContentCreatorFormComponent implements OnInit {
     limitEnabled: boolean;
 
     redemptionFormat: string;
+
+    redemption_method: number;
 
     heroOfferImageConfig: any;
 
@@ -87,18 +171,34 @@ export class ContentCreatorFormComponent implements OnInit {
 
     overlayScratcherImageConfig: any;
 
+    walletImageExists: boolean = false;
+
+    walletImageModified: number;
+
     walletImageConfig: any;
+
+    csvFileConfig: any;
+
+    csvFileExists: boolean = false;
+
+    companyName: string;
 
     form: NgForm;
 
     constructor (
         private uuidApi: UuidApiService,
         private filestack: FilestackService,
-        private dialog: MdDialog
+        private dialog: MdDialog,
     ) {}
 
     ngOnInit() {
-        this.fetchUuid();
+        if (!this.editMode || !this.viewMode) {
+
+            this.fetchUuid();
+
+        }
+
+
         this.contentTypes = [
             {
                 value: "offer",
@@ -116,44 +216,120 @@ export class ContentCreatorFormComponent implements OnInit {
 
         this.redemptionMethods = [
             {
-                value: "online",
+                value: 1,
                 viewValue: "Online"
             },
             {
-                value: "store",
+                value: 2,
                 viewValue: "In Store"
             },
             {
-                value: "both",
+                value: 3,
                 viewValue: "Online & In Store"
             }
         ];
 
         this.redemptionFormats = [
             {
-                value: "format1",
-                viewValue: "Format 1"
+                value: 'AZTEC',
+                viewValue: 'AZTEC'
             },
             {
-                value: "format2",
-                viewValue: "Format 2"
+                value: 'CODABAR',
+                viewValue: 'CODABAR'
             },
             {
-                value: "format3",
-                viewValue: "Format 3"
+                value: 'CODE_39',
+                viewValue: 'CODE 39'
+            },
+            {
+                value: 'CODE_93',
+                viewValue: 'CODE 93'
+            },
+            {
+                value: 'CODE_128',
+                viewValue: 'CODE 128'
+            },
+            {
+                value: 'DATA_MATRIX',
+                viewValue: 'DATA MATRIX'
+            },
+            {
+                value: 'EAN_8',
+                viewValue: 'EAN 8'
+            },
+            {
+                value: 'EAN_13',
+                viewValue: 'EAN 13'
+            },
+            {
+                value: 'ITF',
+                viewValue: 'ITF'
+            },
+            {
+                value: 'MAXICODE',
+                viewValue: 'MAXICODE'
+            },
+            {
+                value: 'PDF_417',
+                viewValue: 'PDF 417'
+            },
+            {
+                value: 'QR_CODE',
+                viewValue: 'QR CODE'
+            },
+            {
+                value: 'RSS_14',
+                viewValue: 'RSS 14'
+            },
+            {
+                value: 'RSS_EXPANDED',
+                viewValue: 'RSS EXPANDED'
+            },
+            {
+                value: 'UPC_A',
+                viewValue: 'UPC A'
+            },
+            {
+                value: 'UPC_E',
+                viewValue: 'UPC E'
+            },
+            {
+                value: 'UPC_EAN_EXTENSION',
+                viewValue: 'UPC EAN EXTENSION'
+            },
+            {
+                value: 'OTHER',
+                viewValue: 'Other'
             }
         ];
+
+        this.redemptionCodeOptions = [
+            {
+                value: "none",
+                viewValue: "None"
+            },
+            {
+                value: "manual",
+                viewValue: "Manual"
+            },
+            {
+                value: "upload",
+                viewValue: "Upload"
+            }
+        ];
+
 
     }
 
     public launchTerms () {
         let config = {
             data: this.content.content_term_id,
-            disableClose: true
+            disableClose: false
         };
         let dialogRef = this.dialog.open(TermsDialogComponent, config);
         dialogRef.afterClosed().subscribe(result => {
-            this.content.content_term_id = result.id;
+            this.content.content_term_id = result.id || this.content.content_term_id;
         });
     }
 
@@ -168,13 +344,16 @@ export class ContentCreatorFormComponent implements OnInit {
     }
 
     public fetchUuid () {
-        this.uuidApi.fetchUuid()
-        .subscribe(
-            data => {
-                this.contentUuid = data.uuid;
-                this.setImageConfig();
-            }
-        )
+        if (this.editMode === false && this.viewMode === false) {
+            this.uuidApi.fetchUuid()
+            .subscribe(
+                    data => {
+                    this.contentUuid = data.uuid;
+                    this.setImageConfig();
+                    this.setCsvConfig();
+                }
+            )
+        } 
     }
 
     public setImageConfig () {
@@ -183,9 +362,11 @@ export class ContentCreatorFormComponent implements OnInit {
         this.overlayScratcherImageConfig = this.filestack.createImageConfig('overlay-scratcher', this.contentUuid, 9/10);
         this.walletImageConfig = this.filestack.createImageConfig('wallet', this.contentUuid, 1/1);
     }
-
-    public setModelDefaults (type: string) {
-        this.content = new ContentModel(this.contentUuid, type, '', '', '', new Date(), new Date());
+    public setCsvConfig() {
+        this.csvFileConfig = this.filestack.createCsvConfig('code-csv', this.contentUuid);
     }
 
+    public setModelDefaults (type: string) {
+            this.content = new ContentModel(this.contentUuid, type, '', '', '', new Date(), new Date(), false, null, '', null);
+    }
 }

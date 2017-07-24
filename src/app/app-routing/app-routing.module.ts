@@ -16,7 +16,6 @@ import { ContentComponent } from '../content/content-component/content.component
 import { ContentCreatorComponent } from '../content/content-creator/content-creator.component';
 import { ContentDetailsComponent } from '../content/content-details/content-details.component';
 import { ContentOverviewComponent } from '../content/content-overview/content-overview.component';
-import { ContentDetailsEditComponent } from './../content/content-details/content-details-edit.component';
 
 import { TriggersComponent } from '../triggers/triggers-component/triggers.component';
 import { TriggerDetailsComponent } from '../triggers/trigger-details/trigger-details.component';

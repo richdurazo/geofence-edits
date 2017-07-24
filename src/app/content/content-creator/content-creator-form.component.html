@@ -58,7 +58,9 @@
                             </md-hint>
                         </md-input-container>
                     </div>
-                    <div>
+
+                    <!--handle company name-->
+<!--                    <div>
                         <md-input-container fxFlex="50">
                             <input
                             mdInput
@@ -75,7 +77,7 @@
                                 </div>
                             </md-hint>
                         </md-input-container>
-                    </div>
+                    </div>-->
 
                     <div fxLayout="row" fxLayout.sm="column" fxLayoutGap="10px" fxFlex="66">
 
@@ -202,7 +204,7 @@
 
                     <!--REDEMPTION OPTIONS-->
 
-                    <div fxLayout="row" *ngIf="contentType === 'offer'"  fxLayoutGap="10px">
+                    <div fxLayout="row" *ngIf="contentType !== 'offer'"  fxLayoutGap="10px">
 
                             <div fxLayout="column" fxFlex="33">
                                 <md-select
@@ -422,7 +424,8 @@
                                                 {{ content.scratcher_description }}
                                             </span>
                                         </h2>
-                                        <div fxLayout="row" fxFlex="20" fxLayoutAlign="center">
+                                        <!--company Name-->
+<!--                                        <div fxLayout="row" fxFlex="20" fxLayoutAlign="center">
 
                                         </div>
 
@@ -430,7 +433,7 @@
                                             <small>
                                                 from {{ content.company_name }}
                                             </small>
-                                        </div>
+                                        </div>-->
 
                                         <div fxLayout="row" fxFlex="40">
                                             <button type="button" name="button" md-raised-button color="primary" fxFlexAlign="end" fxFlex="100">
@@ -473,7 +476,7 @@
 
                                         <h3 class="scratcher-heading">{{ content.display_name }}</h3>
 
-                                        <small>from {{ content.company_name }}</small>
+                                        <!--<small>from company name</small>-->
 
                                         <p>{{ content.description }}</p>
 
@@ -508,7 +511,7 @@
 
                                     <h3 class="scratcher-heading">{{ content.display_name }}</h3>
 
-                                    <small>from {{ content.company_name }}</small>
+                                    <small>from company name</small>
 
                                     <p>{{ content.description }}</p>
 

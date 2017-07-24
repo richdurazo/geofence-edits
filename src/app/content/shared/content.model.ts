@@ -16,7 +16,6 @@ export class ContentModel {
     start_at: any;
     end_at: any;
     content_term_id: number;
-    company_name: string;
 
     constructor (
         uuid: string,

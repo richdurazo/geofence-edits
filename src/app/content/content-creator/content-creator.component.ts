@@ -150,10 +150,10 @@ export class ContentCreatorComponent implements OnInit {
         obj.end_at = this.dateUtils.formatSQLDate(obj.end_at);
 
         if (!this.editMode) {
-            this.contentApi.createContent(obj)
-                .subscribe(
-                    data => this.processSuccess(data)
-                );
+                this.contentApi.createContent(obj)
+                    .subscribe(
+                        data => this.processSuccess(data)
+                    );
             } else {
                 this.contentApi.updateContent(obj)
                     .subscribe(

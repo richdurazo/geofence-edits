@@ -21,7 +21,7 @@
             "prefix": "app",
             "styles": [
                 "styles.scss",
-                "../node_modules/roboto-fontface/css/roboto/sass/roboto-fontface.scss",
+                "assets/roboto-fontface/css/roboto/sass/roboto-fontface.scss",
                 "../node_modules/nvd3/build/nv.d3.css"
             ],
             "scripts": [

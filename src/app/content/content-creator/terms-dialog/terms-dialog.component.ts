@@ -19,7 +19,7 @@ export class TermsDialogComponent implements OnInit {
 
     constructor (public dialogRef: MdDialogRef<TermsDialogComponent>,
                  public termsApi: TermsApiService,
-                 @Optional() @Inject(MD_DIALOG_DATA) private id: any,
+                 @Optional() @Inject(MD_DIALOG_DATA) public id: any,
                  private router: Router) {
                     this.model = {
                         body: ''

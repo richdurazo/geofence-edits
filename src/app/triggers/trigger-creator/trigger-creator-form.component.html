@@ -1,15 +1,16 @@
-<md-card fxFlex="100">
+<md-card class="trigger-details-card" fxFlex='100'>
 
-    <form #form="ngForm" (ngSubmit)="submitForm(form)" novalidate fxLayout="column">
+    <form #form="ngForm" (ngSubmit)="submitForm(form)" class="padding" fxFlex='100' fxLayout="column">
 
         <div fxLayout="row">
 
-            <div fxLayout="column" fxFlex="50">
+            <div fxFlex="25">
 
                 <div *ngIf="triggerType">
 
-                    <div fxLayout="row" *ngIf="!parentCampaign">
-                        <md-select
+                    <div fxLayout="row" *ngIf="!parentCampaign" fxflex>
+
+                        <md-select *ngIf="trigger"
                         placeholder="Campaign"
                         name="camnpaign"
                         [ngModel]="triggerCampaign"
@@ -18,18 +19,20 @@
                                 {{ campaign.name }}
                             </md-option>
                         </md-select>
+
                     </div>
 
                     <div fxLayout="row">
-                        <md-input-container fxFlex="50">
-                            <input
-                            mdInput
-                            name="name"
-                            type="text"
-                            placeholder="Name"
-                            required
-                            [(ngModel)]="trigger.name"
-                            #name="ngModel">
+
+                        <md-input-container fxFlex="75">
+                            <input 
+                                mdInput
+                                name="name"
+                                type="text"
+                                placeholder="Name"
+                                required
+                                [(ngModel)]="trigger.name"
+                                #name="ngModel">
 
                             <md-hint align="start">
                                 <div  *ngIf="form.submitted && name.errors !== null && name.errors.required">
@@ -37,14 +40,15 @@
                                 </div>
                             </md-hint>
                         </md-input-container>
+
                     </div>
 
                 </div>
 
-                 <div fxLayout="row" fxLayout.sm="column" fxLayoutGap="10px">
+                <div fxLayout="row">
 
-                    <div fxFlex="33">
-                        <md-select
+                    <md-select 
+                        fxflex="25"
                         placeholder="Type"
                         name="type"
                         [ngModel]="triggerType"
@@ -52,57 +56,191 @@
                             <md-option *ngFor="let type of triggerTypes" [value]="type.value">
                                 {{ type.viewValue }}
                             </md-option>
-                        </md-select>
-                    </div>
-
-                    <div fxFlex="33" *ngIf="triggerType">
-                        <md-select
-                        placeholder="Delivery Mode"
-                        name="deliveryMode"
-                        [ngModel]="deliveryMode"
-                        (ngModelChange)="setDeliveryMode($event)">
-                            <md-option *ngFor="let mode of deliveryModes" [value]="mode.id">
-                                {{ mode.name }}
-                            </md-option>
-                        </md-select>
-                    </div>                
+                    </md-select>
 
                 </div>
 
-                <div fxLayout="row" fxLayout.sm="column" fxLayoutGap="10px" *ngIf="!triggerType">
+                <div fxLayout="row" *ngIf="!triggerType">
                     <p>To get started, please select a type.</p>
                 </div>
 
-            </div>
+                <div fxLayout="row" *ngIf="triggerType === 'beacon'">
+                    <h3 md-subheader>Beacon(s)</h3>
+                </div>
 
-            <div class="right-column" fxFlex="33" fxLayoutAlign="end">
+                <div fxLayout="row" *ngIf="triggerType === 'beacon'">
 
-                <div class="media-container" *ngIf="triggerType === 'watermark' || triggerType === 'fingerprint'">
-                    <div class="creator-section-label">
-                        Media
+                    <md-list fxLayout="column" *ngIf="beacons">
+                    <div fxLayout="row" *ngIf="!beacon">
+                        <p>Add a Beacon.</p>
+                    </div>
+                        <md-list-item *ngFor="let beacon of beacons">
+                            <span>
+                                <md-icon md-list-icon>place</md-icon>
+                               {{beacon.id}}
+                               <span class="app-toolbar-filler"></span>
+                                <button type="button" md-icon-button>
+                                <md-icon class="beacon-edit" md-list-icon (click)="beaconEdit($event)">edit</md-icon>
+                                </button>
+                            </span>
+
+                        </md-list-item>
+                    </md-list>
+
+                </div>
+                <div fxLayout="row" *ngIf="triggerType === 'geofence'">
+                    <h3 md-subheader>Geofence Status:</h3>
+                </div>
+
+                <div fxLayout="row" *ngIf="triggerType === 'geofence'">
+                    <div fxLayout="row" *ngIf="!geofence">
+                        <p>Add a Geofence.</p>
+                    </div>
+                    <md-list fxLayout="row" *ngIf="geofence">
+                        
+                        <md-list-item>
+                            <span>
+                               Geofence added
+                               <span class="app-toolbar-filler"></span>
+                                <button type="button" md-icon-button>
+                                <md-icon class="beacon-edit" md-list-icon (click)="geofenceEdit($event)">edit</md-icon>
+                                </button>
+                            </span>
+
+                        </md-list-item>
+                    </md-list>
+
+                </div>
+
+                <div fxLayout="row" *ngIf="triggerType">
+                    <h3 md-subheader>Delivery Preset: </h3>
+                </div>
+
+                <div fxLayout="row" *ngIf="triggerType">
+                    <div fxLayout="row" *ngIf="!deliveryPreset">
+                        <p>please add a Delivery Preset.</p>
                     </div>
 
-                    <div class="media-upload-container">
-                        <app-file-uploader
-                        [fileExists]="triggerMediaExists"
-                        [config]="triggerMediaConfig"
-                        (onUpload)="triggerMediaExists = $event">
-                        </app-file-uploader>
-                    </div>
+                    <md-list fxLayout="row" *ngIf="deliveryPreset">
+                        
+                        <md-list-item>
+                            <span>
+                               {{deliveryPreset.name}}
+                               <span class="app-toolbar-filler"></span>
+                                <button type="button" md-icon-button>
+                                <md-icon class="beacon-edit" md-list-icon (click)="deliveryPresetEdit($event)">edit</md-icon>
+                                </button>
+                            </span>
+
+                        </md-list-item>
+                    </md-list>
+
+                </div>
+
+                <div  class="create-trigger-button" fxLayout="row" *ngIf="!editMode">
+
+                    <button
+                        type="submit" 
+                        *ngIf="triggerType"
+                        class="common-form-submit" 
+                        md-raised-button 
+                        [disabled]="!form.valid" 
+                        color="primary">
+                            Create Trigger
+                    </button>
+
+                </div>
+
+                <div  class="create-trigger-button" fxLayout="row" *ngIf="editMode">
+
+                    <button
+                        type="submit" 
+                        *ngIf="triggerType"
+                        class="common-form-submit" 
+                        md-raised-button 
+                        [disabled]="!form.valid" 
+                        color="primary">
+                            Update Trigger
+                    </button>
+
                 </div>
 
             </div>
 
-            <div fxFlex="10">
+            <!-- right content-->
+    
+            <div fxFlex="75">
+
+                <md-tab-group *ngIf="triggerType" class="highlight-well">
+
+                    <md-tab label="Geofence Options" *ngIf="triggerType === 'geofence'">
+<!--                        <app-geofence-creator
+                        [geofence]="geofence"
+                        [trigger]="editTrigger"
+                        (onCreate)="geofenceCreated($event)">
+                        </app-geofence-creator>-->
+
+                    </md-tab>
+
+
+                    <md-tab label="Audio Options" *ngIf="triggerType === 'audio'">
+
+                        <div fxFlex="70" fxLayout="column">
+                            
+                            <div fxLayout="row" class="right-column" fxLayoutAlign="center">
+
+                                <div fxLayout="column" class="media-container">
+
+                                    <div class="creator-section-label">
+                                        Media
+                                    </div>
+
+                                    <div class="media-upload-container">
+                                        <app-file-uploader
+                                        [fileExists]="triggerMediaExists"
+                                        [config]="triggerMediaConfig"
+                                        (onUpload)="triggerMediaExists = $event">
+                                        </app-file-uploader>
+                                    </div>
+                                    
+                                </div>
+
+                            </div>  
+
+                        </div>
+
+                    </md-tab>
+
+                    <md-tab label="Beacon Options" *ngIf="triggerType === 'beacon'">
+
+                        <!--beacon stuff-->
+<!--                        <app-beacon-creator
+                            (onCreate)="beaconCreated($event)">
+                        </app-beacon-creator>-->
+
+                    </md-tab>
+
+                    <md-tab label="Delivery Preset Options" *ngIf="triggerType">
+                        
+                        <div fxLayout="column" fxFlex="100">
+                                
+<!--                                <app-delivery-preset-options
+                                (onSelect)="presetSelected($event)">
+                                </app-delivery-preset-options>-->
+
+                        </div>
+            
+
+                    </md-tab>
+
+                </md-tab-group>
 
             </div>
 
-        </div>
-
-        <div fxLayoutAlign="end" fxFlex="100" *ngIf="triggerType">
-            <button type="submit" class="common-form-submit" md-raised-button color="primary">Create</button>
         </div>
 
     </form>
 
 </md-card>
+
+

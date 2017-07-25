@@ -1,3 +1,5 @@
+import { GeofenceModel } from './../shared/geofence.model';
+import { BeaconModel } from './../shared/beacon.model';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { CampaignModel } from '../../campaigns/shared/campaign.model';
@@ -19,6 +21,12 @@ export class TriggerCreatorFormComponent implements OnInit {
 
     @Output() onCreate: EventEmitter<any> = new EventEmitter();
 
+    beacon: BeaconModel;
+
+    beacons: BeaconModel[] = [];
+
+    geofence: GeofenceModel;
+
     trigger: TriggerModel;
 
     triggerMediaConfig: any;
@@ -29,24 +37,28 @@ export class TriggerCreatorFormComponent implements OnInit {
 
     triggerCampaign: CampaignModel;
 
+    triggerName: string = '';
+
     campaigns: CampaignModel[];
+
+    campaign_id: number;
 
     triggerTypes: [
         {
-            value: "touch",
-            viewValue: "Touch"
+            value: 'touch',
+            viewValue: 'Touch'
         },
         {
-            value: "watermark",
-            viewValue: "Audio Watermark"
+            value: 'beacon',
+            viewValue: 'Beacon'
         },
         {
-            value: "fingerprint",
-            viewValue: "Audio Fingerprint"
+            value: 'geofence',
+            viewValue: 'Geofence'
         },
         {
-            value: "beacon",
-            viewValue: "Beacon"
+            value: 'audio',
+            viewValue: 'Audio'
         }
     ];
 
@@ -63,24 +75,26 @@ export class TriggerCreatorFormComponent implements OnInit {
 
         if (!this.parentCampaign) {
             this.getCampaigns();
+        } else {
+            this.campaign_id = this.parentCampaign.id;
         }
 
         this.triggerTypes = [
             {
-                value: "touch",
-                viewValue: "Touch"
+                value: 'touch',
+                viewValue: 'Touch'
             },
             {
-                value: "watermark",
-                viewValue: "Audio Watermark"
+                value: 'beacon',
+                viewValue: 'Beacon'
             },
             {
-                value: "fingerprint",
-                viewValue: "Audio Fingerprint"
+                value: 'geofence',
+                viewValue: 'Geofence'
             },
             {
-                value: "beacon",
-                viewValue: "Beacon"
+                value: 'audio',
+                viewValue: 'Audio'
             }
         ];
     }
@@ -114,18 +128,18 @@ export class TriggerCreatorFormComponent implements OnInit {
         }
     }
 
-    public setType (event) {
+    public setType (event, form) {
         this.triggerType = event;
-
         if (!this.trigger) {
-            this.trigger = new TriggerModel('', event, this.triggerUuid, this.trigger.campaign_id, this.trigger.delivery_preset_id);
+            this.trigger = new TriggerModel(this.triggerName, this.triggerType, this.triggerUuid, this.campaign_id, null);
         } else {
             this.trigger.type = this.triggerType;
         }
-
         if (this.parentCampaign) {
             this.trigger.campaign_id = this.parentCampaign.id;
         }
+        this.trigger = new TriggerModel(this.triggerName, this.triggerType, this.triggerUuid, this.campaign_id, null);
+
     }
 
     public setCampaign (data) {

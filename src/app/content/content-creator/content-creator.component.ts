@@ -187,9 +187,6 @@ export class ContentCreatorComponent implements OnInit {
             this.creatorForm.scratcherEnabled = true;
             this.creatorForm.content.scratcher_enabled = true;
             this.creatorForm.setImageConfig();
-            this.creatorForm.heroOfferImageExists = true;
-            this.creatorForm.heroScratcherImageExists = true;
-            this.creatorForm.walletImageExists = true;
         }
         if (data.redemption_code) {
             this.creatorForm.codeOption = 'manual';

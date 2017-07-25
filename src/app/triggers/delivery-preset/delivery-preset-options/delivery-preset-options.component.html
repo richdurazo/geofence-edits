@@ -1,0 +1,95 @@
+<div fxLayout="column" fxFlex="100" class="highlight-well padding">
+<div fxLayout="row">
+
+    <div fxFlex="33">
+
+        <md-select 
+            placeholder="Delivery Preset Option"
+            name="presetOption"
+            [ngModel]="presetOption"
+            (ngModelChange)="setDeliveryPresetOption($event)">
+            <md-option *ngFor="let presetOption of deliveryPresetOptions" [value]="presetOption.value">
+            {{ presetOption.viewValue }}
+            </md-option>
+        </md-select>
+    </div>
+    <div fxFlex ="67">
+
+        <div *ngIf="presetOption === 'usePreset'" fxFlex="33">
+            <md-select
+                *ngIf="!editing"
+                fxFlex
+                placeholder="Delivery Preset" 
+                [ngModel]="deliveryPreset" 
+                name="deliveryPreset" 
+                (ngModelChange)="setDeliveryPreset($event)"
+                #deliveryPreset="ngModel">
+                    <md-option *ngFor="let deliveryPreset of deliveryPresets" [value]="deliveryPreset.id">
+                   {{ deliveryPreset.name }}
+                    </md-option>
+            </md-select>
+
+        </div>
+        <div *ngIf="editing" fxFlex="33">
+            {{ deliveryPreset.name }}
+        </div>
+        
+
+</div>
+    </div>   
+
+    <app-delivery-preset-creator
+    *ngIf="presetOption === 'createPreset'"
+    (onCreate)="presetCreated($event)">
+    </app-delivery-preset-creator>
+
+    <div fxLayout="row">
+
+        <div fxFlex="100"> 
+
+            <div fxFlex="column">
+                
+                <div class="trigger-content-group-container" fxLayout="column" *ngIf="presetOption === 'usePreset'">
+
+                    <div class="padded-container"  *ngIf="deliveryPreset">
+
+                        <app-content-group-details
+                            class="rendered-content-group"
+                            [trigger]="trigger"
+                            [contentGroup]="contentGroup"
+                            *ngFor="let contentGroup of contentGroups">
+                        </app-content-group-details>
+
+                        <app-content-group-creator
+                            [trigger]="trigger"
+                            [deliveryPreset]="deliveryPreset"
+                            (onCreate)="contentCreated($event)"
+                            *ngIf="adding">
+                        </app-content-group-creator>
+
+                    </div>
+
+                    <div class="add-content-group-row" fxLayout="column" *ngIf="!adding && editing">
+
+                        <div fxLayout="row" fxFlex="100" fxFlexAlign="end" *ngIf="deliveryPreset">
+
+                            <button type="button" md-raised-button (click)="adding = !adding">
+                                <md-icon>
+                                    add
+                                </md-icon>
+                                Add Content Group
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>         
+
+        </div>
+
+    </div>
+
+</div>

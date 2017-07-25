@@ -95,9 +95,15 @@ body {
     }
 
     // COMMON UTILITIES
+    .app-toolbar-filler {
+        flex: 1 1 auto;
+    }
     fieldset {
-    border: 0;
-}
+        border: 0;
+    }
+    .padding {
+        padding: 24px;
+    }
     .relative {
         position: relative;
     }
@@ -159,6 +165,10 @@ body {
     }
 
     // FORMS
+    .highlight-well {
+        background-color: $light-grey;
+
+    }
     .form-highlight-well {
         background-color: $light-grey;
         margin-left: -$common-margin;
@@ -574,5 +584,10 @@ body {
             margin-bottom: 0;
         }
     }
+
+    md-card.content-group.mat-card {
+        padding: 0px;
+    }
+
 
 }

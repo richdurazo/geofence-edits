@@ -1,3 +1,4 @@
+import { DeliveryPresetModel } from './../shared/delivery-preset.model';
 import { GeofenceModel } from './../shared/geofence.model';
 import { BeaconModel } from './../shared/beacon.model';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
@@ -24,6 +25,8 @@ export class TriggerCreatorFormComponent implements OnInit {
     beacon: BeaconModel;
 
     beacons: BeaconModel[] = [];
+
+    deliveryPreset: DeliveryPresetModel;
 
     geofence: GeofenceModel;
 
@@ -126,6 +129,16 @@ export class TriggerCreatorFormComponent implements OnInit {
         if (this.onCreate) {
             this.onCreate.emit(data);
         }
+    }
+
+    public presetSelected(data) {
+        this.deliveryPreset = data;
+        this.trigger.delivery_preset_id = data.id;
+    }
+
+    public presetCreated(data) {
+        this.deliveryPreset = data;
+        this.trigger.delivery_preset_id = data.id;
     }
 
     public setType (event, form) {

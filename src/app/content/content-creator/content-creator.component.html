@@ -59,7 +59,7 @@
             md-button
             color="primary"
             (click)="onCancel()"
-            *ngIf="editMode">
+            *ngIf="editMode && !viewMode">
             Cancel
         </button>
         <button
@@ -68,7 +68,7 @@
             md-raised-button
             color="primary"
             (click)="submitForm($event)"
-            *ngIf="editMode">
+            *ngIf="editMode && !viewMode">
             Update
         </button>
         <button
@@ -77,7 +77,7 @@
             md-raised-button
             color="primary"
             (click)="onEditContent()"
-            *ngIf="viewMode">
+            *ngIf="viewMode && !editMode">
             Edit
         </button>
     </div>

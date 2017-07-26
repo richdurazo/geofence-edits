@@ -72,6 +72,7 @@ import { DeliveryPresetCreatorComponent } from './triggers/delivery-preset/deliv
 import { GeofenceCreatorComponent } from './triggers/geofence/geofence-creator/geofence-creator.component';
 import { AgmCoreModule } from '@agm/core';
 import {} from '@types/googlemaps';
+import { BeaconCreatorComponent } from './triggers/beacon/beacon-creator/beacon-creator.component';
 
 
 @NgModule({
@@ -117,7 +118,8 @@ import {} from '@types/googlemaps';
         DialogConfirmComponent,
         DeliveryPresetOptionsComponent,
         DeliveryPresetCreatorComponent,
-        GeofenceCreatorComponent
+        GeofenceCreatorComponent,
+        BeaconCreatorComponent
     ],
     imports: [
         AppRoutingModule,

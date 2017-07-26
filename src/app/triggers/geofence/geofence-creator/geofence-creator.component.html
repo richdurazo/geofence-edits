@@ -1,6 +1,7 @@
 <div class="geofence-container" class="padding">
 
     <form [formGroup]="geofenceForm" (ngSubmit)="onSubmit()" fxFlex='100' fxLayout="column" *ngIf="geofence">
+        <fieldset [disabled]="geofenceCreated">
 
         <div fxLayout="row">
 
@@ -95,6 +96,7 @@
                 
                 <div fxLayout="row" fxLayoutAlign="center">
                     <button
+                    [disabled]="!geofenceForm.valid || geofenceCreated" 
                         type="submit"
                         md-raised-button>
                         <md-icon>
@@ -133,7 +135,7 @@
             </div>
 
         </div>
-
+        </fieldset>
     </form>
 
 </div>

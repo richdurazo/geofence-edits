@@ -77,7 +77,7 @@
                         <md-list-item *ngFor="let beacon of beacons">
                             <span>
                                 <md-icon md-list-icon>place</md-icon>
-                               {{beacon.id}}
+                               {{beacon.uniqueId}}
                                <span class="app-toolbar-filler"></span>
                                 <button type="button" md-icon-button>
                                 <md-icon class="beacon-edit" md-list-icon (click)="beaconEdit($event)">edit</md-icon>
@@ -214,9 +214,9 @@
                     <md-tab label="Beacon Options" *ngIf="triggerType === 'beacon'">
 
                         <!--beacon stuff-->
-<!--                        <app-beacon-creator
+                        <app-beacon-creator
                             (onCreate)="beaconCreated($event)">
-                        </app-beacon-creator>-->
+                        </app-beacon-creator>
 
                     </md-tab>
 

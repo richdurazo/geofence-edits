@@ -43,6 +43,8 @@ export class GeofenceCreatorComponent implements OnInit {
   searchControl: FormControl;
 
   geofenceForm: FormGroup;
+  
+  geofenceCreated: boolean = false;
 
   triggerId: number;
 
@@ -83,8 +85,10 @@ export class GeofenceCreatorComponent implements OnInit {
       this.longitude = this.geofence.geometry.coordinates[0];
       this.initForm();
     }
-
-
+    this.geofenceForm.valueChanges
+       .subscribe(value => {
+         this.radius = value.rad
+       });
 
 
     this.mapsAPILoader.load().then(() => {
@@ -153,11 +157,11 @@ export class GeofenceCreatorComponent implements OnInit {
       'lat': new FormControl({value: lat, disabled: true}),
       'lng': new FormControl({value: lng, disabled: true}),
     });
-    console.log(this.geofenceForm);
   }
 
 
   onSubmit() {
+    this.geofenceCreated = true;
     let rad = this.radius;
     let location = JSON.stringify({type: "Point", coordinates: this.coordinates})
     let geofence = {address: this.address, geometry: location, radius: rad};
@@ -222,14 +226,13 @@ export class GeofenceCreatorComponent implements OnInit {
     if(this.radiusChange) {
       this.radiusChange.emit(data)
       this.radius = data;
+      console.log(this.radius)
       this.geofenceForm.patchValue({
         'rad': this.radius
       });
     }
   }
- initMap() {
-   console.log('hi')
- }
+
 
 }
 

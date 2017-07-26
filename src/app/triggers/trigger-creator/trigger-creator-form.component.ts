@@ -118,11 +118,30 @@ export class TriggerCreatorFormComponent implements OnInit {
             return;
         }
         var obj = Object.assign({}, this.trigger);
+        console.log(obj)
 
-        this.triggerApi.createTrigger(obj)
-        .subscribe(
-            data => this.processSuccess(data)
-        )
+        if (obj.type === "touch") {
+
+        this.triggerApi.createTouchTrigger(obj)
+            .subscribe(data => {
+                this.processSuccess(data.trigger);
+            });
+        }
+        if (this.triggerType === "geofence") {
+            console.log(obj)
+            this.triggerApi.createGeofenceTrigger(obj)
+                .subscribe(data => {
+                    this.attachPreset(data.trigger.id);
+            });
+        } 
+    }
+    attachPreset(id) {
+        this.trigger.id = id;
+        this.trigger.delivery_preset_id = this.deliveryPreset.id;
+        this.triggerApi.updateTrigger(this.trigger)
+            .subscribe(data => {
+                this.processSuccess(this.trigger);
+            });
     }
 
     processSuccess (data) {
@@ -143,6 +162,7 @@ export class TriggerCreatorFormComponent implements OnInit {
 
     public setType (event, form) {
         this.triggerType = event;
+        console.log(event);
         if (!this.trigger) {
             this.trigger = new TriggerModel(this.triggerName, this.triggerType, this.triggerUuid, this.campaign_id, null);
         } else {
@@ -166,6 +186,14 @@ export class TriggerCreatorFormComponent implements OnInit {
                 this.campaigns = data;
             }
         );
+    }
+
+    public geofenceCreated (data) {
+        this.geofence = data;
+        this.trigger.address = this.geofence.address;
+        this.trigger.geometry = data.geometry;
+        this.trigger.radius = data.radius;
+        this.trigger.type = data.type;
     }
 
 }

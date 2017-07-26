@@ -69,6 +69,10 @@ import { TargetTypeaheadComponent } from './shared/target-typeahead/target-typea
 import { DialogConfirmComponent } from './shared/dialog-confirm/dialog-confirm.component';
 import { DeliveryPresetOptionsComponent } from './triggers/delivery-preset/delivery-preset-options/delivery-preset-options.component';
 import { DeliveryPresetCreatorComponent } from './triggers/delivery-preset/delivery-preset-creator/delivery-preset-creator.component';
+import { GeofenceCreatorComponent } from './triggers/geofence/geofence-creator/geofence-creator.component';
+import { AgmCoreModule } from '@agm/core';
+import {} from '@types/googlemaps';
+
 
 @NgModule({
     declarations: [
@@ -112,7 +116,8 @@ import { DeliveryPresetCreatorComponent } from './triggers/delivery-preset/deliv
         TargetTypeaheadComponent,
         DialogConfirmComponent,
         DeliveryPresetOptionsComponent,
-        DeliveryPresetCreatorComponent
+        DeliveryPresetCreatorComponent,
+        GeofenceCreatorComponent
     ],
     imports: [
         AppRoutingModule,
@@ -123,6 +128,10 @@ import { DeliveryPresetCreatorComponent } from './triggers/delivery-preset/deliv
         ReactiveFormsModule,
         HttpModule,
         MaterialModule,
+        AgmCoreModule.forRoot({
+            apiKey: 'AIzaSyDmBfBqrgXymd47v7N_u9dBzxLanZBi1CI',
+            libraries: ['places']
+        })
     ],
     providers: [
         AuthCustomHttpService,

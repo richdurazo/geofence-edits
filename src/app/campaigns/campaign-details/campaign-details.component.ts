@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { TriggerModel } from '../../triggers/shared/trigger.model';
@@ -12,6 +12,8 @@ import { CampaignModel } from '../shared/campaign.model';
   styleUrls: ['./campaign-details.component.scss']
 })
 export class CampaignDetailsComponent implements OnInit {
+
+    @Input() trigger: TriggerModel;
 
     campaign: CampaignModel;
 
@@ -58,6 +60,20 @@ export class CampaignDetailsComponent implements OnInit {
     public triggerCreated (data) {
         this.triggers.push(data);
         this.adding = false;
+        this.campaignApi.attachTrigger(this.id, data.id)
+            .subscribe(data => {
+                console.log(data);
+            }, error => {
+                console.log('error', error)
+            })
+    }
+    public triggerDeleted(data) {
+        for (let trigger of this.triggers) {
+            if (data === trigger.id) {
+                let idx = this.triggers.indexOf(trigger);
+                this.triggers.splice(idx, 1);
+            }
+        }
     }
 
 }

@@ -18,7 +18,11 @@ import { TriggerModel } from '../shared/trigger.model';
 })
 export class TriggerCreatorFormComponent implements OnInit {
 
+    @Input() editTrigger: TriggerModel;
+
     @Input() parentCampaign: CampaignModel;
+
+    @Input() presetDelivery: DeliveryPresetModel;
 
     @Output() onCreate: EventEmitter<any> = new EventEmitter();
 
@@ -29,6 +33,8 @@ export class TriggerCreatorFormComponent implements OnInit {
     deliveryPreset: DeliveryPresetModel;
 
     geofence: GeofenceModel;
+
+    editMode: boolean;
 
     trigger: TriggerModel;
 
@@ -81,6 +87,12 @@ export class TriggerCreatorFormComponent implements OnInit {
         } else {
             this.campaign_id = this.parentCampaign.id;
         }
+        if(this.editTrigger) {
+            this.editMode = true;
+            this.trigger = this.editTrigger;
+            this.setTriggerType(this.trigger.triggerable_type);
+            this.deliveryPreset = this.presetDelivery;
+        }
 
         this.triggerTypes = [
             {
@@ -112,6 +124,38 @@ export class TriggerCreatorFormComponent implements OnInit {
                 this.triggerMediaConfig = this.filestack.createMediaConfig('audio-trigger', this.triggerUuid);
             }
         )
+    }
+
+
+    setTriggerType(str) {
+        let substring: string;
+        const types: Array<string> = ['geofence', 'audio', 'touch', 'beacon'];
+        if (str !== undefined) {
+            for (let type of types) {
+                substring = type;
+                if (str.toLowerCase().includes(substring)) {
+                    this.triggerType = substring;
+                    this.trigger.type = substring;
+                    this.initType(this.trigger.type);
+                }
+            }
+        }
+
+    }
+
+    initType(type) {
+        if (type === 'geofence') {
+            this.getGeofenceTrigger(this.trigger.triggerable_id)
+        }
+    }
+
+    getGeofenceTrigger(id) {
+        this.triggerApi.getGeofenceTrigger(id)
+            .subscribe(data => {
+                this.geofence = data;
+                                console.log('this geofence', this.geofence)
+
+            })
     }
 
     public submitForm (form) {

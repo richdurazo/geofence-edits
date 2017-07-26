@@ -65,19 +65,20 @@
                 </div>
 
                 <div fxLayout="row" *ngIf="triggerType === 'beacon'">
-                    <h3 md-subheader>Beacon(s)</h3>
+                    <h4>Beacon(s)</h4>
                 </div>
 
                 <div fxLayout="row" *ngIf="triggerType === 'beacon'">
 
                     <md-list fxLayout="column" *ngIf="beacons">
                     <div fxLayout="row" *ngIf="!beacon">
-                        <p>Add a Beacon.</p>
+                        <p>Please add a Beacon</p>
                     </div>
                         <md-list-item *ngFor="let beacon of beacons">
+                            <p>{{beacon.uniqueId}}</p>
                             <span>
                                 <md-icon md-list-icon>place</md-icon>
-                               {{beacon.uniqueId}}
+                               
                                <span class="app-toolbar-filler"></span>
                                 <button type="button" md-icon-button>
                                 <md-icon class="beacon-edit" md-list-icon (click)="beaconEdit($event)">edit</md-icon>
@@ -89,18 +90,17 @@
 
                 </div>
                 <div fxLayout="row" *ngIf="triggerType === 'geofence'">
-                    <h3 md-subheader>Geofence Status:</h3>
+                    <h4>Geofence Status:</h4>
                 </div>
 
                 <div fxLayout="row" *ngIf="triggerType === 'geofence'">
                     <div fxLayout="row" *ngIf="!geofence">
-                        <p>Add a Geofence.</p>
+                        <p>Please add a Geofence</p>
                     </div>
                     <md-list fxLayout="row" *ngIf="geofence">
-                        
+                        <p>Geofence added</p>
                         <md-list-item>
                             <span>
-                               Geofence added
                                <span class="app-toolbar-filler"></span>
                                 <button type="button" md-icon-button>
                                 <md-icon class="beacon-edit" md-list-icon (click)="geofenceEdit($event)">edit</md-icon>
@@ -113,19 +113,19 @@
                 </div>
 
                 <div fxLayout="row" *ngIf="triggerType">
-                    <h3 md-subheader>Delivery Preset: </h3>
+                    <h4>Delivery Preset: </h4>
                 </div>
 
                 <div fxLayout="row" *ngIf="triggerType">
                     <div fxLayout="row" *ngIf="!deliveryPreset">
-                        <p>please add a Delivery Preset.</p>
+                        <p>Please add a Delivery Preset.</p>
                     </div>
 
                     <md-list fxLayout="row" *ngIf="deliveryPreset">
-                        
+                        <p>{{deliveryPreset.name}}</p>
                         <md-list-item>
                             <span>
-                               {{deliveryPreset.name}}
+                               
                                <span class="app-toolbar-filler"></span>
                                 <button type="button" md-icon-button>
                                 <md-icon class="beacon-edit" md-list-icon (click)="deliveryPresetEdit($event)">edit</md-icon>
@@ -225,7 +225,8 @@
                         <div fxLayout="column" fxFlex="100">
                                 
                                 <app-delivery-preset-options
-                                (onSelect)="presetSelected($event)">
+                                (onSelect)="presetSelected($event)"
+                                [presetDelivery]="presetDelivery">
                                 </app-delivery-preset-options>
 
                         </div>

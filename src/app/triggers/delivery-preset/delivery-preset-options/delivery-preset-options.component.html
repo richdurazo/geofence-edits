@@ -20,7 +20,7 @@
                 *ngIf="!editing"
                 fxFlex
                 placeholder="Delivery Preset" 
-                [ngModel]="deliveryPreset" 
+                [ngModel]="deliveryPreset.id" 
                 name="deliveryPreset" 
                 (ngModelChange)="setDeliveryPreset($event)"
                 #deliveryPreset="ngModel">

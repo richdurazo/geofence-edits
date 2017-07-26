@@ -1,18 +1,30 @@
-<p>ConFirm Delete</p>
-<p> Are you sure you would like to remove {{data.name}}</p>
-<button
-  type="button" 
-  md-raised-button
-  color="warn"
-  (click)="onDelete()">
-  Delete
-</button>
-<button
-  type="button"
-  md-button color="primary"
-  (click)="dialogRef.close(true)">
-  Cancel
-</button>
+<div class="confirm-modal padding" fxLayout=column>
+  <div class="confirm-message" fxLayout="row">
+  <p> Are you sure you would like to remove {{data.name}} ?</p>
+</div>
+<div class="confirm-sub-message" fxLayout="row" fxLayoutAlign="center">
+<small>This cannot be undone</small>
+</div>
+<div class="confirm-modal-actions" fxLayout="row">
+  <button
+    type="button"
+    md-raised-button
+    (click)="dialogRef.close(true)">
+    CANCEL
+  </button>
+  <button
+    type="button"
+    class="common-form-submit" 
+    color="primary"
+    md-raised-button
+    (click)="onDelete()">
+    CONFIRM
+  </button>
+</div>
+
+</div>
+
+
 
 
 

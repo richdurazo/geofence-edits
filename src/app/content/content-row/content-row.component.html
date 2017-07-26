@@ -1,3 +1,13 @@
-<div class="">
-    {{ item.name }}
+<div fxLayout="row" class="content-list-item">
+    <span fxLayoutAlign="start center">
+        <md-icon>insert_drive_file</md-icon>
+            <p class="content-item">{{ item.name }}</p>
+    </span>
+            <span class="app-toolbar-filler"></span>
+
+    <div fxLayoutAlign="end center">
+        <p class="content-amount">amount Left</p>
+        <md-icon>delete</md-icon>
+    </div>
 </div>
+

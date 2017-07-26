@@ -3,7 +3,7 @@ import { ContentGroupModel } from './../../../content/shared/content-group.model
 import { TriggerApiService } from './../../shared/trigger-api.service';
 import { DeliveryPresetModel } from './../../shared/delivery-preset.model';
 import { NgForm } from '@angular/forms';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 
 @Component({
   selector: 'app-delivery-preset-options',
@@ -13,6 +13,8 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 export class DeliveryPresetOptionsComponent implements OnInit {
     
     @Output() onSelect: EventEmitter<any> = new EventEmitter();
+
+    @Input() presetDelivery: DeliveryPresetModel;
 
     adding: boolean = false;
 
@@ -67,6 +69,10 @@ export class DeliveryPresetOptionsComponent implements OnInit {
                  private deliveryPresetApi: DeliveryPresetApiService ) { }
 
     ngOnInit() {
+        if (this.presetDelivery) {
+            this.presetOption = "usePreset";
+            this.deliveryPreset = this.presetDelivery;
+        }
         this.getDeliveryPresets();
     }
 

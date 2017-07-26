@@ -186,8 +186,8 @@ body {
 
     // COMMON TOOLBAR
     md-toolbar.mat-toolbar {
-        position: absolute;
-        z-index: 2;
+/*        position: absolute;
+        z-index: 2;*/
 
         .company-logo {
             color: $nav-text-color;
@@ -261,7 +261,20 @@ body {
             }
         }
     }
+    // map
+    agm-map {
+  height: 400px;
+  width: 400px;
+}
+    // modal
 
+    .confirm-modal {
+        padding: 24px;
+    }
+    .confirm-modal-actions{
+        margin: 0 auto;
+        padding: 24px;
+    }
     // CONTENT CREATOR
     .creator-section-label {
         font-size: $small-font-size;

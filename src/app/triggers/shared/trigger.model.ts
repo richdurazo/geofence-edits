@@ -17,6 +17,7 @@ export class TriggerModel {
     trigger_id?: number;
     triggerable_type?: string;
     triggerable_id?: number;
+    file_name?: string;
 
     constructor (
         name: string,
@@ -35,7 +36,9 @@ export class TriggerModel {
         client_id?: string,
         trigger_id?: number,
         triggerable_type?: string,
-        triggerable_id?: number
+        triggerable_id?: number,
+        file_name?: string
+
 
     ) {
         this.name = name;
@@ -55,6 +58,7 @@ export class TriggerModel {
         this.trigger_id = trigger_id;
         this.triggerable_type = triggerable_type;
         this.triggerable_id = triggerable_id;
+        this.file_name = file_name;
 
     }
 }

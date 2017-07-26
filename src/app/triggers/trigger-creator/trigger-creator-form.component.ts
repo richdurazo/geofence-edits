@@ -108,6 +108,7 @@ export class TriggerCreatorFormComponent implements OnInit {
         .subscribe(
             data => {
                 this.triggerUuid = data.uuid;
+                console.log(data.uuid)
                 this.triggerMediaConfig = this.filestack.createMediaConfig('audio-trigger', this.triggerUuid);
             }
         )
@@ -118,9 +119,8 @@ export class TriggerCreatorFormComponent implements OnInit {
             return;
         }
         var obj = Object.assign({}, this.trigger);
-        console.log(obj)
 
-        if (obj.type === "touch") {
+        if (this.triggerType  === "touch") {
 
         this.triggerApi.createTouchTrigger(obj)
             .subscribe(data => {
@@ -134,6 +134,20 @@ export class TriggerCreatorFormComponent implements OnInit {
                     this.attachPreset(data.trigger.id);
             });
         } 
+        if (this.triggerType === "beacon") {
+            this.triggerApi.createBeaconTrigger(obj)
+                .subscribe(data => {
+                    this.processSuccess(data.trigger.id)
+                })
+        }
+
+        if (this.triggerType  === "audio") {
+
+        this.triggerApi.createAudioTrigger(obj)
+            .subscribe(data => {
+                this.processSuccess(data.trigger.id);
+            });
+        }
     }
     attachPreset(id) {
         this.trigger.id = id;
@@ -194,6 +208,21 @@ export class TriggerCreatorFormComponent implements OnInit {
         this.trigger.geometry = data.geometry;
         this.trigger.radius = data.radius;
         this.trigger.type = data.type;
+    }
+    public beaconCreated (data) {
+        this.beacons.push(data);
+        this.beacon = data;
+        console.log(this.beacon);
+        this.trigger.active = data.active;
+        this.trigger.client_id = data.client_id;
+        this.trigger.address = data.address;
+        this.trigger.latitude = data.latitude;
+        this.trigger.longitude = data.longitude;
+        this.trigger.uniqueId = data.uniqueId;
+        this.trigger.vendor = data.vendor;
+
+        console.log(this.trigger)
+
     }
 
 }

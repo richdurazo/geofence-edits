@@ -55,6 +55,10 @@ export class TriggerApiService {
       return this.authCustomHttp.post(AppSettings.API_ROOT + '/beacon', data)
       .map(res => res.json())
   }
+  createAudioTrigger (data) {
+      return this.authCustomHttp.post(AppSettings.API_ROOT + '/beacon', data)
+      .map(res => res.json())
+  }
 
   getDeliveryPresetContentGroup(data) {
       return this.authCustomHttp.get(AppSettings.API_ROOT + '/delivery-preset/' + data + '/content-group')

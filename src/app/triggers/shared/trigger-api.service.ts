@@ -56,7 +56,7 @@ export class TriggerApiService {
       .map(res => res.json())
   }
   createAudioTrigger (data) {
-      return this.authCustomHttp.post(AppSettings.API_ROOT + '/beacon', data)
+      return this.authCustomHttp.post(AppSettings.API_ROOT + '/audio', data)
       .map(res => res.json())
   }
 

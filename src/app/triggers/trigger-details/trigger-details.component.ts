@@ -19,7 +19,6 @@ export class TriggerDetailsComponent implements OnInit {
 
     @Output() onRemove: EventEmitter<any> = new EventEmitter();
 
-
     id: string;
 
     deliveryPresetId: number;
@@ -96,7 +95,6 @@ export class TriggerDetailsComponent implements OnInit {
                 private deliveryPresetApi: DeliveryPresetApiService) { }
 
     ngOnInit() {
-        console.log('this', this.trigger)
         if (this.trigger) {
             this.initTrigger(this.trigger.delivery_preset_id);
             this.setTriggerType(this.trigger.triggerable_type)
@@ -172,6 +170,7 @@ export class TriggerDetailsComponent implements OnInit {
             this.sub.unsubscribe();
         }
     }
+
     setTriggerType(str) {
         let substring: string;
         const types: Array<string> = ['geofence', 'audio', 'touch', 'beacon'];
@@ -211,11 +210,8 @@ export class TriggerDetailsComponent implements OnInit {
     this.deliveryPresetApi.getDeliveryPreset(id)
         .subscribe(data => {
             this.deliveryPreset = data;
-            this.trigger.delivery_preset_id = data.id;
-                            this.presetOption = 'usePreset';
-                        console.log('dp data', this.deliveryPreset)
-
-        })
+            this.presetOption = 'usePreset';
+        });
     }
 
     public getDeliveryPresets() {
@@ -223,17 +219,15 @@ export class TriggerDetailsComponent implements OnInit {
         .subscribe(
             data => {
                 this.deliveryPresets = data;
-                console.log('dps', this.deliveryPresets)
             }
         );
     }
-    setDeliveryPreset(event) {
-        console.log(event)
-        this.trigger.delivery_preset_id = event;
-        this.initTrigger(event)
-        
 
+    setDeliveryPreset(event) {
+        this.trigger.delivery_preset_id = event;
+        this.initTrigger(event);
     }
+
     setDeliveryPresetOption(event) {
         this.presetOption = event;
         if (this.presetOption === 'createPreset') {
@@ -246,8 +240,8 @@ export class TriggerDetailsComponent implements OnInit {
     }
 
     public submitForm(form) {
-        console.log(form)
-    }
+/*        console.log(form)
+*/    }
     onCancel(form) {
 /*        this.initTrigger(this.trigger.delivery_preset_id)
         console.log('reset form', form)*/
@@ -266,15 +260,14 @@ export class TriggerDetailsComponent implements OnInit {
         if(this.onRemove) {
             this.onRemove.emit(data)
         }
-    }    
-    
+    }
+
     public presetCreated(data) {
         this.deliveryPreset = data;
         this.deliveryPresets.push(data);
         this.setDeliveryPreset(data.id);
         this.deliveryPreset.id = data.id;
         this.presetOption = "usePreset";
-        console.log(data)
     }
 
 }

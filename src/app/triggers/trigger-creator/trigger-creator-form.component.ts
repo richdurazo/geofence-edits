@@ -1,3 +1,4 @@
+import { AudioModel } from './../shared/audio.model';
 import { DeliveryPresetModel } from './../shared/delivery-preset.model';
 import { GeofenceModel } from './../shared/geofence.model';
 import { BeaconModel } from './../shared/beacon.model';
@@ -26,6 +27,10 @@ export class TriggerCreatorFormComponent implements OnInit {
 
     @Output() onCreate: EventEmitter<any> = new EventEmitter();
 
+    @Input() lastModified: number;
+
+    audio: AudioModel;
+
     beacon: BeaconModel;
 
     beacons: BeaconModel[] = [];
@@ -35,6 +40,8 @@ export class TriggerCreatorFormComponent implements OnInit {
     geofence: GeofenceModel;
 
     editMode: boolean;
+
+    filename: string;
 
     trigger: TriggerModel;
 
@@ -120,7 +127,6 @@ export class TriggerCreatorFormComponent implements OnInit {
         .subscribe(
             data => {
                 this.triggerUuid = data.uuid;
-                console.log(data.uuid)
                 this.triggerMediaConfig = this.filestack.createMediaConfig('audio-trigger', this.triggerUuid);
             }
         )
@@ -147,14 +153,13 @@ export class TriggerCreatorFormComponent implements OnInit {
         if (type === 'geofence') {
             this.getGeofenceTrigger(this.trigger.triggerable_id)
         }
+
     }
 
     getGeofenceTrigger(id) {
         this.triggerApi.getGeofenceTrigger(id)
             .subscribe(data => {
                 this.geofence = data;
-                                console.log('this geofence', this.geofence)
-
             })
     }
 
@@ -162,37 +167,40 @@ export class TriggerCreatorFormComponent implements OnInit {
         if (!form.valid) {
             return;
         }
+
         var obj = Object.assign({}, this.trigger);
 
         if (this.triggerType  === "touch") {
 
-        this.triggerApi.createTouchTrigger(obj)
-            .subscribe(data => {
-                this.processSuccess(data.trigger);
-            });
+            this.triggerApi.createTouchTrigger(obj)
+                .subscribe(data => {
+                    this.processSuccess(data.trigger);
+                });
         }
         if (this.triggerType === "geofence") {
-            console.log(obj)
             this.triggerApi.createGeofenceTrigger(obj)
                 .subscribe(data => {
                     this.attachPreset(data.trigger.id);
             });
-        } 
+        }
+
         if (this.triggerType === "beacon") {
             this.triggerApi.createBeaconTrigger(obj)
                 .subscribe(data => {
-                    this.processSuccess(data.trigger.id)
-                })
+                    this.processSuccess(data.trigger);
+                });
         }
 
-        if (this.triggerType  === "audio") {
-
-        this.triggerApi.createAudioTrigger(obj)
-            .subscribe(data => {
-                this.processSuccess(data.trigger.id);
-            });
-        }
+        if (this.triggerType === "audio") {
+            this.audio.name = this.trigger.name;
+            let obj = Object.assign({}, this.audio);
+            this.triggerApi.createAudioTrigger(obj)
+                .subscribe(data => {
+                    this.processSuccess(data.trigger);
+                });
+            }
     }
+
     attachPreset(id) {
         this.trigger.id = id;
         this.trigger.delivery_preset_id = this.deliveryPreset.id;
@@ -211,16 +219,22 @@ export class TriggerCreatorFormComponent implements OnInit {
     public presetSelected(data) {
         this.deliveryPreset = data;
         this.trigger.delivery_preset_id = data.id;
+        if (this.audio) {
+            this.audio.delivery_preset_id = data.id
+        }
     }
 
     public presetCreated(data) {
         this.deliveryPreset = data;
         this.trigger.delivery_preset_id = data.id;
+        if (this.audio) {
+            this.audio.delivery_preset_id = data.id
+        }
     }
 
     public setType (event, form) {
         this.triggerType = event;
-        console.log(event);
+
         if (!this.trigger) {
             this.trigger = new TriggerModel(this.triggerName, this.triggerType, this.triggerUuid, this.campaign_id, null);
         } else {
@@ -230,7 +244,16 @@ export class TriggerCreatorFormComponent implements OnInit {
             this.trigger.campaign_id = this.parentCampaign.id;
         }
         this.trigger = new TriggerModel(this.triggerName, this.triggerType, this.triggerUuid, this.campaign_id, null);
+        if (event === "audio") {
+            this.setAudioFileName()
+         }
+    }
 
+    setAudioFileName() {
+        let uuid = this.triggerUuid;
+        this.filename = 'https://s3-us-west-1.amazonaws.com/garythebucket' + '/' + uuid[0] + '/' + uuid[1] + '/' + uuid + '/' + 'video' + '/' + 'audio-trigger.mp4';
+        this.trigger.file_name = this.filename;
+        this.audio = new AudioModel(this.triggerName, uuid, null, this.campaign_id, this.trigger.file_name);
     }
 
     public setCampaign (data) {
@@ -256,7 +279,6 @@ export class TriggerCreatorFormComponent implements OnInit {
     public beaconCreated (data) {
         this.beacons.push(data);
         this.beacon = data;
-        console.log(this.beacon);
         this.trigger.active = data.active;
         this.trigger.client_id = data.client_id;
         this.trigger.address = data.address;
@@ -264,8 +286,6 @@ export class TriggerCreatorFormComponent implements OnInit {
         this.trigger.longitude = data.longitude;
         this.trigger.uniqueId = data.uniqueId;
         this.trigger.vendor = data.vendor;
-
-        console.log(this.trigger)
 
     }
 

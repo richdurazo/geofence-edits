@@ -5,12 +5,12 @@
         <md-icon>more_vert</md-icon>
     </button>
     <md-menu #menu="mdMenu">
-        <button 
+<!--        <button 
             md-menu-item
             (click)="editing = true"
             *ngIf="!editing">
             <span>Edit</span>
-        </button>
+        </button>-->
         <button 
             md-menu-item
             (click)="onDelete()"
@@ -62,7 +62,7 @@
                                 </app-content-group-creator>
                             </div>
 
-                            <div *ngIf="editing">   
+                            <div>   
                                 <div class="add-content-group-row" fxLayout="column" *ngIf="!adding">
                                     <div fxLayout="row" fxFlex="100" fxFlexAlign="end" *ngIf="deliveryPreset">
                                         <button type="button" md-raised-button (click)="adding = !adding">
@@ -89,7 +89,7 @@
                 
                 </md-tab>
 
-                <md-tab label="Geofence Options" *ngIf="triggerType === 'geofence'">
+                <!--<md-tab label="Geofence Options" *ngIf="triggerType === 'geofence'">
 
                     <app-geofence-creator
                     [geofence]="geofence"
@@ -129,12 +129,11 @@
 
                 <md-tab label="Beacon Options" *ngIf="triggerType === 'beacon'">
 
-                    <!--beacon stuff-->
                     <app-beacon-creator 
                         (onCreate)="beaconCreated($event)">
                     </app-beacon-creator>
 
-                </md-tab>
+                </md-tab>-->
 
             </md-tab-group>
 

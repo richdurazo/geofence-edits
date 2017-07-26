@@ -3,6 +3,7 @@ import { LatLngLiteral, MapsAPILoader } from '@agm/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { BeaconModel } from './../../shared/beacon.model';
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, NgZone } from '@angular/core';
+declare var google;
 
 @Component({
   selector: 'app-beacon-creator',

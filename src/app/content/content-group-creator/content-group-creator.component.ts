@@ -46,26 +46,13 @@ export class ContentGroupCreatorComponent implements OnInit {
 
     public submitForm (form) {
         if (form.valid) {
-            console.log('submitted form and the content group', form, this.contentGroup)
             this.contentApi.createContentGroup(this.contentGroup)
             .subscribe(data => {
-                console.log('subscripe from after the content is created', data)
                 this.processSuccess(data);
             })
         }
     }
-
-        // why attach contentGroup? 
-        // when I post gontent group it contains delivery presetID which is a foriegn key
-        // post to contentGroup doen't work without delivery_preset_id
-
-/*    public attachContentGroup (data) {
-        this.deliveryPresetApi.attachContentGroup(this.deliveryPreset.id, data.id)
-        .subscribe(content => {
-            this.processSuccess(data);
-        })
-    }*/
-
+    
     public processSuccess (data) {
         if (this.onCreate) {
             this.onCreate.emit(data);

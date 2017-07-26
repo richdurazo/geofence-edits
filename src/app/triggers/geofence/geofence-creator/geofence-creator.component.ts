@@ -7,6 +7,8 @@ import { ViewChild, ElementRef, NgZone } from '@angular/core';
 import { MapsAPILoader } from '@agm/core';
 import { LatLng, LatLngLiteral, PolyMouseEvent } from '@agm/core';
 import { AfterContentInit, Directive, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
+declare var google;
+import {} from '@types/googlemaps';
 
 @Component({
   selector: 'app-geofence-creator',
@@ -65,9 +67,7 @@ export class GeofenceCreatorComponent implements OnInit {
                public triggerApi: TriggerApiService ) {}
 
   ngOnInit() {
-    console.log(this.geofence)
       this.searchControl = new FormControl(this.address);
-      console.log('onInit', this.searchControl)
       this.initForm();
       this.zoom = 16;
 
@@ -77,10 +77,8 @@ export class GeofenceCreatorComponent implements OnInit {
       this.longitude = -118.38325739999999;
       this.radius = 300;
     } else {
-      console.log('we made it', this.geofence)
       this.address = this.geofence.address;
       this.searchControl = new FormControl(this.address);
-      console.log(this.searchControl, this.address, this.searchElementRef)
       this.latitude = this.geofence.geometry.coordinates[1];
       this.longitude = this.geofence.geometry.coordinates[0];
       this.initForm();
@@ -108,10 +106,10 @@ export class GeofenceCreatorComponent implements OnInit {
           //set latitude, longitude and zoom
           this.latitude = place.geometry.location.lat();
           this.longitude = place.geometry.location.lng();
-        this.geofenceForm.patchValue({
-          'lat': this.latitude,
-          'lng': this.longitude
-        });     
+          this.geofenceForm.patchValue({
+            'lat': this.latitude,
+            'lng': this.longitude
+          });     
           this.coordinates = [this.longitude, this.latitude];
           this.zoom = 16;
 
@@ -159,7 +157,6 @@ export class GeofenceCreatorComponent implements OnInit {
     });
   }
 
-
   onSubmit() {
     this.geofenceCreated = true;
     let rad = this.radius;
@@ -169,6 +166,7 @@ export class GeofenceCreatorComponent implements OnInit {
     let obj = Object.assign({}, this.geofence);
     this.processSuccess(this.geofence);
   }
+
   initGeo() {
     this.geofence = new GeofenceModel(
       '',
@@ -180,9 +178,9 @@ export class GeofenceCreatorComponent implements OnInit {
   private setCurrentPosition() {
      this.currentPosition = false;
      let currentAddress: string = '';
-    if ("geolocation" in navigator) {
-      let geocoder = new google.maps.Geocoder;
-      let infowindow = new google.maps.InfoWindow;
+      if ("geolocation" in navigator) {
+        let geocoder = new google.maps.Geocoder;
+        let infowindow = new google.maps.InfoWindow;
 
       navigator.geolocation.getCurrentPosition((position) => {
         this.latitude = position.coords.latitude;
@@ -226,7 +224,6 @@ export class GeofenceCreatorComponent implements OnInit {
     if(this.radiusChange) {
       this.radiusChange.emit(data)
       this.radius = data;
-      console.log(this.radius)
       this.geofenceForm.patchValue({
         'rad': this.radius
       });

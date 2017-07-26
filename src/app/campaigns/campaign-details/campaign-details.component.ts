@@ -52,8 +52,6 @@ export class CampaignDetailsComponent implements OnInit {
         this.campaignApi.getCampaignTriggers(this.id)
         .subscribe(data => {
             this.triggers = data;
-        }, error => {
-            console.log('error', error);
         })
     }
 

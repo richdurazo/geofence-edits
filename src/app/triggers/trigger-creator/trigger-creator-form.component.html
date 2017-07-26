@@ -76,14 +76,14 @@
                     </div>
                         <md-list-item *ngFor="let beacon of beacons">
                             <p>{{beacon.uniqueId}}</p>
-                            <span>
+<!--                            <span>
                                 <md-icon md-list-icon>place</md-icon>
                                
                                <span class="app-toolbar-filler"></span>
                                 <button type="button" md-icon-button>
                                 <md-icon class="beacon-edit" md-list-icon (click)="beaconEdit($event)">edit</md-icon>
                                 </button>
-                            </span>
+                            </span>-->
 
                         </md-list-item>
                     </md-list>
@@ -99,7 +99,7 @@
                     </div>
                     <md-list fxLayout="row" *ngIf="geofence">
                         <p>Geofence added</p>
-                        <md-list-item>
+<!--                        <md-list-item>
                             <span>
                                <span class="app-toolbar-filler"></span>
                                 <button type="button" md-icon-button>
@@ -107,7 +107,7 @@
                                 </button>
                             </span>
 
-                        </md-list-item>
+                        </md-list-item>-->
                     </md-list>
 
                 </div>
@@ -123,16 +123,6 @@
 
                     <md-list fxLayout="row" *ngIf="deliveryPreset">
                         <p>{{deliveryPreset.name}}</p>
-                        <md-list-item>
-                            <span>
-                               
-                               <span class="app-toolbar-filler"></span>
-                                <button type="button" md-icon-button>
-                                <md-icon class="beacon-edit" md-list-icon (click)="deliveryPresetEdit($event)">edit</md-icon>
-                                </button>
-                            </span>
-
-                        </md-list-item>
                     </md-list>
 
                 </div>

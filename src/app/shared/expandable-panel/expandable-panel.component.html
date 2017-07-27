@@ -72,14 +72,14 @@
               *ngIf="editing">
               Save
           </button>
-          <button
+<!--          <button
               md-menu-item
               (click)="removeItem()">
                   Remove
-              </button>
+              </button>-->
         </md-menu>
 
-        <button md-icon-button [mdMenuTriggerFor]="appMenu">
+        <button md-icon-button type="button" [mdMenuTriggerFor]="appMenu">
            <md-icon>more_vert</md-icon>
         </button>
     </div>

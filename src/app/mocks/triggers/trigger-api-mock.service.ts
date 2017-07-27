@@ -20,5 +20,19 @@ export class TriggerApiMockService {
     deleteTrigger () {
       return false;
     }
-
+    createTouchTrigger(data) {
+      return false;
+    }
+    createGeofenceTrigger(data) {
+      return false;
+    }
+    createBeaconTrigger(data) {
+      return false;
+    }
+    createAudioTrigger(data) {
+      return false;
+    }
+    getTriggerContentGroups(data) {
+      return false;
+    }
 }

@@ -1,3 +1,4 @@
+import { DeliveryPresetApiService } from './triggers/delivery-preset/delivery-preset-api.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
@@ -66,6 +67,13 @@ import { ContentSelectorComponent } from './content/content-selector/content-sel
 import { ChartComponent } from './shared/chart/chart.component';
 import { TargetTypeaheadComponent } from './shared/target-typeahead/target-typeahead.component';
 import { DialogConfirmComponent } from './shared/dialog-confirm/dialog-confirm.component';
+import { DeliveryPresetOptionsComponent } from './triggers/delivery-preset/delivery-preset-options/delivery-preset-options.component';
+import { DeliveryPresetCreatorComponent } from './triggers/delivery-preset/delivery-preset-creator/delivery-preset-creator.component';
+import { GeofenceCreatorComponent } from './triggers/geofence/geofence-creator/geofence-creator.component';
+import { AgmCoreModule } from '@agm/core';
+import {} from '@types/googlemaps';
+import { BeaconCreatorComponent } from './triggers/beacon/beacon-creator/beacon-creator.component';
+
 
 @NgModule({
     declarations: [
@@ -107,7 +115,11 @@ import { DialogConfirmComponent } from './shared/dialog-confirm/dialog-confirm.c
         ContentSelectorComponent,
         ChartComponent,
         TargetTypeaheadComponent,
-        DialogConfirmComponent
+        DialogConfirmComponent,
+        DeliveryPresetOptionsComponent,
+        DeliveryPresetCreatorComponent,
+        GeofenceCreatorComponent,
+        BeaconCreatorComponent
     ],
     imports: [
         AppRoutingModule,
@@ -118,6 +130,10 @@ import { DialogConfirmComponent } from './shared/dialog-confirm/dialog-confirm.c
         ReactiveFormsModule,
         HttpModule,
         MaterialModule,
+        AgmCoreModule.forRoot({
+            apiKey: 'AIzaSyDmBfBqrgXymd47v7N_u9dBzxLanZBi1CI',
+            libraries: ['places']
+        })
     ],
     providers: [
         AuthCustomHttpService,
@@ -129,7 +145,8 @@ import { DialogConfirmComponent } from './shared/dialog-confirm/dialog-confirm.c
         TermsApiService,
         TriggerApiService,
         UserApiService,
-        UuidApiService
+        UuidApiService,
+        DeliveryPresetApiService
     ],
     entryComponents: [
         TermsDialogComponent,

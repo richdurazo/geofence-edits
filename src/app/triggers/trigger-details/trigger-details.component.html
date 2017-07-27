@@ -1,81 +1,237 @@
-<div fxLayout="column">
+<md-toolbar color="primary" *ngIf="trigger">
+    {{ trigger.name }}
+    <span class="app-toolbar-filler"></span>
+    <button class="button" md-icon-button [mdMenuTriggerFor]="menu">
+        <md-icon>more_vert</md-icon>
+    </button>
+    <md-menu #menu="mdMenu">
+        <button 
+            md-menu-item
+            (click)="editing = true"
+            *ngIf="!editing">
+            <span>Edit</span>
+        </button>
+        <button 
+            md-menu-item
+            (click)="onDelete()"
+            *ngIf="editing">
+            <span>Remove</span>
+        </button>
+        <button
+            md-menu-item
+            (click)="onCancel(form); editing = false"
+            *ngIf="editing">
+            cancel
+        </button>
+        <button
+            md-menu-item
+            (click)="updateItem()"
+            *ngIf="editing">
+            Save
+        </button>
+    </md-menu>
+</md-toolbar>
 
-    <md-card class="trigger-details-card" fxLayout="row" fxFlex="100">
+<form #form="ngForm" (ngSubmit)="submitForm(form)" novalidate>
 
-                <div fxLayout="column" fxFlex="55">
+    <div fxLayout="column">
 
-                    <div *ngIf="trigger">
-                        <div fxLayout="row">
-                            <h1 class="section-heading">
-                                {{ trigger.name }}
-                            </h1>
-                        </div>
+        <md-card class="content-group-container-card" *ngIf="deliveryPreset">
 
-                        <div fxLayout="row">
-                            <div fxFlex="50" fxLayout="column" class="details-display-container">
-                                <label>
-                                    Type
-                                </label>
-                                <div>
-                                    {{ trigger.type }}
+            <md-tab-group *ngIf="deliveryPreset" fxLayout="column" fxFlex="75">
+
+                <md-tab label="Delivery Preset Options">
+
+                    <div class="content-group-container-card" fxLayout="column" fxFlex="100">
+
+                        <div class="trigger-content-group-container" *ngIf="presetOption === 'usePreset'">
+
+                            <div class="padded-container">
+                                <app-content-group-details
+                                    class="rendered-content-group"
+                                    [trigger]="trigger"
+                                    [contentGroup]="contentGroup"
+                                    *ngFor="let contentGroup of contentGroups">
+                                </app-content-group-details>
+
+                                <app-content-group-creator
+                                    [trigger]="trigger"
+                                    [deliveryPreset]="deliveryPreset"
+                                    (onCreate)="contentCreated($event)"
+                                    *ngIf="adding">
+                                </app-content-group-creator>
+                            </div>
+
+                            <div>   
+                                <div class="add-content-group-row" fxLayout="column" *ngIf="!adding">
+                                    <div fxLayout="row" fxFlex="100" fxFlexAlign="end" *ngIf="deliveryPreset">
+                                        <button type="button" md-raised-button (click)="adding = !adding">
+                                            <md-icon>
+                                                add
+                                            </md-icon>
+                                            Add Content Group
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
+
+                        </div>
+                        <div class="trigger-content-group-container" *ngIf="presetOption === 'createPreset'"> 
+                            <div fxLayout="column" fxFlex="75" fxFlexOffset="10" class="form-highlight-well padding">   
+                                <app-delivery-preset-creator
+                                (onCreate)="presetCreated($event)">
+                                </app-delivery-preset-creator>       
+                            </div>
+                    
                         </div>
 
                     </div>
+                
+                </md-tab>
 
-                </div>
+                <!--<md-tab label="Geofence Options" *ngIf="triggerType === 'geofence'">
 
-                <div class="right-column" fxFlex="35" *ngIf="trigger" fxLayoutAlign="end">
+                    <app-geofence-creator
+                    [geofence]="geofence"
+                    [trigger]="editTrigger"
+                    (onCreate)="geofenceCreated($event)">
+                    </app-geofence-creator>
 
-                    <div class="media-container" *ngIf="trigger.type === 'watermark' || trigger.type === 'fingerprint'">
-                        <div class="creator-section-label" style="margin-top: 0;">
-                            Media
-                        </div>
+                </md-tab>
 
-                        <div class="media-view-container">
-                            <app-video
-                                [uuid]="trigger.uuid"
-                                [key]="'audio-trigger'">
-                            </app-video>
-                        </div>
+                <md-tab label="Audio Options" *ngIf="triggerType === 'audio'">
+
+                    <div fxFlex="70" fxLayout="column">
+                        
+                        <div fxLayout="row" class="right-column" fxLayoutAlign="center">
+
+                            <div fxLayout="column" class="media-container">
+
+                                <div class="creator-section-label">
+                                    Media
+                                </div>
+
+                                <div class="media-upload-container">
+                                    <app-file-uploader
+                                    [fileExists]="triggerMediaExists"
+                                    [config]="triggerMediaConfig"
+                                    (onUpload)="triggerMediaExists = $event">
+                                    </app-file-uploader>
+                                </div>
+                                
+                            </div>
+
+                        </div>  
+
                     </div>
 
+                </md-tab>
+
+                <md-tab label="Beacon Options" *ngIf="triggerType === 'beacon'">
+
+                    <app-beacon-creator 
+                        (onCreate)="beaconCreated($event)">
+                    </app-beacon-creator>
+
+                </md-tab>-->
+
+            </md-tab-group>
+
+            <div class="padded-container" *ngIf="deliveryPreset" fxLayout="column" fxFlex="25" fxLayoutGap="10">
+
+                    <div fxLayout="column" fxFlex="100" >
+                            <div fxLayout="column">
+
+                             <div fxLayout="row">
+                                <div fxFlex="75" fxLayout="column" class="details-display-container">
+                                    <div fxLayout="row">
+                                        <md-input-container fxFlex>
+                                            <input
+                                            mdInput
+                                            name="name"
+                                            type="text"
+                                            placeholder="Name"
+                                            required
+                                            [(ngModel)]="trigger.name"
+                                            #name="ngModel"
+                                            [disabled]="!editing">
+
+                                            <md-hint align="start">
+                                                <div  *ngIf="form.submitted && name.errors !== null && name.errors.required">
+                                                    Please add a name
+                                                </div>
+                                            </md-hint>
+                                        </md-input-container>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div fxLayout="row">
+                                <div fxFlex="75" fxLayout="column" class="details-display-container">
+                                    <md-select 
+                                    [disabled]="!editing"
+                                    placeholder="Type"
+                                    name="type"
+                                    [ngModel]="triggerType"
+                                    (ngModelChange)="setTriggerType($event)">
+                                        <md-option *ngFor="let type of triggerTypes" [value]="type.value">
+                                            {{ type.viewValue }}
+                                        </md-option>
+                                    </md-select>
+                                </div>
+                            </div>
+
+                            <div fxLayout="row" fxLayoutGap="10">
+                                <div fxFlex="75" fxLayout="column" class="details-display-container">
+                                                      
+                                    <md-select 
+                                    [disabled]="!editing"
+                                    placeholder="Delivery Preset Option"
+                                    name="presetOption"
+                                    [ngModel]="presetOption"
+                                    (ngModelChange)="setDeliveryPresetOption($event)">
+                                        <md-option *ngFor="let presetOption of deliveryPresetOptions" [value]="presetOption.value">
+                                        {{ presetOption.viewValue }}
+                                        </md-option>
+                                    </md-select>
+
+
+                                </div>
+                            </div>
+
+                            <div fxLayout="row" fxLayoutGap="10">
+                                <div fxLayout="row" fxFlex="75">   
+                                    <md-select fxFlex="100" 
+                                        [disabled]="!editing"
+                                        placeholder="Delivery Preset" 
+                                        [ngModel]="trigger.delivery_preset_id" 
+                                        name="preset" 
+                                        (ngModelChange)="setDeliveryPreset($event)">
+                                            <md-option *ngFor="let preset of deliveryPresets" [value]="preset.id">
+                                            {{ preset.name }}
+                                            </md-option>
+                                    </md-select>
+                                </div>
+                            </div>
+                        <div fxLayout="row">
+                            <div fxFlex="67" fxLayout="column">
+                                <button *ngIf="editing"
+                                    type="submit"
+                                    name="button"
+                                    md-raised-button
+                                    color="primary">
+                                    Save
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <div fxFlex="10" *ngIf="trigger"></div>
-
-    </md-card>
-
-    <md-card class="content-group-container-card">
-        <div class="trigger-content-group-container" fxLayout="column" fxFlex="100">
-
-            <div class="padded-container">
-                <app-content-group-details
-                    class="rendered-content-group"
-                    [trigger]="trigger"
-                    [contentGroup]="contentGroup"
-                    *ngFor="let contentGroup of contentGroups">
-                </app-content-group-details>
-
-                <app-content-group-creator
-                    [trigger]="trigger"
-                    (onCreate)="contentCreated($event)"
-                    *ngIf="adding">
-                </app-content-group-creator>
             </div>
 
-            <div class="add-content-group-row" fxLayout="column" *ngIf="!adding">
-                <div fxLayout="row" fxFlex="100" fxFlexAlign="end">
-                    <button type="button" md-raised-button (click)="adding = !adding">
-                        <md-icon>
-                            add
-                        </md-icon>
-                        Add Content Group
-                    </button>
-                </div>
-            </div>
-        </div>
-    </md-card>
 
-</div>
+        </md-card>
+
+    </div>
+</form>
+

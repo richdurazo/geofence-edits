@@ -61,7 +61,7 @@ describe('AuthApiService', () => {
             );
 
             service.login(credentials).subscribe( data => {
-                expect(headers).toEqual([{"Content-Type": "application/x-www-form-urlencoded"}]);
+                expect(headers).toEqual([{"Content-Type": "application/x-www-form-urlencoded"},{ "device": 'application/x-www-form-urlencoded' } ]);
                 expect(data).toEqual(mockData);
             });
         }));

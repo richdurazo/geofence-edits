@@ -18,6 +18,8 @@ export class DeliveryPresetCreatorComponent implements OnInit {
 
   deliveryMode: number;
 
+  presetName: string;
+
   uuid: string;
 
   presetCreated: boolean = false;

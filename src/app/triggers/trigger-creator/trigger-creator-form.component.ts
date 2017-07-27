@@ -232,7 +232,7 @@ export class TriggerCreatorFormComponent implements OnInit {
         }
     }
 
-    public setType (event, form) {
+    public setType (event) {
         this.triggerType = event;
 
         if (!this.trigger) {

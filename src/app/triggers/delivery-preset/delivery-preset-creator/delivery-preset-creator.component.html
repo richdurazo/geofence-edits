@@ -14,7 +14,7 @@
                 #name="ngModel">
 
             <md-hint align="start">
-                <div  *ngIf="form.submitted && presetName.errors !== null">
+                <div  *ngIf="form.submitted && name.errors !== null">
                     Please add Delivery Preset Name
                 </div>
             </md-hint>
@@ -27,7 +27,7 @@
         <md-select
             placeholder="Delivery Mode"
             name="deliveryMode"
-            [(ngModel)]="presetMode">
+            [(ngModel)]="deliveryMode">
                 <md-option *ngFor="let mode of deliveryModes" [value]="mode.value">
                     {{ mode.viewValue }}
                 </md-option>

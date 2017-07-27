@@ -5,17 +5,16 @@
         <md-icon>more_vert</md-icon>
     </button>
     <md-menu #menu="mdMenu">
-<!--        <button 
+        <button 
             md-menu-item
             (click)="editing = true"
             *ngIf="!editing">
             <span>Edit</span>
-        </button>-->
+        </button>
         <button 
             md-menu-item
             (click)="onDelete()"
-            
-            >
+            *ngIf="editing">
             <span>Remove</span>
         </button>
         <button

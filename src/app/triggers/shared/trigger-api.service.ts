@@ -27,8 +27,8 @@ export class TriggerApiService {
       .map(res => res.json())
   }
 
-  deleteTrigger (id) {
-      return this.authCustomHttp.delete(AppSettings.API_ROOT + '/trigger/' + id)
+  deleteTrigger (data) {
+      return this.authCustomHttp.delete(AppSettings.API_ROOT + '/trigger/' + data.id)
       .map(res => res.json())
   }
 /*

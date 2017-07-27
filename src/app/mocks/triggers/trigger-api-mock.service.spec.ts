@@ -38,6 +38,45 @@ describe('TriggerApiMockService', () => {
     })
   });
 
+  describe('createTouchTrigger', () => {
+    it('should be a function', () => {
+      expect(typeof triggerApiMockService.createTouchTrigger).toEqual('function');
+    });
+
+    it('should return false', () => {
+      expect(triggerApiMockService.createTouchTrigger()).toEqual(false);
+    })
+  });
+
+  describe('createAudioTrigger', () => {
+    it('should be a function', () => {
+      expect(typeof triggerApiMockService.createAudioTrigger).toEqual('function');
+    });
+
+    it('should return false', () => {
+      expect(triggerApiMockService.createAudioTrigger()).toEqual(false);
+    })
+  });
+
+  describe('createBeaconTrigger', () => {
+    it('should be a function', () => {
+      expect(typeof triggerApiMockService.createBeaconTrigger).toEqual('function');
+    });
+
+    it('should return false', () => {
+      expect(triggerApiMockService.createBeaconTrigger()).toEqual(false);
+    })
+  });
+  describe('createGeofenceTrigger', () => {
+    it('should be a function', () => {
+      expect(typeof triggerApiMockService.createGeofenceTrigger).toEqual('function');
+    });
+
+    it('should return false', () => {
+      expect(triggerApiMockService.createGeofenceTrigger()).toEqual(false);
+    })
+  });
+
   describe('deleteTrigger', () => {
     it('should be a function', () => {
       expect(typeof triggerApiMockService.deleteTrigger).toEqual('function');
@@ -45,6 +84,15 @@ describe('TriggerApiMockService', () => {
 
     it('should return false', () => {
       expect(triggerApiMockService.deleteTrigger()).toEqual(false);
+    })
+  });
+  describe('getTriggerContentGroups', () => {
+    it('should be a function', () => {
+      expect(typeof triggerApiMockService.getTriggerContentGroups).toEqual('function');
+    });
+
+    it('should return false', () => {
+      expect(triggerApiMockService.getTriggerContentGroups()).toEqual(false);
     })
   });
 });

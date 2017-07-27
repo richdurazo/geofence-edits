@@ -29,8 +29,8 @@ export class DeliveryPresetApiService {
         .map(res => res.json());
     }
 
-    deleteDeliveryPreset (id) {
-        return this.authCustomHttp.delete(AppSettings.API_ROOT + '/delivery-preset/' + id)
+    deleteDeliveryPreset (data) {
+        return this.authCustomHttp.delete(AppSettings.API_ROOT + '/delivery-preset/' + data.id)
         .map(res => res.json());
     }
 

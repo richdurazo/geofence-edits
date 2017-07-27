@@ -105,10 +105,10 @@ export class DeliveryPresetOptionsComponent implements OnInit {
                 }
             }
         }
-        this.getContentGroups(event);
+        this.getTriggerContentGroups(event);
     }
 
-    public getContentGroups (id) {
+    public getTriggerContentGroups (id) {
         this.triggerApi.getTriggerContentGroups(id)
         .subscribe(data => {
             this.contentGroups = data;

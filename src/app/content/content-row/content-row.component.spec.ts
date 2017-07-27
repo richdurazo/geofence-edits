@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ContentRowComponent } from './content-row.component';
@@ -12,7 +12,10 @@ describe('ContentRowComponent', () => {
       declarations: [
           ContentRowComponent,
           TestComponentWrapper
-      ]
+      ],
+      schemas: [
+          CUSTOM_ELEMENTS_SCHEMA
+      ],
     })
     .compileComponents();
   }));

@@ -159,7 +159,7 @@ export class TriggerDetailsComponent implements OnInit {
     }
 
     initTrigger(id) {
-        this.getContentGroups(id);
+        this.getTriggerContentGroups(id);
         this.getDeliveryPreset(id);
         this.getDeliveryPresets();
         this.presetOption = 'usePreset';
@@ -194,7 +194,7 @@ export class TriggerDetailsComponent implements OnInit {
         });
     }
 
-    public getContentGroups (id) {
+    public getTriggerContentGroups (id) {
         this.triggerApi.getTriggerContentGroups(id)
         .subscribe(data => {
             this.contentGroups = data;
@@ -248,7 +248,7 @@ export class TriggerDetailsComponent implements OnInit {
     }
 
     onDelete() {
-        this.triggerApi.deleteTrigger(this.trigger.id)
+        this.triggerApi.deleteTrigger(this.trigger)
             .subscribe(data => {
                 if(data) {
                     this.processDelete(this.trigger.id)

@@ -204,7 +204,7 @@
 
                     <!--REDEMPTION OPTIONS-->
 
-                    <div fxLayout="row" *ngIf="contentType !== 'offer'"  fxLayoutGap="10px">
+                    <div fxLayout="row" *ngIf="contentType !== 'message'"  fxLayoutGap="10px">
 
                             <div fxLayout="column" fxFlex="33">
                                 <md-select
@@ -222,8 +222,7 @@
                                     [disabled]="viewMode"
                                     placeholder="QR Format"
                                     name="redemption_format"
-                                    [(ngModel)]="content.redemption_code_format"
-                                    *ngIf="content.redemption_method === 2 || content.redemption_method === 3">
+                                    [(ngModel)]="content.redemption_code_format">
                                         <md-option *ngFor="let format of redemptionFormats" [value]="format.value">
                                             {{ format.viewValue }}
                                         </md-option>

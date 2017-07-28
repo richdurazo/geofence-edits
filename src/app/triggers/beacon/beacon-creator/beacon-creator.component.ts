@@ -2,7 +2,7 @@ import { TriggerApiService } from './../../shared/trigger-api.service';
 import { LatLngLiteral, MapsAPILoader } from '@agm/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { BeaconModel } from './../../shared/beacon.model';
-import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, NgZone } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, NgZone, Input } from '@angular/core';
 declare var google;
 
 @Component({
@@ -15,7 +15,7 @@ export class BeaconCreatorComponent implements OnInit {
 
     @Output() onCreate: EventEmitter<any> = new EventEmitter();
 
-    beacon: BeaconModel;
+    @Input() beacon: BeaconModel;
 
     beacons: BeaconModel[]=[];
 
@@ -54,22 +54,29 @@ export class BeaconCreatorComponent implements OnInit {
 
 
   ngOnInit() {
-    let beaconId = '';
-    this.zoom = 16;
-    this.latitude = 34.0664201;
-    this.longitude = -118.38325739999999;
-    this.markers = [{lat:0, lng:0}]
+    if(!this.beacon) {
+          let beaconId = '';
+          this.zoom = 16;
+          this.latitude = 34.0664201;
+          this.longitude = -118.38325739999999;
+          this.markers = [{lat:0, lng:0}]
 
-    this.searchControl = new FormControl('');
-    this.initBeacon();
+          this.searchControl = new FormControl('');
+          this.initBeacon();
 
-    this.beaconForm = new FormGroup({
-      'id': new FormControl(beaconId),
-      'type': new FormControl(''),
-      'lat': new FormControl({value: this.latitude, disabled: true}),
-      'lng': new FormControl({value: this.longitude, disabled: true}),
-      'search': this.searchControl
-    });
+          this.beaconForm = new FormGroup({
+            'id': new FormControl(beaconId),
+            'type': new FormControl(''),
+            'lat': new FormControl({value: this.latitude, disabled: true}),
+            'lng': new FormControl({value: this.longitude, disabled: true}),
+            'search': this.searchControl
+          });
+    } else {
+      console.log(this.beacon)
+    }
+    if (this.beacon) {
+      console.log(this.beacon)
+    }
 
     this.mapsAPILoader.load().then(() => {
       let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {

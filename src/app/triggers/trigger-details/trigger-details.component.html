@@ -7,7 +7,7 @@
     <md-menu #menu="mdMenu">
         <button 
             md-menu-item
-            (click)="editing = true"
+            (click)="editing = true; onEdit()"
             *ngIf="!editing">
             <span>Edit</span>
         </button>
@@ -22,12 +22,6 @@
             (click)="onCancel(form); editing = false"
             *ngIf="editing">
             cancel
-        </button>
-        <button
-            md-menu-item
-            (click)="updateItem()"
-            *ngIf="editing">
-            Save
         </button>
     </md-menu>
 </md-toolbar>
@@ -125,7 +119,7 @@
 
                     </div>
 
-                </md-tab>
+                </md-tab>-->
 
                 <md-tab label="Beacon Options" *ngIf="triggerType === 'beacon'">
 
@@ -133,7 +127,7 @@
                         (onCreate)="beaconCreated($event)">
                     </app-beacon-creator>
 
-                </md-tab>-->
+                </md-tab>
 
             </md-tab-group>
 

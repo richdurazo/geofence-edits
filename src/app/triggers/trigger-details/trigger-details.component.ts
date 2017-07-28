@@ -1,3 +1,4 @@
+import { BeaconModel } from './../shared/beacon.model';
 import { DeliveryPresetApiService } from './../delivery-preset/delivery-preset-api.service';
 import { DeliveryPresetModel } from './../shared/delivery-preset.model';
 import { Component, OnInit, OnDestroy, Input, EventEmitter, Output } from '@angular/core';
@@ -14,10 +15,11 @@ import { TriggerModel } from '../shared/trigger.model';
   styleUrls: ['./trigger-details.component.scss']
 })
 export class TriggerDetailsComponent implements OnInit {
-
+    beacon: BeaconModel;
     @Input() trigger: TriggerModel;
 
     @Output() onRemove: EventEmitter<any> = new EventEmitter();
+    @Output() onChange: EventEmitter<any> = new EventEmitter();
 
     id: string;
 
@@ -179,6 +181,7 @@ export class TriggerDetailsComponent implements OnInit {
             substring = type;
             if (str.toLowerCase().includes(substring)) {
                 this.triggerType = substring;
+                console.log(this.triggerType)
             }
         }
         }
@@ -240,8 +243,27 @@ export class TriggerDetailsComponent implements OnInit {
     }
 
     public submitForm(form) {
-/*        console.log(form)
-*/    }
+        if (!form.valid) {
+            alert('invalid Form')
+            return;
+        }
+        switch (form.value.type) {
+            case 'touch':
+            console.log('touch', form)
+            break;
+            case 'audio':
+            console.log('audio', form)
+            break;
+            case 'beacon':
+            console.log('beacon', form)
+            break;
+            case 'geofence':
+            console.log('geofence', form)
+            break;
+        }
+
+
+    }
     onCancel(form) {
 /*        this.initTrigger(this.trigger.delivery_preset_id)
         console.log('reset form', form)*/
@@ -269,5 +291,44 @@ export class TriggerDetailsComponent implements OnInit {
         this.deliveryPreset.id = data.id;
         this.presetOption = "usePreset";
     }
+    onEdit() {
+        if (this.triggerType === 'beacon') {
+        this.triggerApi.getBeaconTrigger(this.trigger.triggerable_id)
+            .subscribe(data => {
+                this.processTrigger(data);
+            })
+        }
+    }
+    processTrigger(data) {
+        console.log(data, 'emit beacon')
+        if (this.onChange) {
+            this.onChange.emit(data)
+        }
+    }
+/*    typeEdit(event) {
+        if (event !== this.triggerType) {
+            let type = event;
+            let name = this.trigger.name;
+            let uuid = this.trigger.uuid;
+            let campaign = this.trigger.campaign_id;
+            let delivery_preset_id
+            switch (type) {
+                case 'touch':
+                
+                break;
+                case 'audio':
+               
+                break;
+                case 'beacon':
 
+                break;
+                case 'geofence':
+
+                break;
+            }
+            console.log('handle type change by init a new trigger model :', event, 'OGtype: ', this.triggerType)
+
+        }
+        console.log(this.trigger)
+    }*/
 }

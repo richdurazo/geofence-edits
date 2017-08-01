@@ -7,13 +7,13 @@
     <md-menu #menu="mdMenu">
         <button 
             md-menu-item
-            (click)="editing = true; onEdit()"
+            (click)="onEdit()"
             *ngIf="!editing">
             <span>Edit</span>
         </button>
         <button 
             md-menu-item
-            (click)="onDelete()"
+            (click)="launchConfirmRemove()"
             *ngIf="editing">
             <span>Remove</span>
         </button>
@@ -83,9 +83,10 @@
                 
                 </md-tab>
 
-                <!--<md-tab label="Geofence Options" *ngIf="triggerType === 'geofence'">
+                <md-tab label="Geofence Options" *ngIf="triggerType === 'geofence'">
 
                     <app-geofence-creator
+                    *ngIf="editing"
                     [geofence]="geofence"
                     [trigger]="editTrigger"
                     (onCreate)="geofenceCreated($event)">
@@ -96,8 +97,21 @@
                 <md-tab label="Audio Options" *ngIf="triggerType === 'audio'">
 
                     <div fxFlex="70" fxLayout="column">
-                        
-                        <div fxLayout="row" class="right-column" fxLayoutAlign="center">
+                        <div fxLayout="row" class="right-column"  *ngIf="!editing" fxLayoutAlign="center">
+                            <div fxLayout="column" class="media-container">
+
+                                <div class="creator-section-label">
+                                    Media
+                                </div>     
+                                <div class="media-upload-container">
+                                    <app-video 
+                                        [uuid]="trigger.uuid"
+                                        [key]="'audio-trigger'">
+                                    </app-video>
+                                </div>                           
+                            </div>
+                        </div>
+                        <div fxLayout="row" class="right-column" *ngIf="editing" fxLayoutAlign="center">
 
                             <div fxLayout="column" class="media-container">
 
@@ -109,7 +123,8 @@
                                     <app-file-uploader
                                     [fileExists]="triggerMediaExists"
                                     [config]="triggerMediaConfig"
-                                    (onUpload)="triggerMediaExists = $event">
+                                    (onUpload)="triggerMediaExists"
+                                    (onChange)="triggerMediaModified = $event">
                                     </app-file-uploader>
                                 </div>
                                 
@@ -119,12 +134,16 @@
 
                     </div>
 
-                </md-tab>-->
+                </md-tab>
 
                 <md-tab label="Beacon Options" *ngIf="triggerType === 'beacon'">
-
                     <app-beacon-creator 
+                        *ngIf='beacon'
+                        [beacon]='beacon'
                         (onCreate)="beaconCreated($event)">
+                    </app-beacon-creator>
+                    <app-beacon-creator 
+                        *ngIf='!beacon'>
                     </app-beacon-creator>
 
                 </md-tab>
@@ -209,7 +228,8 @@
                             </div>
                         <div fxLayout="row">
                             <div fxFlex="67" fxLayout="column">
-                                <button *ngIf="editing"
+                                <button 
+                                    [disabled]="!form.dirty && !editing"
                                     type="submit"
                                     name="button"
                                     md-raised-button

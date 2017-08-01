@@ -1,3 +1,7 @@
+import { AudioModel } from './../shared/audio.model';
+import { FilestackService } from './../../shared/filestack.service';
+import { MdDialog } from '@angular/material';
+import { DialogConfirmComponent } from './../../shared/dialog-confirm/dialog-confirm.component';
 import { BeaconModel } from './../shared/beacon.model';
 import { DeliveryPresetApiService } from './../delivery-preset/delivery-preset-api.service';
 import { DeliveryPresetModel } from './../shared/delivery-preset.model';
@@ -19,9 +23,16 @@ export class TriggerDetailsComponent implements OnInit {
     @Input() trigger: TriggerModel;
 
     @Output() onRemove: EventEmitter<any> = new EventEmitter();
+
     @Output() onChange: EventEmitter<any> = new EventEmitter();
+   
+    google: any;
 
     id: string;
+
+    delete: boolean;
+
+    audio: AudioModel;
 
     deliveryPresetId: number;
 
@@ -31,9 +42,15 @@ export class TriggerDetailsComponent implements OnInit {
 
     adding: boolean = false;
 
+    editing: boolean;
+
     deliveryPreset: DeliveryPresetModel;
 
     deliveryPresets: DeliveryPresetModel[];
+
+    triggerMediaExists: boolean = true;
+
+    triggerMediaConfig: any;
 
     presetOption: string;
 
@@ -94,12 +111,14 @@ export class TriggerDetailsComponent implements OnInit {
 
     constructor(private route: ActivatedRoute, 
                 private triggerApi: TriggerApiService,
-                private deliveryPresetApi: DeliveryPresetApiService) { }
+                private deliveryPresetApi: DeliveryPresetApiService,
+                private dialog: MdDialog,
+                private filestack: FilestackService) { }
 
     ngOnInit() {
         if (this.trigger) {
             this.initTrigger(this.trigger.delivery_preset_id);
-            this.setTriggerType(this.trigger.triggerable_type)
+            this.setTriggerType(this.trigger.triggerable_type);
 
         } else {
             this.sub = this.route.params.subscribe(params => {
@@ -181,10 +200,17 @@ export class TriggerDetailsComponent implements OnInit {
             substring = type;
             if (str.toLowerCase().includes(substring)) {
                 this.triggerType = substring;
-                console.log(this.triggerType)
+                if (this.triggerType === 'audio') {
+                    this.setMediaConfig();
+                }
             }
         }
         }
+
+    }
+
+    setMediaConfig() {
+        this.triggerMediaConfig = this.filestack.createMediaConfig('audio-trigger', this.trigger.uuid);
 
     }
 
@@ -243,26 +269,37 @@ export class TriggerDetailsComponent implements OnInit {
     }
 
     public submitForm(form) {
-        if (!form.valid) {
-            alert('invalid Form')
-            return;
-        }
-        switch (form.value.type) {
-            case 'touch':
-            console.log('touch', form)
-            break;
-            case 'audio':
-            console.log('audio', form)
-            break;
-            case 'beacon':
-            console.log('beacon', form)
-            break;
-            case 'geofence':
-            console.log('geofence', form)
-            break;
+        var obj = Object.assign({}, this.trigger);
+
+        if (this.triggerType === form.value.type) {
+            switch (form.value.type) {
+                case 'touch':
+                this.triggerApi.updateTrigger(obj)
+                    .subscribe(data => {
+                        this.processSuccess(data);
+                    })
+                break;
+                case 'audio':
+                this.triggerApi.updateTrigger(obj)
+                    .subscribe(data => {
+                        this.processSuccess(data)
+                    })
+                break;
+                case 'beacon':
+                console.log('beacon', form)
+                break;
+                case 'geofence':
+                console.log('geofence', form)
+                break;
+            }
+        } else {
+            console.log('type change');
+            // Handle the case where user is editing and wants to chage the trigger type
         }
 
-
+    }
+    processSuccess(data) {
+        this.editing = false;
     }
     onCancel(form) {
 /*        this.initTrigger(this.trigger.delivery_preset_id)
@@ -278,12 +315,6 @@ export class TriggerDetailsComponent implements OnInit {
             })
     }
 
-    processDelete(data) {
-        if(this.onRemove) {
-            this.onRemove.emit(data)
-        }
-    }
-
     public presetCreated(data) {
         this.deliveryPreset = data;
         this.deliveryPresets.push(data);
@@ -291,21 +322,51 @@ export class TriggerDetailsComponent implements OnInit {
         this.deliveryPreset.id = data.id;
         this.presetOption = "usePreset";
     }
+
     onEdit() {
-        if (this.triggerType === 'beacon') {
-        this.triggerApi.getBeaconTrigger(this.trigger.triggerable_id)
-            .subscribe(data => {
-                this.processTrigger(data);
-            })
-        }
+        this.editing = true;
+        console.log(this.editing)
+            if (this.triggerType === 'beacon') {
+                this.triggerApi.getBeaconTrigger(this.trigger.triggerable_id)
+                    .subscribe(data => {
+                        this.beacon = data;
+                        this.processTrigger(this.beacon)
+                    });
+            }
+
     }
+
     processTrigger(data) {
         console.log(data, 'emit beacon')
         if (this.onChange) {
-            this.onChange.emit(data)
+            this.onChange.emit(data);
         }
     }
-/*    typeEdit(event) {
+    public launchConfirmRemove () {
+        let config = {
+            disableClose: false
+        };
+        let dialogRef = this.dialog.open(DialogConfirmComponent, config);
+        dialogRef.componentInstance.data = this.trigger;
+        dialogRef.afterClosed().subscribe( result => {
+            this.delete = result;
+            console.log(result, this.delete);
+            if (this.delete) {
+                this.processDelete(this.trigger);
+            }
+        })
+    }
+
+    public processDelete(item) {
+
+        this.triggerApi.deleteTrigger(this.trigger)
+            .subscribe(data => {
+                if(data) {
+                    this.processDelete(this.trigger.id);
+                }
+            });
+    }
+    /*    typeEdit(event) {
         if (event !== this.triggerType) {
             let type = event;
             let name = this.trigger.name;

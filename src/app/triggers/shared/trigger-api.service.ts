@@ -51,6 +51,10 @@ export class TriggerApiService {
       return this.authCustomHttp.post(AppSettings.API_ROOT + '/touch', data)
       .map(res => res.json())
   }
+  updateTouchTrigger(data) {
+    return this.authCustomHttp.put(AppSettings.API_ROOT + '/touch/' + data.triggerable_id, data)
+      .map(res => res.json())
+  }
   createBeaconTrigger (data) {
       return this.authCustomHttp.post(AppSettings.API_ROOT + '/beacon', data)
       .map(res => res.json())

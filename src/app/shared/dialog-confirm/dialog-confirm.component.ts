@@ -11,21 +11,13 @@ import { Component, OnInit } from '@angular/core';
 export class DialogConfirmComponent implements OnInit {
 
   data: any;
+
+  delete: boolean;
+
   constructor(public dialogRef: MdDialogRef<DialogConfirmComponent>,
               private contentApi: ContentApiService,
               private router: Router) { }
 
   ngOnInit() {
-  }
-
-  onDelete() {
-    this.contentApi.deleteContent(this.data)
-        .subscribe(data => {
-          this.processSuccess(data);
-        });
-  }
-  processSuccess(data) {
-    this.dialogRef.close();
-    this.router.navigate(['content']);
   }
 }

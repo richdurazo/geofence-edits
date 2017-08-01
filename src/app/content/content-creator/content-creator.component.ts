@@ -20,6 +20,7 @@ export class ContentCreatorComponent implements OnInit {
     viewMode: boolean;
     id: any;
     content: ContentModel;
+    delete: boolean;
     barcode: any = null;
     codeOption: string;
     codeFormat: string;
@@ -219,6 +220,19 @@ export class ContentCreatorComponent implements OnInit {
         };
         let dialogRef = this.dialog.open(DialogConfirmComponent, config);
         dialogRef.componentInstance.data = this.creatorForm.content;
+        dialogRef.afterClosed().subscribe( result => {
+            this.delete = result;
+            if (this.delete) {
+                this.processDelete(this.creatorForm.content);
+            }
+        });
+    }
+
+    public processDelete(item) {
+    this.contentApi.deleteContent(item)
+        .subscribe(data => {
+           this.router.navigate(['content']);
+        });
     }
 
 }

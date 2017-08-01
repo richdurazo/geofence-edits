@@ -1,6 +1,6 @@
 export class BeaconModel {
     vendor: string;
-    uniqueId: any;
+    unique_id: any;
     address: string;
     latitude: number;
     longitude: number;
@@ -8,7 +8,7 @@ export class BeaconModel {
     client_id: string;
     constructor (
         vendor: string,
-        uniqueId: any,
+        unique_id: any,
         address: string,
         latitude: number,
         longitude: number,
@@ -17,7 +17,7 @@ export class BeaconModel {
 
     ) {
         this.vendor = vendor;
-        this.uniqueId = uniqueId;
+        this.unique_id = unique_id;
         this.address = address;
         this.latitude = latitude;
         this.longitude = longitude;

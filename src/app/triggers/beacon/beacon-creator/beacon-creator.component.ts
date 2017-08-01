@@ -2,7 +2,7 @@ import { TriggerApiService } from './../../shared/trigger-api.service';
 import { LatLngLiteral, MapsAPILoader } from '@agm/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { BeaconModel } from './../../shared/beacon.model';
-import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, NgZone, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, NgZone, Input, AfterViewInit } from '@angular/core';
 declare var google;
 
 @Component({
@@ -11,11 +11,11 @@ declare var google;
   styleUrls: ['./beacon-creator.component.scss']
 })
 
-export class BeaconCreatorComponent implements OnInit {
+export class BeaconCreatorComponent implements OnInit, AfterViewInit{
 
     @Output() onCreate: EventEmitter<any> = new EventEmitter();
 
-    @Input() beacon: BeaconModel;
+    @Input() beacon: any;
 
     beacons: BeaconModel[]=[];
 
@@ -41,7 +41,7 @@ export class BeaconCreatorComponent implements OnInit {
 
     address: string;
 
-    markers: Array<LatLngLiteral>;
+    markers: Array<LatLngLiteral> = [];
 
 
   @ViewChild("search")
@@ -54,34 +54,51 @@ export class BeaconCreatorComponent implements OnInit {
 
 
   ngOnInit() {
-    if(!this.beacon) {
-          let beaconId = '';
+    let beaconId = '';
+    let beaconType = '';
+    let beaconAddress = '8750 wilshire';
+    let beaconLat: number = 34.0664201;
+    let beaconLng: number = -118.38325739999999;
+
+    if(this.beacon) {
+      this.editMode = true;
+
+      beaconId = this.beacon.unique_id;
+      beaconType = this.beacon.vendor;
+      beaconAddress = this.beacon.address;
+      beaconLat = parseFloat(this.beacon.latitude);
+      beaconLng = parseFloat(this.beacon.longitude);
+      this.zoom = 16;
+      this.latitude = beaconLat;
+      this.longitude = beaconLng;
+      this.markers = [{lat: beaconLat, lng: beaconLng}];
+      this.searchControl = new FormControl(beaconAddress);
+
+
+    }
+             this.markers = [{lat:0, lng:0}]
+
           this.zoom = 16;
           this.latitude = 34.0664201;
           this.longitude = -118.38325739999999;
-          this.markers = [{lat:0, lng:0}]
 
-          this.searchControl = new FormControl('');
+          this.searchControl = new FormControl(beaconAddress);
           this.initBeacon();
 
           this.beaconForm = new FormGroup({
             'id': new FormControl(beaconId),
-            'type': new FormControl(''),
-            'lat': new FormControl({value: this.latitude, disabled: true}),
-            'lng': new FormControl({value: this.longitude, disabled: true}),
+            'type': new FormControl(beaconType),
+            'lat': new FormControl({value: beaconLat, disabled: true}),
+            'lng': new FormControl({value: beaconLng, disabled: true}),
             'search': this.searchControl
           });
-    } else {
-      console.log(this.beacon)
-    }
-    if (this.beacon) {
-      console.log(this.beacon)
-    }
+
 
     this.mapsAPILoader.load().then(() => {
       let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
         types: ["address"]
       });
+      console.log(autocomplete)
       autocomplete.addListener("place_changed", () => {
         this.ngZone.run(() => {
           //get the place result
@@ -105,7 +122,9 @@ export class BeaconCreatorComponent implements OnInit {
       });
     });
   }
-
+  ngAfterViewInit() {
+    console.log('hi')
+  }
   onSubmit() {
     this.beaconCreated = true;
     this.beacon = new BeaconModel(
@@ -123,11 +142,13 @@ export class BeaconCreatorComponent implements OnInit {
   }
 
   initBeacon() {
-    let beaconId = '';
-    this.beacon = new BeaconModel('', '', '', 0, 0, '', '');
+    if (!this.beacon) {
+      this.beacon = new BeaconModel('', '', '', 0, 0, '', '');
+    }
+    this.beacon = new BeaconModel(this.beacon.vendor, this.beacon.unique_id, this.beacon.address, this.beacon.latitude, this.beacon.latitude, this.beacon.active, this.beacon.client_id)
   }
 
-  private setCurrentPosition() {
+/*  private setCurrentPosition() {
     if ("geolocation" in navigator) {
       this.currentPosition = false;
       navigator.geolocation.getCurrentPosition((position) => {
@@ -141,7 +162,7 @@ export class BeaconCreatorComponent implements OnInit {
         this.spinnerSwitch(position)
       });
     }
-  }
+  }*/
 
   processSuccess(data) {
     if (this.onCreate) {

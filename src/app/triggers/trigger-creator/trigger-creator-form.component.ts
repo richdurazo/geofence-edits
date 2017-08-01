@@ -47,6 +47,8 @@ export class TriggerCreatorFormComponent implements OnInit {
 
     triggerMediaConfig: any;
 
+    triggerMediaModified: number;
+
     triggerMediaExists: boolean = false;
 
     triggerType: string;
@@ -253,6 +255,7 @@ export class TriggerCreatorFormComponent implements OnInit {
         let uuid = this.triggerUuid;
         this.filename = 'https://s3-us-west-1.amazonaws.com/garythebucket' + '/' + uuid[0] + '/' + uuid[1] + '/' + uuid + '/' + 'video' + '/' + 'audio-trigger.mp4';
         this.trigger.file_name = this.filename;
+        console.log(this.trigger.file_name)
         this.audio = new AudioModel(this.triggerName, uuid, null, this.campaign_id, this.trigger.file_name);
     }
 
@@ -284,7 +287,7 @@ export class TriggerCreatorFormComponent implements OnInit {
         this.trigger.address = data.address;
         this.trigger.latitude = data.latitude;
         this.trigger.longitude = data.longitude;
-        this.trigger.uniqueId = data.uniqueId;
+        this.trigger.unique_id = data.unique_id;
         this.trigger.vendor = data.vendor;
 
     }

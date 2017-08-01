@@ -141,8 +141,9 @@
                                 <h3>Locating...</h3>
 
                             </div>-->
+                            
 
-                            <agm-map *ngIf="currentPosition" [latitude]="latitude" [longitude]="longitude">
+                            <agm-map [latitude]="latitude" [longitude]="longitude">
 
                                 <agm-marker 
                                     *ngFor="let m of markers; let i = index" 
@@ -151,8 +152,7 @@
                                 </agm-marker>
 
                             </agm-map>
-
-
+             
                         </div>
 
 

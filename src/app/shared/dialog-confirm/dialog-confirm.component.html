@@ -9,7 +9,7 @@
   <button
     type="button"
     md-raised-button
-    (click)="dialogRef.close(true)">
+    (click)="dialogRef.close(false)">
     CANCEL
   </button>
   <button
@@ -17,7 +17,7 @@
     class="common-form-submit" 
     color="primary"
     md-raised-button
-    (click)="onDelete()">
+    (click)="dialogRef.close(true)">
     CONFIRM
   </button>
 </div>

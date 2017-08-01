@@ -75,7 +75,7 @@
                         <p>Please add a Beacon</p>
                     </div>
                         <md-list-item *ngFor="let beacon of beacons">
-                            <p>{{beacon.uniqueId}}</p>
+                            <p>{{beacon.unique_id}}</p>
 <!--                            <span>
                                 <md-icon md-list-icon>place</md-icon>
                                
@@ -189,7 +189,9 @@
                                         <app-file-uploader
                                         [fileExists]="triggerMediaExists"
                                         [config]="triggerMediaConfig"
-                                        (onUpload)="triggerMediaExists = $event">
+                                        (onUpload)="triggerMediaExists = $event"
+                                        (onChange)="triggerMediaModified = $event">
+
                                         </app-file-uploader>
                                     </div>
                                     

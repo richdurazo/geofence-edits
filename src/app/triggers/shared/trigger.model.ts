@@ -9,7 +9,7 @@ export class TriggerModel {
     geometry?: string;
     radius?: string;
     vendor?: string;
-    uniqueId?: any;
+    unique_id?: any;
     latitude?: number;
     longitude?: number;
     active?: string;
@@ -29,7 +29,7 @@ export class TriggerModel {
         geometry?: string,
         radius?: string,
         vendor?: string,
-        uniqueId?: any,
+        unique_id?: any,
         latitude?: number,
         longitude?: number,
         active?: string,
@@ -50,7 +50,7 @@ export class TriggerModel {
         this.geometry = geometry;
         this.radius = radius;
         this.vendor = vendor;
-        this.uniqueId = uniqueId;
+        this.unique_id = unique_id;
         this.latitude = latitude;
         this.longitude = longitude;
         this.active = active;

@@ -72,14 +72,16 @@
         </h1>
     </div>
 
-    <div fxLayout="column" fxLayoutGap="24px">
+    <div fxLayout="column" fxLayoutGap="24px" *ngIf="deliveryPresets">
 
         <app-trigger-details
+            [deliveryPresets]="deliveryPresets"
             [trigger]="trigger"
             *ngFor="let trigger of triggers">
         </app-trigger-details>
 
         <app-trigger-creator-form
+            [deliveryPresets] = "deliveryPresets"
             [parentCampaign]="campaign"
             *ngIf="adding"
             (onCreate)="triggerCreated($event)">

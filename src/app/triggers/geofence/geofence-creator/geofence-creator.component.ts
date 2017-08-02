@@ -67,6 +67,7 @@ export class GeofenceCreatorComponent implements OnInit {
                public triggerApi: TriggerApiService ) {}
 
   ngOnInit() {
+    console.log('data emitted to geo', this.geofence)
       this.searchControl = new FormControl(this.address);
       this.initForm();
       this.zoom = 16;
@@ -119,7 +120,7 @@ export class GeofenceCreatorComponent implements OnInit {
   }
 
   private initForm() {
-      let geofenceType = 'Point';
+      let geofenceType = '';
       let geofenceAddress = '';
       let geofenceCoordinates = new FormArray([]);
       let geofenceRadius = 300;
@@ -168,11 +169,16 @@ export class GeofenceCreatorComponent implements OnInit {
   }
 
   initGeo() {
-    this.geofence = new GeofenceModel(
-      '',
-      '',
-      null
-    );
+    if(!this.geofence) {
+      this.geofence = new GeofenceModel(
+        '',
+        '',
+        null
+      );
+    } else {
+      this.geofence = new GeofenceModel(this.geofence.address, this.geofence.geometry, this.radius);
+    }
+
   }
 
   private setCurrentPosition() {

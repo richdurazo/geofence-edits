@@ -27,6 +27,9 @@ export class TriggerCreatorFormComponent implements OnInit {
 
     @Output() onCreate: EventEmitter<any> = new EventEmitter();
 
+    @Output() onSelect: EventEmitter<any> = new EventEmitter();
+
+
     @Input() lastModified: number;
 
     audio: AudioModel;
@@ -35,11 +38,17 @@ export class TriggerCreatorFormComponent implements OnInit {
 
     beacons: BeaconModel[] = [];
 
-    deliveryPreset: DeliveryPresetModel;
+    createPresetMode: boolean;
+
+    @Input() deliveryPreset: DeliveryPresetModel;
+
+    @Input() deliveryPresets: DeliveryPresetModel[];
+
+    @Input() presetOption: string;
 
     geofence: GeofenceModel;
 
-    editMode: boolean;
+    @Input() editMode: boolean;
 
     filename: string;
 
@@ -79,6 +88,16 @@ export class TriggerCreatorFormComponent implements OnInit {
             viewValue: 'Audio'
         }
     ];
+    deliveryPresetOptions = [
+        {
+            value: 'usePreset',
+            viewValue: 'Use Delivery Preset'
+        },
+        {
+            value: 'createPreset',
+            viewValue: 'Create New Delivery Preset'
+        }
+    ];
 
     triggerUuid: string;
 
@@ -90,17 +109,16 @@ export class TriggerCreatorFormComponent implements OnInit {
 
     ngOnInit() {
         this.fetchUuid();
-
         if (!this.parentCampaign) {
             this.getCampaigns();
         } else {
             this.campaign_id = this.parentCampaign.id;
         }
-        if(this.editTrigger) {
+        if (this.editTrigger) {
             this.editMode = true;
             this.trigger = this.editTrigger;
             this.setTriggerType(this.trigger.triggerable_type);
-            this.deliveryPreset = this.presetDelivery;
+            this.presetOption = 'usePreset';
         }
 
         this.triggerTypes = [
@@ -119,6 +137,16 @@ export class TriggerCreatorFormComponent implements OnInit {
             {
                 value: 'audio',
                 viewValue: 'Audio'
+            }
+        ];
+        this.deliveryPresetOptions = [
+            {
+                value: 'usePreset',
+                viewValue: 'Use Delivery Preset'
+            },
+            {
+                value: 'createPreset',
+                viewValue: 'Create New Delivery Preset'
             }
         ];
     }
@@ -155,6 +183,13 @@ export class TriggerCreatorFormComponent implements OnInit {
         if (type === 'geofence') {
             this.getGeofenceTrigger(this.trigger.triggerable_id)
         }
+            if (this.triggerType === 'beacon') {
+                this.triggerApi.getBeaconTrigger(this.trigger.triggerable_id)
+                    .subscribe(data => {
+                        this.beacon = data;
+                        this.processSuccess(this.beacon)
+                    });
+            }
 
     }
 
@@ -255,7 +290,6 @@ export class TriggerCreatorFormComponent implements OnInit {
         let uuid = this.triggerUuid;
         this.filename = 'https://s3-us-west-1.amazonaws.com/garythebucket' + '/' + uuid[0] + '/' + uuid[1] + '/' + uuid + '/' + 'video' + '/' + 'audio-trigger.mp4';
         this.trigger.file_name = this.filename;
-        console.log(this.trigger.file_name)
         this.audio = new AudioModel(this.triggerName, uuid, null, this.campaign_id, this.trigger.file_name);
     }
 
@@ -290,6 +324,28 @@ export class TriggerCreatorFormComponent implements OnInit {
         this.trigger.unique_id = data.unique_id;
         this.trigger.vendor = data.vendor;
 
+    }
+    setDeliveryPreset(event) {
+        this.trigger.delivery_preset_id = event;
+        for (let preset of this.deliveryPresets) {
+            if (event === preset.id) {
+                this.deliveryPreset = preset;
+                this.deliveryPreset.id = event;
+                if (this.onSelect) {
+                    this.onSelect.emit(this.deliveryPreset);
+                }
+            }
+        }
+    }
+
+    setDeliveryPresetOption(event) {
+        this.presetOption = event;
+        if (this.presetOption === 'createPreset') {
+            this.createPresetMode = true;
+        } else {
+            if (this.presetOption === 'usePreset') {
+            }
+        }
     }
 
 }

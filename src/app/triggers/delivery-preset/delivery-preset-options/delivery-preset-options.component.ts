@@ -22,9 +22,9 @@ export class DeliveryPresetOptionsComponent implements OnInit {
 
     contentGroups: ContentGroupModel[];
 
-    deliveryPresets: DeliveryPresetModel[];
+    @Input() deliveryPresets: DeliveryPresetModel[];
 
-    deliveryPreset: DeliveryPresetModel;
+    @Input() deliveryPreset: DeliveryPresetModel;
 
     editing: boolean = false;
 
@@ -32,7 +32,7 @@ export class DeliveryPresetOptionsComponent implements OnInit {
 
     presetMode: any;
 
-    presetOption: string;
+    @Input() presetOption: string;
 
     form: NgForm;
 
@@ -69,30 +69,23 @@ export class DeliveryPresetOptionsComponent implements OnInit {
                  private deliveryPresetApi: DeliveryPresetApiService ) { }
 
     ngOnInit() {
+        if (this.deliveryPreset) {
+            this.presetName = this.deliveryPreset.name;
+            this.getTriggerContentGroups(this.deliveryPreset.id)
+        } else {
+        this.presetName = '';
+        this.deliveryPreset = new DeliveryPresetModel(0, this.presetName, 0, '')
+        }
+
+
         if (this.presetDelivery) {
             this.presetOption = "usePreset";
             this.deliveryPreset = this.presetDelivery;
         }
-        this.getDeliveryPresets();
     }
 
     setDeliveryPresetOption(event) {
         this.presetOption = event;
-        if (this.presetOption === 'createPreset') {
-            this.presetName = '';
-        } else {
-            if (this.presetOption === 'usePreset') {
-                this.getDeliveryPresets();
-            }
-        }
-    }
-
-    public getDeliveryPresets() {
-        this.triggerApi.getDeliveryPresets()
-            .subscribe(
-                data => {
-                this.deliveryPresets = data;
-            });
     }
 
     setDeliveryPreset(event) {
@@ -113,16 +106,6 @@ export class DeliveryPresetOptionsComponent implements OnInit {
         .subscribe(data => {
             this.contentGroups = data;
         });
-    }
-    public getDeliveryPreset(id) {
-    this.deliveryPresetApi.getDeliveryPreset(id)
-        .subscribe(data => {
-            this.presetName = data.name;
-            this.deliveryPreset = data;
-          if (this.onSelect) {
-              this.onSelect.emit(data);
-          }
-        })
     }
 
     public contentCreated (data) {

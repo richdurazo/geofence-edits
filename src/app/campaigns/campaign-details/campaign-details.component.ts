@@ -1,3 +1,5 @@
+import { DeliveryPresetModel } from './../../triggers/shared/delivery-preset.model';
+import { DeliveryPresetApiService } from './../../triggers/delivery-preset/delivery-preset-api.service';
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -19,6 +21,8 @@ export class CampaignDetailsComponent implements OnInit {
 
     triggers: TriggerModel[];
 
+    deliveryPresets: DeliveryPresetModel[];
+
     adding: boolean;
 
     id: string;
@@ -27,7 +31,9 @@ export class CampaignDetailsComponent implements OnInit {
 
     private sub: any;
 
-    constructor(private route: ActivatedRoute, private campaignApi: CampaignApiService) { }
+    constructor(private route: ActivatedRoute, 
+                private campaignApi: CampaignApiService,
+                private deliveryPresetApi: DeliveryPresetApiService) { }
 
     ngOnInit() {
         this.sub = this.route.params.subscribe(params => {
@@ -35,10 +41,20 @@ export class CampaignDetailsComponent implements OnInit {
             this.getCampaign();
             this.getCampaignTriggers();
         });
+        this.getDeliveryPresets();
     }
 
     ngOnDestroy() {
         this.sub.unsubscribe();
+    }
+
+    public getDeliveryPresets() {
+        this.deliveryPresetApi.getDeliveryPresets()
+        .subscribe(
+            data => {
+                this.deliveryPresets = data;
+            }
+        );
     }
 
     private getCampaign () {

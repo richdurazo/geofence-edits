@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { TriggerApiService } from '../../shared/trigger-api.service';
 import { TriggerModel } from '../../shared/trigger.model';
@@ -10,7 +10,7 @@ import { TriggerModel } from '../../shared/trigger.model';
 })
 
 export class TriggerListComponent implements OnInit {
-
+    @Input() trigger: TriggerModel;
     triggers: TriggerModel[] = [];
 
   constructor(private triggerApi: TriggerApiService) { }

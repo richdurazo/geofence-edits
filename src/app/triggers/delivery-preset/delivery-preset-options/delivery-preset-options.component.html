@@ -21,11 +21,10 @@
                 fxFlex
                 placeholder="Delivery Preset" 
                 [ngModel]="deliveryPreset.id" 
-                name="deliveryPreset" 
-                (ngModelChange)="setDeliveryPreset($event)"
-                #deliveryPreset="ngModel">
-                    <md-option *ngFor="let deliveryPreset of deliveryPresets" [value]="deliveryPreset.id">
-                   {{ deliveryPreset.name }}
+                name="preset" 
+                (ngModelChange)="setDeliveryPreset($event)">
+                    <md-option *ngFor="let preset of deliveryPresets" [value]="preset.id">
+                   {{ preset.name }}
                     </md-option>
             </md-select>
 

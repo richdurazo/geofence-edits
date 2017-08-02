@@ -2,7 +2,7 @@
 
     <form [formGroup]="beaconForm" (ngSubmit)="onSubmit()" class="padding" fxFlex='100' fxLayout="column" *ngIf="beacon">
         
-        <fieldset [disabled]="beaconCreated">
+        <fieldset [disabled]="beaconCreated || editMode">
 
             <div fxLayout="row">
 

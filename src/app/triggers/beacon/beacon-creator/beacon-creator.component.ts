@@ -2,7 +2,7 @@ import { TriggerApiService } from './../../shared/trigger-api.service';
 import { LatLngLiteral, MapsAPILoader } from '@agm/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { BeaconModel } from './../../shared/beacon.model';
-import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, NgZone, Input, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, NgZone, Input } from '@angular/core';
 declare var google;
 
 @Component({
@@ -11,7 +11,7 @@ declare var google;
   styleUrls: ['./beacon-creator.component.scss']
 })
 
-export class BeaconCreatorComponent implements OnInit, AfterViewInit{
+export class BeaconCreatorComponent implements OnInit {
 
     @Output() onCreate: EventEmitter<any> = new EventEmitter();
 
@@ -76,22 +76,22 @@ export class BeaconCreatorComponent implements OnInit, AfterViewInit{
 
 
     }
-             this.markers = [{lat:0, lng:0}]
+      this.markers = [{lat:0, lng:0}]
 
-          this.zoom = 16;
-          this.latitude = 34.0664201;
-          this.longitude = -118.38325739999999;
+      this.zoom = 16;
+      this.latitude = 34.0664201;
+      this.longitude = -118.38325739999999;
 
-          this.searchControl = new FormControl(beaconAddress);
-          this.initBeacon();
+      this.searchControl = new FormControl(beaconAddress);
+      this.initBeacon();
 
-          this.beaconForm = new FormGroup({
-            'id': new FormControl(beaconId),
-            'type': new FormControl(beaconType),
-            'lat': new FormControl({value: beaconLat, disabled: true}),
-            'lng': new FormControl({value: beaconLng, disabled: true}),
-            'search': this.searchControl
-          });
+      this.beaconForm = new FormGroup({
+        'id': new FormControl(beaconId),
+        'type': new FormControl(beaconType),
+        'lat': new FormControl({value: beaconLat, disabled: true}),
+        'lng': new FormControl({value: beaconLng, disabled: true}),
+        'search': this.searchControl
+      });
 
 
     this.mapsAPILoader.load().then(() => {
@@ -122,9 +122,7 @@ export class BeaconCreatorComponent implements OnInit, AfterViewInit{
       });
     });
   }
-  ngAfterViewInit() {
-    console.log('hi')
-  }
+
   onSubmit() {
     this.beaconCreated = true;
     this.beacon = new BeaconModel(

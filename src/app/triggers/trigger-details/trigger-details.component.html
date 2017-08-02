@@ -1,6 +1,9 @@
-<md-toolbar color="primary" *ngIf="trigger">
+<!--<md-toolbar color="primary" *ngIf="trigger" class="heading-wrapper cursor-pointer" (click)="toggleExpanded()">
+
     {{ trigger.name }}
     <span class="app-toolbar-filler"></span>
+            <md-icon [@iconChange]="isExpanded + ''">keyboard_arrow_up</md-icon>
+
     <button class="button" md-icon-button [mdMenuTriggerFor]="menu">
         <md-icon>more_vert</md-icon>
     </button>
@@ -24,11 +27,70 @@
             cancel
         </button>
     </md-menu>
+</md-toolbar>-->
+<md-toolbar color="primary">
+    <div class="heading-wrapper cursor-pointer" fxFlex="95" (click)="toggleExpanded()" >
+        <h1 class="expandable-panel-heading" fxLayoutAlign="start center">
+            <div fxFlex="45">
+                {{ trigger.name }}
+            </div>
+
+
+            <div fxFlex="10" fxLayoutAlign="end">
+                <md-icon [@iconChange]="isExpanded + ''">keyboard_arrow_up</md-icon>
+            </div>
+        </h1>
+    </div>
+    <div class="menu-wrapper" fxFlex="5" fxLayoutAlign="end end">
+        <md-menu #appMenu="mdMenu">
+          <button
+              md-menu-item
+              (click)="setEditMode(); editing = true"
+              *ngIf="!editing">
+              Edit
+          </button>
+            <button 
+                md-menu-item
+                (click)="launchConfirmRemove()"
+                *ngIf="!editing">
+                <span>Remove</span>
+            </button>
+        <button
+            md-menu-item
+            (click)="onCancel(form); editing = false"
+            *ngIf="editing">
+            cancel
+        </button>
+          <button
+              md-menu-item
+              (click)="updateItem()"
+              *ngIf="editing">
+              Save
+          </button>
+
+
+        </md-menu>
+
+        <button md-icon-button type="button" [mdMenuTriggerFor]="appMenu">
+           <md-icon>more_vert</md-icon>
+        </button>
+    </div>
 </md-toolbar>
 
-<form #form="ngForm" (ngSubmit)="submitForm(form)" novalidate>
+<div class="expandable-content" [@expandChange]="isExpanded + ''">
+    <app-trigger-creator-form 
+        [editMode]="editMode"
+        [presetOption]="presetOption"
+        [editTrigger]="trigger"
+        [deliveryPresets]="deliveryPresets"
+        [deliveryPreset]="deliveryPreset">
+    </app-trigger-creator-form>
+</div>
+
+<!--<form #form="ngForm" (ngSubmit)="submitForm(form)" novalidate>
 
     <div fxLayout="column">
+
 
         <md-card class="content-group-container-card" *ngIf="deliveryPreset">
 
@@ -136,7 +198,7 @@
 
                 </md-tab>
 
-                <md-tab label="Beacon Options" *ngIf="triggerType === 'beacon'">
+                <md-tab label="Beacon Options" (click)="setBeaconOptions($event)" *ngIf="triggerType === 'beacon'">
                     <app-beacon-creator 
                         *ngIf='beacon'
                         [beacon]='beacon'
@@ -247,5 +309,5 @@
         </md-card>
 
     </div>
-</form>
+</form>-->
 

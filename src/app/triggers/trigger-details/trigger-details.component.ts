@@ -1,3 +1,4 @@
+import { GeofenceModel } from './../shared/geofence.model';
 import { AudioModel } from './../shared/audio.model';
 import { FilestackService } from './../../shared/filestack.service';
 import { MdDialog } from '@angular/material';
@@ -7,6 +8,8 @@ import { DeliveryPresetApiService } from './../delivery-preset/delivery-preset-a
 import { DeliveryPresetModel } from './../shared/delivery-preset.model';
 import { Component, OnInit, OnDestroy, Input, EventEmitter, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { trigger, state, animate, transition, style } from '@angular/animations';
+
 
 import { ContentGroupModel } from '../../content/shared/content-group.model';
 
@@ -16,10 +19,42 @@ import { TriggerModel } from '../shared/trigger.model';
 @Component({
   selector: 'app-trigger-details',
   templateUrl: './trigger-details.component.html',
-  styleUrls: ['./trigger-details.component.scss']
+  styleUrls: ['./trigger-details.component.scss'],
+    animations: [
+      trigger('expandChange', [
+          state('true' ,
+              style({ height: '0', display : 'none' }),
+          ),
+          state('false',
+              style({ height: '*', display: '*' })
+          ),
+          transition('void => *', style({ height: '0' })
+          ),
+          transition('true => false', [
+                style({overflow: 'hidden'}),
+                animate('.25s ease-out', style({height: '*'})),
+          ]),
+          transition('false => true', [
+                style({overflow: 'hidden'}),
+                animate('.25s ease-out', style({height: '0'})),
+          ]),
+      ]),
+      trigger('iconChange', [
+          state('true',
+              style({ transform: 'rotate( -180deg )' })
+          ),
+          state('false',
+              style({ transform: 'rotate( 0deg )' })
+          ),
+          transition('void => *', style({ transform: 'rotate( 0deg )' })
+          ),
+          transition('* => *', animate('.25s'))
+      ])
+  ]
 })
 export class TriggerDetailsComponent implements OnInit {
     beacon: BeaconModel;
+
     @Input() trigger: TriggerModel;
 
     @Output() onRemove: EventEmitter<any> = new EventEmitter();
@@ -28,7 +63,11 @@ export class TriggerDetailsComponent implements OnInit {
    
     google: any;
 
+    geofence: GeofenceModel;
+
     id: string;
+
+    isExpanded: boolean = false;
 
     delete: boolean;
 
@@ -44,15 +83,17 @@ export class TriggerDetailsComponent implements OnInit {
 
     editing: boolean;
 
+    editMode: boolean;
+
     deliveryPreset: DeliveryPresetModel;
 
-    deliveryPresets: DeliveryPresetModel[];
+    @Input() deliveryPresets: DeliveryPresetModel[];
 
     triggerMediaExists: boolean = true;
 
     triggerMediaConfig: any;
 
-    presetOption: string;
+    presetOption: string = 'usePreset'; 
 
     createPresetMode: boolean;
 
@@ -116,10 +157,10 @@ export class TriggerDetailsComponent implements OnInit {
                 private filestack: FilestackService) { }
 
     ngOnInit() {
+
         if (this.trigger) {
             this.initTrigger(this.trigger.delivery_preset_id);
             this.setTriggerType(this.trigger.triggerable_type);
-
         } else {
             this.sub = this.route.params.subscribe(params => {
                 this.id = params['id'];
@@ -182,8 +223,6 @@ export class TriggerDetailsComponent implements OnInit {
     initTrigger(id) {
         this.getTriggerContentGroups(id);
         this.getDeliveryPreset(id);
-        this.getDeliveryPresets();
-        this.presetOption = 'usePreset';
     }
 
     ngOnDestroy() {
@@ -196,15 +235,21 @@ export class TriggerDetailsComponent implements OnInit {
         let substring: string;
         const types: Array<string> = ['geofence', 'audio', 'touch', 'beacon'];
         if (str !== undefined) {
-        for (let type of types) {
-            substring = type;
-            if (str.toLowerCase().includes(substring)) {
-                this.triggerType = substring;
-                if (this.triggerType === 'audio') {
-                    this.setMediaConfig();
+            for (let type of types) {
+                substring = type;
+                if (str.toLowerCase().includes(substring)) {
+                    this.triggerType = substring;
+                    if (this.triggerType === 'audio') {
+                        this.setMediaConfig();
+                    }
+                    if (this.triggerType === 'beacon') {
+                        this.setBeaconOptions();
+                    }
+                    if (this.triggerType === 'geofence') {
+                        this.setGeofenceOptions();
+                    }
                 }
             }
-        }
         }
 
     }
@@ -236,36 +281,17 @@ export class TriggerDetailsComponent implements OnInit {
     }
 
     public getDeliveryPreset(id) {
-    this.deliveryPresetApi.getDeliveryPreset(id)
-        .subscribe(data => {
-            this.deliveryPreset = data;
-            this.presetOption = 'usePreset';
-        });
-    }
-
-    public getDeliveryPresets() {
-        this.triggerApi.getDeliveryPresets()
-        .subscribe(
-            data => {
-                this.deliveryPresets = data;
-            }
-        );
-    }
-
-    setDeliveryPreset(event) {
-        this.trigger.delivery_preset_id = event;
-        this.initTrigger(event);
-    }
-
-    setDeliveryPresetOption(event) {
-        this.presetOption = event;
-        if (this.presetOption === 'createPreset') {
-            this.createPresetMode = true;
-        } else {
-            if (this.presetOption === 'usePreset') {
-                this.getDeliveryPresets();
+        for (let preset of this.deliveryPresets) {
+            if (id === preset.id) {
+                this.deliveryPreset = preset;
+                this.deliveryPreset.id = id;
+                    this.onChange.emit(this.deliveryPreset);
             }
         }
+    }
+
+    toggleExpanded () {
+        this.isExpanded = !this.isExpanded;
     }
 
     public submitForm(form) {
@@ -302,8 +328,10 @@ export class TriggerDetailsComponent implements OnInit {
         this.editing = false;
     }
     onCancel(form) {
-/*        this.initTrigger(this.trigger.delivery_preset_id)
-        console.log('reset form', form)*/
+        this.editMode = true;
+            if (this.onChange) {
+            this.onChange.emit(this.editMode)
+        }
     }
 
     onDelete() {
@@ -315,29 +343,31 @@ export class TriggerDetailsComponent implements OnInit {
             })
     }
 
-    public presetCreated(data) {
-        this.deliveryPreset = data;
-        this.deliveryPresets.push(data);
-        this.setDeliveryPreset(data.id);
-        this.deliveryPreset.id = data.id;
-        this.presetOption = "usePreset";
+    setBeaconOptions() {
+        this.triggerApi.getBeaconTrigger(this.trigger.triggerable_id)
+            .subscribe(data => {
+                this.beacon = data;
+                this.processTrigger(this.beacon)
+            });
     }
-
+    setGeofenceOptions() {
+        this.triggerApi.getGeofenceTrigger(this.trigger.triggerable_id)
+            .subscribe(data => {
+                this.geofence = data;
+                this.processTrigger(this.geofence)
+            });
+    }
     onEdit() {
         this.editing = true;
-        console.log(this.editing)
-            if (this.triggerType === 'beacon') {
-                this.triggerApi.getBeaconTrigger(this.trigger.triggerable_id)
-                    .subscribe(data => {
-                        this.beacon = data;
-                        this.processTrigger(this.beacon)
-                    });
-            }
-
     }
 
     processTrigger(data) {
         console.log(data, 'emit beacon')
+        if (this.onChange) {
+            this.onChange.emit(data);
+        }
+    }
+    emitPreset(data) {
         if (this.onChange) {
             this.onChange.emit(data);
         }
@@ -366,30 +396,10 @@ export class TriggerDetailsComponent implements OnInit {
                 }
             });
     }
-    /*    typeEdit(event) {
-        if (event !== this.triggerType) {
-            let type = event;
-            let name = this.trigger.name;
-            let uuid = this.trigger.uuid;
-            let campaign = this.trigger.campaign_id;
-            let delivery_preset_id
-            switch (type) {
-                case 'touch':
-                
-                break;
-                case 'audio':
-               
-                break;
-                case 'beacon':
-
-                break;
-                case 'geofence':
-
-                break;
-            }
-            console.log('handle type change by init a new trigger model :', event, 'OGtype: ', this.triggerType)
-
+    setEditMode() {
+        this.editMode = false;
+        if (this.onChange) {
+            this.onChange.emit(this.editMode)
         }
-        console.log(this.trigger)
-    }*/
+    }
 }

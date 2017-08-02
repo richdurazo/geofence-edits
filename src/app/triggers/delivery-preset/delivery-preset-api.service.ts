@@ -19,6 +19,11 @@ export class DeliveryPresetApiService {
         }
     }
 
+    getDeliveryPresets() {
+        return this.authCustomHttp.get(AppSettings.API_ROOT + '/delivery-preset')
+        .map(res => res.json())
+    }
+
     createDeliveryPreset (data) {
         return this.authCustomHttp.post(AppSettings.API_ROOT + '/delivery-preset', data)
         .map(res => res.json());

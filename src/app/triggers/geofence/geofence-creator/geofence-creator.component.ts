@@ -26,7 +26,7 @@ export class GeofenceCreatorComponent implements OnInit {
 
   radiusChange: EventEmitter<number> = new EventEmitter<number>();
 
-  editMode: boolean = false;
+  @Input() editMode: boolean;
 
   currentPosition: boolean = true;
 
@@ -54,9 +54,14 @@ export class GeofenceCreatorComponent implements OnInit {
 
   radius: number;
 
-  type: string = 'Point';
+  type: string;
 
-  paths: Array<LatLngLiteral>;
+  paths: Array<LatLngLiteral> = [];
+
+  geofenceTypes = [
+    {value: 'Point', viewValue: 'Point'},
+    {value: 'Polygon', viewValue: 'Polygon'},
+  ];
 
   @ViewChild("search")
   public searchElementRef: ElementRef;
@@ -67,23 +72,70 @@ export class GeofenceCreatorComponent implements OnInit {
                public triggerApi: TriggerApiService ) {}
 
   ngOnInit() {
-    console.log('data emitted to geo', this.geofence)
-      this.searchControl = new FormControl(this.address);
-      this.initForm();
+      this.geofenceTypes = [
+        {value: 'Point', viewValue: 'Point'},
+        {value: 'Polygon', viewValue: 'Polygon'}
+      ];
+
+      let geofenceType = 'Point';
+      let geofenceAddress = '8750 wilshire';
+      let geofenceCoordinates = new FormArray([]);
+      let geofenceRadius = 300;
+      let geoLat = 34.0664201;
+      let geoLng = -118.38325739999999;
+      let paths = [{lat: geoLat, lng: geoLng}];
       this.zoom = 16;
 
-    if (!this.geofence) {
-      this.initGeo();
-      this.latitude = 34.0664201;
-      this.longitude = -118.38325739999999;
-      this.radius = 300;
-    } else {
+
+    if (this.geofence) {
+      this.editMode = true;
+      geofenceType = this.geofence.geometry['type'];
+      this.type = geofenceType;
+      console.log(geofenceType)
+      geofenceAddress = this.geofence.address;
+      geofenceRadius = this.geofence.radius;
+      if (geofenceType === 'Point') {
+        geoLat = (this.geofence.geometry.coordinates[1]);
+        geoLng = (this.geofence.geometry.coordinates[0]);
+      } else {
+        let coordinatesArray = this.geofence.geometry.coordinates[0];
+
+        let paths = coordinatesArray.map((coordinate) => {
+          return {lat: coordinate[0], lng: coordinate[1]}
+        });
+        this.paths = paths;
+      }
+
+
       this.address = this.geofence.address;
-      this.searchControl = new FormControl(this.address);
-      this.latitude = this.geofence.geometry.coordinates[1];
-      this.longitude = this.geofence.geometry.coordinates[0];
-      this.initForm();
+      this.searchControl = new FormControl(geofenceAddress);
+      this.latitude = geoLat;
+      this.longitude = geoLng;
+      this.searchControl = new FormControl(geofenceAddress)
     }
+    this.type = geofenceType;
+    this.searchControl = new FormControl(geofenceAddress);
+    this.initGeo();
+
+    if (this.type === 'Point') {
+      this.geofenceForm = new FormGroup({
+        'type': new FormControl({value: geofenceType}),
+        'search': this.searchControl,
+        'rad' : new FormControl(geofenceRadius),
+        'lat': new FormControl({value: geoLat, disabled: true}),
+        'lng': new FormControl({value: geoLng, disabled: true}),
+      });
+    } else {
+        this.geofenceForm = new FormGroup({
+          'type': new FormControl({value: geofenceType}),
+          'search': this.searchControl,
+          'paths': geofenceCoordinates,
+          'lat': new FormControl({value: geoLat, disabled: true}),
+          'lng': new FormControl({value: geoLng, disabled: true}),
+        });
+    }
+
+
     this.geofenceForm.valueChanges
        .subscribe(value => {
          this.radius = value.rad
@@ -128,9 +180,8 @@ export class GeofenceCreatorComponent implements OnInit {
       let lng = -118.38325739999999;
 
     if (this.geofence) {
-      geofenceType = this.geofence.geometry['type'];
+      geofenceType = this.geofence.geometry.type;
       geofenceAddress = this.geofence.address;
-      geofenceCoordinates = this.geofence.geometry.coordinates;
       lat = this.geofence.geometry.coordinates[1];
       lng = this.geofence.geometry.coordinates[0];
       geofenceRadius = this.geofence.radius;
@@ -175,9 +226,8 @@ export class GeofenceCreatorComponent implements OnInit {
         '',
         null
       );
-    } else {
+    } 
       this.geofence = new GeofenceModel(this.geofence.address, this.geofence.geometry, this.radius);
-    }
 
   }
 

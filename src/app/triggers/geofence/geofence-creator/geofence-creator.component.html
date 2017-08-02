@@ -1,7 +1,7 @@
 <div class="geofence-container" class="padding">
 
     <form [formGroup]="geofenceForm" (ngSubmit)="onSubmit()" fxFlex='100' fxLayout="column" *ngIf="geofence">
-        <fieldset [disabled]="geofenceCreated">
+        <fieldset [disabled]="geofenceCreated || editMode">
 
         <div fxLayout="row">
 
@@ -15,11 +15,13 @@
                             fxFlex="50"
                             placeholder="Geofence Type"
                             formControlName="type"
-                            #type
-                            (ngOnChange)="initMap()">
-                                <md-option value="Point">
-                                    Point
-                                </md-option>
+                            #type>
+                                    <md-option value="Point">
+                                        Point
+                                    </md-option>
+                                    <md-option value="Polygon">
+                                        Polygon
+                                    </md-option>
                         </md-select>
 
                         <!--reverse geocode -->
@@ -52,9 +54,13 @@
 
                         </md-input-container>
 
-                        <label class="radius" for="rad">Radius</label>
+                        <div  *ngIf="type === 'Point'">
+                            <label class="radius" for="rad">Radius</label>
+                        </div>
+                        
 
                         <md-slider
+                            *ngIf="type === 'Point'"
                             formControlName="rad"
                             type="number"
                             #rad
@@ -96,7 +102,7 @@
                 
                 <div fxLayout="row" fxLayoutAlign="center">
                     <button
-                    [disabled]="!geofenceForm.valid || geofenceCreated" 
+                        [disabled]="!geofenceForm.valid || geofenceCreated || editMode" 
                         type="submit"
                         md-raised-button>
                         <md-icon>
@@ -118,8 +124,7 @@
 
                         </div>
 
-                            <agm-map  *ngIf="currentPosition" [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
-                                <agm-marker *ngFor="let m of markers; let i = index" [latitude]="m.lat" [longitude]="m.lng"></agm-marker>
+                            <agm-map  *ngIf="type === 'Point'" [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
                             
                                 <agm-circle [latitude]="latitude" [longitude]="longitude" 
                                     [radius]="radius"
@@ -128,6 +133,13 @@
                                     [editable]="true"
                                     (radiusChange)="onRadiusChange($event)">
                                 </agm-circle>
+                            
+                            </agm-map>
+                            <agm-map  *ngIf="type === 'Polygon'" [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
+                            
+                                <agm-polygon [paths]="paths" [fillColor]="'red'">
+                                    
+                                </agm-polygon>
                             
                             </agm-map>
                     </div>

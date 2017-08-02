@@ -10,10 +10,12 @@
                 <md-tab label="Geofence Options" *ngIf="triggerType === 'geofence'">
                     <app-geofence-creator
                     *ngIf="geofence"
+                    [editMode]="editMode"
                     [geofence]="geofence"
                     (onCreate)="geofenceCreated($event)">
                     </app-geofence-creator>
                     <app-geofence-creator
+                    *ngIf="!geofence"
                     [trigger]="editTrigger"
                     (onCreate)="geofenceCreated($event)">
                     </app-geofence-creator>
